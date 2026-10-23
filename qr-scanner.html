@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QR Code Scanner - Read QR Codes Online with Camera or Image</title>
+<meta name="description" content="Free online QR code scanner: decode QR codes using your webcam or by uploading an image. Runs 100% in your browser - images are never uploaded to any server.">
+<meta name="keywords" content="qr code scanner,read qr code online,qr decoder,scan qr from image,webcam qr scanner">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/qr-scanner.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="QR Code Scanner">
+<meta property="og:description" content="Free online QR code scanner: decode QR codes using your webcam or by uploading an image. Runs 100% in your browser - images are never uploaded to any server.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdqAsxVwJGACZjAUIAd8a7S0L/1/1r/HPn1vAmAAGIAJRWYAfwFVAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "QR Code Scanner", "url": "https://maniu2475-glitch.github.io/tools-en/qr-scanner.html", "description": "Free online QR code scanner: decode QR codes using your webcam or by uploading an image. Runs 100% in your browser - images are never uploaded to any server.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>QR Code Scanner</h1>
+      <p class="tool-desc">Scan a QR code with your camera, or upload an image containing a QR code. Decoded text appears below.</p>
+<div class="btn-group">
+<button class="btn" onclick="qrStartCam()">Start camera</button>
+<button class="btn btn-outline" onclick="qrStopCam()">Stop camera</button>
+</div>
+<video id="qr-video" style="max-width:100%;display:none;margin:10px 0;border:1px solid #ccc"></video>
+<p class="tool-desc">Or upload an image:</p>
+<input type="file" id="qr-file" accept="image/*" onchange="qrScanFile(this)">
+<div class="result-box" id="qr-output" style="word-break:break-all">Result will appear here…</div>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">A QR code scanner that works entirely offline in your browser. Click "Start camera" to point your webcam at a QR code - the page detects and decodes it automatically using the built-in BarcodeDetector API. Alternatively, upload a screenshot or photo that contains a QR code and the tool reads it instantly. Because everything runs locally, confidential codes such as payment or 2FA QR images are never sent to any server. Works great for decoding Wi-Fi passwords, event tickets, links on posters, and TOTP secrets for authenticator apps. For creating codes instead, use the related QR code generator tool.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a>
+<a class="btn btn-outline" href="base64.html">Base64 encode/decode</a>
+<a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a>
+<a class="btn btn-outline" href="qr-code-generator.html">QR code generator</a>
+<a class="btn btn-outline" href="password-generator.html">Password generator</a>
+<a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a>
+<a class="btn btn-outline" href="color-converter.html">Color converter</a>
+<a class="btn btn-outline" href="markdown-editor.html">Markdown editor</a>
+<a class="btn btn-outline" href="word-counter.html">Word counter</a>
+<a class="btn btn-outline" href="md5-generator.html">Hash generator</a>
+<a class="btn btn-outline" href="ip-lookup.html">IP lookup</a>
+<a class="btn btn-outline" href="number-converter.html">Base converter</a>
+<a class="btn btn-outline" href="unit-converter.html">Unit converter</a>
+<a class="btn btn-outline" href="case-converter.html">Case converter</a>
+<a class="btn btn-outline" href="text-sort.html">Text sorter</a>
+<a class="btn btn-outline" href="csv-to-json.html">CSV to JSON</a>
+<a class="btn btn-outline" href="uuid-generator.html">UUID generator</a>
+<a class="btn btn-outline" href="jwt-decoder.html">JWT decoder</a>
+<a class="btn btn-outline" href="lorem-ipsum-generator.html">Lorem ipsum</a>
+<a class="btn btn-outline" href="text-diff.html">Text diff</a>
+<a class="btn btn-outline" href="html-entities.html">HTML entities</a>
+<a class="btn btn-outline" href="slug-generator.html">Slug generator</a>
+<a class="btn btn-outline" href="password-strength.html">Password strength</a>
+<a class="btn btn-outline" href="image-to-base64.html">Image to Base64</a>
+<a class="btn btn-outline" href="url-parser.html">URL parser</a>
+<a class="btn btn-outline" href="color-picker.html">Color picker</a>
+<a class="btn btn-outline" href="text-to-binary.html">Text to binary</a>
+<a class="btn btn-outline" href="qr-scanner.html">QR scanner</a>
+<a class="btn btn-outline" href="base32.html">Base32 encode/decode</a>
+<a class="btn btn-outline" href="cron-generator.html">Cron job generator</a>
+<a class="btn btn-outline" href="aspect-ratio-calculator.html">Aspect ratio calculator</a>
+<a class="btn btn-outline" href="random-string-generator.html">Random string generator</a></div>
+      <h3>Frequently asked questions</h3>
+      <div style="line-height:1.9"><details><summary><strong>Is this tool really free?</strong></summary><p>Yes, completely free with no signup, no login and no usage limits. Just open the page and use it.</p></details>
+<details><summary><strong>Is my data uploaded to a server?</strong></summary><p>No. All processing happens locally in your browser - your data never leaves your device, so even sensitive content stays private.</p></details>
+<details><summary><strong>Which browsers are supported?</strong></summary><p>All modern browsers including Chrome, Edge, Firefox and Safari, on both desktop and mobile.</p></details></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">🧰 Online Toolbox</a></p></div></footer>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+<script>
+// QR scanning via BarcodeDetector API with fetch-free image handling
+async function qrDecode(source){ // source: canvas / video / img element
+  try{
+    const det = new BarcodeDetector();
+    const codes = await det.detect(source);
+    if(codes.length){ out(codes[0].rawValue); return true; }
+  }catch(e){ out('BarcodeDetector not available or no code found: ' + e.message); }
+  return false;
+}
+function out(t){ document.getElementById('qr-output').textContent = t; }
+let qrStream = null;
+function qrStartCam(){
+  if(!('BarcodeDetector' in window)){ out('Your browser does not support the BarcodeDetector API. Try Chrome or Edge, or upload an image instead.'); return; }
+  navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}}).then(stream=>{
+    qrStream = stream;
+    const v = document.getElementById('qr-video');
+    v.srcObject = stream; v.style.display='block'; v.play();
+    const tick = async ()=>{
+      if(!qrStream) return;
+      const ok = await qrDecode(v);
+      if(ok){ qrStopCam(); return; }
+      setTimeout(tick, 400);
+    };
+    tick();
+  }).catch(e=>out('Camera error: '+e.message));
+}
+function qrStopCam(){
+  if(qrStream){ qrStream.getTracks().forEach(t=>t.stop()); qrStream=null; }
+  const v=document.getElementById('qr-video'); v.style.display='none'; v.srcObject=null;
+}
+async function qrScanFile(inp){
+  const f = inp.files && inp.files[0];
+  if(!f) return;
+  out('Scanning…');
+  const img = new Image();
+  img.onload = async ()=>{ await qrDecode(img); };
+  img.onerror = ()=>out('Could not load image.');
+  img.src = URL.createObjectURL(f);
+}
+</script>
+</body>
+</html>

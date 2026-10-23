@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aspect Ratio Calculator - Resize Images &amp; Videos Without Distortion</title>
+<meta name="description" content="Free aspect ratio calculator: enter original width and height plus a new width or height, and get the matching dimension so your image or video keeps its exact proportions.">
+<meta name="keywords" content="aspect ratio calculator,image resize calculator,keep aspect ratio,16:9 calculator,video dimensions">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/aspect-ratio-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Aspect Ratio Calculator">
+<meta property="og:description" content="Free aspect ratio calculator: enter original width and height plus a new width or height, and get the matching dimension so your image or video keeps its exact proportions.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdqAsxVwJGACZjAUIAd8a7S0L/1/1r/HPn1vAmAAGIAJRWYAfwFVAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Aspect Ratio Calculator", "url": "https://maniu2475-glitch.github.io/tools-en/aspect-ratio-calculator.html", "description": "Free aspect ratio calculator: enter original width and height plus a new width or height, and get the matching dimension so your image or video keeps its exact proportions.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Aspect Ratio Calculator</h1>
+      <div class="grid-2">
+<div>
+<h3>Original size</h3>
+<label>Width</label><input type="number" id="ar-w1" value="1920" oninput="arCalc()">
+<label>Height</label><input type="number" id="ar-h1" value="1080" oninput="arCalc()">
+</div>
+<div>
+<h3>New size (fill one)</h3>
+<label>New width</label><input type="number" id="ar-w2" placeholder="e.g. 1280" oninput="arCalc('w')">
+<label>New height</label><input type="number" id="ar-h2" placeholder="e.g. 720" oninput="arCalc('h')">
+<div class="result-box" id="ar-out"></div>
+</div>
+</div>
+<h3>Common ratios</h3>
+<div class="btn-group" style="flex-wrap:wrap">
+<button class="btn btn-outline" onclick="arSet(16,9)">16:9 HD</button>
+<button class="btn btn-outline" onclick="arSet(4,3)">4:3</button>
+<button class="btn btn-outline" onclick="arSet(1,1)">1:1</button>
+<button class="btn btn-outline" onclick="arSet(21,9)">21:9</button>
+<button class="btn btn-outline" onclick="arSet(9,16)">9:16 vertical</button>
+<button class="btn btn-outline" onclick="arSet(2,3)">2:3 photo</button>
+</div>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">Whenever you resize an image, thumbnail, or video, keeping the aspect ratio is what prevents stretched or squashed results. This calculator does the math for you: enter the original dimensions, then type either a target width or a target height, and the matching dimension appears instantly. It also reduces the ratio to its simplest form (1920x1080 becomes 16:9) so you can compare against standard formats at a glance. Designers use it to check whether footage fits a frame, developers to compute responsive image sizes, and video editors to letterbox correctly for social platforms. Quick buttons for the most common ratios - 16:9, 4:3, 1:1, 21:9 and 9:16 vertical - make one-off conversions a single click.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a>
+<a class="btn btn-outline" href="base64.html">Base64 encode/decode</a>
+<a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a>
+<a class="btn btn-outline" href="qr-code-generator.html">QR code generator</a>
+<a class="btn btn-outline" href="password-generator.html">Password generator</a>
+<a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a>
+<a class="btn btn-outline" href="color-converter.html">Color converter</a>
+<a class="btn btn-outline" href="markdown-editor.html">Markdown editor</a>
+<a class="btn btn-outline" href="word-counter.html">Word counter</a>
+<a class="btn btn-outline" href="md5-generator.html">Hash generator</a>
+<a class="btn btn-outline" href="ip-lookup.html">IP lookup</a>
+<a class="btn btn-outline" href="number-converter.html">Base converter</a>
+<a class="btn btn-outline" href="unit-converter.html">Unit converter</a>
+<a class="btn btn-outline" href="case-converter.html">Case converter</a>
+<a class="btn btn-outline" href="text-sort.html">Text sorter</a>
+<a class="btn btn-outline" href="csv-to-json.html">CSV to JSON</a>
+<a class="btn btn-outline" href="uuid-generator.html">UUID generator</a>
+<a class="btn btn-outline" href="jwt-decoder.html">JWT decoder</a>
+<a class="btn btn-outline" href="lorem-ipsum-generator.html">Lorem ipsum</a>
+<a class="btn btn-outline" href="text-diff.html">Text diff</a>
+<a class="btn btn-outline" href="html-entities.html">HTML entities</a>
+<a class="btn btn-outline" href="slug-generator.html">Slug generator</a>
+<a class="btn btn-outline" href="password-strength.html">Password strength</a>
+<a class="btn btn-outline" href="image-to-base64.html">Image to Base64</a>
+<a class="btn btn-outline" href="url-parser.html">URL parser</a>
+<a class="btn btn-outline" href="color-picker.html">Color picker</a>
+<a class="btn btn-outline" href="text-to-binary.html">Text to binary</a>
+<a class="btn btn-outline" href="qr-scanner.html">QR scanner</a>
+<a class="btn btn-outline" href="base32.html">Base32 encode/decode</a>
+<a class="btn btn-outline" href="cron-generator.html">Cron job generator</a>
+<a class="btn btn-outline" href="aspect-ratio-calculator.html">Aspect ratio calculator</a>
+<a class="btn btn-outline" href="random-string-generator.html">Random string generator</a></div>
+      <h3>Frequently asked questions</h3>
+      <div style="line-height:1.9"><details><summary><strong>Is this tool really free?</strong></summary><p>Yes, completely free with no signup, no login and no usage limits. Just open the page and use it.</p></details>
+<details><summary><strong>Is my data uploaded to a server?</strong></summary><p>No. All processing happens locally in your browser - your data never leaves your device, so even sensitive content stays private.</p></details>
+<details><summary><strong>Which browsers are supported?</strong></summary><p>All modern browsers including Chrome, Edge, Firefox and Safari, on both desktop and mobile.</p></details></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">🧰 Online Toolbox</a></p></div></footer>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+<script>
+function gcd(a,b){ return b? gcd(b, a%b) : a; }
+function arCalc(mode){
+  const w1=+document.getElementById('ar-w1').value, h1=+document.getElementById('ar-h1').value;
+  const w2=+document.getElementById('ar-w2').value, h2=+document.getElementById('ar-h2').value;
+  const out=document.getElementById('ar-out');
+  if(!w1||!h1){ out.textContent='Enter original width and height.'; return; }
+  const g=gcd(w1,h1), rw=w1/g, rh=h1/g;
+  let line='Ratio: '+w1+':'+h1+' = '+rw+':'+rh+' ('+(w1/h1).toFixed(4)+':1)';
+  if(mode==='w' && w2>0) line+='\nNew height for width '+w2+': '+Math.round(w2*h1/w1)+' px';
+  else if(mode==='h' && h2>0) line+='\nNew width for height '+h2+': '+Math.round(h2*w1/h1)+' px';
+  out.textContent = line;
+}
+function arSet(a,b){
+  document.getElementById('ar-w1').value=a*160;
+  document.getElementById('ar-h1').value=b*160;
+  arCalc();
+}
+</script>
+</body>
+</html>

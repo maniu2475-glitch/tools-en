@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cron Job Generator - Build Crontab Expressions Visually</title>
+<meta name="description" content="Free online cron job generator: pick minutes, hours, days, months and weekdays from friendly dropdowns and get a ready-to-paste crontab expression with a plain-English preview.">
+<meta name="keywords" content="cron job generator,crontab generator,cron expression builder,generate cron schedule">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/cron-generator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cron Job Generator">
+<meta property="og:description" content="Free online cron job generator: pick minutes, hours, days, months and weekdays from friendly dropdowns and get a ready-to-paste crontab expression with a plain-English preview.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdqAsxVwJGACZjAUIAd8a7S0L/1/1r/HPn1vAmAAGIAJRWYAfwFVAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Cron Job Generator", "url": "https://maniu2475-glitch.github.io/tools-en/cron-generator.html", "description": "Free online cron job generator: pick minutes, hours, days, months and weekdays from friendly dropdowns and get a ready-to-paste crontab expression with a plain-English preview.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Cron Job Generator</h1>
+      <p class="tool-desc">Choose your schedule below; the expression and its meaning update live.</p>
+<div class="grid-2">
+<div>
+<label>Minutes</label><input id="cg-min" value="*/15" oninput="cronGen()">
+<label>Hours (0-23)</label><input id="cg-hour" value="*" oninput="cronGen()">
+<label>Day of month (1-31)</label><input id="cg-dom" value="*" oninput="cronGen()">
+<label>Month (1-12 or names)</label><input id="cg-mon" value="*" oninput="cronGen()">
+<label>Day of week (0-7, Sun=0)</label><input id="cg-dow" value="*" oninput="cronGen()">
+</div>
+<div>
+<label>Generated expression</label>
+<input id="cg-out" readonly style="font-family:monospace" value="*/15 * * * *" onclick="this.select()">
+<div class="btn-group">
+<button class="btn" onclick="cgCopy()">Copy expression</button>
+<button class="btn btn-outline" onclick="cgPreset('*/5 * * * *')">Every 5 min</button>
+<button class="btn btn-outline" onclick="cgPreset('0 9 * * 1-5')">Weekdays 9am</button>
+<button class="btn btn-outline" onclick="cgPreset('0 0 * * 0')">Every Sunday</button>
+<button class="btn btn-outline" onclick="cgPreset('0 0 1 * *')">Monthly</button>
+</div>
+<div class="result-box" id="cg-desc"></div>
+</div>
+</div>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">Writing cron expressions from memory is error-prone: is Sunday 0 or 7, does the month field come before the weekday, what does */10 in the hour field do? This generator lets you fill each of the five crontab fields separately and shows the assembled expression instantly, so you can paste it into crontab, Kubernetes CronJob specs, Jenkins scheduled jobs, or GitHub Actions schedules. Presets for the most common patterns - every 5 minutes, weekday mornings, weekly and monthly runs - help you start from a known-good example. The fields also accept advanced syntax such as ranges (1-5), lists (1,15), steps (*/10) and names (MON-FRI, JAN). Pair it with the cron expression parser tool to double-check what your final expression actually means before it goes to production.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a>
+<a class="btn btn-outline" href="base64.html">Base64 encode/decode</a>
+<a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a>
+<a class="btn btn-outline" href="qr-code-generator.html">QR code generator</a>
+<a class="btn btn-outline" href="password-generator.html">Password generator</a>
+<a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a>
+<a class="btn btn-outline" href="color-converter.html">Color converter</a>
+<a class="btn btn-outline" href="markdown-editor.html">Markdown editor</a>
+<a class="btn btn-outline" href="word-counter.html">Word counter</a>
+<a class="btn btn-outline" href="md5-generator.html">Hash generator</a>
+<a class="btn btn-outline" href="ip-lookup.html">IP lookup</a>
+<a class="btn btn-outline" href="number-converter.html">Base converter</a>
+<a class="btn btn-outline" href="unit-converter.html">Unit converter</a>
+<a class="btn btn-outline" href="case-converter.html">Case converter</a>
+<a class="btn btn-outline" href="text-sort.html">Text sorter</a>
+<a class="btn btn-outline" href="csv-to-json.html">CSV to JSON</a>
+<a class="btn btn-outline" href="uuid-generator.html">UUID generator</a>
+<a class="btn btn-outline" href="jwt-decoder.html">JWT decoder</a>
+<a class="btn btn-outline" href="lorem-ipsum-generator.html">Lorem ipsum</a>
+<a class="btn btn-outline" href="text-diff.html">Text diff</a>
+<a class="btn btn-outline" href="html-entities.html">HTML entities</a>
+<a class="btn btn-outline" href="slug-generator.html">Slug generator</a>
+<a class="btn btn-outline" href="password-strength.html">Password strength</a>
+<a class="btn btn-outline" href="image-to-base64.html">Image to Base64</a>
+<a class="btn btn-outline" href="url-parser.html">URL parser</a>
+<a class="btn btn-outline" href="color-picker.html">Color picker</a>
+<a class="btn btn-outline" href="text-to-binary.html">Text to binary</a>
+<a class="btn btn-outline" href="qr-scanner.html">QR scanner</a>
+<a class="btn btn-outline" href="base32.html">Base32 encode/decode</a>
+<a class="btn btn-outline" href="cron-generator.html">Cron job generator</a>
+<a class="btn btn-outline" href="aspect-ratio-calculator.html">Aspect ratio calculator</a>
+<a class="btn btn-outline" href="random-string-generator.html">Random string generator</a></div>
+      <h3>Frequently asked questions</h3>
+      <div style="line-height:1.9"><details><summary><strong>Is this tool really free?</strong></summary><p>Yes, completely free with no signup, no login and no usage limits. Just open the page and use it.</p></details>
+<details><summary><strong>Is my data uploaded to a server?</strong></summary><p>No. All processing happens locally in your browser - your data never leaves your device, so even sensitive content stays private.</p></details>
+<details><summary><strong>Which browsers are supported?</strong></summary><p>All modern browsers including Chrome, Edge, Firefox and Safari, on both desktop and mobile.</p></details></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">🧰 Online Toolbox</a></p></div></footer>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+<script>
+function cronGen(){
+  const v = id => document.getElementById(id).value.trim() || '*';
+  const expr = [v('cg-min'),v('cg-hour'),v('cg-dom'),v('cg-mon'),v('cg-dow')].join(' ');
+  document.getElementById('cg-out').value = expr;
+  document.getElementById('cg-desc').textContent = 'Meaning: ' + expr + ' — verify with the cron parser before deploying.';
+}
+function cgPreset(p){ const f=p.split(' '); ['cg-min','cg-hour','cg-dom','cg-mon','cg-dow'].forEach((id,i)=>document.getElementById(id).value=f[i]); cronGen(); }
+function cgCopy(){ document.getElementById('cg-out').select(); navigator.clipboard.writeText(document.getElementById('cg-out').value).then(()=>alert('Copied!')); }
+document.addEventListener('DOMContentLoaded', cronGen);
+</script>
+</body>
+</html>

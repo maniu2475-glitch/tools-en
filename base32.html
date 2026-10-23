@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Base32 Encode &amp; Decode Online - RFC 4648 Tool</title>
+<meta name="description" content="Free online Base32 encoder and decoder (RFC 4648). Convert text to Base32 and back, with full UTF-8 and Unicode support. 100% client-side.">
+<meta name="keywords" content="base32 encode,base32 decode,base32 online,rfc 4648,totp secret decoder">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/base32.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Base32 Encode / Decode">
+<meta property="og:description" content="Free online Base32 encoder and decoder (RFC 4648). Convert text to Base32 and back, with full UTF-8 and Unicode support. 100% client-side.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdqAsxVwJGACZjAUIAd8a7S0L/1/1r/HPn1vAmAAGIAJRWYAfwFVAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Base32 Encode / Decode", "url": "https://maniu2475-glitch.github.io/tools-en/base32.html", "description": "Free online Base32 encoder and decoder (RFC 4648). Convert text to Base32 and back, with full UTF-8 and Unicode support. 100% client-side.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Base32 Encode / Decode</h1>
+      <div class="grid-2">
+<div><h3>Encode → Base32</h3>
+<textarea id="b32-in" rows="6" placeholder="Enter text…"></textarea>
+<div class="btn-group"><button class="btn" onclick="b32enc()">Encode</button></div>
+<div class="result-box" id="b32-enc-out" style="word-break:break-all"></div></div>
+<div><h3>Decode Base32 → text</h3>
+<textarea id="b32-coded" rows="6" placeholder="Enter Base32 string, padding optional…"></textarea>
+<div class="btn-group"><button class="btn" onclick="b32dec()">Decode</button></div>
+<div class="result-box" id="b32-dec-out" style="word-break:break-all"></div></div>
+</div>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">Base32 is a binary-to-text encoding that represents data with a 32-character alphabet (A-Z and 2-7), exactly as defined in RFC 4648. It is used in TOTP two-factor authentication secrets (the codes you scan into Google Authenticator), DNSSEC keys, and systems where case-insensitive handling or avoiding confusing characters matters. Base32 is less dense than Base64 - every 5 bytes become 8 characters - but it survives being read aloud, printed, or re-typed much better. This tool encodes and decodes arbitrary UTF-8 text, tolerates lowercase input and missing padding, and reports invalid characters clearly. All computation happens in your browser, so secrets stay private.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a>
+<a class="btn btn-outline" href="base64.html">Base64 encode/decode</a>
+<a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a>
+<a class="btn btn-outline" href="qr-code-generator.html">QR code generator</a>
+<a class="btn btn-outline" href="password-generator.html">Password generator</a>
+<a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a>
+<a class="btn btn-outline" href="color-converter.html">Color converter</a>
+<a class="btn btn-outline" href="markdown-editor.html">Markdown editor</a>
+<a class="btn btn-outline" href="word-counter.html">Word counter</a>
+<a class="btn btn-outline" href="md5-generator.html">Hash generator</a>
+<a class="btn btn-outline" href="ip-lookup.html">IP lookup</a>
+<a class="btn btn-outline" href="number-converter.html">Base converter</a>
+<a class="btn btn-outline" href="unit-converter.html">Unit converter</a>
+<a class="btn btn-outline" href="case-converter.html">Case converter</a>
+<a class="btn btn-outline" href="text-sort.html">Text sorter</a>
+<a class="btn btn-outline" href="csv-to-json.html">CSV to JSON</a>
+<a class="btn btn-outline" href="uuid-generator.html">UUID generator</a>
+<a class="btn btn-outline" href="jwt-decoder.html">JWT decoder</a>
+<a class="btn btn-outline" href="lorem-ipsum-generator.html">Lorem ipsum</a>
+<a class="btn btn-outline" href="text-diff.html">Text diff</a>
+<a class="btn btn-outline" href="html-entities.html">HTML entities</a>
+<a class="btn btn-outline" href="slug-generator.html">Slug generator</a>
+<a class="btn btn-outline" href="password-strength.html">Password strength</a>
+<a class="btn btn-outline" href="image-to-base64.html">Image to Base64</a>
+<a class="btn btn-outline" href="url-parser.html">URL parser</a>
+<a class="btn btn-outline" href="color-picker.html">Color picker</a>
+<a class="btn btn-outline" href="text-to-binary.html">Text to binary</a>
+<a class="btn btn-outline" href="qr-scanner.html">QR scanner</a>
+<a class="btn btn-outline" href="base32.html">Base32 encode/decode</a>
+<a class="btn btn-outline" href="cron-generator.html">Cron job generator</a>
+<a class="btn btn-outline" href="aspect-ratio-calculator.html">Aspect ratio calculator</a>
+<a class="btn btn-outline" href="random-string-generator.html">Random string generator</a></div>
+      <h3>Frequently asked questions</h3>
+      <div style="line-height:1.9"><details><summary><strong>Is this tool really free?</strong></summary><p>Yes, completely free with no signup, no login and no usage limits. Just open the page and use it.</p></details>
+<details><summary><strong>Is my data uploaded to a server?</strong></summary><p>No. All processing happens locally in your browser - your data never leaves your device, so even sensitive content stays private.</p></details>
+<details><summary><strong>Which browsers are supported?</strong></summary><p>All modern browsers including Chrome, Edge, Firefox and Safari, on both desktop and mobile.</p></details></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">🧰 Online Toolbox</a></p></div></footer>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+<script>
+const B32A='ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+function bytesToB32(bytes){
+  let out='',bits=0,val=0;
+  for(const b of bytes){ val=(val<<8)|b; bits+=8;
+    while(bits>=5){ out+=B32A[(val>>> (bits-5))&31]; bits-=5; } }
+  if(bits>0) out+=B32A[(val<<(5-bits))&31];
+  while(out.length%8) out+='=';
+  return out;
+}
+function b32ToBytes(s){
+  s=s.toUpperCase().replace(/=+$/,'').replace(/\s/g,'');
+  let bits=0,val=0,out=[];
+  for(const c of s){ const i=B32A.indexOf(c); if(i<0) throw new Error('Invalid Base32 character: '+c);
+    val=(val<<5)|i; bits+=5;
+    if(bits>=8){ out.push((val>>>(bits-8))&255); bits-=8; } }
+  return new Uint8Array(out);
+}
+const te=new TextEncoder(), td=new TextDecoder();
+function b32enc(){ try{ document.getElementById('b32-enc-out').textContent = bytesToB32(te.encode(document.getElementById('b32-in').value)); }catch(e){ document.getElementById('b32-enc-out').textContent='Error: '+e.message; } }
+function b32dec(){ try{ document.getElementById('b32-dec-out').textContent = td.decode(b32ToBytes(document.getElementById('b32-coded').value)); }catch(e){ document.getElementById('b32-dec-out').textContent='Error: '+e.message; } }
+</script>
+</body>
+</html>
