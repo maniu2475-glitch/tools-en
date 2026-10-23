@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Online Tools - JSON Formatter, Base64, QR Code, Hash, UUID & More</title>
+<meta name="description" content="Free online toolbox: JSON formatter & validator, Base64, URL encode, QR code generator, password generator, timestamp converter, color palette, Markdown preview, word counter, MD5/SHA hash, IP lookup, radix converter, unit converter, JWT decoder. 100% browser-side, no data uploaded.">
+<meta name="keywords" content="online tools,json formatter,json validator,base64 encode,url encode,qr code generator,password generator,timestamp converter,unix timestamp,md5 hash generator,sha256,ip lookup,uuid generator,jwt decoder,unit converter,free tools">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<!-- Open Graph / SEO -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free Online Toolbox - 18 Handy Web Tools">
+<meta property="og:description" content="18 free online tools: JSON formatter, Base64, QR code, hash generator, UUID, JWT decoder. All run locally in your browser.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdqAsxVwJGACZjAUIAd8a7S0L/1/1r/HPn1vAmAAGIAJRWYAfwFVAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
+<!-- 外部库 CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/11.1.1/marked.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js" defer></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===== 顶部广告位 Banner ===== -->
+<div class="ad-banner" id="ad-top">
+  <div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div>
+</div>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="#home">
+      <span class="logo-icon">🧰</span>
+      <span class="logo-text">ToolBox</span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="菜单">☰</button>
+    <nav class="main-nav" id="mainNav">
+      <a href="#tool-json" data-tool="json">JSON</a>
+      <a href="#tool-base64" data-tool="base64">Base64</a>
+      <a href="#tool-url" data-tool="url">URL</a>
+      <a href="#tool-qrcode" data-tool="qrcode">二维码</a>
+      <a href="#tool-password" data-tool="password">密码</a>
+      <a href="#tool-timestamp" data-tool="timestamp">时间戳</a>
+      <a href="#tool-color" data-tool="color">颜色</a>
+      <a href="#tool-markdown" data-tool="markdown">Markdown</a>
+      <a href="#tool-counter" data-tool="counter">字数</a>
+      <a href="#tool-hash" data-tool="hash">哈希</a>
+      <a href="#tool-ip" data-tool="ip">IP查询</a>
+      <a href="#tool-radix" data-tool="radix">Radix</a>
+      <a href="#tool-unit" data-tool="unit">Units</a>
+      <a href="#tool-case" data-tool="case">大小写</a>
+      <a href="#tool-textsort" data-tool="textsort">文本处理</a>
+      <a href="#tool-csv" data-tool="csv">CSV转JSON</a>
+      <a href="#tool-uuid" data-tool="uuid">UUID</a>
+      <a href="#tool-jwt" data-tool="jwt">JWT解码</a>
+    </nav>
+  </div>
+</header>
+
+<div class="layout container">
+  <main class="content" id="content">
+
+    <!-- 首页简介 -->
+    <section class="tool-panel active" id="tool-home">
+      <h1>Free Online Toolbox</h1>
+      <p class="intro">18 handy online tools that run <strong>entirely in your browser</strong> — fast, private, and free. No data ever leaves your device.</p>
+      <div class="home-grid">
+        <a class="home-card" href="#tool-json"><div class="hc-icon">🧩</div><div class="hc-title">JSON Formatter / Validator</div><div class="hc-desc">格式化、压缩、校验错误行号</div></a>
+        <a class="home-card" href="#tool-base64"><div class="hc-icon">🔠</div><div class="hc-title">Base64 Encode / Decode</div><div class="hc-desc">支持中文与任意文本</div></a>
+        <a class="home-card" href="#tool-url"><div class="hc-icon">🔗</div><div class="hc-title">URL Encode / Decode</div><div class="hc-desc">encodeURIComponent / decodeURI</div></a>
+        <a class="home-card" href="#tool-qrcode"><div class="hc-icon">📱</div><div class="hc-title">QR Code Generator</div><div class="hc-desc">自定义尺寸，可Download PNG</div></a>
+        <a class="home-card" href="#tool-password"><div class="hc-icon">🔐</div><div class="hc-title">Password Generator</div><div class="hc-desc">可调Length与字符集，强度评估</div></a>
+        <a class="home-card" href="#tool-timestamp"><div class="hc-icon">⏱️</div><div class="hc-title">Unix Timestamp Converter</div><div class="hc-desc">Unix 秒/毫秒与日期互转</div></a>
+        <a class="home-card" href="#tool-color"><div class="hc-icon">🎨</div><div class="hc-title">Color Converter & Palettes</div><div class="hc-desc">HEX/RGB/HSL 互转 + Color Schemes</div></a>
+        <a class="home-card" href="#tool-markdown"><div class="hc-icon">📝</div><div class="hc-title">Markdown Preview</div><div class="hc-desc">实时渲染，支持表格/代码块</div></a>
+        <a class="home-card" href="#tool-counter"><div class="hc-icon">📊</div><div class="hc-title">Word Counter</div><div class="hc-desc">字符/词/行/中英文分别统计</div></a>
+        <a class="home-card" href="#tool-hash"><div class="hc-icon">#️⃣</div><div class="hc-title">MD5 / SHA Hash</div><div class="hc-desc">MD5、SHA1、SHA256 全支持</div></a>
+        <a class="home-card" href="#tool-ip"><div class="hc-icon">🌐</div><div class="hc-title">IP Lookup</div><div class="hc-desc">查看您的 IP 与归属地信息</div></a>
+        <a class="home-card" href="#tool-radix"><div class="hc-icon">🔢</div><div class="hc-title">Radix / Base Converter</div><div class="hc-desc">二进制/八进制/十进制/十六进制</div></a>
+        <a class="home-card" href="#tool-unit"><div class="hc-icon">📏</div><div class="hc-title">Unit Converter</div><div class="hc-desc">Temperature、Length、Weight、Area</div></a>
+        <a class="home-card" href="#tool-case"><div class="hc-icon">🔤</div><div class="hc-title">Case Converter</div><div class="hc-desc">UPPER/小写/首字母/camelCase</div></a>
+        <a class="home-card" href="#tool-textsort"><div class="hc-icon">📋</div><div class="hc-title">Text Dedup & Sort</div><div class="hc-desc">Dedup、排序、Remove Blanks、提取</div></a>
+        <a class="home-card" href="#tool-csv"><div class="hc-icon">📄</div><div class="hc-title">CSV to JSON</div><div class="hc-desc">支持自定义分隔符</div></a>
+        <a class="home-card" href="#tool-uuid"><div class="hc-icon">🆔</div><div class="hc-title">UUID Generator</div><div class="hc-desc">批量Generate UUIDs v4</div></a>
+        <a class="home-card" href="#tool-jwt"><div class="hc-icon">🔑</div><div class="hc-title">JWT Decoder</div><div class="hc-desc">解码 Header/Payload，本地运行</div></a>
+
+    </section>
+
+    <!-- ===== JSON ===== -->
+    <section class="tool-panel" id="tool-json">
+      <h2>JSON Formatter / Validator</h2>
+      <p class="tool-desc">Paste JSON text to beautify, minify, or validate with error location.</p>
+      <textarea id="json-input" rows="10" placeholder='Paste JSON here，例如 {"name":"工具箱","version":1}'></textarea>
+      <div class="btn-group">
+        <button class="btn" onclick="jsonFormat()">格式化</button>
+        <button class="btn" onclick="jsonMinify()">压缩</button>
+        <button class="btn btn-outline" onclick="jsonValidate()">仅校验</button>
+        <button class="btn btn-outline" onclick="jsonCopy()">CopyResult</button>
+      </div>
+      <pre id="json-output" class="output"></pre>
+    </section>
+
+    <!-- ===== Base64 ===== -->
+    <section class="tool-panel" id="tool-base64">
+      <h2>Base64 Encode / Decode</h2>
+      <p class="tool-desc">Base64 encode & decode, UTF-8 safe.</p>
+      <textarea id="b64-input" rows="6" placeholder="Enter text or Base64 string"></textarea>
+      <div class="btn-group">
+        <button class="btn" onclick="b64Encode()">Encode →</button>
+        <button class="btn" onclick="b64Decode()">← Decode</button>
+        <button class="btn btn-outline" onclick="swapText('b64-input','b64-output')">⇅ Swap</button>
+      </div>
+      <textarea id="b64-output" rows="6" class="output-text" readonly placeholder="Result"></textarea>
+    </section>
+
+    <!-- ===== URL ===== -->
+    <section class="tool-panel" id="tool-url">
+      <h2>URL Encode / Decode</h2>
+      <p class="tool-desc">URL-encode or decode text using encodeURIComponent.</p>
+      <textarea id="url-input" rows="6" placeholder="Enter text or an encoded URL"></textarea>
+      <div class="btn-group">
+        <button class="btn" onclick="urlEncode()">Encode →</button>
+        <button class="btn" onclick="urlDecode()">← Decode</button>
+        <button class="btn btn-outline" onclick="swapText('url-input','url-output')">⇅ Swap</button>
+      </div>
+      <textarea id="url-output" rows="6" class="output-text" readonly placeholder="Result"></textarea>
+    </section>
+
+    <!-- ===== 二维码 ===== -->
+    <section class="tool-panel" id="tool-qrcode">
+      <h2>QR Code Generator</h2>
+      <p class="tool-desc">Enter text or a URL, generate a QR code, download as PNG.</p>
+      <textarea id="qr-input" rows="3" placeholder="Enter a URL or text, e.g. https://example.com"></textarea>
+      <div class="form-row">
+        <label>尺寸：<input type="range" id="qr-size" min="120" max="360" step="20" value="200"> <span id="qr-size-val">200</span>px</label>
+      </div>
+      <div class="btn-group">
+        <button class="btn" onclick="qrGenerate()">Generate QR Code</button>
+        <button class="btn btn-outline" onclick="qrDownload()">Download PNG</button>
+      </div>
+      <div id="qr-output" class="qr-box"></div>
+    </section>
+
+    <!-- ===== 密码生成器 ===== -->
+    <section class="tool-panel" id="tool-password">
+      <h2>Password Generator</h2>
+      <p class="tool-desc">Generate strong passwords using browser crypto randomness.</p>
+      <div class="result-box" id="pwd-output">Click the button to generate a password</div>
+      <div class="form-row">
+        <label>Length：<input type="range" id="pwd-length" min="6" max="64" value="16" oninput="document.getElementById('pwd-length-val').textContent=this.value"> <span id="pwd-length-val">16</span> </label>
+      </div>
+      <div class="check-grid">
+        <label><input type="checkbox" id="pwd-upper" checked> Uppercase A-Z</label>
+        <label><input type="checkbox" id="pwd-lower" checked> Lowercase a-z</label>
+        <label><input type="checkbox" id="pwd-digit" checked> Digits 0-9</label>
+        <label><input type="checkbox" id="pwd-symbol" checked> Symbols !@#$%…</label>
+        <label><input type="checkbox" id="pwd-nodup"> No duplicate chars</label>
+      </div>
+      <div class="btn-group">
+        <button class="btn" onclick="pwdGenerate()">Generate Password</button>
+        <button class="btn btn-outline" onclick="pwdCopy()">Copy</button>
+      </div>
+      <div class="strength-bar"><div id="pwd-strength"></div></div>
+      <p class="tool-desc" id="pwd-strength-text"></p>
+    </section>
+
+    <!-- ===== 时间戳 ===== -->
+    <section class="tool-panel" id="tool-timestamp">
+      <h2>Unix Timestamp Converter</h2>
+      <p class="tool-desc">Current time:<strong id="ts-now"></strong>（auto-refreshes every second)</p>
+      <div class="grid-2">
+        <div>
+          <h3>Timestamp → Date</h3>
+          <input type="text" id="ts-input" placeholder="如 1700000000 或 1700000000000">
+          <div class="btn-group">
+            <button class="btn" onclick="tsToDate()">Convert</button>
+            <button class="btn btn-outline" onclick="document.getElementById('ts-input').value=Math.floor(Date.now()/1000)">Now (sec)</button>
+          </div>
+          <div class="result-box" id="ts-date-out"></div>
+        </div>
+        <div>
+          <h3>Date → Timestamp</h3>
+          <input type="datetime-local" id="date-input">
+          <div class="btn-group">
+            <button class="btn" onclick="dateToTs()">Convert</button>
+          </div>
+          <div class="result-box" id="ts-out2"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 颜色 ===== -->
+    <section class="tool-panel" id="tool-color">
+      <h2>Color Converter & Palettes</h2>
+      <p class="tool-desc">Pick a color to see HEX / RGB / HSL and generate schemes.</p>
+      <div class="form-row">
+        <input type="color" id="color-picker" value="#4f6ef7" oninput="colorUpdate()">
+        <input type="text" id="color-hex" value="#4f6ef7" style="width:120px" oninput="colorFromHex()">
+      </div>
+      <div class="result-box" id="color-info"></div>
+      <h3>Color Schemes</h3>
+      <div id="palette-out" class="palette"></div>
+    </section>
+
+    <!-- ===== Markdown ===== -->
+    <section class="tool-panel" id="tool-markdown">
+      <h2>Live Markdown Preview</h2>
+      <p class="tool-desc">Type Markdown on the left, see rendered output on the right (GFM).</p>
+      <div class="md-grid">
+        <textarea id="md-input" rows="16"># Welcome使用 Markdown 预览
+
+支持 **加粗**、*斜体*、`行内代码`、[链接](https://example.com)
+
+- 列表项 1
+- 列表项 2
+
+| 工具 | 状态 |
+|------|------|
+| JSON | ✅ |
+| 二维码 | ✅ |
+
+```js
+console.log("代码块");
+```
+</textarea>
+        <div id="md-output" class="md-preview"></div>
+      </div>
+    </section>
+
+    <!-- ===== 字数统计 ===== -->
+    <section class="tool-panel" id="tool-counter">
+      <h2>Word Counter</h2>
+      <p class="tool-desc">Live counts of characters, words, lines, paragraphs and bytes.</p>
+      <textarea id="count-input" rows="10" placeholder="Paste or type text here…" oninput="countText()"></textarea>
+      <div class="stat-grid" id="count-output"></div>
+    </section>
+
+    <!-- ===== 哈希 ===== -->
+    <section class="tool-panel" id="tool-hash">
+      <h2>MD5 / SHA Hash Calculator</h2>
+      <p class="tool-desc">Compute MD5, SHA-1, SHA-256 and SHA-512 hashes locally in your browser.</p>
+      <textarea id="hash-input" rows="4" placeholder="Enter text to hash"></textarea>
+      <div class="btn-group"><button class="btn" onclick="hashCompute()">Compute Hash</button></div>
+      <div class="result-box" id="hash-out"></div>
+    </section>
+
+    <!-- ===== IP 查询 ===== -->
+    <section class="tool-panel" id="tool-ip">
+      <h2>IP Lookup</h2>
+      <p class="tool-desc">Click to look up your public IP and location (calls a public API only on demand).</p>
+      <div class="btn-group"><button class="btn" onclick="ipLookup()">Look up my IP</button></div>
+      <div class="result-box" id="ip-out">Click the button to start</div>
+    </section>
+
+    <!-- ===== 进制转换 ===== -->
+    <section class="tool-panel" id="tool-radix">
+      <h2>Radix / Base Converter</h2>
+      <p class="tool-desc">Enter a number in any base; see binary, octal, decimal and hex at once.</p>
+      <div class="form-row">
+        <select id="radix-from">
+          <option value="2">Binary (2)</option>
+          <option value="8">Octal (8)</option>
+          <option value="10" selected>Decimal (10)</option>
+          <option value="16">Hex (16)</option>
+        </select>
+        <input type="text" id="radix-input" placeholder="Enter number" oninput="radixConvert()">
+      </div>
+      <div class="result-box" id="radix-out"></div>
+    </section>
+
+    <!-- ===== 单位换算 ===== -->
+    <section class="tool-panel" id="tool-unit">
+      <h2>Unit Converter</h2>
+      <p class="tool-desc">Convert temperature, length, weight and area units.</p>
+      <div class="form-row">
+        <select id="unit-cat" onchange="unitChangeCat()">
+          <option value="temp">Temperature</option>
+          <option value="length">Length</option>
+          <option value="weight">Weight</option>
+          <option value="area">Area</option>
+        </select>
+        <input type="number" id="unit-val" value="1" oninput="unitConvert()">
+        <select id="unit-from" onchange="unitConvert()"></select>
+        <span>→</span>
+        <select id="unit-to" onchange="unitConvert()"></select>
+      </div>
+      <div class="result-box" id="unit-out"></div>
+    </section>
+
+    <!-- ===== 大小写 ===== -->
+    <section class="tool-panel" id="tool-case">
+      <h2>Case Converter</h2>
+      <p class="tool-desc">UPPERCASE, lowercase, Title Case, camelCase, snake_case.</p>
+      <textarea id="case-input" rows="5" placeholder="输入文本"></textarea>
+      <div class="btn-group">
+        <button class="btn" onclick="caseDo('upper')">UPPER</button>
+        <button class="btn" onclick="caseDo('lower')">lower</button>
+        <button class="btn" onclick="caseDo('cap')">Title</button>
+        <button class="btn" onclick="caseDo('camel')">camelCase</button>
+        <button class="btn" onclick="caseDo('snake')">snake_case</button>
+      </div>
+      <textarea id="case-output" rows="5" class="output-text" readonly placeholder="Result"></textarea>
+    </section>
+
+    <!-- ===== 文本处理 ===== -->
+    <section class="tool-panel" id="tool-textsort">
+      <h2>Text Dedup & Sort</h2>
+      <p class="tool-desc">按行Dedup、排序（升/降/Length）、Remove Blanks、添Number Lines、Reverse。</p>
+      <textarea id="tsort-input" rows="8" placeholder="One item per line"></textarea>
+      <div class="btn-group">
+        <button class="btn" onclick="tsort('dedup')">Dedup</button>
+        <button class="btn" onclick="tsort('asc')">Sort A-Z</button>
+        <button class="btn" onclick="tsort('desc')">Sort Z-A</button>
+        <button class="btn" onclick="tsort('len')">按Length</button>
+        <button class="btn" onclick="tsort('trim')">Remove Blanks</button>
+        <button class="btn" onclick="tsort('num')">Number Lines</button>
+        <button class="btn" onclick="tsort('rev')">Reverse</button>
+      </div>
+      <textarea id="tsort-output" rows="8" class="output-text" readonly placeholder="Result"></textarea>
+    </section>
+
+    <!-- ===== CSV → JSON ===== -->
+    <section class="tool-panel" id="tool-csv">
+      <h2>CSV to JSON</h2>
+      <p class="tool-desc">First row is the header. Supports comma, tab and semicolon delimiters.</p>
+      <textarea id="csv-input" rows="8" placeholder="name,age&#10;Tom,18&#10;Jerry,22"></textarea>
+      <div class="form-row">
+        <select id="csv-sep">
+          <option value=",">Comma ,</option>
+          <option value="&#9;">Tab</option>
+          <option value=";">Semicolon ;</option>
+        </select>
+      </div>
+      <div class="btn-group">
+        <button class="btn" onclick="csvToJson()">Convert to JSON</button>
+        <button class="btn btn-outline" onclick="csvCopy()">CopyResult</button>
+      </div>
+      <pre id="csv-output" class="output"></pre>
+    </section>
+
+    <!-- ===== UUID ===== -->
+    <section class="tool-panel" id="tool-uuid">
+      <h2>UUID Generator</h2>
+      <p class="tool-desc">Batch-generate random UUID v4 with browser crypto.</p>
+      <div class="form-row">
+        <label>Count:<input type="number" id="uuid-count" min="1" max="100" value="5"></label>
+        <label><input type="checkbox" id="uuid-upper"> Uppercase</label>
+      </div>
+      <div class="btn-group">
+        <button class="btn" onclick="uuidGen()">Generate UUIDs</button>
+        <button class="btn btn-outline" onclick="uuidCopy()">Copy</button>
+      </div>
+      <pre id="uuid-output" class="output"></pre>
+    </section>
+
+    <!-- ===== JWT ===== -->
+    <section class="tool-panel" id="tool-jwt">
+      <h2>JWT Decoder</h2>
+      <p class="tool-desc">Decode a JWT header and payload (no signature verification, fully local).</p>
+      <textarea id="jwt-input" rows="4" placeholder="Paste a JWT like eyJhbGciOi..."></textarea>
+      <div class="btn-group"><button class="btn" onclick="jwtDecode()">解码</button></div>
+      <pre id="jwt-output" class="output"></pre>
+    </section>
+
+  </main>
+
+  <!-- ===== 侧边栏广告位 ===== -->
+  <aside class="sidebar">
+    <div class="ad-sidebar" id="ad-side">
+      <div class="ad-placeholder-text">Ad slot (300x250)<br>AdSense code goes here</div>
+    </div>
+    <div class="side-card">
+      <h3>Privacy</h3>
+      <p>All tools run locally in your browser. No data is uploaded to any server.</p>
+    </div>
+    <div class="side-card">
+      <h3>All Tools</h3>
+      <ul class="side-list">
+        <li><a href="#tool-json">JSON Formatter</a></li>
+        <li><a href="#tool-base64">Base64</a></li>
+        <li><a href="#tool-url">URL Encode</a></li>
+        <li><a href="#tool-qrcode">QR Code</a></li>
+        <li><a href="#tool-password">Password Gen</a></li>
+        <li><a href="#tool-timestamp">Timestamp</a></li>
+        <li><a href="#tool-color">Colors</a></li>
+        <li><a href="#tool-markdown">Markdown</a></li>
+        <li><a href="#tool-counter">Word Count</a></li>
+        <li><a href="#tool-hash">Hash</a></li>
+        <li><a href="#tool-ip">IP Lookup</a></li>
+        <li><a href="#tool-radix">Radix</a></li>
+        <li><a href="#tool-unit">Units</a></li>
+        <li><a href="#tool-case">Case</a></li>
+        <li><a href="#tool-textsort">文本Dedup/排序</a></li>
+        <li><a href="#tool-csv">CSV→JSON</a></li>
+        <li><a href="#tool-uuid">UUID</a></li>
+        <li><a href="#tool-jwt">JWT</a></li>
+      </ul>
+    </div>
+    <!-- ===== 底部矩形广告位（第二广告位） ===== -->
+    <div class="ad-sidebar ad-rect" id="ad-side-2">
+      <div class="ad-placeholder-text">Ad slot (300x600)</div>
+    </div>
+  </aside>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© 2025 ToolBox · Runs 100% client-side · No data uploaded</p>
+    <p class="footer-links"><a href="#tool-json">JSON</a> · <a href="#tool-base64">Base64</a> · <a href="#tool-qrcode">二维码</a> · <a href="#tool-password">密码</a></p>
+  </div>
+</footer>
+
+<!-- ===== 底部广告位 ===== -->
+<div class="ad-banner" id="ad-bottom">
+  <div class="ad-placeholder-text">Ad slot (responsive banner) — AdSense code goes here</div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
