@@ -151,7 +151,9 @@ function imgToB64(input){
   r.onload=e=>{
     const d=e.target.result;
     document.getElementById('img-output').value=d;
-    document.getElementById('img-preview').src=d;
+    const pv=document.getElementById('img-preview');
+    pv.src=d;
+    pv.style.display='block';
     document.getElementById('img-info').textContent=f.name+" — "+(f.size/1024).toFixed(1)+" KB — Base64 size: "+(d.length/1024).toFixed(1)+" KB";
   };
   r.readAsDataURL(f);
