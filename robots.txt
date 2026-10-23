@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://maniu2475-glitch.github.io/tools-en/sitemap.xml
