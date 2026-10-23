@@ -19,7 +19,13 @@ function showPanel() {
   let id = location.hash.replace('#', '') || 'home';
   const panels = document.querySelectorAll('.tool-panel');
   const target = document.getElementById('tool-' + id);
-  if (!target) id = 'home';
+  if (!target) {
+    // static subpage: no hash target -> keep the single active panel
+    if (!panels.length) return;
+    const hasActive = Array.from(panels).some(p => p.classList.contains('active'));
+    if (!hasActive) panels[0].classList.add('active');
+    return;
+  }
   panels.forEach(p => p.classList.toggle('active', p.id === 'tool-' + id));
   // 高亮导航
   document.querySelectorAll('.main-nav a').forEach(a =>

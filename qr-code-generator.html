@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QR Code Generator - Free Online QR Maker</title>
+<meta name="description" content="Free online QR code generator: turn any URL or text into a scannable QR code instantly. Generated locally in your browser - safe for sensitive data.">
+<meta name="keywords" content="Free online QR code generator: turn any URL or text into a scannable QR code instantly. Generated locally in your browser - safe for sensitive data.">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/qr-code-generator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<!-- Open Graph / SEO -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="QR code generator">
+<meta property="og:description" content="Free online QR code generator: turn any URL or text into a scannable QR code instantly. Generated locally in your browser - safe for sensitive data.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdqAsxVwJGACZjAUIAd8a7S0L/1/1r/HPn1vAmAAGIAJRWYAfwFVAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
+<!-- 外部库 CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/11.1.1/marked.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js" defer></script>
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "QR code generator", "url": "https://maniu2475-glitch.github.io/tools-en/qr-code-generator.html", "description": "Free online QR code generator: turn any URL or text into a scannable QR code instantly. Generated locally in your browser - safe for sensitive data.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is this tool really free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, completely free with no signup, no login and no usage limits. Just open the page and use it."}}, {"@type": "Question", "name": "Is my data uploaded to a server?", "acceptedAnswer": {"@type": "Answer", "text": "No. All processing happens locally in your browser - your data never leaves your device, so even sensitive content stays private."}}, {"@type": "Question", "name": "Which browsers are supported?", "acceptedAnswer": {"@type": "Answer", "text": "All modern browsers including Chrome, Edge, Firefox and Safari, on both desktop and mobile."}}]}</script></head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="menu">☰</button>
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span><span class="logo-text">Online Toolbox</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#tool-json" data-tool="json">JSON</a>
+      <a href="index.html#tool-base64" data-tool="base64">Base64</a>
+      <a href="index.html#tool-url" data-tool="url">URL</a>
+      <a href="index.html#tool-qrcode" data-tool="qrcode">二维码</a>
+      <a href="index.html#tool-password" data-tool="password">密码</a>
+      <a href="index.html#tool-timestamp" data-tool="timestamp">时间戳</a>
+      <a href="index.html#tool-color" data-tool="color">颜色</a>
+      <a href="index.html#tool-markdown" data-tool="markdown">Markdown</a>
+      <a href="index.html#tool-counter" data-tool="counter">字数</a>
+      <a href="index.html#tool-hash" data-tool="hash">哈希</a>
+      <a href="index.html#tool-ip" data-tool="ip">IP查询</a>
+      <a href="index.html#tool-radix" data-tool="radix">Radix</a>
+      <a href="index.html#tool-unit" data-tool="unit">Units</a>
+      <a href="index.html#tool-case" data-tool="case">大小写</a>
+      <a href="index.html#tool-textsort" data-tool="textsort">文本处理</a>
+      <a href="index.html#tool-csv" data-tool="csv">CSV转JSON</a>
+      <a href="index.html#tool-uuid" data-tool="uuid">UUID</a>
+      <a href="index.html#tool-jwt" data-tool="jwt">JWT解码</a>
+    </nav>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-qrcode">
+      <h1>QR Code Generator</h1>
+      
+      
+      <p class="tool-desc">Enter text or a URL, generate a QR code, download as PNG.</p>
+      <textarea id="qr-input" rows="3" placeholder="Enter a URL or text, e.g. https://example.com"></textarea>
+      <div class="form-row">
+        <label>尺寸：<input type="range" id="qr-size" min="120" max="360" step="20" value="200"> <span id="qr-size-val">200</span>px</label>
+      </div>
+      <div class="btn-group">
+        <button class="btn" onclick="qrGenerate()">Generate QR Code</button>
+        <button class="btn btn-outline" onclick="qrDownload()">Download PNG</button>
+      </div>
+      <div id="qr-output" class="qr-box"></div>
+    
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">Enter any URL, text, WiFi credentials or contact info and instantly get a scannable QR code. Codes are generated locally by your browser, so nothing is uploaded - safe even for payment links and private data. </p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a>
+<a class="btn btn-outline" href="base64.html">Base64 encode/decode</a>
+<a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a>
+<a class="btn btn-outline" href="password-generator.html">Password generator</a>
+<a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a>
+<a class="btn btn-outline" href="color-converter.html">Color converter</a>
+<a class="btn btn-outline" href="markdown-editor.html">Markdown editor</a>
+<a class="btn btn-outline" href="word-counter.html">Word counter</a>
+<a class="btn btn-outline" href="md5-generator.html">Hash generator</a>
+<a class="btn btn-outline" href="ip-lookup.html">IP lookup</a>
+<a class="btn btn-outline" href="number-converter.html">Base converter</a>
+<a class="btn btn-outline" href="unit-converter.html">Unit converter</a>
+<a class="btn btn-outline" href="case-converter.html">Case converter</a>
+<a class="btn btn-outline" href="text-sort.html">Text sorter</a>
+<a class="btn btn-outline" href="csv-to-json.html">CSV to JSON</a>
+<a class="btn btn-outline" href="uuid-generator.html">UUID generator</a>
+<a class="btn btn-outline" href="jwt-decoder.html">JWT decoder</a>
+<a class="btn btn-outline" href="lorem-ipsum-generator.html">Lorem ipsum</a>
+<a class="btn btn-outline" href="cron-parser.html">Cron parser</a>
+<a class="btn btn-outline" href="text-diff.html">Text diff</a>
+<a class="btn btn-outline" href="html-entities.html">HTML entities</a>
+<a class="btn btn-outline" href="slug-generator.html">Slug generator</a>
+<a class="btn btn-outline" href="password-strength.html">Password strength</a>
+<a class="btn btn-outline" href="image-to-base64.html">Image to Base64</a>
+<a class="btn btn-outline" href="url-parser.html">URL parser</a>
+<a class="btn btn-outline" href="color-picker.html">Color picker</a>
+<a class="btn btn-outline" href="text-to-binary.html">Text to binary</a></div>
+      <h3>Frequently asked questions</h3>
+      <div style="line-height:1.9"><details><summary><strong>Is this tool really free?</strong></summary><p>Yes, completely free with no signup, no login and no usage limits. Just open the page and use it.</p></details>
+<details><summary><strong>Is my data uploaded to a server?</strong></summary><p>No. All processing happens locally in your browser - your data never leaves your device, so even sensitive content stays private.</p></details>
+<details><summary><strong>Which browsers are supported?</strong></summary><p>All modern browsers including Chrome, Edge, Firefox and Safari, on both desktop and mobile.</p></details></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">🧰 Online Toolbox</a></p></div></footer>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+</body>
+</html>
