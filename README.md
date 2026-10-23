@@ -1,9 +1,9 @@
 Free Online Toolbox
 ==================
 
-18 free online tools that run 100% in your browser — no data ever uploaded.
+33 free online tools that run 100% in your browser — no data ever uploaded.
 
-**Tools:** JSON Formatter, Base64, URL Encode, QR Code, Password Generator, Timestamp Converter, Color Palettes, Markdown Preview, Word Counter, MD5/SHA Hash, IP Lookup, Radix Converter, Unit Converter, Case Converter, Text Dedup & Sort, CSV→JSON, UUID Generator, JWT Decoder.
+**Tools:** JSON Formatter, Base64 Encode/Decode, URL Encode/Decode, QR Code Generator, QR Code Scanner, Password Generator, Password Strength Checker, Timestamp Converter, Color Converter, Color Picker, Markdown Editor, Word Counter, MD5/SHA Hash, IP Lookup, Number Converter (Radix), Unit Converter, Case Converter, Text Sort, Text Diff, Text to Binary, CSV→JSON, UUID Generator, JWT Decoder, Base32 Encode/Decode, Cron Expression Parser, Cron Job Generator, Aspect Ratio Calculator, Random String Generator, Slug Generator, HTML Entities, Image to Base64, Lorem Ipsum Generator, URL Parser.
 
 ## Why use it?
 - 🔒 **Private** — all computation happens locally in your browser
