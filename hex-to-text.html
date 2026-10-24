@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hex to Text Converter - Hexadecimal to ASCII &amp; String</title>
+<meta name="description" content="Free online hex to text converter and text to hex encoder. Convert hexadecimal strings to readable ASCII text or encode text as hex, with spacing options. Client-side.">
+<meta name="keywords" content="hex to text,hex to ascii,hex decoder,text to hex,hex string converter,hex to string">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/hex-to-text.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hex to Text Converter">
+<meta property="og:description" content="Free online hex to text converter and text to hex encoder. Convert hexadecimal strings to readable ASCII text or encode text as hex, with spacing options. Client-side.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Hex to Text Converter", "url": "https://maniu2475-glitch.github.io/tools-en/hex-to-text.html", "description": "Free online hex to text converter and text to hex encoder. Convert hexadecimal strings to readable ASCII text or encode text as hex, with spacing options. Client-side.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Hex to Text Converter</h1>
+<h3>Hex → Text</h3>
+<textarea id="h-in" rows="5" placeholder="Paste hex, e.g. 48 65 6c 6c 6f" oninput="hDec()"></textarea>
+<div class="result-box" id="h-dec-out" style="word-break:break-all"></div>
+<h3>Text → Hex</h3>
+<textarea id="h-ti" rows="5" placeholder="Enter text to encode" oninput="hEnc()"></textarea>
+<div class="result-box" id="h-enc-out" style="word-break:break-all"></div>
+<div class="btn-group"><button class="btn" onclick="hSep(true)">With spaces</button><button class="btn" onclick="hSep(false)">No spaces</button></div>
+<p class="tool-desc">Hexadecimal (base-16) notation represents every byte as two characters from 0-9 and a-f, and it is the standard way to display raw binary data: in hex editors, network packet captures, debuggers, checksums and API responses. A string like <code>48 65 6c 6c 6f</code> is simply "Hello" in hex form. Converting between hex and readable text is a routine task for developers, reverse engineers, and anyone working with encoded payloads or color codes.</p>
+<p class="tool-desc">This converter handles both directions: paste hex (with or without spaces, colons or 0x prefixes) to get the decoded ASCII/UTF-8 text, or type text to get its hex representation. The tool automatically strips common separators so you can paste hex straight from a packet dump or hexdump output, and it validates input, warning you about odd-length strings. All processing is local JavaScript - your data never leaves the browser - which matters because hex dumps often contain sensitive material like session tokens or private keys.</p>
+      <h3>Related tools</h3>
+      <div class="related-tools">
+<a class="btn btn-outline" href="base64.html">Base64 encode/decode</a>
+<a class="btn btn-outline" href="base32.html">Base32 encode/decode</a>
+<a class="btn btn-outline" href="text-to-binary.html">Text to binary</a>
+<a class="btn btn-outline" href="md5-generator.html">MD5 hash</a>
+<a class="btn btn-outline" href="sha256-hash-generator.html">SHA-256 hash</a>
+<a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a>
+<a class="btn btn-outline" href="case-converter.html">Case converter</a>
+<a class="btn btn-outline" href="random-string-generator.html">Random string</a>
+<a class="btn btn-outline" href="password-generator.html">Password generator</a>
+<a class="btn btn-outline" href="json-formatter.html">JSON formatter</a>
+<a class="btn btn-outline" href="roman-numeral-converter.html">Roman numerals</a>
+<a class="btn btn-outline" href="number-converter.html">Number base converter</a>
+<a class="btn btn-outline" href="qr-code-generator.html">QR code generator</a>
+<a class="btn btn-outline" href="word-counter.html">Word counter</a>
+<a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a></div>
+      <h3>Frequently asked questions</h3>
+      <div style="line-height:1.9"><details><summary><strong>Is this tool really free?</strong></summary><p>Yes, completely free with no signup, no login and no usage limits. Just open the page and use it.</p></details>
+<details><summary><strong>Is my data uploaded to a server?</strong></summary><p>No. All processing happens locally in your browser - your data never leaves your device, so even sensitive content stays private.</p></details>
+<details><summary><strong>Which browsers are supported?</strong></summary><p>All modern browsers including Chrome, Edge, Firefox and Safari, on both desktop and mobile.</p></details></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">🧰 Online Toolbox</a></p></div></footer>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+<script>
+var hSpaced=true;
+function hDec(){var s=document.getElementById('h-in').value.toLowerCase().replace(/0x/g,'').replace(/[^0-9a-f]/g,'');var el=document.getElementById('h-dec-out');
+if(!s){el.textContent='';return;}if(s.length%2){el.textContent='Odd number of hex digits.';return;}
+try{var bytes=new Uint8Array(s.length/2);for(var i=0;i<s.length;i+=2){bytes[i/2]=parseInt(s.substr(i,2),16);}
+el.textContent=new TextDecoder().decode(bytes);}catch(e){el.textContent='Decoding error.';}}
+function hEnc(){var s=document.getElementById('h-ti').value;var out=[];var b=new TextEncoder().encode(s);
+for(var i=0;i<b.length;i++){out.push(b[i].toString(16).padStart(2,'0'));}
+document.getElementById('h-enc-out').textContent=hSpaced?out.join(' '):out.join('');}
+function hSep(on){hSpaced=on;hEnc();}
+</script>
+</body>
+</html>

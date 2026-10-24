@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ROT13 &amp; Caesar Cipher Translator - Encode &amp; Decode Text</title>
+<meta name="description" content="Free online ROT13 and Caesar cipher tool. Encode or decode text with any shift (ROT13, ROT5, custom Caesar shift). Runs fully in your browser.">
+<meta name="keywords" content="rot13,rot13 decode,rot13 translator,caesar cipher,caesar cipher decoder,caesar shift,cipher tool">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/rot13-caesar-cipher.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ROT13 &amp; Caesar Cipher">
+<meta property="og:description" content="Free online ROT13 and Caesar cipher tool. Encode or decode text with any shift (ROT13, ROT5, custom Caesar shift). Runs fully in your browser.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "ROT13 &amp; Caesar Cipher", "url": "https://maniu2475-glitch.github.io/tools-en/rot13-caesar-cipher.html", "description": "Free online ROT13 and Caesar cipher tool. Encode or decode text with any shift (ROT13, ROT5, custom Caesar shift). Runs fully in your browser.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>ROT13 &amp; Caesar Cipher</h1>
+<h3>ROT13 / Caesar cipher</h3>
+<textarea id="c-in" rows="6" placeholder="Enter text to encode or decode…"></textarea>
+<div class="btn-group">
+<label>Shift: <input id="c-shift" type="number" value="13" min="1" max="25" style="width:70px"></label>
+<button class="btn" onclick="cRun()">Apply cipher</button>
+<button class="btn" onclick="cSet(13)">ROT13</button>
+<button class="btn" onclick="cSet(5)">ROT5</button>
+<button class="btn" onclick="cClear()">Clear</button>
+</div>
+<div class="result-box" id="c-out" style="word-break:break-all"></div>
+<p class="tool-desc">ROT13 (rotate by 13 places) is a simple letter substitution cipher that replaces each letter with the letter 13 positions after it in the alphabet. Since the English alphabet has 26 letters, applying ROT13 twice returns the original text, which makes it its own inverse - the same function encodes and decodes. This classic cipher appears everywhere from newsgroups hiding spoilers to programming puzzles and CTF challenges. Because A maps to N, B to O, and so on, the result looks like scrambled nonsense to a casual reader while remaining trivially reversible.</p>
+<p class="tool-desc">This tool also implements the general <strong>Caesar cipher</strong> with any shift value from 1 to 25, so you can try ROT1, ROT5, ROT13, ROT18 and every other rotation. Type or paste text, choose a shift, and see the encrypted (or decrypted) result instantly. Case is preserved, digits and punctuation are left untouched. Everything runs client-side in JavaScript - no data is ever sent to a server - making it safe for any content. Useful for decoding hidden messages, obfuscating puzzle answers, teaching classical cryptography, or verifying ROT13 text found in documentation and forum posts.</p>
+      <h3>Related tools</h3>
+      <div class="related-tools">
+<a class="btn btn-outline" href="base64.html">Base64 encode/decode</a>
+<a class="btn btn-outline" href="base32.html">Base32 encode/decode</a>
+<a class="btn btn-outline" href="text-to-binary.html">Text to binary</a>
+<a class="btn btn-outline" href="md5-generator.html">MD5 hash</a>
+<a class="btn btn-outline" href="sha256-hash-generator.html">SHA-256 hash</a>
+<a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a>
+<a class="btn btn-outline" href="case-converter.html">Case converter</a>
+<a class="btn btn-outline" href="random-string-generator.html">Random string</a>
+<a class="btn btn-outline" href="password-generator.html">Password generator</a>
+<a class="btn btn-outline" href="json-formatter.html">JSON formatter</a>
+<a class="btn btn-outline" href="roman-numeral-converter.html">Roman numerals</a>
+<a class="btn btn-outline" href="number-converter.html">Number base converter</a>
+<a class="btn btn-outline" href="qr-code-generator.html">QR code generator</a>
+<a class="btn btn-outline" href="word-counter.html">Word counter</a>
+<a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a></div>
+      <h3>Frequently asked questions</h3>
+      <div style="line-height:1.9"><details><summary><strong>Is this tool really free?</strong></summary><p>Yes, completely free with no signup, no login and no usage limits. Just open the page and use it.</p></details>
+<details><summary><strong>Is my data uploaded to a server?</strong></summary><p>No. All processing happens locally in your browser - your data never leaves your device, so even sensitive content stays private.</p></details>
+<details><summary><strong>Which browsers are supported?</strong></summary><p>All modern browsers including Chrome, Edge, Firefox and Safari, on both desktop and mobile.</p></details></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">🧰 Online Toolbox</a></p></div></footer>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+<script>
+function cSet(n){document.getElementById('c-shift').value=n;cRun();}
+function cClear(){document.getElementById('c-in').value='';document.getElementById('c-out').textContent='';}
+function cRun(){var s=document.getElementById('c-in').value,k=parseInt(document.getElementById('c-shift').value,10)||13;var o='';for(var i=0;i<s.length;i++){var c=s[i];if(c>='a'&&c<='z'){o+=String.fromCharCode((c.charCodeAt(0)-97+k)%26+97);}else if(c>='A'&&c<='Z'){o+=String.fromCharCode((c.charCodeAt(0)-65+k)%26+65);}else{o+=c;}}
+document.getElementById('c-out').textContent=o;}
+document.getElementById('c-in').addEventListener('input',cRun);
+</script>
+</body>
+</html>

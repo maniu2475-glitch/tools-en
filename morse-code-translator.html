@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morse Code Translator - Convert Text to Morse &amp; Back</title>
+<meta name="description" content="Free online Morse code translator. Convert English text to Morse code (dots and dashes) or decode Morse back to text, with playback tone. 100% client-side.">
+<meta name="keywords" content="morse code translator,morse code converter,text to morse,morse decoder,sos morse code">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/morse-code-translator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Morse Code Translator">
+<meta property="og:description" content="Free online Morse code translator. Convert English text to Morse code (dots and dashes) or decode Morse back to text, with playback tone. 100% client-side.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Morse Code Translator", "url": "https://maniu2475-glitch.github.io/tools-en/morse-code-translator.html", "description": "Free online Morse code translator. Convert English text to Morse code (dots and dashes) or decode Morse back to text, with playback tone. 100% client-side.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Morse Code Translator</h1>
+<h3>Text → Morse</h3>
+<textarea id="m-in" rows="5" placeholder="Enter text, e.g. HELLO WORLD" oninput="mEnc()"></textarea>
+<div class="result-box" id="m-enc-out" style="word-break:break-all"></div>
+<h3>Morse → Text</h3>
+<textarea id="m-mi" rows="5" placeholder="Enter Morse, e.g. .... . .-.. .-.. ---" oninput="mDec()"></textarea>
+<div class="result-box" id="m-dec-out" style="word-break:break-all"></div>
+<div class="btn-group"><button class="btn" onclick="mPlay()">▶ Play Morse audio</button><button class="btn" onclick="mSwap()">⇅ Move result up</button></div>
+<p class="tool-desc">Morse code is a time-honored encoding system that represents letters, digits and punctuation as sequences of dots (short signals) and dashes (long signals), invented for telegraphy in the 1830s and still used today by amateur radio operators, aviation beacons, and in emergency situations - the famous SOS distress signal is Morse code. Each letter maps to a unique pattern, for example A is <code>.-</code>, B is <code>-...</code>, and numbers each use five symbols.</p>
+<p class="tool-desc">This translator works in both directions: paste plain text and get International Morse code, or paste Morse (separate letters with spaces, words with <code>/</code>) and get readable text back. Type your message in the box and the conversion happens instantly as you type. You can also play the Morse audio using your browser's built-in sound synthesis, which is handy for learning or signaling practice. All conversion happens locally in JavaScript, so nothing is uploaded anywhere and the tool works offline once loaded.</p>
+      <h3>Related tools</h3>
+      <div class="related-tools">
+<a class="btn btn-outline" href="base64.html">Base64 encode/decode</a>
+<a class="btn btn-outline" href="base32.html">Base32 encode/decode</a>
+<a class="btn btn-outline" href="text-to-binary.html">Text to binary</a>
+<a class="btn btn-outline" href="md5-generator.html">MD5 hash</a>
+<a class="btn btn-outline" href="sha256-hash-generator.html">SHA-256 hash</a>
+<a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a>
+<a class="btn btn-outline" href="case-converter.html">Case converter</a>
+<a class="btn btn-outline" href="random-string-generator.html">Random string</a>
+<a class="btn btn-outline" href="password-generator.html">Password generator</a>
+<a class="btn btn-outline" href="json-formatter.html">JSON formatter</a>
+<a class="btn btn-outline" href="roman-numeral-converter.html">Roman numerals</a>
+<a class="btn btn-outline" href="number-converter.html">Number base converter</a>
+<a class="btn btn-outline" href="qr-code-generator.html">QR code generator</a>
+<a class="btn btn-outline" href="word-counter.html">Word counter</a>
+<a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a></div>
+      <h3>Frequently asked questions</h3>
+      <div style="line-height:1.9"><details><summary><strong>Is this tool really free?</strong></summary><p>Yes, completely free with no signup, no login and no usage limits. Just open the page and use it.</p></details>
+<details><summary><strong>Is my data uploaded to a server?</strong></summary><p>No. All processing happens locally in your browser - your data never leaves your device, so even sensitive content stays private.</p></details>
+<details><summary><strong>Which browsers are supported?</strong></summary><p>All modern browsers including Chrome, Edge, Firefox and Safari, on both desktop and mobile.</p></details></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">🧰 Online Toolbox</a></p></div></footer>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+<script>
+var M={'.-':'A','-...':'B','-.-.':'C','-..':'D','.':'E','..-.':'F','--.':'G','....':'H','..':'I','.---':'J','-.-':'K','.-..':'L','--':'M','-.':'N','---':'O','.--.':'P','--.-':'Q','.-.':'R','...':'S','-':'T','..-':'U','...-':'V','.--':'W','-..-':'X','-.--':'Y','--..':'Z','-----':'0','.----':'1','..---':'2','...--':'3','....-':'4','.....':'5','-....':'6','--...':'7','---..':'8','----.':'9','-..-.':'/','.-.-.-':'.','--..--':',','..--..':'?','-.-.--':'!','-....-':'-','-...-':'=','.--.-.':'@'};
+var R={};for(var k in M){R[M[k]]=k;}
+function mEnc(){var s=document.getElementById('m-in').value.toUpperCase(),out=[];for(var i=0;i<s.length;i++){var ch=s[i];if(ch===' '){out.push('/');}else if(R[ch]){out.push(R[ch]);}}document.getElementById('m-enc-out').textContent=out.join(' ');}
+function mDec(){var s=document.getElementById('m-mi').value.replace(/\//g,' / ').replace(/\s+/g,' ').trim().split(' '),out=[];for(var i=0;i<s.length;i++){var t=s[i];if(t==='/'){out.push(' ');}else{out.push(M[t]||'?');}}document.getElementById('m-dec-out').textContent=out.join('');}
+function mSwap(){var v=document.getElementById('m-enc-out').textContent;if(v){document.getElementById('m-mi').value=v;mDec();}}
+function mPlay(){var s=document.getElementById('m-enc-out').textContent;if(!s){alert('Enter text first.');return;}var ctx=null;try{ctx=new (window.AudioContext||window.webkitAudioContext)();}catch(e){alert('Audio not supported.');return;}
+var t=ctx.currentTime,u=0.07;function beep(d){var o=ctx.createOscillator(),g=ctx.createGain();o.frequency.value=600;o.connect(g);g.connect(ctx.destination);o.start(t);o.stop(t+d);t+=d+u;}
+for(var i=0;i<s.length;i++){var c=s[i];if(c==='.'){beep(u);}else if(c==='-'){beep(u*3);}else if(c===' '){t+=u*3;}else if(c==='/'){t+=u*5;}}}
+</script>
+</body>
+</html>

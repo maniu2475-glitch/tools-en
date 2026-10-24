@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Number to Words Converter - Spell Out Numbers in English</title>
+<meta name="description" content="Free online number-to-words converter. Turn any number up to trillions into English words (e.g. 1234 becomes one thousand two hundred thirty-four). Perfect for checks. Client-side.">
+<meta name="keywords" content="number to words,spell number,convert number to words,number in english words,check writing numbers">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/number-to-words.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Number to Words Converter">
+<meta property="og:description" content="Free online number-to-words converter. Turn any number up to trillions into English words (e.g. 1234 becomes one thousand two hundred thirty-four). Perfect for checks. Client-side.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Number to Words Converter", "url": "https://maniu2475-glitch.github.io/tools-en/number-to-words.html", "description": "Free online number-to-words converter. Turn any number up to trillions into English words (e.g. 1234 becomes one thousand two hundred thirty-four). Perfect for checks. Client-side.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Number to Words Converter</h1>
+<h3>Number → English words</h3>
+<input id="n-in" type="text" placeholder="Enter a number, e.g. 1234567" style="width:100%;padding:10px;font-size:16px" oninput="nRun()">
+<div class="result-box" id="n-out" style="font-size:18px;line-height:1.6"></div>
+<div class="btn-group"><button class="btn" onclick="nCopy()">Copy words</button><button class="btn" onclick="nCap()">Capitalize</button></div>
+<p class="tool-desc">Writing numbers out in words is a common requirement when filling out bank checks, legal documents, invoices, and educational exercises. Rules differ slightly between American and British English, and beyond a few thousand it is easy to make mistakes with millions, billions and trillions. This converter spells out any positive integer up to 15 digits instantly and accurately, using standard American English conventions - for example 1234 becomes "one thousand two hundred thirty-four", and 2026 becomes "two thousand twenty-six".</p>
+<p class="tool-desc">Just type a number and the words appear immediately; you can copy the result with one click. The tool also adds commas every three digits to the numeric display so long numbers are easy to read, and can capitalize the result for check-writing use. Everything is computed in your browser with plain JavaScript - no servers, no tracking - so it works offline and handles as many conversions as you like. Bookmark it for accounting, teaching kids numbers, or any time you need to spell a number correctly.</p>
+      <h3>Related tools</h3>
+      <div class="related-tools">
+<a class="btn btn-outline" href="base64.html">Base64 encode/decode</a>
+<a class="btn btn-outline" href="base32.html">Base32 encode/decode</a>
+<a class="btn btn-outline" href="text-to-binary.html">Text to binary</a>
+<a class="btn btn-outline" href="md5-generator.html">MD5 hash</a>
+<a class="btn btn-outline" href="sha256-hash-generator.html">SHA-256 hash</a>
+<a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a>
+<a class="btn btn-outline" href="case-converter.html">Case converter</a>
+<a class="btn btn-outline" href="random-string-generator.html">Random string</a>
+<a class="btn btn-outline" href="password-generator.html">Password generator</a>
+<a class="btn btn-outline" href="json-formatter.html">JSON formatter</a>
+<a class="btn btn-outline" href="roman-numeral-converter.html">Roman numerals</a>
+<a class="btn btn-outline" href="number-converter.html">Number base converter</a>
+<a class="btn btn-outline" href="qr-code-generator.html">QR code generator</a>
+<a class="btn btn-outline" href="word-counter.html">Word counter</a>
+<a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a></div>
+      <h3>Frequently asked questions</h3>
+      <div style="line-height:1.9"><details><summary><strong>Is this tool really free?</strong></summary><p>Yes, completely free with no signup, no login and no usage limits. Just open the page and use it.</p></details>
+<details><summary><strong>Is my data uploaded to a server?</strong></summary><p>No. All processing happens locally in your browser - your data never leaves your device, so even sensitive content stays private.</p></details>
+<details><summary><strong>Which browsers are supported?</strong></summary><p>All modern browsers including Chrome, Edge, Firefox and Safari, on both desktop and mobile.</p></details></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">🧰 Online Toolbox</a></p></div></footer>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+<script>
+var ONE=['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen'];
+var TEN=['','','twenty','thirty','forty','fifty','sixty','seventy','eighty','ninety'];
+var SC=['',' thousand',' million',' billion',' trillion'];
+function g3(n){var s='';if(n>=100){s+=ONE[(n/100)|0]+' hundred';n%=100;if(n)s+=' ';}
+if(n>=20){s+=TEN[(n/10)|0];n%=10;if(n)s+='-'+ONE[n];}else if(n>0){s+=ONE[n];}return s;}
+function words(n){if(n===0)return 'zero';var parts=[],i=0;while(n>0){var g=n%1000;if(g){parts.unshift(g3(g)+SC[i]);}n=(n/1000)|0;i++;}
+return parts.join(' ');}
+var nCapOn=false;
+function nRun(){var raw=document.getElementById('n-in').value.replace(/[^0-9]/g,'');var el=document.getElementById('n-out');
+if(!raw){el.textContent='';return;}var n=parseInt(raw,10);var w=words(n);if(nCapOn){w=w.charAt(0).toUpperCase()+w.slice(1);}
+el.textContent=raw.replace(/\B(?=(\d{3})+(?!\d))/g,',')+'  =  '+w;}
+function nCopy(){var t=document.getElementById('n-out').textContent.split('  =  ')[1];if(t){navigator.clipboard.writeText(t);}}
+function nCap(){nCapOn=!nCapOn;nRun();}
+</script>
+</body>
+</html>
