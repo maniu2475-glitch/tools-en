@@ -10,7 +10,7 @@ Free Online Toolbox
 - ⚡ **Fast** — static site, no sign-up, no ads clutter
 - 💰 **Free** — always
 
-Built with vanilla HTML/CSS/JS. Single-page app, hash-based routing.
+Built with vanilla HTML/CSS/JS. The home page is a single-page app with hash routing, and every tool also has its own standalone page (for example `/json-formatter.html`) with its own title, canonical URL and sitemap entry — all 43 pages are listed in `sitemap.xml` and submitted to search engines via IndexNow.
 
 ## Deploy (GitHub Pages)
 ```bash
