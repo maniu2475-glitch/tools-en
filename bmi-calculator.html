@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BMI Calculator - Free Online Tool</title>
+<meta name="description" content="Free online BMI calculator with metric and imperial units. Enter height and weight to get your Body Mass Index, WHO weight category and the healthy weight range for your height.">
+<meta name="keywords" content="bmi calculator, online bmi calculator, free tool">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/bmi-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="BMI Calculator">
+<meta property="og:description" content="Free online BMI calculator with metric and imperial units. Enter height and weight to get your Body Mass Index, WHO weight category and the healthy weight range for your height.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "BMI Calculator", "url": "https://maniu2475-glitch.github.io/tools-en/bmi-calculator.html", "description": "Free online BMI calculator with metric and imperial units. Enter height and weight to get your Body Mass Index, WHO weight category and the healthy weight range for your height.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>BMI Calculator</h1>
+      <p class="tool-desc">Metric & imperial, WHO category — everything runs in your browser, nothing is uploaded.</p>
+<div class="grid-2">
+<div>
+<div class="btn-group">
+<button class="btn" id="bm-metric" onclick="bmUnit('metric')">Metric</button>
+<button class="btn btn-outline" id="bm-imp" onclick="bmUnit('imperial')">Imperial</button>
+</div>
+<div id="bm-fields-m">
+<label>Height (cm)</label><input id="bm-cm" value="170" oninput="bmCalc()">
+<label>Weight (kg)</label><input id="bm-kg" value="65" oninput="bmCalc()">
+</div>
+<div id="bm-fields-i" style="display:none">
+<label>Height (ft + in)</label><div><input id="bm-ft" style="width:70px" value="5" oninput="bmCalc()"> ft <input id="bm-in" style="width:70px" value="7" oninput="bmCalc()"> in</div>
+<label>Weight (lb)</label><input id="bm-lb" value="143" oninput="bmCalc()">
+</div>
+</div>
+<div>
+<label>Your BMI</label><input id="bm-out" readonly style="font-family:monospace;font-size:1.4em">
+<div class="result-box" id="bm-desc"></div>
+<div class="result-box" id="bm-range"></div>
+</div>
+</div>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">Body Mass Index (BMI) is a quick screening measure that divides your weight by the square of your height. While it is not a diagnostic tool - athletes with high muscle mass and older adults can be misclassified - it remains the standard first check recommended by the World Health Organization for tracking weight-related health risk. This calculator accepts metric (kg / cm) or imperial (lb / ft+in) units, computes your BMI to one decimal place, places you in the WHO category (underweight, normal, overweight, or one of three obesity classes), and shows the healthy weight range for your height so you know how far you are from it. All arithmetic happens in your browser; nothing is stored or transmitted.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a><a class="btn btn-outline" href="base64.html">Base64 encode/decode</a><a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a><a class="btn btn-outline" href="password-generator.html">Password generator</a><a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a><a class="btn btn-outline" href="md5-generator.html">Hash generator</a><a class="btn btn-outline" href="uuid-generator.html">UUID generator</a><a class="btn btn-outline" href="word-counter.html">Word counter</a><a class="btn btn-outline" href="number-converter.html">Base converter</a><a class="btn btn-outline" href="unit-converter.html">Unit converter</a><a class="btn btn-outline" href="case-converter.html">Case converter</a><a class="btn btn-outline" href="cron-generator.html">Cron job generator</a></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2026 Online Toolbox · 887+ free browser-side tools</p></div></footer>
+<script>
+var bmMode='metric';
+function bmUnit(m){bmMode=m;document.getElementById('bm-fields-m').style.display=m==='metric'?'':'none';document.getElementById('bm-fields-i').style.display=m==='imperial'?'':'none';document.getElementById('bm-metric').className='btn'+(m==='metric'?'':' btn-outline');document.getElementById('bm-imp').className='btn'+(m==='imperial'?'':' btn-outline');bmCalc();}
+function bmCalc(){
+ var hM,wK;
+ if(bmMode==='metric'){hM=(+document.getElementById('bm-cm').value)/100;wK=+document.getElementById('bm-kg').value;}
+ else{hM=((+document.getElementById('bm-ft').value)*12+(+document.getElementById('bm-in').value))*0.0254;wK=+document.getElementById('bm-lb').value*0.45359237;}
+ var o=document.getElementById('bm-out'),d=document.getElementById('bm-desc'),r=document.getElementById('bm-range');
+ if(!(hM>0&&wK>0)){o.value='';d.textContent='Enter height and weight.';r.textContent='';return;}
+ var bmi=wK/(hM*hM);o.value=bmi.toFixed(1);
+ var cat=bmi<18.5?'Underweight':bmi<25?'Normal weight':bmi<30?'Overweight':bmi<35?'Obesity class I':bmi<40?'Obesity class II':'Obesity class III';
+ d.textContent='Category: '+cat;
+ var lo=18.5*hM*hM,hi=24.9*hM*hM;
+ r.textContent='Healthy weight range for your height: '+lo.toFixed(1)+'–'+hi.toFixed(1)+' kg ('+(lo/0.45359237).toFixed(0)+'–'+(hi/0.45359237).toFixed(0)+' lb)';
+}
+document.addEventListener('DOMContentLoaded',bmCalc);
+</script>
+</body>
+</html>

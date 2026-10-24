@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Age Calculator - Free Online Tool</title>
+<meta name="description" content="Free online age calculator: find your exact age in years, months and days from your date of birth, plus total days lived, hours, and your next birthday countdown.">
+<meta name="keywords" content="age calculator, online age calculator, free tool">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/age-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Age Calculator">
+<meta property="og:description" content="Free online age calculator: find your exact age in years, months and days from your date of birth, plus total days lived, hours, and your next birthday countdown.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Age Calculator", "url": "https://maniu2475-glitch.github.io/tools-en/age-calculator.html", "description": "Free online age calculator: find your exact age in years, months and days from your date of birth, plus total days lived, hours, and your next birthday countdown.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Age Calculator</h1>
+      <p class="tool-desc">Exact age & next birthday countdown — everything runs in your browser, nothing is uploaded.</p>
+<div class="grid-2">
+<div>
+<label>Date of birth</label><input type="date" id="ag-dob" value="1990-06-15" onchange="agCalc()">
+<label>Age at date (default today)</label><input type="date" id="ag-at" onchange="agCalc()">
+</div>
+<div>
+<label>Age</label><input id="ag-out" readonly style="font-family:monospace;font-size:1.2em">
+<div class="result-box" id="ag-days"></div>
+<div class="result-box" id="ag-next"></div>
+</div>
+</div>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">Need your exact age for a form, a visa application, a school admission or just curiosity? This calculator takes a date of birth (and an optional "as of" date, which defaults to today) and computes the age in years, months and days the way a person would count it, correctly handling month lengths, leap years and end-of-month edge cases. It also reports the total number of days, weeks and hours lived, plus a countdown to your next birthday - including which weekday it falls on. All date math runs in your browser with the standard JavaScript Date object, so results match what any app would compute, and your birth date is never transmitted anywhere.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a><a class="btn btn-outline" href="base64.html">Base64 encode/decode</a><a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a><a class="btn btn-outline" href="password-generator.html">Password generator</a><a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a><a class="btn btn-outline" href="md5-generator.html">Hash generator</a><a class="btn btn-outline" href="uuid-generator.html">UUID generator</a><a class="btn btn-outline" href="word-counter.html">Word counter</a><a class="btn btn-outline" href="number-converter.html">Base converter</a><a class="btn btn-outline" href="unit-converter.html">Unit converter</a><a class="btn btn-outline" href="case-converter.html">Case converter</a><a class="btn btn-outline" href="cron-generator.html">Cron job generator</a></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2026 Online Toolbox · 887+ free browser-side tools</p></div></footer>
+<script>
+function agCalc(){
+ var dob=new Date(document.getElementById('ag-dob').value),atS=document.getElementById('ag-at').value,at=atS?new Date(atS):new Date();
+ var o=document.getElementById('ag-out'),d=document.getElementById('ag-days'),n=document.getElementById('ag-next');
+ if(isNaN(dob)||isNaN(at)||at<dob){o.value='';d.textContent='Enter a valid birth date.';n.textContent='';return;}
+ var y=at.getFullYear()-dob.getFullYear(),m=at.getMonth()-dob.getMonth(),dd=at.getDate()-dob.getDate();
+ if(dd<0){m--;dd+=new Date(at.getFullYear(),at.getMonth(),0).getDate();}
+ if(m<0){y--;m+=12;}
+ o.value=y+' years, '+m+' months, '+dd+' days';
+ var days=Math.floor((at-dob)/86400000);
+ d.textContent='Total: '+days+' days ('+Math.floor(days/7)+' weeks, '+(days*24).toLocaleString()+' hours)';
+ var next=new Date(at.getFullYear(),dob.getMonth(),dob.getDate());
+ if(next<=at)next.setFullYear(next.getFullYear()+1);
+ var left=Math.ceil((next-at)/86400000);
+ n.textContent='Next birthday: '+next.toDateString()+' — '+left+' day'+(left!==1?'s':'')+' to go';
+}
+document.addEventListener('DOMContentLoaded',agCalc);
+</script>
+</body>
+</html>

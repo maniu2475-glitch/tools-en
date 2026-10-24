@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Percentage Calculator - Free Online Tool</title>
+<meta name="description" content="Free online percentage calculator: what is X% of Y, X is what percent of Y, and percentage increase or decrease between two values. Instant results, runs in your browser.">
+<meta name="keywords" content="percentage calculator, online percentage calculator, free tool">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/percentage-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Percentage Calculator">
+<meta property="og:description" content="Free online percentage calculator: what is X% of Y, X is what percent of Y, and percentage increase or decrease between two values. Instant results, runs in your browser.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Percentage Calculator", "url": "https://maniu2475-glitch.github.io/tools-en/percentage-calculator.html", "description": "Free online percentage calculator: what is X% of Y, X is what percent of Y, and percentage increase or decrease between two values. Instant results, runs in your browser.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Percentage Calculator</h1>
+      <p class="tool-desc">Percent of, increase/decrease — everything runs in your browser, nothing is uploaded.</p>
+<div class="grid-2">
+<div>
+<label>What is <input id="pc-a" style="width:80px" value="15" oninput="pc1()"> % of <input id="pc-b" style="width:80px" value="200" oninput="pc1()"> ?</label>
+<div class="result-box" id="pc-r1"></div>
+</div>
+<div>
+<label><input id="pc-c" style="width:80px" value="30" oninput="pc2()"> is what percent of <input id="pc-d" style="width:80px" value="200" oninput="pc2()"> ?</label>
+<div class="result-box" id="pc-r2"></div>
+</div>
+<div>
+<label>Percentage change from <input id="pc-e" style="width:80px" value="80" oninput="pc3()"> to <input id="pc-f" style="width:80px" value="100" oninput="pc3()"> ?</label>
+<div class="result-box" id="pc-r3"></div>
+</div>
+</div>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">Percentages appear everywhere - discounts, taxes, tips, interest rates, exam scores and growth reports - yet mental arithmetic with them is surprisingly error-prone. This calculator covers the three percentage questions people ask most: "what is X percent of Y", "X is what percent of Y", and "what is the percentage change from X to Y". Type any two values and the third is computed instantly, with the formula shown so you can verify the result by hand. Everything runs locally in your browser: no data is uploaded, no account is needed, and results appear the moment you type. Bookmark it for shopping season, homework, or financial planning; it also handles decimals and negative numbers, so percentage decreases and losses are supported too.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a><a class="btn btn-outline" href="base64.html">Base64 encode/decode</a><a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a><a class="btn btn-outline" href="password-generator.html">Password generator</a><a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a><a class="btn btn-outline" href="md5-generator.html">Hash generator</a><a class="btn btn-outline" href="uuid-generator.html">UUID generator</a><a class="btn btn-outline" href="word-counter.html">Word counter</a><a class="btn btn-outline" href="number-converter.html">Base converter</a><a class="btn btn-outline" href="unit-converter.html">Unit converter</a><a class="btn btn-outline" href="case-converter.html">Case converter</a><a class="btn btn-outline" href="cron-generator.html">Cron job generator</a></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2026 Online Toolbox · 887+ free browser-side tools</p></div></footer>
+<script>
+function pc1(){var a=+document.getElementById('pc-a').value,b=+document.getElementById('pc-b').value;document.getElementById('pc-r1').textContent=isNaN(a)||isNaN(b)?'—':a+'% of '+b+' = '+(a*b/100);}
+function pc2(){var a=+document.getElementById('pc-c').value,b=+document.getElementById('pc-d').value;document.getElementById('pc-r2').textContent=(!b)?'—':a+' is '+(a/b*100)+'% of '+b;}
+function pc3(){var a=+document.getElementById('pc-e').value,b=+document.getElementById('pc-f').value;var el=document.getElementById('pc-r3');if(isNaN(a)||isNaN(b)||a===0){el.textContent='—';return;}var c=(b-a)/Math.abs(a)*100;el.textContent=(c>=0?'Increase ':'Decrease ')+Math.abs(c).toFixed(2)+'% ('+(b-a)+')';}
+document.addEventListener('DOMContentLoaded',function(){pc1();pc2();pc3();});
+</script>
+</body>
+</html>

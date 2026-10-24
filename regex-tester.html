@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regex Tester - Free Online Tool</title>
+<meta name="description" content="Free online regular expression tester: test patterns against sample text with live match highlighting and match list. Supports JavaScript RegExp flags g, i, m and s.">
+<meta name="keywords" content="regex tester, online regex tester, free tool">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/regex-tester.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Regex Tester">
+<meta property="og:description" content="Free online regular expression tester: test patterns against sample text with live match highlighting and match list. Supports JavaScript RegExp flags g, i, m and s.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Regex Tester", "url": "https://maniu2475-glitch.github.io/tools-en/regex-tester.html", "description": "Free online regular expression tester: test patterns against sample text with live match highlighting and match list. Supports JavaScript RegExp flags g, i, m and s.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Regex Tester</h1>
+      <p class="tool-desc">Live match highlighting & list — everything runs in your browser, nothing is uploaded.</p>
+<div class="grid-2">
+<div>
+<label>Pattern</label><input id="re-pat" style="font-family:monospace" value="\b(\w+)@(\w+\.\w+)\b" oninput="reTest()">
+<label>Flags</label>
+<div class="btn-group">
+<button class="btn" id="re-fg" onclick="reFlag('g',this)">g</button>
+<button class="btn btn-outline" id="re-fi" onclick="reFlag('i',this)">i</button>
+<button class="btn btn-outline" id="re-fm" onclick="reFlag('m',this)">m</button>
+<button class="btn btn-outline" id="re-fs" onclick="reFlag('s',this)">s</button>
+</div>
+<label>Test text</label><textarea id="re-txt" rows="6" oninput="reTest()">Contact: alice@example.com or bob@test.org for details.</textarea>
+</div>
+<div>
+<label>Result</label>
+<div class="result-box" id="re-out" style="white-space:pre-wrap;min-height:120px"></div>
+</div>
+</div>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">Regular expressions are powerful but notoriously hard to read, and the fastest way to learn them is to experiment. Paste a pattern, choose your flags, and this tester highlights every match inside your sample text in real time, listing each match with its index and captured groups. It uses the standard JavaScript RegExp engine (with the g, i, m and s flags available as checkboxes), so behaviour matches what you will get in browser code and Node.js exactly. Invalid patterns produce a readable error message instead of a silent failure, which makes this a great companion for debugging validation rules, find-and-replace commands, log scraping scripts or URL routing patterns. Nothing is sent to a server - the engine lives entirely in your browser tab.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a><a class="btn btn-outline" href="base64.html">Base64 encode/decode</a><a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a><a class="btn btn-outline" href="password-generator.html">Password generator</a><a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a><a class="btn btn-outline" href="md5-generator.html">Hash generator</a><a class="btn btn-outline" href="uuid-generator.html">UUID generator</a><a class="btn btn-outline" href="word-counter.html">Word counter</a><a class="btn btn-outline" href="number-converter.html">Base converter</a><a class="btn btn-outline" href="unit-converter.html">Unit converter</a><a class="btn btn-outline" href="case-converter.html">Case converter</a><a class="btn btn-outline" href="cron-generator.html">Cron job generator</a></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2026 Online Toolbox · 887+ free browser-side tools</p></div></footer>
+<script>
+var reFlags={g:true,i:false,m:false,s:false};
+function reFlag(f,btn){reFlags[f]=!reFlags[f];btn.className='btn'+(reFlags[f]?'':' btn-outline');reTest();}
+function reTest(){
+ var pat=document.getElementById('re-pat').value,txt=document.getElementById('re-txt').value,out=document.getElementById('re-out');
+ var flags=Object.keys(reFlags).filter(f=>reFlags[f]).join('');
+ try{
+  var re=new RegExp(pat,flags);var m,found=[],safety=0;
+  if(flags.includes('g')){while((m=re.exec(txt))&&safety<5000){found.push(m);if(m.index===re.lastIndex)re.lastIndex++;safety++;}}
+  else{m=re.exec(txt);if(m)found.push(m);}
+  if(!found.length){out.textContent='No matches.';return;}
+  var html='',last=0;
+  found.forEach(function(m){html+=esc(txt.slice(last,m.index))+'<mark>'+esc(m[0])+'</mark>';last=m.index+m[0].length;});
+  html+=esc(txt.slice(last));
+  out.innerHTML=html+'\n\nMatches: '+found.length+'\n'+found.map((m,i)=>'#'+(i+1)+' "'+m[0]+'" at '+m.index+(m.length>1?' groups: ['+m.slice(1).join(', ')+']':'')).join('\n');
+ }catch(e){out.textContent='Invalid pattern: '+e.message;}
+}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+document.addEventListener('DOMContentLoaded',reTest);
+</script>
+</body>
+</html>

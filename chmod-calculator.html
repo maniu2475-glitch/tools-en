@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chmod Calculator - Free Online Tool</title>
+<meta name="description" content="Free online chmod calculator: convert between numeric (755, 644) and symbolic (rwxr-xr-x) permission modes for Unix and Linux files, with a plain-English summary.">
+<meta name="keywords" content="chmod calculator, online chmod calculator, free tool">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/chmod-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Chmod Calculator">
+<meta property="og:description" content="Free online chmod calculator: convert between numeric (755, 644) and symbolic (rwxr-xr-x) permission modes for Unix and Linux files, with a plain-English summary.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Chmod Calculator", "url": "https://maniu2475-glitch.github.io/tools-en/chmod-calculator.html", "description": "Free online chmod calculator: convert between numeric (755, 644) and symbolic (rwxr-xr-x) permission modes for Unix and Linux files, with a plain-English summary.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Chmod Calculator</h1>
+      <p class="tool-desc">Unix permission numeric/symbolic — everything runs in your browser, nothing is uploaded.</p>
+<div class="grid-2">
+<div>
+<table style="width:100%;text-align:center"><tr><th></th><th>Read</th><th>Write</th><th>Execute</th></tr>
+<tr><td style="text-align:left">Owner</td><td><input type="checkbox" id="ch-0-0" onchange="chm()"></td><td><input type="checkbox" id="ch-0-1" onchange="chm()"></td><td><input type="checkbox" id="ch-0-2" onchange="chm()"></td></tr>
+<tr><td style="text-align:left">Group</td><td><input type="checkbox" id="ch-1-0" onchange="chm()"></td><td><input type="checkbox" id="ch-1-1" onchange="chm()"></td><td><input type="checkbox" id="ch-1-2" onchange="chm()"></td></tr>
+<tr><td style="text-align:left">Others</td><td><input type="checkbox" id="ch-2-0" onchange="chm()"></td><td><input type="checkbox" id="ch-2-1" onchange="chm()"></td><td><input type="checkbox" id="ch-2-2" onchange="chm()"></td></tr></table>
+</div>
+<div>
+<label>Numeric mode</label><input id="ch-num" style="font-family:monospace" maxlength="3" oninput="chFromNum(this.value)">
+<label>Symbolic</label><input id="ch-sym" readonly style="font-family:monospace">
+<label>Command</label><input id="ch-cmd" readonly style="font-family:monospace" onclick="this.select()">
+<div class="result-box" id="ch-desc"></div>
+<div class="btn-group">
+<button class="btn btn-outline" onclick="chPreset('755')">755</button>
+<button class="btn btn-outline" onclick="chPreset('644')">644</button>
+<button class="btn btn-outline" onclick="chPreset('600')">600</button>
+<button class="btn btn-outline" onclick="chPreset('777')">777</button>
+</div>
+</div>
+</div>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">Linux and macOS file permissions trip up almost every beginner: is 755 read-write-execute for the owner? Which digit is the group? This chmod calculator lets you toggle read, write and execute checkboxes for owner, group and others, and instantly shows the numeric octal mode (such as 755), the symbolic string (rwxr-xr-x), and a sentence explaining exactly what each class of user can do. You can also type a numeric mode like 644 and the checkboxes will update, making it easy to reverse-engineer permissions you find in tutorials or deployment guides. The results are safe to paste into chmod commands, Dockerfiles, Git hooks and Ansible playbooks. Everything runs client-side, so no file data ever leaves your machine.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a><a class="btn btn-outline" href="base64.html">Base64 encode/decode</a><a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a><a class="btn btn-outline" href="password-generator.html">Password generator</a><a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a><a class="btn btn-outline" href="md5-generator.html">Hash generator</a><a class="btn btn-outline" href="uuid-generator.html">UUID generator</a><a class="btn btn-outline" href="word-counter.html">Word counter</a><a class="btn btn-outline" href="number-converter.html">Base converter</a><a class="btn btn-outline" href="unit-converter.html">Unit converter</a><a class="btn btn-outline" href="case-converter.html">Case converter</a><a class="btn btn-outline" href="cron-generator.html">Cron job generator</a></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2026 Online Toolbox · 887+ free browser-side tools</p></div></footer>
+<script>
+function chm(){var num=0,sym='',names=['Owner','Group','Others'],bits=[['r','w','x']],desc=[];
+for(var i=0;i<3;i++){var d=0,s='';['0','1','2'].forEach(function(j){j=+j;var c=document.getElementById('ch-'+i+'-'+j).checked;if(c){d+=Math.pow(2,2-j);s+='rw x'.replace(' ','')[j]?['r','w','x'][j]:'';}else{s+='-';}});
+num=num*10+d;sym+=s;}
+sym=sym.replace('undefined','');
+document.getElementById('ch-num').value=num;
+document.getElementById('ch-sym').value=sym;
+document.getElementById('ch-cmd').value='chmod '+num+' file';
+document.getElementById('ch-desc').textContent=num+' ('+sym+') — '+describe(num);}
+function describe(n){var r=[];var cls=['Owner','Group','Others'];var words=['read','write','execute'];
+String(n).split('').forEach(function(d,i){var v=parseInt(d,8),acts=[];[4,2,1].forEach(function(b,j){if(v&b)acts.push(words[j]);});r.push(cls[i]+': '+(acts.length?acts.join(', '):'no permissions'));});return r.join('; ');}
+function chFromNum(v){v=String(v).replace(/[^0-7]/g,'').slice(0,3);if(v.length!==3)return;for(var i=0;i<3;i++){var d=parseInt(v[i],8);for(var j=0;j<3;j++)document.getElementById('ch-'+i+'-'+j).checked=!!(d&Math.pow(2,2-j));}chm();}
+function chPreset(p){chFromNum(p);}
+document.addEventListener('DOMContentLoaded',function(){chFromNum('755');});
+</script>
+</body>
+</html>
