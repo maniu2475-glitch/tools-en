@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sleep Calculator - What Time Should I Go to Sleep?</title>
+<meta name="description" content="Free sleep cycle calculator: enter your wake-up time and find the best bedtime to wake up refreshed, based on 90-minute sleep cycles.">
+<meta name="keywords" content="sleep calculator,bedtime calculator,sleep cycle,wake up time,90 minute sleep cycle,when should i sleep">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/sleep-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sleep Calculator">
+<meta property="og:description" content="Free sleep cycle calculator: enter your wake-up time and find the best bedtime to wake up refreshed, based on 90-minute sleep cycles.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Sleep Calculator", "url": "https://maniu2475-glitch.github.io/tools-en/sleep-calculator.html", "description": "Free sleep cycle calculator: enter your wake-up time and find the best bedtime to wake up refreshed, based on 90-minute sleep cycles.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+<h1>Sleep Calculator</h1>
+<p class="lead">Enter the time you need to wake up and this calculator works backwards in 90-minute sleep cycles to suggest the best bedtimes, so you rise feeling refreshed instead of groggy.</p>
+<div class="grid-2">
+<div>
+<h3>Wake-up time</h3>
+<input type="time" id="sc-wake" class="full-input" value="07:00">
+<div style="margin-top:10px">Minutes to fall asleep: <input type="number" id="sc-fall" value="15" min="0" max="120" style="width:80px"></div>
+<div class="btn-group"><button class="btn" onclick="scCalc()">Calculate bedtimes</button></div>
+</div>
+<div><h3>Result</h3>
+<div class="result-box" id="out">—</div></div>
+</div>
+<h2>About this tool</h2>
+<p>A good night's sleep is not just about duration — it is about waking at the right moment. Each night you pass through several <strong>sleep cycles</strong> of roughly 90 minutes each, moving between light sleep, deep sleep and REM. If your alarm rings in the middle of a deep stage, you feel groggy no matter how long you slept. If it rings near the end of a cycle, you wake up clear-headed.</p>
+<p>This sleep calculator takes the number of minutes you usually need to fall asleep, then counts back from your wake-up time in full 90-minute cycles. It suggests six bedtimes, from six cycles (about nine hours) down to three cycles (about four and a half hours), so you can pick the one that fits your evening. Most adults do best on five cycles — seven and a half hours.</p>
+<p>The tool is a planning aid, not a medical device: real cycles vary between 80 and 120 minutes from person to person and night to night. Use the suggestions as a starting point and adjust by 15 minutes if you consistently wake groggy. Everything runs locally in your browser; no data is uploaded.</p>
+<h3>Related tools</h3>
+<div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="bmi-calculator.html">BMI calculator</a><a class="btn btn-outline" href="age-calculator.html">Age calculator</a><a class="btn btn-outline" href="percentage-calculator.html">Percentage calculator</a><a class="btn btn-outline" href="tip-calculator.html">Tip calculator</a><a class="btn btn-outline" href="loan-calculator.html">Loan calculator</a><a class="btn btn-outline" href="compound-interest-calculator.html">Compound interest calculator</a><a class="btn btn-outline" href="calories-burned-calculator.html">Calories burned calculator</a><a class="btn btn-outline" href="water-intake-calculator.html">Water intake calculator</a><a class="btn btn-outline" href="ideal-weight-calculator.html">Ideal weight calculator</a><a class="btn btn-outline" href="heart-rate-zone-calculator.html">Heart rate zone calculator</a><a class="btn btn-outline" href="sleep-calculator.html">Sleep calculator</a><a class="btn btn-outline" href="index.html">All tools</a></div>
+<div class="faq-section">
+<h2>FAQ</h2>
+<details><summary><strong>How many hours of sleep do adults need?</strong></summary><p>Most adults need 7–9 hours. Five 90-minute cycles gives 7.5 hours, which sits comfortably in that range.</p></details>
+<details><summary><strong>Why 90 minutes per cycle?</strong></summary><p>90 minutes is the average length of one full sleep cycle. Waking near the end of a cycle, rather than in deep sleep, is what makes mornings feel easier.</p></details>
+<details><summary><strong>What if I can't fall asleep quickly?</strong></summary><p>Adjust the "minutes to fall asleep" field. 10–20 minutes is typical; if you drop off instantly you may be sleep-deprived.</p></details></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">🧰 Online Toolbox</a></p></div></footer>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+<script>
+function scCalc(){
+  const w=document.getElementById('sc-wake').value;
+  const fall=parseInt(document.getElementById('sc-fall').value,10)||0;
+  const out=document.getElementById('out');
+  if(!w){ out.textContent='Please set a wake-up time.'; return; }
+  const [h,m]=w.split(':').map(Number);
+  const wakeM=(h*60+m)%1440;
+  const rows=[];
+  for(let c=6;c>=3;c--){
+    let bedM=((wakeM-fall-c*90)%1440+1440)%1440;
+    const hh=Math.floor(bedM/60), mm=bedM%60;
+    const ap=hh<12?'AM':'PM'; let h12=hh%12; if(h12===0)h12=12;
+    rows.push('<strong>'+h12+':'+String(mm).padStart(2,'0')+' '+ap+'</strong> — '+c+' cycles ('+((c*90)/60).toFixed(1)+'h of sleep)');
+  }
+  out.innerHTML='<strong>Best bedtimes (wake at '+w+'):</strong><br>'+rows.join('<br>');
+}
+</script>
+</body>
+</html>

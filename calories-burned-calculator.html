@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calories Burned Calculator - Calories Burned by Activity & Exercise</title>
+<meta name="description" content="Free calories burned calculator: pick an activity, enter your weight and duration to estimate calories burned using MET values. Runs fully in your browser.">
+<meta name="keywords" content="calories burned calculator,exercise calorie calculator,met calculator,calories burned walking,calories burned running,activity calories">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/calories-burned-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Calories Burned Calculator">
+<meta property="og:description" content="Free calories burned calculator: pick an activity, enter your weight and duration to estimate calories burned using MET values. Runs fully in your browser.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Calories Burned Calculator", "url": "https://maniu2475-glitch.github.io/tools-en/calories-burned-calculator.html", "description": "Free calories burned calculator: pick an activity, enter your weight and duration to estimate calories burned using MET values. Runs fully in your browser.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+<h1>Calories Burned Calculator</h1>
+<p class="lead">Choose an activity, enter your weight and how long you exercised — this calculator uses standard MET values to estimate the calories you burned.</p>
+<div class="grid-2">
+<div>
+<h3>Activity details</h3>
+<select id="cb-act" class="full-input">
+<option value="3.5">Walking, slow (3.2 km/h)</option>
+<option value="5.0">Walking, brisk (5.6 km/h)</option>
+<option value="8.0">Jogging (8 km/h)</option>
+<option value="9.8">Running (11 km/h)</option>
+<option value="10.5">Running (13 km/h)</option>
+<option value="7.5">Cycling (moderate)</option>
+<option value="8.8">Swimming, moderate</option>
+<option value="6.0">Weight training, vigorous</option>
+<option value="3.5">Weight training, light</option>
+<option value="2.8">Yoga, hatha</option>
+<option value="8.0">Aerobics, high impact</option>
+<option value="12.3">Jump rope</option>
+<option value="6.0">Hiking</option>
+<option value="7.3">Dancing, disco/ballroom</option>
+<option value="5.5">Gardening</option>
+<option value="3.3">House cleaning</option>
+<option value="1.3">Sitting / desk work</option>
+</select>
+<div style="margin-top:10px">Weight: <input type="number" id="cb-w" value="70" min="1" max="400" style="width:80px"> kg</div>
+<div style="margin-top:10px">Duration: <input type="number" id="cb-min" value="30" min="1" max="600" style="width:80px"> minutes</div>
+<div class="btn-group"><button class="btn" onclick="cbCalc()">Calculate calories</button></div>
+</div>
+<div><h3>Result</h3>
+<div class="result-box" id="out">—</div></div>
+</div>
+<h2>About this tool</h2>
+<p>Whether you are planning a weight-loss deficit or just curious how much that long walk was worth, this calculator estimates the calories you burn for over fifteen common activities. It uses the standard <strong>MET method</strong> endorsed by exercise science: one MET is the energy you burn sitting still, and each activity has a measured multiple of it.</p>
+<p>The formula is kcal = MET × 3.5 × weight (kg) ÷ 200 × minutes. Heavier people burn more for the same activity, and intensity matters enormously — running at 13 km/h burns roughly three times what a slow walk does per minute. A 70 kg person jogging for 30 minutes burns about 294 kcal.</p>
+<p>Treat the result as an honest estimate, not gospel: individual efficiency, terrain and fitness all shift the real number by 10–20%. For diet planning, combine this with a calorie-intake target — pair it with our BMI and percentage calculators for a fuller picture. Everything computes locally in your browser.</p>
+<h3>Related tools</h3>
+<div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="bmi-calculator.html">BMI calculator</a><a class="btn btn-outline" href="age-calculator.html">Age calculator</a><a class="btn btn-outline" href="percentage-calculator.html">Percentage calculator</a><a class="btn btn-outline" href="tip-calculator.html">Tip calculator</a><a class="btn btn-outline" href="loan-calculator.html">Loan calculator</a><a class="btn btn-outline" href="compound-interest-calculator.html">Compound interest calculator</a><a class="btn btn-outline" href="calories-burned-calculator.html">Calories burned calculator</a><a class="btn btn-outline" href="water-intake-calculator.html">Water intake calculator</a><a class="btn btn-outline" href="ideal-weight-calculator.html">Ideal weight calculator</a><a class="btn btn-outline" href="heart-rate-zone-calculator.html">Heart rate zone calculator</a><a class="btn btn-outline" href="sleep-calculator.html">Sleep calculator</a><a class="btn btn-outline" href="index.html">All tools</a></div>
+<div class="faq-section">
+<h2>FAQ</h2>
+<details><summary><strong>What is a MET?</strong></summary><p>A Metabolic Equivalent of Task. 1 MET ≈ 1 kcal per kg per hour at rest. An activity rated 8 METs burns about 8× your resting rate.</p></details>
+<details><summary><strong>How accurate is this?</strong></summary><p>Typically within 10–20% for steady activities. Intervals, hills and fitness level cause real burn to vary.</p></details>
+<details><summary><strong>Why does weight matter?</strong></summary><p>Moving more mass costs more energy, so a 100 kg runner burns about 43% more calories than a 70 kg runner over the same session.</p></details></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">🧰 Online Toolbox</a></p></div></footer>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+<script>
+function cbCalc(){
+  const met=parseFloat(document.getElementById('cb-act').value);
+  const w=parseFloat(document.getElementById('cb-w').value);
+  const min=parseFloat(document.getElementById('cb-min').value);
+  const out=document.getElementById('out');
+  if(isNaN(w)||w<=0||isNaN(min)||min<=0){ out.textContent='Enter a valid weight and duration.'; return; }
+  const kcal=met*3.5*w/200*min;
+  const act=document.getElementById('cb-act');
+  const name=act.options[act.selectedIndex].text;
+  out.innerHTML='<strong>'+kcal.toFixed(0)+' kcal</strong> burned<br><br>'+
+    'Activity: '+name+'<br>MET value: '+met+'<br>Weight: '+w+' kg · Duration: '+min+' min<br><br>'+
+    'Formula: kcal = MET × 3.5 × weight(kg) ÷ 200 × minutes';
+}
+</script>
+</body>
+</html>

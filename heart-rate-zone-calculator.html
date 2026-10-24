@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heart Rate Zone Calculator - Target Training Zones by Age</title>
+<meta name="description" content="Free heart rate zone calculator: enter your age and resting heart rate to get your five training zones using the Karvonen method, fat-burn to max effort.">
+<meta name="keywords" content="heart rate zone calculator,target heart rate,karvonen formula,training zones,resting heart rate,max heart rate,cardio zones">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/heart-rate-zone-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Heart Rate Zone Calculator">
+<meta property="og:description" content="Free heart rate zone calculator: enter your age and resting heart rate to get your five training zones using the Karvonen method, fat-burn to max effort.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Heart Rate Zone Calculator", "url": "https://maniu2475-glitch.github.io/tools-en/heart-rate-zone-calculator.html", "description": "Free heart rate zone calculator: enter your age and resting heart rate to get your five training zones using the Karvonen method, fat-burn to max effort.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+<h1>Heart Rate Zone Calculator</h1>
+<p class="lead">Enter your age and resting heart rate to map your five training zones — from easy fat-burning effort to all-out maximum — using the Karvonen heart-rate-reserve method.</p>
+<div class="grid-2">
+<div>
+<h3>Your details</h3>
+<div>Age: <input type="number" id="hr-age" value="30" min="10" max="100" style="width:80px"> years</div>
+<div style="margin-top:10px">Resting heart rate: <input type="number" id="hr-rest" value="60" min="30" max="110" style="width:80px"> bpm</div>
+<div style="margin-top:10px">Max HR formula:
+<select id="hr-formula">
+<option value="220">220 − age (classic)</option>
+<option value="208">208 − 0.7 × age (Tanaka)</option>
+</select></div>
+<div class="btn-group"><button class="btn" onclick="hrCalc()">Calculate zones</button></div>
+</div>
+<div><h3>Result</h3>
+<div class="result-box" id="out">—</div></div>
+</div>
+<h2>About this tool</h2>
+<p>Training by heart rate turns a vague "run easy today" into a precise number. This calculator converts your age and resting heart rate into the five standard <strong>training zones</strong> using the Karvonen method, which works from your heart-rate reserve — the gap between your maximum and resting rates — rather than a flat percentage of maximum.</p>
+<p>Zone 1 is recovery pace, Zone 2 is the conversational endurance and fat-burning zone where most training time belongs, Zone 3 builds aerobic capacity, Zone 4 is tempo and threshold work, and Zone 5 is short all-out intervals. You can choose between the classic 220-minus-age maximum or the more modern Tanaka formula (208 − 0.7 × age), which fits older adults better.</p>
+<p>Measure your resting heart rate first thing in the morning before getting up — most adults sit between 60 and 100 bpm, and well-trained endurance athletes can be below 50. Zone boundaries are guides, not walls: heat, caffeine, stress and fatigue all nudge your heart rate around. All calculations happen locally in your browser.</p>
+<h3>Related tools</h3>
+<div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="bmi-calculator.html">BMI calculator</a><a class="btn btn-outline" href="age-calculator.html">Age calculator</a><a class="btn btn-outline" href="percentage-calculator.html">Percentage calculator</a><a class="btn btn-outline" href="tip-calculator.html">Tip calculator</a><a class="btn btn-outline" href="loan-calculator.html">Loan calculator</a><a class="btn btn-outline" href="compound-interest-calculator.html">Compound interest calculator</a><a class="btn btn-outline" href="calories-burned-calculator.html">Calories burned calculator</a><a class="btn btn-outline" href="water-intake-calculator.html">Water intake calculator</a><a class="btn btn-outline" href="ideal-weight-calculator.html">Ideal weight calculator</a><a class="btn btn-outline" href="heart-rate-zone-calculator.html">Heart rate zone calculator</a><a class="btn btn-outline" href="sleep-calculator.html">Sleep calculator</a><a class="btn btn-outline" href="index.html">All tools</a></div>
+<div class="faq-section">
+<h2>FAQ</h2>
+<details><summary><strong>Which max HR formula should I pick?</strong></summary><p>Tanaka (208 − 0.7 × age) is generally more accurate, especially over 40; the classic 220 − age is simpler but tends to overestimate for younger and underestimate for older people.</p></details>
+<details><summary><strong>How do I measure my resting heart rate?</strong></summary><p>Count your pulse for 60 seconds right after waking, before coffee or movement. Average it over a few days for a stable number.</p></details>
+<details><summary><strong>Is the fat-burning zone a myth?</strong></summary><p>You burn a higher fat percentage in Zone 2 but more total calories in higher zones. For fat loss, total energy balance matters more than which zone you sit in.</p></details></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">🧰 Online Toolbox</a></p></div></footer>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+<script>
+function hrCalc(){
+  const age=parseFloat(document.getElementById('hr-age').value);
+  const rest=parseFloat(document.getElementById('hr-rest').value);
+  const f=document.getElementById('hr-formula').value;
+  const out=document.getElementById('out');
+  if(isNaN(age)||age<10||age>100||isNaN(rest)||rest<30||rest>110){ out.textContent='Enter a valid age and resting heart rate.'; return; }
+  const mhr=f==='208'?208-0.7*age:220-age;
+  const hrr=mhr-rest;
+  if(hrr<=0){ out.textContent='Resting HR too close to max HR — check your inputs.'; return; }
+  const Z=[[50,60,'Zone 1 — Very light: recovery, warm-up'],
+           [60,70,'Zone 2 — Light: fat burn, base endurance'],
+           [70,80,'Zone 3 — Moderate: aerobic fitness'],
+           [80,90,'Zone 4 — Hard: threshold, tempo'],
+           [90,100,'Zone 5 — Maximum: intervals, sprints']];
+  let html='<strong>Max HR: '+Math.round(mhr)+' bpm · Heart rate reserve: '+Math.round(hrr)+' bpm</strong><br><br>';
+  for(const [a,b,label] of Z){
+    const lo=Math.round(rest+a/100*hrr), hi=Math.round(rest+b/100*hrr);
+    html+='<strong>'+label+'</strong><br>'+lo+'–'+hi+' bpm<br><br>';
+  }
+  html+='<strong>Common fat-burning zone (Karvonen 60–70%):</strong> '+Math.round(rest+0.6*hrr)+'–'+Math.round(rest+0.7*hrr)+' bpm';
+  out.innerHTML=html;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Water Intake Calculator - How Much Water Should I Drink Daily?</title>
+<meta name="description" content="Free daily water intake calculator: enter your weight, exercise time and climate to find how many liters of water you should drink each day.">
+<meta name="keywords" content="water intake calculator,daily water intake,how much water to drink,hydration calculator,water consumption">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/water-intake-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Water Intake Calculator">
+<meta property="og:description" content="Free daily water intake calculator: enter your weight, exercise time and climate to find how many liters of water you should drink each day.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Water Intake Calculator", "url": "https://maniu2475-glitch.github.io/tools-en/water-intake-calculator.html", "description": "Free daily water intake calculator: enter your weight, exercise time and climate to find how many liters of water you should drink each day.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+<h1>Water Intake Calculator</h1>
+<p class="lead">Enter your body weight, how much you exercise, and your climate to estimate how much water you should drink each day in liters, ounces and glasses.</p>
+<div class="grid-2">
+<div>
+<h3>Your details</h3>
+<div>Weight: <input type="number" id="wi-w" value="70" min="1" max="400" style="width:80px"> kg</div>
+<div style="margin-top:10px">Exercise per day: <input type="number" id="wi-ex" value="30" min="0" max="600" style="width:80px"> minutes</div>
+<div style="margin-top:10px">Climate:
+<select id="wi-climate">
+<option value="0">Temperate</option>
+<option value="500">Hot / humid</option>
+<option value="300">Cold / high altitude</option>
+</select></div>
+<div class="btn-group"><button class="btn" onclick="wiCalc()">Calculate water needs</button></div>
+</div>
+<div><h3>Result</h3>
+<div class="result-box" id="out">—</div></div>
+</div>
+<h2>About this tool</h2>
+<p>Water makes up about 60% of your body weight and every system depends on it — temperature control, joint lubrication, nutrient transport and waste removal. Yet most people guess their daily needs. This calculator turns your weight, activity level and climate into a concrete number of liters to drink each day.</p>
+<p>The estimate starts from the widely used guideline of <strong>35 ml per kilogram</strong> of body weight (about 2.5 liters for a 70 kg adult — a little more than the classic "8 glasses" rule). It then adds roughly 350 ml for every 30 minutes of exercise to cover sweat losses, and an extra allowance for hot, humid weather or cold, high-altitude conditions where you lose more water through breath and skin.</p>
+<p>Remember that about 20% of fluid normally comes from food, so you do not need to drink every drop. Thirst is still your best daily guide, and needs rise with fever, breastfeeding or heavy labor. The calculation runs entirely in your browser.</p>
+<h3>Related tools</h3>
+<div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="bmi-calculator.html">BMI calculator</a><a class="btn btn-outline" href="age-calculator.html">Age calculator</a><a class="btn btn-outline" href="percentage-calculator.html">Percentage calculator</a><a class="btn btn-outline" href="tip-calculator.html">Tip calculator</a><a class="btn btn-outline" href="loan-calculator.html">Loan calculator</a><a class="btn btn-outline" href="compound-interest-calculator.html">Compound interest calculator</a><a class="btn btn-outline" href="calories-burned-calculator.html">Calories burned calculator</a><a class="btn btn-outline" href="water-intake-calculator.html">Water intake calculator</a><a class="btn btn-outline" href="ideal-weight-calculator.html">Ideal weight calculator</a><a class="btn btn-outline" href="heart-rate-zone-calculator.html">Heart rate zone calculator</a><a class="btn btn-outline" href="sleep-calculator.html">Sleep calculator</a><a class="btn btn-outline" href="index.html">All tools</a></div>
+<div class="faq-section">
+<h2>FAQ</h2>
+<details><summary><strong>Is 8 glasses a day enough?</strong></summary><p>8 glasses is about 2 liters — fine for many people, but needs scale with body size, activity and climate, which is exactly what this calculator accounts for.</p></details>
+<details><summary><strong>Can I drink too much water?</strong></summary><p>Yes — drinking extreme amounts in a short time can dilute blood sodium (hyponatremia). Spread intake through the day rather than forcing liters at once.</p></details>
+<details><summary><strong>Does coffee count?</strong></summary><p>Caffeinated drinks are mildly diuretic but still net-positive for hydration. Water, milk and juice all count toward your total.</p></details></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">🧰 Online Toolbox</a></p></div></footer>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+<script>
+function wiCalc(){
+  const w=parseFloat(document.getElementById('wi-w').value);
+  const ex=parseFloat(document.getElementById('wi-ex').value)||0;
+  const cl=parseFloat(document.getElementById('wi-climate').value);
+  const out=document.getElementById('out');
+  if(isNaN(w)||w<=0){ out.textContent='Enter a valid weight.'; return; }
+  const ml=w*35+(ex/30)*350+cl;
+  const L=ml/1000;
+  out.innerHTML='<strong>Daily water intake: '+L.toFixed(2)+' L</strong> ('+ml.toFixed(0)+' ml)<br>'+
+    '≈ '+Math.round(ml/250)+' glasses (250 ml each)<br>'+
+    '≈ '+Math.round(ml/29.574)+' US fluid ounces<br><br>'+
+    'Base: '+Math.round(w*35)+' ml · Exercise: '+Math.round((ex/30)*350)+' ml · Climate: '+cl+' ml';
+}
+</script>
+</body>
+</html>
