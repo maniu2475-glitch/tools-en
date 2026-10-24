@@ -1,9 +1,17 @@
 Free Online Toolbox
 ==================
 
-53 free online tools that run 100% in your browser — no data ever uploaded.
+63 free online tools that run 100% in your browser — no data ever uploaded.
 
 **Tools:** JSON Formatter, Base64 Encode/Decode, URL Encode/Decode, QR Code Generator, QR Code Scanner, Password Generator, Password Strength Checker, Timestamp Converter, Color Converter, Color Picker, Markdown Editor, Word Counter, MD5/SHA Hash, IP Lookup, Number Converter (Radix), Unit Converter, Case Converter, Text Sort, Text Diff, Text to Binary, CSV→JSON, UUID Generator, JWT Decoder, Base32 Encode/Decode, Cron Expression Parser, Cron Job Generator, Aspect Ratio Calculator, Random String Generator, Slug Generator, HTML Entities, Image to Base64, Lorem Ipsum Generator, URL Parser, Percentage Calculator, Chmod Calculator, Regex Tester, BMI Calculator, Age Calculator, Loan Calculator, Temperature Converter, Random Number Generator, Discount Calculator, Compound Interest Calculator.
+
+Newly added tools (2026-10-24, third batch):
+
+- [Text Reverser](https://maniu2475-glitch.github.io/tools-en/text-reverser.html) — reverse characters, words or lines
+- [JSON to YAML Converter](https://maniu2475-glitch.github.io/tools-en/json-to-yaml.html) — JSON to clean indented YAML
+- [JavaScript Minifier](https://maniu2475-glitch.github.io/tools-en/js-minifier.html) — strip comments & whitespace, save bytes
+- [GPA Calculator](https://maniu2475-glitch.github.io/tools-en/gpa-calculator.html) — credit-weighted GPA on the 4.0 scale
+- [Random Letter Generator](https://maniu2475-glitch.github.io/tools-en/random-letter-generator.html) — A-Z, vowels or custom sets, crypto-random
 
 Newly added tools (2026-10-24, evening batch):
 
