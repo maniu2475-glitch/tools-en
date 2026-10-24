@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Standard Deviation Calculator - Mean, Variance & More</title>
+<meta name="description" content="Free online standard deviation calculator: paste numbers and get mean, median, variance, sample & population standard deviation, min, max and range instantly.">
+<meta name="keywords" content="standard deviation calculator,variance calculator,statistics calculator,sample standard deviation,population standard deviation">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/standard-deviation-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Standard Deviation Calculator">
+<meta property="og:description" content="Free online standard deviation calculator: paste numbers and get mean, median, variance, sample & population standard deviation, min, max and range instantly.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Standard Deviation Calculator", "url": "https://maniu2475-glitch.github.io/tools-en/standard-deviation-calculator.html", "description": "Free online standard deviation calculator: paste numbers and get mean, median, variance, sample & population standard deviation, min, max and range instantly.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+<h1>Standard Deviation Calculator</h1>
+<p class="lead">Paste or type your numbers (separated by commas, spaces or new lines) and get a full statistical summary: count, sum, mean, median, mode, variance, sample and population standard deviation, min, max and range.</p>
+<div class="grid-2">
+<div><h3>Your data</h3>
+<textarea id="sd-in" rows="6" class="full-input" placeholder="e.g. 12, 15, 18, 22, 25, 30"></textarea>
+<div class="btn-group"><button class="btn" onclick="sdCalc()">Calculate statistics</button></div>
+</div>
+<div><h3>Result</h3>
+<div class="result-box" id="sd-out">—</div></div>
+</div>
+<h2>About this tool</h2>
+<p>Standard deviation measures how spread out a set of numbers is around their mean. A low standard deviation means the values cluster tightly around the average; a high one means they are widely scattered. It is the single most used measure of dispersion in statistics, appearing everywhere from quality control and finance (where it underlies volatility and risk) to test scores and scientific measurement error.</p>
+<p>There are two versions. The <strong>sample standard deviation</strong> (dividing by n−1) is used when your numbers are a sample from a larger population — it corrects for the tendency of samples to underestimate spread. The <strong>population standard deviation</strong> (dividing by n) applies when you have every value in the whole population. This calculator shows both so you can use whichever your course or field requires.</p>
+<p>The output also includes the mean, variance (the square of standard deviation), median, range, and the minimum and maximum values, giving you a complete descriptive-statistics summary in one pass. Everything is computed in your browser with plain JavaScript — your data never leaves your device, which matters when analysing confidential figures.</p>
+<h3>Related tools</h3>
+<div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="tip-calculator.html">Tip calculator</a><a class="btn btn-outline" href="percentage-calculator.html">Percentage calculator</a><a class="btn btn-outline" href="random-number-generator.html">Random number generator</a><a class="btn btn-outline" href="bmi-calculator.html">BMI calculator</a><a class="btn btn-outline" href="age-calculator.html">Age calculator</a><a class="btn btn-outline" href="average-calculator.html">Average calculator</a>
+<a class="btn btn-outline" href="index.html">All tools</a></div>
+<div class="faq-section">
+<h2>FAQ</h2>
+<details><summary><strong>Should I use sample or population standard deviation?</strong></summary><p>Use sample (n−1) when your data is a sample drawn from a bigger population — the usual case in surveys and experiments. Use population (n) only when you have all values of the entire group.</p></details>
+<details><summary><strong>Can standard deviation be negative?</strong></summary><p>No. It is the square root of variance, so it is always zero or positive. Zero means every value is identical.</p></details>
+<details><summary><strong>What is the 68-95-99.7 rule?</strong></summary><p>For roughly normal data, about 68% of values fall within one standard deviation of the mean, 95% within two, and 99.7% within three.</p></details></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">🧰 Online Toolbox</a></p></div></footer>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+<script>
+
+function sdCalc(){
+  const raw=document.getElementById('sd-in').value;
+  const out=document.getElementById('sd-out');
+  const nums=raw.split(/[\s,;]+/).filter(s=>s.length).map(Number).filter(n=>!isNaN(n));
+  if(nums.length<1){ out.textContent='Enter at least one number.'; return; }
+  const n=nums.length, sum=nums.reduce((a,b)=>a+b,0), mean=sum/n;
+  const sorted=[...nums].sort((a,b)=>a-b);
+  let median;
+  if(n%2) median=sorted[(n-1)/2]; else median=(sorted[n/2-1]+sorted[n/2])/2;
+  const ss=nums.reduce((a,b)=>a+(b-mean)**2,0);
+  const varP=ss/n, varS=n>1?ss/(n-1):0;
+  const sdP=Math.sqrt(varP), sdS=Math.sqrt(varS);
+  // mode
+  const freq={}; let mode='—',best=0;
+  for(const x of nums){ freq[x]=(freq[x]||0)+1; if(freq[x]>best){best=freq[x];mode=x;} }
+  if(best<2) mode='none';
+  out.innerHTML='<strong>Count:</strong> '+n+'<br>'+
+   '<strong>Sum:</strong> '+sum+'<br>'+
+   '<strong>Mean:</strong> '+mean.toFixed(4)+'<br>'+
+   '<strong>Median:</strong> '+median+'<br>'+
+   '<strong>Mode:</strong> '+mode+'<br>'+
+   '<strong>Min / Max:</strong> '+sorted[0]+' / '+sorted[n-1]+'<br>'+
+   '<strong>Range:</strong> '+(sorted[n-1]-sorted[0])+'<br>'+
+   '<strong>Variance (population):</strong> '+varP.toFixed(4)+'<br>'+
+   '<strong>Variance (sample):</strong> '+(n>1?varS.toFixed(4):'n/a')+'<br>'+
+   '<strong>Std deviation (population):</strong> '+sdP.toFixed(4)+'<br>'+
+   '<strong>Std deviation (sample):</strong> '+(n>1?sdS.toFixed(4):'n/a');
+}
+
+</script>
+</body>
+</html>

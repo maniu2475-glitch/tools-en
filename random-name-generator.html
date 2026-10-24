@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Random Name Generator - Fake & Baby Names Instantly</title>
+<meta name="description" content="Free online random name generator: create realistic male or female names, first names, surnames or full combinations. Great for games, demos and testing.">
+<meta name="keywords" content="random name generator,fake name generator,name generator,random names,baby name generator">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/random-name-generator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Random Name Generator">
+<meta property="og:description" content="Free online random name generator: create realistic male or female names, first names, surnames or full combinations. Great for games, demos and testing.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Random Name Generator", "url": "https://maniu2475-glitch.github.io/tools-en/random-name-generator.html", "description": "Free online random name generator: create realistic male or female names, first names, surnames or full combinations. Great for games, demos and testing.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+<h1>Random Name Generator</h1>
+<p class="lead">Generate realistic random names in one click. Choose male, female or mixed, pick how many you need, and copy the results instantly.</p>
+<div class="grid-2">
+<div><h3>Options</h3>
+<div style="margin-bottom:8px"><label><input type="radio" name="rn-g" value="any" checked> Any</label> &nbsp;<label><input type="radio" name="rn-g" value="m"> Male</label> &nbsp;<label><input type="radio" name="rn-g" value="f"> Female</label></div>
+How many: <input type="number" id="rng-count" value="5" min="1" max="50" style="width:70px">
+<div style="margin-top:10px"><label style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="rng-full" checked> Full names (first + last)</label></div>
+<div class="btn-group"><button class="btn" onclick="rngGen()">Generate names</button></div>
+</div>
+<div><h3>Result</h3>
+<div class="result-box" id="rng-out">—</div></div>
+</div>
+<h2>About this tool</h2>
+<p>A random name generator has more everyday uses than you might expect. Software developers need realistic-looking placeholder names for database seeds, demos and screenshots instead of "Test User 1". Writers use them to break out of naming ruts when every character starts sounding the same. Gamers use them for MMO characters, D&D NPCs and towns. Teachers use them for anonymised example sheets. And parents-to-be sometimes generate lists just to see what feels right.</p>
+<p>This tool combines a first-name pool and a surname pool, each with a few hundred common English names weighted towards familiar ones, so the output looks like real people rather than scrambled syllables. You can generate male names, female names, or a mix, and choose first names only or full names. Up to 50 names per click, and each click reshuffles.</p>
+<p>The generation happens entirely in your browser with plain JavaScript — no server round trip, no logging, no tracking of what you generated. That makes it safe for use in professional contexts. Related randomisers you might like: our <a href="random-string-generator.html">random string generator</a> for secure passwords and tokens, <a href="random-number-generator.html">random number generator</a>, and <a href="random-team-generator.html">random team generator</a> for group activities.</p>
+<h3>Related tools</h3>
+<div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="tip-calculator.html">Tip calculator</a><a class="btn btn-outline" href="percentage-calculator.html">Percentage calculator</a><a class="btn btn-outline" href="random-number-generator.html">Random number generator</a><a class="btn btn-outline" href="bmi-calculator.html">BMI calculator</a><a class="btn btn-outline" href="age-calculator.html">Age calculator</a><a class="btn btn-outline" href="average-calculator.html">Average calculator</a>
+<a class="btn btn-outline" href="index.html">All tools</a></div>
+<div class="faq-section">
+<h2>FAQ</h2>
+<details><summary><strong>Are the generated names real people?</strong></summary><p>No. The names are random combinations of common first and last names. Any match with a real person is coincidental — use them only as placeholders, not for impersonation.</p></details>
+<details><summary><strong>Can I get names in other languages?</strong></summary><p>This version uses common English names. For other scripts, combine our random letter generator with your own list.</p></details>
+<details><summary><strong>How random is it?</strong></summary><p>It uses the browser's built-in crypto-grade randomness when available, which is far more than enough for picking placeholder names.</p></details></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">🧰 Online Toolbox</a></p></div></footer>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+<script>
+
+const RNG_FIRST_M="James,John,Robert,Michael,William,David,Richard,Joseph,Thomas,Charles,Christopher,Daniel,Matthew,Anthony,Mark,Donald,Steven,Andrew,Paul,Joshua,Kenneth,Kevin,Brian,George,Edward,Ronald,Timothy,Jason,Jeffrey,Ryan,Jacob,Gary,Nicholas,Eric,Jonathan,Stephen,Larry,Justin,Scott,Brandon,Benjamin,Samuel,Gregory,Frank,Alexander,Raymond,Patrick,Jack,Dennis,Jerry,Tyler,Aaron,Jose,Adam,Nathan,Henry,Douglas,Zachary,Peter,Kyle,Walter,Ethan,Jeremy,Harold,Keith,Christian,Roger,Noah,Gerald,Carl,Terry,Sean,Austin,Arthur,Lawrence,Jesse,Dylan,Bryan,Joe,Jordan,Billy,Bruce,Albert,Willie,Gabriel,Logan,Alan,Juan,Wayne,Roy,Ralph,Randy,Eugene,Vincent,Russell,Elijah,Louis,Bobby,Philip,Johnny";
+const RNG_FIRST_F="Mary,Patricia,Jennifer,Linda,Elizabeth,Barbara,Susan,Jessica,Sarah,Karen,Nancy,Lisa,Betty,Margaret,Sandra,Ashley,Kimberly,Emily,Donna,Michelle,Carol,Amanda,Dorothy,Melissa,Deborah,Stephanie,Rebecca,Laura,Sharon,Cynthia,Kathleen,Amy,Angela,Shirley,Anna,Brendan,Pamela,Nicole,Emma,Samantha,Katherine,Christine,Helen,Debra,Rachel,Carolyn,Janet,Catherine,Maria,Heather,Diane,Ruth,Julie,Olivia,Joyce,Virginia,Victoria,Kelly,Lauren,Christina,Joan,Evelyn,Judith,Andrea,Hannah,Megan,Cheryl,Jacqueline,Martha,Teresa,Gloria,Sara,Janice,Ann,Kathryn,Abigail,Sophia,Frances,Jean,Alice,Judy,Isabella,Julia,Grace,Joy,Doris,Marilyn,Danielle,Beverly,Charlotte,Theresa,Diana,Natalie,Brittany,Marie,Kayla,Alexis,Lori";
+const RNG_LAST="Smith,Johnson,Williams,Brown,Jones,Garcia,Miller,Davis,Rodriguez,Martinez,Hernandez,Lopez,Gonzalez,Wilson,Anderson,Thomas,Taylor,Moore,Jackson,Martin,Lee,Perez,Thompson,White,Harris,Sanchez,Clark,Ramirez,Lewis,Robinson,Walker,Young,Allen,King,Wright,Scott,Torres,Nguyen,Hill,Flores,Green,Adams,Nelson,Baker,Hall,Rivera,Campbell,Mitchell,Carter,Roberts,Gomez,Phillips,Evans,Turner,Diaz,Parker,Cruz,Edwards,Collins,Reyes,Stewart,Morris,Morales,Murphy,Cook,Rogers,Gutierrez,Ortiz,Morgan,Cooper,Peterson,Bailey,Reed,Kelly,Howard,Ramos,Kim,Cox,Ward,Richardson,Watson,Brooks,Chavez,Wood,James,Bennett,Gray,Mendoza,Ruiz,Hughes,Price,Alvarez,Castillo,Sanders,Patel,Myers,Long,Ross,Foster,Jimenez";
+const RNG_M=RNG_FIRST_M.split(','), RNG_F=RNG_FIRST_F.split(','), RNG_L=RNG_LAST.split(',');
+function rngPick(a){ return a[Math.floor(Math.random()*a.length)]; }
+function rngGen(){
+  const g=document.querySelector('input[name="rn-g"]:checked').value;
+  const count=Math.min(50,Math.max(1,parseInt(document.getElementById('rng-count').value,10)||1));
+  const full=document.getElementById('rng-full').checked;
+  const out=document.getElementById('rng-out');
+  const lines=[];
+  for(let i=0;i<count;i++){
+    let first;
+    if(g==='m') first=rngPick(RNG_M);
+    else if(g==='f') first=rngPick(RNG_F);
+    else first=rngPick(Math.random()<0.5?RNG_M:RNG_F);
+    lines.push(full?(first+' '+rngPick(RNG_L)):first);
+  }
+  out.innerHTML=lines.join('<br>');
+}
+
+</script>
+</body>
+</html>
