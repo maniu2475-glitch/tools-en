@@ -29,6 +29,14 @@ Newly added tools (2026-10-24):
 - **CSS Minifier** — Compress stylesheets, shows bytes saved
 - **XML Formatter & Validator** — Pretty-print / minify XML with DOMParser validation
 
+Newly added tools (2026-10-24, 4th batch):
+
+- **Binary to Text Converter** — Binary ⇄ text, UTF-8 safe, flexible input formats
+- **Simple Interest Calculator** — I = P×r×t with maturity amount
+- **SQL Formatter** — Beautify and indent one-line SQL queries
+- **Word Frequency Counter** — Ranked word counts, percentages and keyword density
+- **Quadratic Equation Solver** — Real & complex roots, discriminant, vertex
+
 ## Why use it?
 - 🔒 **Private** — all computation happens locally in your browser
 - ⚡ **Fast** — static site, no sign-up, no ads clutter
@@ -36,7 +44,7 @@ Newly added tools (2026-10-24):
 
 There is also an `all-tools.html` directory page that lists and links every tool page alphabetically, giving each standalone page a site-wide internal link.
 
-Built with vanilla HTML/CSS/JS. The home page is a single-page app with hash routing, and every tool also has its own standalone page (for example `/json-formatter.html`) with its own title, canonical URL and sitemap entry — all 53 pages are listed in `sitemap.xml` and submitted to search engines via IndexNow.
+Built with vanilla HTML/CSS/JS. The home page is a single-page app with hash routing, and every tool also has its own standalone page (for example `/json-formatter.html`) with its own title, canonical URL and sitemap entry — all 58 pages are listed in `sitemap.xml` and submitted to search engines via IndexNow.
 
 ## Deploy (GitHub Pages)
 ```bash
