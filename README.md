@@ -1,7 +1,7 @@
 Free Online Toolbox
 ==================
 
-78 free online tools that run 100% in your browser — no data ever uploaded.
+83 free online tools that run 100% in your browser — no data ever uploaded.
 
 **Tools:** JSON Formatter, Base64 Encode/Decode, URL Encode/Decode, QR Code Generator, QR Code Scanner, Password Generator, Password Strength Checker, Timestamp Converter, Color Converter, Color Picker, Markdown Editor, Word Counter, MD5/SHA Hash, IP Lookup, Number Converter (Radix), Unit Converter, Case Converter, Text Sort, Text Diff, Text to Binary, CSV→JSON, UUID Generator, JWT Decoder, Base32 Encode/Decode, Cron Expression Parser, Cron Job Generator, Aspect Ratio Calculator, Random String Generator, Slug Generator, HTML Entities, Image to Base64, Lorem Ipsum Generator, URL Parser, Percentage Calculator, Chmod Calculator, Regex Tester, BMI Calculator, Age Calculator, Loan Calculator, Temperature Converter, Random Number Generator, Discount Calculator, Compound Interest Calculator.
 
@@ -81,4 +81,12 @@ Newly added tools (2026-10-25, 7th batch):
 - [Inches to cm Converter](https://maniu2475-glitch.github.io/tools-en/inches-to-cm.html) - live two-way inches/cm/feet/meters conversion
 - [Typing Speed Test](https://maniu2475-glitch.github.io/tools-en/typing-speed-test.html) - 60-second WPM and accuracy test
 
-Total: 78 free online tools, all running 100% client-side.
+Newly added tools (2026-10-25, 8th batch):
+
+- [BMR Calculator](https://maniu2475-glitch.github.io/tools-en/bmr-calculator.html) - basal metabolic rate (Mifflin-St Jeor) + TDEE at 5 activity levels
+- [Standard Deviation Calculator](https://maniu2475-glitch.github.io/tools-en/standard-deviation-calculator.html) - mean, median, variance, sample & population std deviation
+- [Split Bill Calculator](https://maniu2475-glitch.github.io/tools-en/split-bill-calculator.html) - divide any bill with tip/tax, rounding that always covers the total
+- [Random Name Generator](https://maniu2475-glitch.github.io/tools-en/random-name-generator.html) - realistic male/female/mixed names for games, demos & testing
+- [Factorial Calculator](https://maniu2475-glitch.github.io/tools-en/factorial-calculator.html) - exact n! up to 170! via BigInt, with digit count & trailing zeros
+
+Total: 83 free online tools, all running 100% client-side.
