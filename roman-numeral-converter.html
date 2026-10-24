@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roman Numeral Converter - Numbers to Roman & Back</title>
+<meta name="description" content="Free online Roman numeral converter: translate numbers 1-3999 to Roman numerals and Roman numerals back to numbers instantly. 100% client-side.">
+<meta name="keywords" content="roman numeral converter,number to roman,roman to number,roman numerals chart,arabic to roman">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/roman-numeral-converter.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Roman Numeral Converter">
+<meta property="og:description" content="Free online Roman numeral converter: translate numbers 1-3999 to Roman numerals and Roman numerals back to numbers instantly. 100% client-side.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Roman Numeral Converter", "url": "https://maniu2475-glitch.github.io/tools-en/roman-numeral-converter.html", "description": "Free online Roman numeral converter: translate numbers 1-3999 to Roman numerals and Roman numerals back to numbers instantly. 100% client-side.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+<h1>Roman Numeral Converter</h1>
+<p class="lead">Convert any number between 1 and 3999 into its Roman numeral form, or decode a Roman numeral back into an ordinary number.</p>
+<div class="grid-2">
+<div><h3>Number → Roman</h3>
+<input type="number" id="rn-num" class="full-input" placeholder="e.g. 2026">
+<div class="btn-group"><button class="btn" onclick="rnToNum()">Convert to Roman</button></div>
+<div class="result-box" id="rn-roman-out">—</div></div>
+<div><h3>Roman → Number</h3>
+<input type="text" id="rn-rom" class="full-input" placeholder="e.g. MMXXVI">
+<div class="btn-group"><button class="btn" onclick="rnFromRom()">Convert to Number</button></div>
+<div class="result-box" id="rn-num-out">—</div></div>
+</div>
+<h2>About this tool</h2>
+<p>Roman numerals use seven letters — I, V, X, L, C, D and M — to represent values 1, 5, 10, 50, 100, 500 and 1000. The subtractive notation means a smaller letter before a larger one is subtracted: IV is 4, IX is 9, XL is 40. Despite being thousands of years old, Roman numerals still appear everywhere: book chapters, film sequels, clock faces, Super Bowl numbering, monarch names and outline headings.</p>
+<p>This converter works in both directions. Type a number such as 2026 and get MMXXVI; paste MCMLXXXIV and get 1984. The parser validates input strictly, so malformed numerals like IIII or VX are rejected with a clear error rather than returning a wrong answer. The supported range is the standard 1-3999, which covers all classical usage.</p>
+<p>Because everything is plain JavaScript running locally, results are instant and private. Students use it to check homework, writers use it for headings, and tattoo designers use it to double-check dates before inking them permanently — a mistake there is hard to fix.</p>
+<h3>Related tools</h3>
+<div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="age-calculator.html">Age calculator</a><a class="btn btn-outline" href="percentage-calculator.html">Percentage calculator</a><a class="btn btn-outline" href="bmi-calculator.html">BMI calculator</a><a class="btn btn-outline" href="discount-calculator.html">Discount calculator</a><a class="btn btn-outline" href="loan-calculator.html">Loan calculator</a><a class="btn btn-outline" href="compound-interest-calculator.html">Compound interest calculator</a><a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a><a class="btn btn-outline" href="random-number-generator.html">Random number generator</a>
+<a class="btn btn-outline" href="index.html">All tools</a></div>
+<div class="faq-section">
+<h2>FAQ</h2>
+<details><summary><strong>What is the largest Roman numeral?</strong></summary><p>Standard notation supports up to 3999 (MMMCMXCIX). Larger numbers used overlines, which this tool does not support.</p></details>
+<details><summary><strong>Is IIII valid?</strong></summary><p>No. The subtractive form IV is the standard for 4, though some old clocks do show IIII.</p></details>
+<details><summary><strong>Can I use lowercase?</strong></summary><p>Yes. The parser accepts i, v, x, l, c, d, m and treats them the same as uppercase.</p></details></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">🧰 Online Toolbox</a></p></div></footer>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+<script>
+
+const RN_MAP=[[1000,'M'],[900,'CM'],[500,'D'],[400,'CD'],[100,'C'],[90,'XC'],[50,'L'],[40,'XL'],[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']];
+const RN_VAL={I:1,V:5,X:10,L:50,C:100,D:500,M:1000};
+function rnToNum(){
+  const n=parseInt(document.getElementById('rn-num').value,10);
+  const out=document.getElementById('rn-roman-out');
+  if(!n||n<1||n>3999){ out.textContent='Please enter a number between 1 and 3999.'; return; }
+  let num=n, res='';
+  for(const [v,s] of RN_MAP){ while(num>=v){ res+=s; num-=v; } }
+  out.textContent=res;
+}
+function rnFromRom(){
+  const raw=document.getElementById('rn-rom').value.toUpperCase().trim();
+  const out=document.getElementById('rn-num-out');
+  if(!raw){ out.textContent='Enter a Roman numeral.'; return; }
+  if(!/^[MDCLXVI]+$/.test(raw)){ out.textContent='Invalid characters. Use M, D, C, L, X, V, I only.'; return; }
+  let sum=0;
+  for(let i=0;i<raw.length;i++){
+    const c=RN_VAL[raw[i]], nx=RN_VAL[raw[i+1]]||0;
+    if(c<nx) sum-=c; else sum+=c;
+  }
+  // re-encode to validate
+  let num=sum, res='';
+  for(const [v,s] of RN_MAP){ while(num>=v){ res+=s; num-=v; } }
+  if(res!==raw){ out.textContent='Not a standard Roman numeral (valid form: '+res+' = '+sum+').'; return; }
+  out.textContent=sum;
+}
+
+</script>
+</body>
+</html>

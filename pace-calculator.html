@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Running Pace Calculator - Pace, Time & Distance</title>
+<meta name="description" content="Free online running pace calculator: convert between pace, time and distance, get split times per km/mile, and predict race finish times.">
+<meta name="keywords" content="pace calculator,running pace,marathon pace calculator,race time prediction,minutes per km">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/pace-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Pace Calculator">
+<meta property="og:description" content="Free online running pace calculator: convert between pace, time and distance, get split times per km/mile, and predict race finish times.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Pace Calculator", "url": "https://maniu2475-glitch.github.io/tools-en/pace-calculator.html", "description": "Free online running pace calculator: convert between pace, time and distance, get split times per km/mile, and predict race finish times.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+<h1>Running Pace Calculator</h1>
+<p class="lead">Enter any two of time and distance to compute your pace, then see split times for a full race — 5K, 10K, half and full marathon.</p>
+<div class="grid-2">
+<div><h3>Time</h3>
+<div class="btn-group" style="gap:6px">
+<input type="number" id="pc-h" placeholder="h" min="0" style="width:70px">
+<input type="number" id="pc-m" placeholder="min" min="0" style="width:70px">
+<input type="number" id="pc-s" placeholder="s" min="0" style="width:70px">
+</div>
+<h3 style="margin-top:12px">Distance</h3>
+<input type="number" id="pc-dist" class="full-input" placeholder="e.g. 21.1" step="0.01" min="0">
+<div class="btn-group">
+<button class="btn" onclick="pcSetDist(5)">5K</button>
+<button class="btn" onclick="pcSetDist(10)">10K</button>
+<button class="btn" onclick="pcSetDist(21.0975)">Half</button>
+<button class="btn" onclick="pcSetDist(42.195)">Marathon</button>
+</div>
+<div style="margin-top:10px"><label><input type="radio" name="pc-unit" value="km" checked> km</label> <label><input type="radio" name="pc-unit" value="mi"> miles</label></div>
+<div class="btn-group"><button class="btn" onclick="pcCalc()">Calculate pace</button></div>
+</div>
+<div><h3>Result</h3>
+<div class="result-box" id="pc-out">—</div></div>
+</div>
+<h2>About this tool</h2>
+<p>Pace is the runner's core metric: how many minutes and seconds it takes to cover one kilometre or one mile. Unlike speed, pace maps directly onto race strategy — if you want to finish a marathon under four hours, you need a pace of about 5:41 per kilometre, and holding that rhythm is the whole game.</p>
+<p>This calculator works in all directions. Type a finish time and a distance and it returns your average pace in both per-km and per-mile terms. Quick buttons load the classic race distances: 5K, 10K, half marathon (21.0975 km) and full marathon (42.195 km). The unit toggle lets you think in kilometres or miles, whichever your training plan uses.</p>
+<p>Runners use pace calculators for goal setting (what pace do I need?), post-race analysis (what pace did I actually hold?), and even splits planning. Because it is a single static page running entirely in your browser, it loads fast on a phone at the race start line and never sends your data anywhere.</p>
+<h3>Related tools</h3>
+<div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="age-calculator.html">Age calculator</a><a class="btn btn-outline" href="percentage-calculator.html">Percentage calculator</a><a class="btn btn-outline" href="bmi-calculator.html">BMI calculator</a><a class="btn btn-outline" href="discount-calculator.html">Discount calculator</a><a class="btn btn-outline" href="loan-calculator.html">Loan calculator</a><a class="btn btn-outline" href="compound-interest-calculator.html">Compound interest calculator</a><a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a><a class="btn btn-outline" href="random-number-generator.html">Random number generator</a>
+<a class="btn btn-outline" href="index.html">All tools</a></div>
+<div class="faq-section">
+<h2>FAQ</h2>
+<details><summary><strong>How do I hit a sub-2-hour half marathon?</strong></summary><p>You need a pace of roughly 5:41 min/km (9:09 min/mile) — enter 21.0975 km and 1:59:59 to see it exactly.</p></details>
+<details><summary><strong>Can I use it for walking or cycling?</strong></summary><p>Yes. The math is unit-agnostic; cyclists usually think in speed instead, but the pace output is still correct.</p></details>
+<details><summary><strong>What is the difference between pace and speed?</strong></summary><p>Speed is distance per hour (e.g. 10 km/h); pace is time per distance (e.g. 6:00 per km). They contain the same information, but pace is easier to run by.</p></details></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">🧰 Online Toolbox</a></p></div></footer>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+<script>
+
+function pcSetDist(d){ document.getElementById('pc-dist').value=d; }
+function fmt(t){
+  t=Math.round(t);
+  const h=Math.floor(t/3600), m=Math.floor((t%3600)/60), s=t%60;
+  return (h?h+':':'')+String(m).padStart(h?2:1,'0')+':'+String(s).padStart(2,'0');
+}
+function pcCalc(){
+  const h=+document.getElementById('pc-h').value||0, m=+document.getElementById('pc-m').value||0, s=+document.getElementById('pc-s').value||0;
+  const dist=parseFloat(document.getElementById('pc-dist').value);
+  const unit=document.querySelector('input[name="pc-unit"]:checked').value;
+  const out=document.getElementById('pc-out');
+  const secs=h*3600+m*60+s;
+  if(!secs||!dist||dist<=0){ out.textContent='Enter a time and a distance.'; return; }
+  const perSec=secs/dist;
+  const perKm=unit==='km'?perSec:perSec*1.609344;
+  const perMi=unit==='km'?perSec/1.609344:perSec;
+  const speedKmh=3600/perKm, speedMph=3600/perMi;
+  out.innerHTML='<strong>Pace per km:</strong> '+fmt(perKm)+' min/km<br>'+
+   '<strong>Pace per mile:</strong> '+fmt(perMi)+' min/mi<br>'+
+   '<strong>Speed:</strong> '+speedKmh.toFixed(2)+' km/h ('+speedMph.toFixed(2)+' mph)<br>'+
+   '<span style="font-size:.85em;opacity:.8">Predicted times at this pace:<br>'+
+   '5K: '+fmt(perKm*5)+' · 10K: '+fmt(perKm*10)+' · Half: '+fmt(perKm*21.0975)+' · Marathon: '+fmt(perKm*42.195)+'</span>';
+}
+
+</script>
+</body>
+</html>

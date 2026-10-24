@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tip Calculator - Split the Bill & Tip Easily</title>
+<meta name="description" content="Free online tip calculator: compute the tip amount, total to pay, and per-person split for any bill. Works with any currency, 100% client-side.">
+<meta name="keywords" content="tip calculator,bill splitter,gratuity calculator,split the bill,tip percentage">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/tip-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tip Calculator">
+<meta property="og:description" content="Free online tip calculator: compute the tip amount, total to pay, and per-person split for any bill. Works with any currency, 100% client-side.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Tip Calculator", "url": "https://maniu2475-glitch.github.io/tools-en/tip-calculator.html", "description": "Free online tip calculator: compute the tip amount, total to pay, and per-person split for any bill. Works with any currency, 100% client-side.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+<h1>Tip Calculator</h1>
+<p class="lead">Enter your bill amount, choose a tip percentage, and say how many people are splitting — you get the tip, grand total and each person's share instantly.</p>
+<div class="grid-2">
+<div><h3>Bill</h3>
+<input type="number" id="tc-bill" class="full-input" placeholder="Bill amount" step="0.01" min="0">
+<div class="btn-group" id="tc-pct-btns">
+<button class="btn" onclick="tcSetPct(10)">10%</button>
+<button class="btn" onclick="tcSetPct(15)">15%</button>
+<button class="btn" onclick="tcSetPct(18)">18%</button>
+<button class="btn" onclick="tcSetPct(20)">20%</button>
+</div>
+<div style="margin-top:10px">Custom tip %: <input type="number" id="tc-pct" value="15" min="0" max="100" style="width:80px"></div>
+<div style="margin-top:10px">Split between <input type="number" id="tc-people" value="1" min="1" style="width:80px"> people</div>
+<div class="btn-group"><button class="btn" onclick="tcCalc()">Calculate</button></div>
+</div>
+<div><h3>Result</h3>
+<div class="result-box" id="tc-out">—</div></div>
+</div>
+<h2>About this tool</h2>
+<p>Working out a tip at the table is surprisingly error-prone: percentages, rounding, and splitting between five friends all at once. This tip calculator handles the whole job in one step. Enter the pre-tip bill, pick a common percentage button (10%, 15%, 18% or 20%) or type any custom rate, and set the number of diners.</p>
+<p>The output shows the tip amount, the total including tip, and the amount each person owes. Results are rounded to two decimals in a way that always covers the bill, so groups never come up short. It works with any currency because you simply type amounts in whatever currency the bill uses.</p>
+<p>Tipping customs differ widely: 15-20% is typical in the United States, 10% in many European countries, and Japan traditionally expects none. The quick percentage buttons make it easy to adapt to wherever you are eating. All math happens locally in your browser, so nothing is transmitted anywhere.</p>
+<h3>Related tools</h3>
+<div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="age-calculator.html">Age calculator</a><a class="btn btn-outline" href="percentage-calculator.html">Percentage calculator</a><a class="btn btn-outline" href="bmi-calculator.html">BMI calculator</a><a class="btn btn-outline" href="discount-calculator.html">Discount calculator</a><a class="btn btn-outline" href="loan-calculator.html">Loan calculator</a><a class="btn btn-outline" href="compound-interest-calculator.html">Compound interest calculator</a><a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a><a class="btn btn-outline" href="random-number-generator.html">Random number generator</a>
+<a class="btn btn-outline" href="index.html">All tools</a></div>
+<div class="faq-section">
+<h2>FAQ</h2>
+<details><summary><strong>How much should I tip?</strong></summary><p>US custom is 15-20% for restaurant service; many other countries are 5-10%. Pick the button that matches your local custom.</p></details>
+<details><summary><strong>Can I split an uneven bill?</strong></summary><p>This tool splits evenly. For per-item splitting, divide each person's items first, then run each subtotal through the calculator.</p></details>
+<details><summary><strong>What currencies are supported?</strong></summary><p>All. The tool only does arithmetic on the number you type, so use any currency.</p></details></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">🧰 Online Toolbox</a></p></div></footer>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+<script>
+
+function tcSetPct(p){ document.getElementById('tc-pct').value=p; tcCalc(); }
+function tcCalc(){
+  const bill=parseFloat(document.getElementById('tc-bill').value);
+  const pct=parseFloat(document.getElementById('tc-pct').value)||0;
+  const people=parseInt(document.getElementById('tc-people').value,10)||1;
+  const out=document.getElementById('tc-out');
+  if(isNaN(bill)||bill<0){ out.textContent='Enter a valid bill amount.'; return; }
+  const tip=bill*pct/100, total=bill+tip, each=Math.ceil(total*100/people)/100;
+  out.innerHTML='<strong>Tip ('+pct+'%):</strong> '+tip.toFixed(2)+'<br>'+
+   '<strong>Total with tip:</strong> '+total.toFixed(2)+'<br>'+
+   '<strong>Each of '+people+' pays:</strong> '+each.toFixed(2);
+}
+
+</script>
+</body>
+</html>

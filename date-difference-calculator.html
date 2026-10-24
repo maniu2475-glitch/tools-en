@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Date Difference Calculator - Days Between Two Dates</title>
+<meta name="description" content="Free online date difference calculator: find the exact number of days, weeks, months and years between two dates, plus business days. 100% client-side.">
+<meta name="keywords" content="date difference calculator,days between dates,calculate duration between two dates,business days calculator">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/date-difference-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Date Difference Calculator">
+<meta property="og:description" content="Free online date difference calculator: find the exact number of days, weeks, months and years between two dates, plus business days. 100% client-side.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Date Difference Calculator", "url": "https://maniu2475-glitch.github.io/tools-en/date-difference-calculator.html", "description": "Free online date difference calculator: find the exact number of days, weeks, months and years between two dates, plus business days. 100% client-side.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+<h1>Date Difference Calculator</h1>
+<p class="lead">Enter a start date and an end date to instantly see the exact duration between them: total days, weeks, months, years, and working (business) days.</p>
+<div class="grid-2">
+<div><h3>Start date</h3>
+<input type="date" id="dd-start" class="full-input" value="2026-01-01">
+<h3 style="margin-top:12px">End date</h3>
+<input type="date" id="dd-end" class="full-input" value="2026-12-31">
+<div class="btn-group"><button class="btn" onclick="ddCalc()">Calculate difference</button></div>
+<div><label style="display:flex;gap:6px;align-items:center;margin-top:10px"><input type="checkbox" id="dd-biz" checked> Count business days (Mon-Fri)</label></div>
+</div>
+<div><h3>Result</h3>
+<div class="result-box" id="dd-out">—</div></div>
+</div>
+<h2>About this tool</h2>
+<p>A date difference calculator answers one of the most common everyday questions: how long is it between two dates? Whether you are counting down to a deadline, tracking a project timeline, calculating someone's age, or measuring the length of a contract, this tool gives you the answer instantly and accurately.</p>
+<p>The calculator computes several views of the same interval. The <strong>total days</strong> figure is the raw day count including weekends. The <strong>business days</strong> option excludes Saturdays and Sundays, which is useful for estimating delivery times, SLA windows, or working schedules. The <strong>calendar breakdown</strong> shows the interval as years, months and days the way a person would describe it, matching how ages and anniversaries are traditionally expressed.</p>
+<p>Everything runs in your browser, so nothing is sent anywhere. You can also use it in reverse: to find a date that is N days from today, try our related tools below. Dates before 1970 and far into the future are handled correctly, including leap years, because the math uses the browser's native date functions.</p>
+<h3>Related tools</h3>
+<div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="age-calculator.html">Age calculator</a><a class="btn btn-outline" href="percentage-calculator.html">Percentage calculator</a><a class="btn btn-outline" href="bmi-calculator.html">BMI calculator</a><a class="btn btn-outline" href="discount-calculator.html">Discount calculator</a><a class="btn btn-outline" href="loan-calculator.html">Loan calculator</a><a class="btn btn-outline" href="compound-interest-calculator.html">Compound interest calculator</a><a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a><a class="btn btn-outline" href="random-number-generator.html">Random number generator</a>
+<a class="btn btn-outline" href="index.html">All tools</a></div>
+<div class="faq-section">
+<h2>FAQ</h2>
+<details><summary><strong>How are business days counted?</strong></summary><p>Business days are Monday through Friday. Public holidays are not excluded because they vary by country, so add them manually if needed.</p></details>
+<details><summary><strong>Does it count leap years?</strong></summary><p>Yes. The calculation uses real calendar rules, so February 29 and leap years are fully accounted for.</p></details>
+<details><summary><strong>What if the end date is before the start date?</strong></summary><p>The tool swaps them automatically and always returns a positive duration.</p></details></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">🧰 Online Toolbox</a></p></div></footer>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+<script>
+
+function ddCalc(){
+  const s=document.getElementById('dd-start').value, e=document.getElementById('dd-end').value;
+  if(!s||!e){ document.getElementById('dd-out').textContent='Please pick both dates.'; return; }
+  let d1=new Date(s+'T00:00:00'), d2=new Date(e+'T00:00:00');
+  if(d2<d1){ const t=d1; d1=d2; d2=t; }
+  const msDay=86400000;
+  let total=Math.round((d2-d1)/msDay);
+  const biz=document.getElementById('dd-biz').checked;
+  let bdays=0;
+  if(biz){
+    let d=new Date(d1);
+    for(let i=0;i<total;i++){ const w=d.getDay(); if(w!==0&&w!==6) bdays++; d=new Date(d.getTime()+msDay); }
+  }
+  // calendar breakdown
+  let y=d2.getFullYear()-d1.getFullYear(), m=d2.getMonth()-d1.getMonth(), day=d2.getDate()-d1.getDate();
+  if(day<0){ m--; day+=new Date(d2.getFullYear(),d2.getMonth(),0).getDate(); }
+  if(m<0){ y--; m+=12; }
+  const weeks=(total/7).toFixed(1);
+  document.getElementById('dd-out').innerHTML=
+   '<strong>Total days:</strong> '+total+'<br>'+
+   '<strong>Total weeks:</strong> '+weeks+'<br>'+
+   '<strong>Calendar:</strong> '+y+' years, '+m+' months, '+day+' days<br>'+
+   (biz?('<strong>Business days (Mon–Fri):</strong> '+bdays+'<br><strong>Weekend days:</strong> '+(total-bdays)):'')+
+   '<br><span style="opacity:.7;font-size:.9em">From '+d1.toDateString()+' to '+d2.toDateString()+'</span>';
+}
+
+</script>
+</body>
+</html>
