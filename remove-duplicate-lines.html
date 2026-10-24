@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Remove Duplicate Lines - Free Online Tool</title>
+<meta name="description" content="Free online tool to remove duplicate lines from any text or list. Optional case-insensitive and trim matching, plus blank line cleanup - all in your browser.">
+<meta name="keywords" content="Free online tool to remove duplicate lines from any text or list. Optional case-insensitive and trim matching, plus blank line cleanup - all in your browser.">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/remove-duplicate-lines.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Remove duplicate lines">
+<meta property="og:description" content="Free online tool to remove duplicate lines from any text or list. Optional case-insensitive and trim matching, plus blank line cleanup - all in your browser.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Remove duplicate lines", "url": "https://maniu2475-glitch.github.io/tools-en/remove-duplicate-lines.html", "description": "Free online tool to remove duplicate lines from any text or list. Optional case-insensitive and trim matching, plus blank line cleanup - all in your browser.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is this tool really free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, completely free with no signup, no login and no usage limits. Just open the page and use it."}}, {"@type": "Question", "name": "Is my data uploaded to a server?", "acceptedAnswer": {"@type": "Answer", "text": "No. All processing happens locally in your browser - your data never leaves your device."}}]}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="menu">☰</button>
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span><span class="logo-text">Online Toolbox</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#tool-json" data-tool="json">JSON</a>
+      <a href="index.html#tool-base64" data-tool="base64">Base64</a>
+      <a href="index.html#tool-url" data-tool="url">URL</a>
+      <a href="index.html#tool-qrcode" data-tool="qrcode">QR Code</a>
+      <a href="index.html#tool-password" data-tool="password">Password</a>
+      <a href="index.html#tool-timestamp" data-tool="timestamp">Timestamp</a>
+      <a href="index.html#tool-color" data-tool="color">Color</a>
+      <a href="index.html#tool-counter" data-tool="counter">Word counter</a>
+      <a href="index.html#tool-hash" data-tool="hash">Hash</a>
+      <a href="index.html#tool-ip" data-tool="ip">IP lookup</a>
+      <a href="index.html#tool-unit" data-tool="unit">Units</a>
+      <a href="index.html#tool-case" data-tool="case">Case</a>
+      <a href="index.html#tool-uuid" data-tool="uuid">UUID</a>
+      <a href="index.html#tool-jwt" data-tool="jwt">JWT</a>
+    </nav>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-remove-duplicate-lines">
+      
+<h1>Remove Duplicate Lines</h1>
+<p class="tool-desc">Paste a list and remove repeated lines instantly, with optional trim and case-insensitive matching.</p>
+<textarea id="rdl-input" rows="10" placeholder="apple&#10;banana&#10;apple&#10;  Apple"></textarea>
+<div class="form-row">
+  <label><input type="checkbox" id="rdl-trim" checked> Trim whitespace</label>
+  <label><input type="checkbox" id="rdl-case"> Ignore case</label>
+  <label><input type="checkbox" id="rdl-blank" checked> Remove blank lines</label>
+</div>
+<div class="btn-group">
+  <button class="btn" onclick="rdlRun()">Remove duplicates</button>
+  <button class="btn btn-outline" onclick="rdlCopy()">Copy result</button>
+</div>
+<textarea id="rdl-output" rows="10" readonly placeholder="Cleaned list appears here"></textarea>
+<p id="rdl-msg" class="tool-msg" style="color:#4f6ef7"></p>
+
+      
+<h3>About this duplicate line remover</h3>
+<p>Working with exported lists - email addresses, keywords, log entries, product SKUs or user IDs - often means fighting duplicates. This tool deduplicates any plain-text list line by line, keeping the first occurrence of each line and discarding later repeats. Options let you trim leading/trailing whitespace before comparing (so <code>apple</code> and <code>apple&nbsp;</code> are recognized as the same) and compare case-insensitively, which is handy for messy CSV exports and mixed-case email lists.</p>
+<p>The <em>remove blank lines</em> option also sweeps away empty rows that would otherwise clutter your output. Everything runs client-side in JavaScript, so lists of tens of thousands of lines are processed instantly and nothing is uploaded. Combined with the Text sorter and Case converter in this toolbox, you can clean, sort and normalize lists in seconds without installing any spreadsheet software.</p>
+
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a>
+<a class="btn btn-outline" href="base64.html">Base64 encode/decode</a>
+<a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a>
+<a class="btn btn-outline" href="csv-to-json.html">CSV to JSON</a>
+<a class="btn btn-outline" href="word-counter.html">Word counter</a>
+<a class="btn btn-outline" href="text-sort.html">Text sorter</a>
+<a class="btn btn-outline" href="case-converter.html">Case converter</a>
+<a class="btn btn-outline" href="uuid-generator.html">UUID generator</a>
+</div>
+      <h3>Frequently asked questions</h3>
+<div style="line-height:1.9"><details><summary><strong>Is this tool really free?</strong></summary><p>Yes, completely free with no signup, no login and no usage limits. Just open the page and use it.</p></details>
+<details><summary><strong>Is my data uploaded to a server?</strong></summary><p>No. All processing happens locally in your browser - your data never leaves your device, so even sensitive content stays private.</p></details>
+<details><summary><strong>Which browsers are supported?</strong></summary><p>All modern browsers including Chrome, Edge, Firefox and Safari, on both desktop and mobile.</p></details></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">🧰 Online Toolbox</a></p></div></footer>
+<script>
+
+function rdlRun(){
+  var lines=document.getElementById('rdl-input').value.split(/\r?\n/);
+  var trim=document.getElementById('rdl-trim').checked;
+  var icase=document.getElementById('rdl-case').checked;
+  var blank=document.getElementById('rdl-blank').checked;
+  var seen=Object.create(null), out=[], removed=0;
+  lines.forEach(function(l){
+    var orig=l;
+    if(trim) l=l.trim();
+    if(blank && !l) return;
+    var key=icase?l.toLowerCase():l;
+    if(key in seen){ removed++; return; }
+    seen[key]=1; out.push(trim?l:orig);
+  });
+  document.getElementById('rdl-output').value=out.join('\n');
+  document.getElementById('rdl-msg').textContent=out.length+' unique line(s), '+removed+' duplicate(s) removed.';
+}
+function rdlCopy(){ var t=document.getElementById('rdl-output'); t.select(); document.execCommand('copy'); }
+
+</script>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+</body>
+</html>

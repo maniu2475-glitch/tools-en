@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JSON to CSV Converter - Free Online Tool</title>
+<meta name="description" content="Free online JSON to CSV converter: turn any JSON array into a clean CSV table you can open in Excel. Runs 100% in your browser - your data never leaves your device.">
+<meta name="keywords" content="Free online JSON to CSV converter: turn any JSON array into a clean CSV table you can open in Excel. Runs 100% in your browser - your data never leaves your device.">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/json-to-csv.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JSON to CSV Converter">
+<meta property="og:description" content="Free online JSON to CSV converter: turn any JSON array into a clean CSV table you can open in Excel. Runs 100% in your browser - your data never leaves your device.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "JSON to CSV Converter", "url": "https://maniu2475-glitch.github.io/tools-en/json-to-csv.html", "description": "Free online JSON to CSV converter: turn any JSON array into a clean CSV table you can open in Excel. Runs 100% in your browser - your data never leaves your device.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is this tool really free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, completely free with no signup, no login and no usage limits. Just open the page and use it."}}, {"@type": "Question", "name": "Is my data uploaded to a server?", "acceptedAnswer": {"@type": "Answer", "text": "No. All processing happens locally in your browser - your data never leaves your device."}}]}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="menu">☰</button>
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span><span class="logo-text">Online Toolbox</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#tool-json" data-tool="json">JSON</a>
+      <a href="index.html#tool-base64" data-tool="base64">Base64</a>
+      <a href="index.html#tool-url" data-tool="url">URL</a>
+      <a href="index.html#tool-qrcode" data-tool="qrcode">QR Code</a>
+      <a href="index.html#tool-password" data-tool="password">Password</a>
+      <a href="index.html#tool-timestamp" data-tool="timestamp">Timestamp</a>
+      <a href="index.html#tool-color" data-tool="color">Color</a>
+      <a href="index.html#tool-counter" data-tool="counter">Word counter</a>
+      <a href="index.html#tool-hash" data-tool="hash">Hash</a>
+      <a href="index.html#tool-ip" data-tool="ip">IP lookup</a>
+      <a href="index.html#tool-unit" data-tool="unit">Units</a>
+      <a href="index.html#tool-case" data-tool="case">Case</a>
+      <a href="index.html#tool-uuid" data-tool="uuid">UUID</a>
+      <a href="index.html#tool-jwt" data-tool="jwt">JWT</a>
+    </nav>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-json-to-csv">
+      
+<h1>JSON to CSV Converter</h1>
+<p class="tool-desc">Paste a JSON array of objects and convert it into CSV format instantly, ready for Excel or Google Sheets.</p>
+<textarea id="jtc-input" rows="8" placeholder='[{"name":"Alice","age":30},{"name":"Bob","age":25}]'></textarea>
+<div class="btn-group">
+  <button class="btn" onclick="jtcRun()">Convert to CSV</button>
+  <button class="btn btn-outline" onclick="jtcCopy()">Copy result</button>
+</div>
+<textarea id="jtc-output" rows="10" readonly placeholder="CSV output appears here"></textarea>
+<p id="jtc-msg" class="tool-msg" style="color:#4f6ef7"></p>
+
+      
+<h3>About this JSON to CSV converter</h3>
+<p>JSON (JavaScript Object Notation) is the de-facto data format for web APIs, but spreadsheets like Excel and Google Sheets expect tabular data such as CSV (comma-separated values). This converter bridges the gap: paste any JSON array of objects and it flattens the structure into rows and columns automatically. The column headers are collected from every record, so fields that appear only in some objects are still included, and missing values simply become empty cells.</p>
+<p>Values are escaped according to the CSV standard (RFC 4180): commas, double quotes and line breaks inside a value are wrapped in quotes, and embedded quotes are doubled. Nested objects and arrays are serialized as JSON strings so you never lose information. Large inputs are handled smoothly because everything runs in your own browser with no upload, no server round-trip and no size quota. Typical use cases include exporting API responses for reporting, preparing test fixtures, and moving data between JavaScript apps and spreadsheet workflows.</p>
+
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a>
+<a class="btn btn-outline" href="base64.html">Base64 encode/decode</a>
+<a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a>
+<a class="btn btn-outline" href="csv-to-json.html">CSV to JSON</a>
+<a class="btn btn-outline" href="word-counter.html">Word counter</a>
+<a class="btn btn-outline" href="text-sort.html">Text sorter</a>
+<a class="btn btn-outline" href="case-converter.html">Case converter</a>
+<a class="btn btn-outline" href="uuid-generator.html">UUID generator</a>
+</div>
+      <h3>Frequently asked questions</h3>
+<div style="line-height:1.9"><details><summary><strong>Is this tool really free?</strong></summary><p>Yes, completely free with no signup, no login and no usage limits. Just open the page and use it.</p></details>
+<details><summary><strong>Is my data uploaded to a server?</strong></summary><p>No. All processing happens locally in your browser - your data never leaves your device, so even sensitive content stays private.</p></details>
+<details><summary><strong>Which browsers are supported?</strong></summary><p>All modern browsers including Chrome, Edge, Firefox and Safari, on both desktop and mobile.</p></details></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">🧰 Online Toolbox</a></p></div></footer>
+<script>
+
+function jtcRun(){
+  var msg=document.getElementById('jtc-msg'), out=document.getElementById('jtc-output');
+  try{
+    var data=JSON.parse(document.getElementById('jtc-input').value);
+    if(!Array.isArray(data)) data=[data];
+    var cols=[]; data.forEach(function(r){ Object.keys(r||{}).forEach(function(k){ if(cols.indexOf(k)<0)cols.push(k); }); });
+    if(!cols.length) throw new Error('No keys found');
+    function esc(v){ if(v===null||v===undefined)return ''; v=typeof v==='object'?JSON.stringify(v):String(v); if(/[",\n]/.test(v)) v='"'+v.replace(/"/g,'""')+'"'; return v; }
+    var csv=[cols.map(esc).join(',')];
+    data.forEach(function(r){ csv.push(cols.map(function(c){ return esc((r||{})[c]); }).join(',')); });
+    out.value=csv.join('\n');
+    msg.textContent='Converted '+data.length+' row(s), '+cols.length+' column(s).';
+  }catch(e){ out.value=''; msg.textContent='Error: '+e.message; }
+}
+function jtcCopy(){ var t=document.getElementById('jtc-output'); t.select(); document.execCommand('copy'); }
+
+</script>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+</body>
+</html>

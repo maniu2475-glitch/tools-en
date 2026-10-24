@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHA-256 Hash Generator - Free Online Tool</title>
+<meta name="description" content="Free online SHA-256 / SHA-1 / SHA-512 hash generator. Compute secure hash digests of any text right in your browser - no upload, no signup, works offline.">
+<meta name="keywords" content="Free online SHA-256 / SHA-1 / SHA-512 hash generator. Compute secure hash digests of any text right in your browser - no upload, no signup, works offline.">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/sha256-hash-generator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SHA-256 hash generator">
+<meta property="og:description" content="Free online SHA-256 / SHA-1 / SHA-512 hash generator. Compute secure hash digests of any text right in your browser - no upload, no signup, works offline.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "SHA-256 hash generator", "url": "https://maniu2475-glitch.github.io/tools-en/sha256-hash-generator.html", "description": "Free online SHA-256 / SHA-1 / SHA-512 hash generator. Compute secure hash digests of any text right in your browser - no upload, no signup, works offline.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is this tool really free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, completely free with no signup, no login and no usage limits. Just open the page and use it."}}, {"@type": "Question", "name": "Is my data uploaded to a server?", "acceptedAnswer": {"@type": "Answer", "text": "No. All processing happens locally in your browser - your data never leaves your device."}}]}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="menu">☰</button>
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span><span class="logo-text">Online Toolbox</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#tool-json" data-tool="json">JSON</a>
+      <a href="index.html#tool-base64" data-tool="base64">Base64</a>
+      <a href="index.html#tool-url" data-tool="url">URL</a>
+      <a href="index.html#tool-qrcode" data-tool="qrcode">QR Code</a>
+      <a href="index.html#tool-password" data-tool="password">Password</a>
+      <a href="index.html#tool-timestamp" data-tool="timestamp">Timestamp</a>
+      <a href="index.html#tool-color" data-tool="color">Color</a>
+      <a href="index.html#tool-counter" data-tool="counter">Word counter</a>
+      <a href="index.html#tool-hash" data-tool="hash">Hash</a>
+      <a href="index.html#tool-ip" data-tool="ip">IP lookup</a>
+      <a href="index.html#tool-unit" data-tool="unit">Units</a>
+      <a href="index.html#tool-case" data-tool="case">Case</a>
+      <a href="index.html#tool-uuid" data-tool="uuid">UUID</a>
+      <a href="index.html#tool-jwt" data-tool="jwt">JWT</a>
+    </nav>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-sha256-hash-generator">
+      
+<h1>SHA-256 Hash Generator</h1>
+<p class="tool-desc">Enter text to compute SHA-256 (and other SHA family) hashes locally in your browser.</p>
+<textarea id="sha-input" rows="4" placeholder="Type or paste any text here"></textarea>
+<div class="btn-group">
+  <button class="btn" onclick="shaRun()">Generate hash</button>
+  <button class="btn btn-outline" onclick="shaClear()">Clear</button>
+</div>
+<h3>Result</h3>
+<p style="word-break:break-all"><b>SHA-256:</b> <span id="sha-out256" style="font-family:monospace">-</span><br>
+<b>SHA-1:</b> <span id="sha-out1" style="font-family:monospace">-</span><br>
+<b>SHA-512:</b> <span id="sha-out512" style="word-break:break-all;font-family:monospace">-</span></p>
+
+      
+<h3>About the SHA-256 hash generator</h3>
+<p>SHA-256 is a member of the SHA-2 cryptographic hash family standardized by NIST. It takes an input of any length and produces a fixed 256-bit (64 hexadecimal character) digest. Because even a one-character change produces a completely different hash, SHA-256 is widely used for data integrity checks, file fingerprints, password hashing (with proper salting), digital signatures and blockchain mining puzzles.</p>
+<p>This page computes SHA-256, SHA-1 and SHA-512 digests using the native Web Crypto API built into every modern browser, which means the calculation is both fast and cryptographically correct. Your text is never transmitted anywhere: it stays in the tab's memory and disappears when you close it. Note that hashing is one-way - a digest cannot be reversed into the original input. SHA-1 is provided only for legacy compatibility and is considered collision-prone, so prefer SHA-256 for new work.</p>
+
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a>
+<a class="btn btn-outline" href="base64.html">Base64 encode/decode</a>
+<a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a>
+<a class="btn btn-outline" href="csv-to-json.html">CSV to JSON</a>
+<a class="btn btn-outline" href="word-counter.html">Word counter</a>
+<a class="btn btn-outline" href="text-sort.html">Text sorter</a>
+<a class="btn btn-outline" href="case-converter.html">Case converter</a>
+<a class="btn btn-outline" href="uuid-generator.html">UUID generator</a>
+</div>
+      <h3>Frequently asked questions</h3>
+<div style="line-height:1.9"><details><summary><strong>Is this tool really free?</strong></summary><p>Yes, completely free with no signup, no login and no usage limits. Just open the page and use it.</p></details>
+<details><summary><strong>Is my data uploaded to a server?</strong></summary><p>No. All processing happens locally in your browser - your data never leaves your device, so even sensitive content stays private.</p></details>
+<details><summary><strong>Which browsers are supported?</strong></summary><p>All modern browsers including Chrome, Edge, Firefox and Safari, on both desktop and mobile.</p></details></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">🧰 Online Toolbox</a></p></div></footer>
+<script>
+
+async function shaRun(){
+  var t=document.getElementById('sha-input').value;
+  if(!t){ return; }
+  var enc=new TextEncoder().encode(t);
+  async function hex(alg){
+    var b=await crypto.subtle.digest(alg, enc);
+    return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,'0');}).join('');
+  }
+  document.getElementById('sha-out256').textContent=await hex('SHA-256');
+  document.getElementById('sha-out1').textContent=await hex('SHA-1');
+  document.getElementById('sha-out512').textContent=await hex('SHA-512');
+}
+function shaClear(){ document.getElementById('sha-input').value=''; ['sha-out256','sha-out1','sha-out512'].forEach(function(i){document.getElementById(i).textContent='-';}); }
+
+</script>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+</body>
+</html>
