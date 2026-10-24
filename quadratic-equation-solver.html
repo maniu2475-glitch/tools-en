@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quadratic Equation Solver — Find Roots of ax² + bx + c = 0</title>
+<meta name="description" content="Free quadratic equation solver: enter coefficients a, b, c of ax² + bx + c = 0 and get real or complex roots, the discriminant and the vertex instantly. Runs in your browser.">
+<meta name="keywords" content="quadratic equation solver, solve ax2+bx+c, discriminant calculator, quadratic roots, vertex calculator">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/quadratic-equation-solver.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Quadratic equation solver">
+<meta property="og:description" content="Free quadratic equation solver: enter coefficients a, b, c of ax² + bx + c = 0 and get real or complex roots, the discriminant and the vertex instantly. Runs in your browser.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdqAsxVwJGACZjAUIAd8a7S0L/1/1r/HPn1vAmAAGIAJRWYAfwFVAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Quadratic equation solver", "url": "https://maniu2475-glitch.github.io/tools-en/quadratic-equation-solver.html", "description": "Free quadratic equation solver: enter coefficients a, b, c of ax² + bx + c = 0 and get real or complex roots, the discriminant and the vertex instantly. Runs in your browser.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Quadratic Equation Solver</h1>
+<div class="grid-2">
+<div><h3>Equation ax² + bx + c = 0</h3>
+<label>a<br><input type="number" id="qe-a" value="1" step="any"></label>
+<label>b<br><input type="number" id="qe-b" value="-3" step="any"></label>
+<label>c<br><input type="number" id="qe-c" value="2" step="any"></label>
+<div class="btn-group"><button class="btn" onclick="qeRun()">Solve</button></div></div>
+<div><h3>Result</h3>
+<div class="result-box" id="qe-out"></div></div>
+</div>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">A quadratic equation is any equation of the form ax² + bx + c = 0 with a ≠ 0. Its solutions — the points where the parabola crosses the x-axis — are found with the quadratic formula x = (−b ± √(b² − 4ac)) / 2a. This solver computes the discriminant D = b² − 4ac first, because it tells the whole story at a glance: D > 0 means two distinct real roots, D = 0 means one repeated real root (the vertex touches the axis), and D < 0 means the roots are a complex-conjugate pair, which this tool reports in full a ± bi form. It also reports the vertex of the parabola at x = −b/2a, useful for maximum-or-minimum word problems in physics and economics. Typical applications include projectile-motion problems in physics, break-even analysis in business, and optimizing dimensions when area or perimeter is fixed. The calculation is exact to floating-point precision and runs entirely client-side, so nothing you enter is transmitted anywhere.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap">
+<a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a>
+<a class="btn btn-outline" href="base64.html">Base64 encode/decode</a>
+<a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a>
+<a class="btn btn-outline" href="qr-code-generator.html">QR code generator</a>
+<a class="btn btn-outline" href="password-generator.html">Password generator</a>
+<a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a>
+<a class="btn btn-outline" href="word-counter.html">Word counter</a>
+<a class="btn btn-outline" href="number-converter.html">Base converter</a>
+<a class="btn btn-outline" href="unit-converter.html">Unit converter</a>
+<a class="btn btn-outline" href="percentage-calculator.html">Percentage calculator</a>
+      </div>
+      <hr>
+      <p><a href="index.html">← Back to all tools</a></p>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>Online Toolbox — free browser-side tools. Your data never leaves your device.</p></div></footer>
+<script>
+function qeRun(){
+  const a=parseFloat(document.getElementById('qe-a').value),b=parseFloat(document.getElementById('qe-b').value),c=parseFloat(document.getElementById('qe-c').value);
+  if(!isFinite(a)||!isFinite(b)||!isFinite(c)){document.getElementById('qe-out').textContent='Enter numbers for a, b, c.';return;}
+  if(a===0){document.getElementById('qe-out').textContent='a cannot be 0 — the equation is not quadratic. Root = '+(c===0?0:(-b/c));return;}
+  const D=b*b-4*a*c;
+  let out='Discriminant D = '+D+'<br>';
+  const vx=-b/(2*a), vy=c-b*b/(4*a);
+  out+='Vertex: ('+vx.toFixed(4)+', '+vy.toFixed(4)+')<br>';
+  if(D>=0){
+    const r1=(-b+Math.sqrt(D))/(2*a), r2=(-b-Math.sqrt(D))/(2*a);
+    out+='x₁ = '+(r1===Math.round(r1)?r1:r1.toFixed(6))+'<br>x₂ = '+(r2===Math.round(r2)?r2:r2.toFixed(6));
+    if(D===0) out+='<br>(repeated root)';
+  }else{
+    const re=(-b/(2*a)).toFixed(6), im=(Math.sqrt(-D)/(2*a)).toFixed(6);
+    out+='Complex roots:<br>x₁ = '+re+' + '+im+'i<br>x₂ = '+re+' − '+im+'i';
+  }
+  document.getElementById('qe-out').innerHTML=out;
+}
+</script>
+</body>
+</html>

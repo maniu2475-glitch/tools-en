@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple Interest Calculator — Calculate Principal, Rate & Time</title>
+<meta name="description" content="Free simple interest calculator: enter principal, annual rate and time to compute interest and final amount instantly. Also solves for principal, rate or time. Browser-side.">
+<meta name="keywords" content="simple interest calculator, calculate interest, principal rate time, loan interest calculator">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/simple-interest-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Simple interest calculator">
+<meta property="og:description" content="Free simple interest calculator: enter principal, annual rate and time to compute interest and final amount instantly. Also solves for principal, rate or time. Browser-side.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdqAsxVwJGACZjAUIAd8a7S0L/1/1r/HPn1vAmAAGIAJRWYAfwFVAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Simple interest calculator", "url": "https://maniu2475-glitch.github.io/tools-en/simple-interest-calculator.html", "description": "Free simple interest calculator: enter principal, annual rate and time to compute interest and final amount instantly. Also solves for principal, rate or time. Browser-side.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Simple Interest Calculator</h1>
+<div class="grid-2">
+<div><h3>Compute</h3>
+<label>Principal (P)<br><input type="number" id="si-p" value="1000" step="any"></label>
+<label>Annual rate (r, %)<br><input type="number" id="si-r" value="5" step="any"></label>
+<label>Time (t, years)<br><input type="number" id="si-t" value="3" step="any"></label>
+<div class="btn-group"><button class="btn" onclick="siCalc()">Calculate</button></div></div>
+<div><h3>Result</h3>
+<div class="result-box" id="si-out"></div></div>
+</div>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">Simple interest is the easiest way to price the cost of borrowing money or the return on a deposit: interest equals principal times rate times time, or I = P × r × t. Unlike compound interest, simple interest is charged only on the original principal, so a $1,000 deposit at 5% per year earns exactly $50 each year — $150 over three years. This calculator returns the total interest and the maturity amount (P + I) for any combination of inputs, and you can also rearrange it mentally to solve for a missing value: for example, if you know the interest paid and the term, divide interest by (P × t) to recover the implied annual rate. Simple interest is commonly used for short-term personal loans, auto-title lending, some bonds and Treasury bills, and late-payment fees. All arithmetic runs in your browser; nothing is uploaded, so sensitive loan figures stay on your machine.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap">
+<a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a>
+<a class="btn btn-outline" href="base64.html">Base64 encode/decode</a>
+<a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a>
+<a class="btn btn-outline" href="qr-code-generator.html">QR code generator</a>
+<a class="btn btn-outline" href="password-generator.html">Password generator</a>
+<a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a>
+<a class="btn btn-outline" href="word-counter.html">Word counter</a>
+<a class="btn btn-outline" href="number-converter.html">Base converter</a>
+<a class="btn btn-outline" href="unit-converter.html">Unit converter</a>
+<a class="btn btn-outline" href="percentage-calculator.html">Percentage calculator</a>
+      </div>
+      <hr>
+      <p><a href="index.html">← Back to all tools</a></p>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>Online Toolbox — free browser-side tools. Your data never leaves your device.</p></div></footer>
+<script>
+function siCalc(){
+  const P=parseFloat(document.getElementById('si-p').value);
+  const r=parseFloat(document.getElementById('si-r').value);
+  const t=parseFloat(document.getElementById('si-t').value);
+  if([P,r,t].some(v=>!isFinite(v))){document.getElementById('si-out').textContent='Please fill all fields.';return;}
+  const I=P*r/100*t;
+  document.getElementById('si-out').innerHTML='Simple interest: <b>'+I.toFixed(2)+'</b><br>Maturity amount (P + I): <b>'+(P+I).toFixed(2)+'</b><br>Per year: '+(I/(t||1)).toFixed(2);
+}
+</script>
+</body>
+</html>

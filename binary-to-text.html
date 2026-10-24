@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Binary to Text Converter Online — Free & Instant</title>
+<meta name="description" content="Free online binary to text converter. Paste any binary string (01000001...) and instantly get readable text, or convert text back to binary. UTF-8 safe, fully browser-side.">
+<meta name="keywords" content="binary to text, binary translator, text to binary converter, 0101 decoder, binary code translator">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/binary-to-text.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Binary to text converter">
+<meta property="og:description" content="Free online binary to text converter. Paste any binary string (01000001...) and instantly get readable text, or convert text back to binary. UTF-8 safe, fully browser-side.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdqAsxVwJGACZjAUIAd8a7S0L/1/1r/HPn1vAmAAGIAJRWYAfwFVAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Binary to text converter", "url": "https://maniu2475-glitch.github.io/tools-en/binary-to-text.html", "description": "Free online binary to text converter. Paste any binary string (01000001...) and instantly get readable text, or convert text back to binary. UTF-8 safe, fully browser-side.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Binary to Text Converter</h1>
+<div class="grid-2">
+<div><h3>Binary → Text</h3>
+<textarea id="bin-in" rows="6" placeholder="e.g. 01001000 01101001"></textarea>
+<div class="btn-group"><button class="btn" onclick="binDec()">Decode</button></div>
+<div class="result-box" id="bin-out" style="word-break:break-all"></div></div>
+<div><h3>Text → Binary</h3>
+<textarea id="txt-in" rows="6" placeholder="Enter any text…"></textarea>
+<div class="btn-group"><button class="btn" onclick="txtEnc()">Encode</button></div>
+<div class="result-box" id="txt-out" style="word-break:break-all"></div></div>
+</div>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">The binary to text converter translates sequences of 1s and 0s into human-readable characters, and back. Computers store every character as a numeric code, and binary is simply those codes written in base 2. Each letter of a UTF-8 string maps to one or more bytes, and each byte is eight binary digits. This tool accepts binary in flexible formats — grouped by spaces (01001000 01101001), newlines, or run together — and decodes it accurately, including multi-byte characters such as accented letters and emoji. Encoding works the same way in reverse: paste a sentence and get its exact binary representation. Common uses include solving puzzles in computer-science classes, debugging low-level network or file data, verifying checksums, and quickly checking how strings are stored in memory. Everything runs locally in your browser with no server round-trip, so you can safely paste any content, including private messages or proprietary samples.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap">
+<a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a>
+<a class="btn btn-outline" href="base64.html">Base64 encode/decode</a>
+<a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a>
+<a class="btn btn-outline" href="qr-code-generator.html">QR code generator</a>
+<a class="btn btn-outline" href="password-generator.html">Password generator</a>
+<a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a>
+<a class="btn btn-outline" href="word-counter.html">Word counter</a>
+<a class="btn btn-outline" href="number-converter.html">Base converter</a>
+<a class="btn btn-outline" href="unit-converter.html">Unit converter</a>
+<a class="btn btn-outline" href="percentage-calculator.html">Percentage calculator</a>
+      </div>
+      <hr>
+      <p><a href="index.html">← Back to all tools</a></p>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>Online Toolbox — free browser-side tools. Your data never leaves your device.</p></div></footer>
+<script>
+const te=new TextEncoder(), td=new TextDecoder();
+function binDec(){
+  const s=document.getElementById('bin-in').value.replace(/[^01]/g,'');
+  if(!s){document.getElementById('bin-out').textContent='Enter binary digits.';return;}
+  if(s.length%8){document.getElementById('bin-out').textContent='Binary length must be a multiple of 8.';return;}
+  const bytes=new Uint8Array(s.length/8);
+  for(let i=0;i<bytes.length;i++) bytes[i]=parseInt(s.substr(i*8,8),2);
+  try{document.getElementById('bin-out').textContent=td.decode(bytes);}catch(e){document.getElementById('bin-out').textContent='Error: '+e.message;}
+}
+function txtEnc(){
+  const bytes=te.encode(document.getElementById('txt-in').value);
+  const out=[];
+  for(const b of bytes) out.push(b.toString(2).padStart(8,'0'));
+  document.getElementById('txt-out').textContent=out.join(' ');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Word Frequency Counter Online — Free Text Analysis Tool</title>
+<meta name="description" content="Free online word frequency counter: paste text and instantly see the most common words, their counts and percentages. Great for SEO, essays and keyword analysis. Client-side.">
+<meta name="keywords" content="word frequency counter, word count tool, keyword frequency, text analysis, most common words">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/word-frequency-counter.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Word frequency counter">
+<meta property="og:description" content="Free online word frequency counter: paste text and instantly see the most common words, their counts and percentages. Great for SEO, essays and keyword analysis. Client-side.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdqAsxVwJGACZjAUIAd8a7S0L/1/1r/HPn1vAmAAGIAJRWYAfwFVAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Word frequency counter", "url": "https://maniu2475-glitch.github.io/tools-en/word-frequency-counter.html", "description": "Free online word frequency counter: paste text and instantly see the most common words, their counts and percentages. Great for SEO, essays and keyword analysis. Client-side.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Word Frequency Counter</h1>
+<h3>Your text</h3>
+<textarea id="wf-in" rows="8" placeholder="Paste any text…"></textarea>
+<div class="btn-group"><button class="btn" onclick="wfRun()">Count</button></div>
+<div class="result-box" id="wf-out"></div>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">The word frequency counter analyses any text and ranks every word by how often it appears, together with its percentage of the total. Writers use it to spot words they unconsciously overuse — filler words like 'very', 'that' or 'really' tend to cluster. SEO specialists paste a competitor's page into it to see which keyword phrases dominate their copy and at what density, since keyword stuffing above roughly 3–5% looks unnatural to both readers and search engines. Language learners use it to extract the high-frequency vocabulary of an article before reading, and teachers use it for vocabulary exercises. The tool lowercases everything, ignores punctuation, and can drop common stop words such as 'the' and 'and' so the interesting words stand out. Results are shown as a ranked table with counts and percentages, limited to the top 100 words for readability. All analysis happens locally in your browser, so private drafts and unpublished manuscripts never leave your machine.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap">
+<a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a>
+<a class="btn btn-outline" href="base64.html">Base64 encode/decode</a>
+<a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a>
+<a class="btn btn-outline" href="qr-code-generator.html">QR code generator</a>
+<a class="btn btn-outline" href="password-generator.html">Password generator</a>
+<a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a>
+<a class="btn btn-outline" href="word-counter.html">Word counter</a>
+<a class="btn btn-outline" href="number-converter.html">Base converter</a>
+<a class="btn btn-outline" href="unit-converter.html">Unit converter</a>
+<a class="btn btn-outline" href="percentage-calculator.html">Percentage calculator</a>
+      </div>
+      <hr>
+      <p><a href="index.html">← Back to all tools</a></p>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>Online Toolbox — free browser-side tools. Your data never leaves your device.</p></div></footer>
+<script>
+function wfRun(){
+  const txt=document.getElementById('wf-in').value;
+  if(!txt.trim()){document.getElementById('wf-out').textContent='Paste some text first.';return;}
+  const words=txt.toLowerCase().match(/[a-z\u00c0-\u024f\u4e00-\u9fff0-9']+/g)||[];
+  const counts={};
+  for(const w of words) counts[w]=(counts[w]||0)+1;
+  const total=words.length;
+  const sorted=Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,100);
+  let html='<table style="width:100%;border-collapse:collapse"><tr><th style="text-align:left">#</th><th style="text-align:left">Word</th><th>Count</th><th>Share</th></tr>';
+  sorted.forEach((e,i)=>{html+='<tr><td>'+(i+1)+'</td><td>'+e[0]+'</td><td>'+e[1]+'</td><td>'+(100*e[1]/total).toFixed(2)+'%</td></tr>';});
+  html+='</table><p>Total words: '+total+' | Unique: '+Object.keys(counts).length+'</p>';
+  document.getElementById('wf-out').innerHTML=html;
+}
+</script>
+</body>
+</html>
