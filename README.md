@@ -1,7 +1,7 @@
 Free Online Toolbox
 ==================
 
-73 free online tools that run 100% in your browser — no data ever uploaded.
+78 free online tools that run 100% in your browser — no data ever uploaded.
 
 **Tools:** JSON Formatter, Base64 Encode/Decode, URL Encode/Decode, QR Code Generator, QR Code Scanner, Password Generator, Password Strength Checker, Timestamp Converter, Color Converter, Color Picker, Markdown Editor, Word Counter, MD5/SHA Hash, IP Lookup, Number Converter (Radix), Unit Converter, Case Converter, Text Sort, Text Diff, Text to Binary, CSV→JSON, UUID Generator, JWT Decoder, Base32 Encode/Decode, Cron Expression Parser, Cron Job Generator, Aspect Ratio Calculator, Random String Generator, Slug Generator, HTML Entities, Image to Base64, Lorem Ipsum Generator, URL Parser, Percentage Calculator, Chmod Calculator, Regex Tester, BMI Calculator, Age Calculator, Loan Calculator, Temperature Converter, Random Number Generator, Discount Calculator, Compound Interest Calculator.
 
@@ -72,3 +72,13 @@ git clone https://github.com/maniu2475-glitch/tools-en.git
 MIT
 
 ⭐ If this helped you, please star the repo!
+
+Newly added tools (2026-10-25, 7th batch):
+
+- [Fraction Calculator](https://maniu2475-glitch.github.io/tools-en/fraction-calculator.html) - add, subtract, multiply & divide fractions, simplified with decimal result
+- [Sales Tax Calculator](https://maniu2475-glitch.github.io/tools-en/sales-tax-calculator.html) - add or remove sales tax / VAT / GST from any price
+- [Online Stopwatch](https://maniu2475-glitch.github.io/tools-en/stopwatch.html) - millisecond-accurate stopwatch with unlimited lap times
+- [Inches to cm Converter](https://maniu2475-glitch.github.io/tools-en/inches-to-cm.html) - live two-way inches/cm/feet/meters conversion
+- [Typing Speed Test](https://maniu2475-glitch.github.io/tools-en/typing-speed-test.html) - 60-second WPM and accuracy test
+
+Total: 78 free online tools, all running 100% client-side.
