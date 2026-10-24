@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hex to RGB Converter — RGB / HSL Color Codes</title>
+<meta name="description" content="Free hex to RGB converter: paste any hex color to get RGB and HSL values instantly, or convert RGB back to hex. Works with #FFF shorthand. Runs fully in your browser.">
+<meta name="keywords" content="hex to rgb,rgb to hex,color converter,hex color code,rgb values,hsl">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/hex-to-rgb.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hex to RGB converter">
+<meta property="og:description" content="Free hex to RGB converter: paste any hex color to get RGB and HSL values instantly, or convert RGB back to hex. Works with #FFF shorthand. Runs fully in your browser.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Hex to RGB converter", "url": "https://maniu2475-glitch.github.io/tools-en/hex-to-rgb.html", "description": "Free hex to RGB converter: paste any hex color to get RGB and HSL values instantly, or convert RGB back to hex. Works with #FFF shorthand. Runs fully in your browser.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Hex to RGB converter</h1>
+<div class="grid-2">
+<div><h3>Hex → RGB</h3>
+<label>Hex color<br><input type="text" id="hx-in" value="#FF6600" oninput="hexToRgb()"></label>
+<div class="result-box" id="hx-out"></div></div>
+<div><h3>RGB → Hex</h3>
+<label>Red (0-255)<br><input type="number" id="r-in" value="255" min="0" max="255" oninput="rgbToHex()"></label>
+<label>Green (0-255)<br><input type="number" id="g-in" value="102" min="0" max="255" oninput="rgbToHex()"></label>
+<label>Blue (0-255)<br><input type="number" id="b-in" value="0" min="0" max="255" oninput="rgbToHex()"></label>
+<div class="result-box" id="rgb-out"></div></div>
+</div>
+<div id="hx-swatch" style="width:120px;height:60px;border-radius:8px;border:1px solid #ccc;margin:16px 0"></div>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">Hexadecimal color codes are the standard way to describe colors on the web: #FF6600 means 255 parts red, 102 parts green and 0 parts blue, each channel ranging from 0 to 255. This converter works in both directions — paste a hex code to get the RGB triplet, or enter red, green and blue values to get the hex string back — and it also shows the CSS rgb() notation and the HSL equivalent, which is often easier when you want to lighten or darken a color while keeping its hue. Typing #FFF or even FFF works too, since three-digit shorthand expands automatically. Everything is computed locally in your browser, so you can paste any brand color without it ever being sent anywhere.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap">
+<a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a>
+<a class="btn btn-outline" href="base64.html">Base64 encode/decode</a>
+<a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a>
+<a class="btn btn-outline" href="qr-code-generator.html">QR code generator</a>
+<a class="btn btn-outline" href="password-generator.html">Password generator</a>
+<a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a>
+<a class="btn btn-outline" href="word-counter.html">Word counter</a>
+<a class="btn btn-outline" href="number-converter.html">Base converter</a>
+<a class="btn btn-outline" href="unit-converter.html">Unit converter</a>
+<a class="btn btn-outline" href="percentage-calculator.html">Percentage calculator</a>
+      </div>
+      <hr>
+      <p><a href="index.html">← Back to all tools</a></p>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>Online Toolbox — free browser-side tools. Your data never leaves your device.</p></div></footer>
+<script>
+function hexToRgb(){
+  let v=document.getElementById('hx-in').value.trim().replace(/^#/,'');
+  if(v.length===3)v=v.split('').map(c=>c+c).join('');
+  if(!/^[0-9a-fA-F]{6}$/.test(v)){document.getElementById('hx-out').textContent='Invalid hex color';return;}
+  const r=parseInt(v.slice(0,2),16),g=parseInt(v.slice(2,4),16),b=parseInt(v.slice(4,6),16);
+  const mx=Math.max(r,g,b),mn=Math.min(r,g,b),l=(mx+mn)/2;
+  const s=mx===mn?0:((mx-mn)/(255-Math.abs(mx+mn-255)))*100;
+  const h=mx===mn?0:Math.round(mx===r?((g-b)/(mx-mn)+(g<b?6:0)):mx===g?((b-r)/(mx-mn)+2):((r-g)/(mx-mn)+4))*60/6*6;
+  document.getElementById('hx-out').innerHTML='RGB: <b>'+r+', '+g+', '+b+'</b><br>rgb('+r+', '+g+', '+b+')<br>HSL ≈ '+Math.round(h/6)+'°, '+Math.round(s)+'%, '+Math.round(l*100)+'%';
+  document.getElementById('hx-swatch').style.background='#'+v.toLowerCase();
+}
+function rgbToHex(){
+  const r=+document.getElementById('r-in').value,g=+document.getElementById('g-in').value,b=+document.getElementById('b-in').value;
+  if([r,g,b].some(v=>isNaN(v)||v<0||v>255)){document.getElementById('rgb-out').textContent='Values must be 0-255';return;}
+  const h='#'+[r,g,b].map(v=>v.toString(16).padStart(2,'0')).join('').toUpperCase();
+  document.getElementById('rgb-out').innerHTML='Hex: <b>'+h+'</b>';
+  document.getElementById('hx-swatch').style.background=h;
+}
+hexToRgb();rgbToHex();
+</script>
+</body>
+</html>

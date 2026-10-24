@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Markup Calculator — Markup, Margin & Profit</title>
+<meta name="description" content="Free markup calculator: enter cost and price to get markup, profit margin and profit per unit, or solve the selling price from a desired markup. All in your browser.">
+<meta name="keywords" content="markup calculator,margin calculator,profit margin,price markup,markup vs margin">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/markup-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Markup Calculator">
+<meta property="og:description" content="Free markup calculator: enter cost and price to get markup, profit margin and profit per unit, or solve the selling price from a desired markup. All in your browser.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Markup Calculator", "url": "https://maniu2475-glitch.github.io/tools-en/markup-calculator.html", "description": "Free markup calculator: enter cost and price to get markup, profit margin and profit per unit, or solve the selling price from a desired markup. All in your browser.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Markup Calculator</h1>
+<div class="grid-2">
+<div><h3>Input</h3>
+<label>Cost<br><input type="number" id="mk-cost" value="80" step="any" oninput="mkCalc()"></label>
+<label>Selling price (leave blank to solve)<br><input type="number" id="mk-price" value="100" step="any" oninput="mkCalc()"></label>
+<label>OR Markup % (solve price)<br><input type="number" id="mk-markup" step="any" placeholder="e.g. 25"></label>
+<div class="btn-group"><button class="btn" onclick="mkCalc()">Calculate</button></div></div>
+<div><h3>Result</h3>
+<div class="result-box" id="mk-out"></div></div>
+</div>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">Markup and margin describe the same profit from two different angles, and confusing them is one of the most common mistakes in small-business pricing. Markup is profit expressed as a percentage of cost: buy for $80 and sell for $100 and the markup is 25%. Margin is profit as a percentage of the selling price — in that same example, $20 on $100, so the margin is only 20%. That means a 25% markup is a 20% margin, a 100% markup is a 50% margin, and so on. This calculator accepts any two of cost, selling price, markup or margin and fills in the rest instantly, so you can move between wholesale cost sheets, retail price tags and financial statements without doing the algebra by hand. Everything is computed in your browser.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap">
+<a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a>
+<a class="btn btn-outline" href="base64.html">Base64 encode/decode</a>
+<a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a>
+<a class="btn btn-outline" href="qr-code-generator.html">QR code generator</a>
+<a class="btn btn-outline" href="password-generator.html">Password generator</a>
+<a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a>
+<a class="btn btn-outline" href="word-counter.html">Word counter</a>
+<a class="btn btn-outline" href="number-converter.html">Base converter</a>
+<a class="btn btn-outline" href="unit-converter.html">Unit converter</a>
+<a class="btn btn-outline" href="percentage-calculator.html">Percentage calculator</a>
+      </div>
+      <hr>
+      <p><a href="index.html">← Back to all tools</a></p>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>Online Toolbox — free browser-side tools. Your data never leaves your device.</p></div></footer>
+<script>
+function mkCalc(){
+  const c=parseFloat(document.getElementById('mk-cost').value);
+  const pEl=document.getElementById('mk-price');
+  const m=parseFloat(document.getElementById('mk-markup').value);
+  let p=parseFloat(pEl.value);
+  if(isNaN(c)){document.getElementById('mk-out').textContent='Enter a cost.';return;}
+  if(isNaN(p)&&isFinite(m))p=c*(1+m/100);
+  if(!isFinite(p)){document.getElementById('mk-out').textContent='Enter a price or markup %.';return;}
+  pEl.value=p;
+  const profit=p-c, markup=(profit/c)*100, margin=(profit/p)*100;
+  document.getElementById('mk-out').innerHTML='Selling price: <b>'+p.toFixed(2)+'</b><br>Profit per unit: <b>'+profit.toFixed(2)+'</b><br>Markup on cost: <b>'+markup.toFixed(2)+'%</b><br>Profit margin: <b>'+margin.toFixed(2)+'%</b>';
+}
+mkCalc();
+</script>
+</body>
+</html>

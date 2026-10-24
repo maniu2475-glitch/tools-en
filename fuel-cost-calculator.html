@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fuel Cost Calculator — Trip Gas Price & Cost per Mile</title>
+<meta name="description" content="Free fuel cost calculator: enter distance, fuel efficiency (mpg or L/100km) and gas price to get trip fuel cost, gallons needed and cost per mile. Runs in your browser.">
+<meta name="keywords" content="fuel cost calculator,gas cost calculator,trip cost,mpg calculator,cost per mile">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/fuel-cost-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Fuel Cost Calculator">
+<meta property="og:description" content="Free fuel cost calculator: enter distance, fuel efficiency (mpg or L/100km) and gas price to get trip fuel cost, gallons needed and cost per mile. Runs in your browser.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Fuel Cost Calculator", "url": "https://maniu2475-glitch.github.io/tools-en/fuel-cost-calculator.html", "description": "Free fuel cost calculator: enter distance, fuel efficiency (mpg or L/100km) and gas price to get trip fuel cost, gallons needed and cost per mile. Runs in your browser.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Fuel Cost Calculator</h1>
+<div class="grid-2">
+<div><h3>Trip</h3>
+<label>Distance<br><input type="number" id="fc-dist" value="250" step="any"></label>
+<label>Unit<br><select id="fc-du"><option value="mi">Miles</option><option value="km">Kilometers</option></select></label>
+<label>Fuel efficiency (mpg or L/100km)<br><input type="number" id="fc-eff" value="25" step="any"></label>
+<label>Fuel price per gallon/liter<br><input type="number" id="fc-price" value="3.50" step="any"></label>
+<div class="btn-group"><button class="btn" onclick="fuelCalc()">Calculate</button></div></div>
+<div><h3>Result</h3>
+<div class="result-box" id="fc-out"></div></div>
+</div>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">A fuel cost calculator answers three everyday questions: how much will a trip cost, how far can I drive on a tank, and how much do I spend per month commuting. You enter the distance, your vehicle's fuel efficiency — miles per gallon or liters per 100 kilometers, the conversion is handled automatically — and the fuel price, and the tool returns the total cost plus a per-mile or per-kilometer figure that is useful for comparing cars, reimbursing travel expenses or pricing delivery routes. A typical gasoline car in the United States averages about 25 mpg, while a diesel sedan in Europe might use 5 L/100 km. The calculation runs entirely in your browser, so no trip details ever leave your device.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap">
+<a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a>
+<a class="btn btn-outline" href="base64.html">Base64 encode/decode</a>
+<a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a>
+<a class="btn btn-outline" href="qr-code-generator.html">QR code generator</a>
+<a class="btn btn-outline" href="password-generator.html">Password generator</a>
+<a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a>
+<a class="btn btn-outline" href="word-counter.html">Word counter</a>
+<a class="btn btn-outline" href="number-converter.html">Base converter</a>
+<a class="btn btn-outline" href="unit-converter.html">Unit converter</a>
+<a class="btn btn-outline" href="percentage-calculator.html">Percentage calculator</a>
+      </div>
+      <hr>
+      <p><a href="index.html">← Back to all tools</a></p>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>Online Toolbox — free browser-side tools. Your data never leaves your device.</p></div></footer>
+<script>
+function fuelCalc(){
+  const d=parseFloat(document.getElementById('fc-dist').value);
+  const u=document.getElementById('fc-du').value;
+  const e=parseFloat(document.getElementById('fc-eff').value);
+  const p=parseFloat(document.getElementById('fc-price').value);
+  if([d,e,p].some(v=>!isFinite(v))||e<=0){document.getElementById('fc-out').textContent='Please fill all fields.';return;}
+  let gallons, unitLabel;
+  if(u==='mi'){gallons=d/e;unitLabel='mile';}
+  else{const kmPerL=100/e; const gal=d/kmPerL/3.78541; gallons=gal; unitLabel='km';}
+  const cost=gallons*p;
+  const per=(cost/d).toFixed(4);
+  document.getElementById('fc-out').innerHTML='Fuel needed: <b>'+gallons.toFixed(2)+' '+(u==='mi'?'gallons':'gallons ('+(d/(100/e)).toFixed(2)+' L)')+'</b><br>Total cost: <b>'+cost.toFixed(2)+'</b><br>Cost per '+unitLabel+': '+per;
+}
+fuelCalc();
+</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reading Time Calculator — Words to Minutes</title>
+<meta name="description" content="Free reading time calculator: paste any text to get estimated reading time, speaking time, word, character, sentence and paragraph counts. Adjustable words-per-minute. Browser-side.">
+<meta name="keywords" content="reading time calculator,how long to read,speaking time,words per minute,read time estimator">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/reading-time-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Reading Time Calculator">
+<meta property="og:description" content="Free reading time calculator: paste any text to get estimated reading time, speaking time, word, character, sentence and paragraph counts. Adjustable words-per-minute. Browser-side.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Reading Time Calculator", "url": "https://maniu2475-glitch.github.io/tools-en/reading-time-calculator.html", "description": "Free reading time calculator: paste any text to get estimated reading time, speaking time, word, character, sentence and paragraph counts. Adjustable words-per-minute. Browser-side.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Reading Time Calculator</h1>
+<label>Paste your text<br><textarea id="rt-text" rows="8" style="width:100%" oninput="readTime()">A long walk through a beautiful forest is one of the simplest pleasures in life. Every few steps bring something new to see.</textarea></label>
+<label>Reading speed (words per minute)<br><input type="number" id="rt-wpm" value="238" min="50" max="1000" oninput="readTime()"></label>
+<div class="result-box" id="rt-out"></div>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">Reading time calculators are used by bloggers, content marketers and web editors to show visitors how long an article will take to read — the little "6 min read" badge next to a headline. The standard average adult reading speed is about 200 to 250 words per minute for English prose; this tool uses 238 wpm by default but lets you change it to 150 for difficult technical material or 300 for skimming. It also counts words, characters, sentences and paragraphs, and estimates speaking time at a typical presentation pace of 140 words per minute, which is handy when preparing a talk or video script. All counting happens locally in your browser, so you can paste unpublished drafts safely.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap">
+<a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a>
+<a class="btn btn-outline" href="base64.html">Base64 encode/decode</a>
+<a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a>
+<a class="btn btn-outline" href="qr-code-generator.html">QR code generator</a>
+<a class="btn btn-outline" href="password-generator.html">Password generator</a>
+<a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a>
+<a class="btn btn-outline" href="word-counter.html">Word counter</a>
+<a class="btn btn-outline" href="number-converter.html">Base converter</a>
+<a class="btn btn-outline" href="unit-converter.html">Unit converter</a>
+<a class="btn btn-outline" href="percentage-calculator.html">Percentage calculator</a>
+      </div>
+      <hr>
+      <p><a href="index.html">← Back to all tools</a></p>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>Online Toolbox — free browser-side tools. Your data never leaves your device.</p></div></footer>
+<script>
+function readTime(){
+  const t=document.getElementById('rt-text').value;
+  const wpm=Math.max(1,+document.getElementById('rt-wpm').value||238);
+  const words=(t.match(/\S+/g)||[]).length;
+  const chars=t.length;
+  const sentences=(t.match(/[.!?]+(\s|$)/g)||[]).length;
+  const paras=t.split(/\n\s*\n/).filter(x=>x.trim()).length;
+  const mins=words/wpm;
+  const fmt=m=>m<1?Math.round(m*60)+' seconds':(Math.round(m*10)/10)+' minutes';
+  document.getElementById('rt-out').innerHTML='Estimated reading time: <b>'+fmt(mins)+'</b><br>Speaking time (~140 wpm): <b>'+fmt(words/140)+'</b><br>Words: '+words.toLocaleString()+' · Characters: '+chars.toLocaleString()+'<br>Sentences: '+sentences+' · Paragraphs: '+paras;
+}
+readTime();
+</script>
+</body>
+</html>
