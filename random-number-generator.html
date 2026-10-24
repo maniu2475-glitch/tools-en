@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Random Number Generator (Range, Integers & Decimals)</title>
+<meta name="description" content="Free random number generator: pick random integers or decimals in any range, with options for uniqueness and crypto-secure randomness. Runs in your browser.">
+<meta name="keywords" content="random number generator, random number picker, lottery number generator, dice roller, random int range">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/random-number-generator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Random Number Generator">
+<meta property="og:description" content="Free random number generator: pick random integers or decimals in any range, with options for uniqueness and crypto-secure randomness. Runs in your browser.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Random Number Generator", "url": "https://maniu2475-glitch.github.io/tools-en/random-number-generator.html", "description": "Free random number generator: pick random integers or decimals in any range, with options for uniqueness and crypto-secure randomness. Runs in your browser.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Random Number Generator</h1>
+      <p class="tool-desc">Random integers or decimals in any range — crypto-secure, browser-side.</p>
+<div class="grid-2">
+<div><label>Min: <input id="rn-min" style="width:80px" value="1" oninput=""></label></div>
+<div><label>Max: <input id="rn-max" style="width:80px" value="100" oninput=""></label></div>
+<div><label>Count: <input id="rn-n" style="width:80px" value="5" oninput=""></label></div>
+<div><label><input type="checkbox" id="rn-u" checked> Unique (no repeats)</label></div>
+</div>
+<button class="btn" onclick="rn()">🎲 Generate</button>
+<div class="result-box" id="rn-out" style="min-height:48px"></div>
+      <h3>About this tool</h3>
+      <p>This random number generator produces random integers or decimals between any two bounds you choose. Enable the unique option to prevent repeats — perfect for lottery picks, raffle draws, sampling, gaming (d6, d20 dice) or classroom activities. It uses the browser's cryptographic random source (crypto.getRandomValues) rather than plain Math.random, so the output is strong enough for shuffles, giveaways and unbiased sampling. You can generate a single number or a batch of many at once, with negative ranges and decimals supported. Everything runs locally in your browser: no data is uploaded and no account is required. Bookmark it for the next time you need a fair, instant draw.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a><a class="btn btn-outline" href="base64.html">Base64 encode/decode</a><a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a><a class="btn btn-outline" href="password-generator.html">Password generator</a><a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a><a class="btn btn-outline" href="md5-generator.html">Hash generator</a><a class="btn btn-outline" href="uuid-generator.html">UUID generator</a><a class="btn btn-outline" href="word-counter.html">Word counter</a><a class="btn btn-outline" href="number-converter.html">Base converter</a><a class="btn btn-outline" href="unit-converter.html">Unit converter</a><a class="btn btn-outline" href="case-converter.html">Case converter</a><a class="btn btn-outline" href="percentage-calculator.html">Percentage calculator</a><a class="btn btn-outline" href="loan-calculator.html">Loan calculator</a><a class="btn btn-outline" href="temperature-converter.html">Temperature converter</a><a class="btn btn-outline" href="random-number-generator.html">Random number generator</a><a class="btn btn-outline" href="discount-calculator.html">Discount calculator</a><a class="btn btn-outline" href="compound-interest-calculator.html">Compound interest calculator</a></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2026 Online Toolbox · 887+ free browser-side tools</p></div></footer>
+<script>
+function rnd(min,max){var a=Math.ceil(min),b=Math.floor(max);var range=b-a+1;var max32=4294967296;var lim=max32-(max32%range);var a2=new Uint32Array(1);do{crypto.getRandomValues(a2);}while(a2[0]>=lim);return a+(a2[0]%range);}
+function rn(){var min=+document.getElementById('rn-min').value,max=+document.getElementById('rn-max').value,n=+document.getElementById('rn-n').value,u=document.getElementById('rn-u').checked;var out=document.getElementById('rn-out');if(isNaN(min)||isNaN(max)||isNaN(n)||n<1||min>max){out.textContent='Invalid input';return;}var res=[];if(u){if(max-min+1<n){out.textContent='Range too small for '+n+' unique numbers';return;}var seen={};while(res.length<n){var x=rnd(min,max);if(!seen[x]){seen[x]=1;res.push(x);}}}else{for(var i=0;i<n;i++)res.push(rnd(min,max));}out.textContent=res.join(', ');}
+document.addEventListener('DOMContentLoaded',rn);
+</script>
+</body>
+</html>

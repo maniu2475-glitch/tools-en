@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loan Calculator (Monthly Payment & Amortization)</title>
+<meta name="description" content="Free online loan calculator: compute monthly payment, total interest and total repayment for any loan amount, interest rate and term. Formulas shown, runs in your browser.">
+<meta name="keywords" content="loan calculator, mortgage payment calculator, monthly payment calculator, loan interest calculator, amortization calculator online">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/loan-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Loan Calculator">
+<meta property="og:description" content="Free online loan calculator: compute monthly payment, total interest and total repayment for any loan amount, interest rate and term. Formulas shown, runs in your browser.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Loan Calculator", "url": "https://maniu2475-glitch.github.io/tools-en/loan-calculator.html", "description": "Free online loan calculator: compute monthly payment, total interest and total repayment for any loan amount, interest rate and term. Formulas shown, runs in your browser.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Loan Calculator</h1>
+      <p class="tool-desc">Monthly payment, total interest & amortization — everything runs in your browser, nothing is uploaded.</p>
+<div class="grid-2">
+<div><label>Loan amount: <input id="lc-p" style="width:110px" value="200000" oninput="lc()"></label></div>
+<div><label>Annual rate (%): <input id="lc-r" style="width:80px" value="5.5" oninput="lc()"></label></div>
+<div><label>Term (years): <input id="lc-y" style="width:80px" value="30" oninput="lc()"></label></div>
+</div>
+<div class="result-box" id="lc-m"></div>
+<div class="result-box" id="lc-ti"></div>
+<div class="result-box" id="lc-tt"></div>
+      <h3>About this tool</h3>
+      <p>This loan calculator answers the three questions every borrower asks: what is my monthly payment, how much interest will I pay in total, and how much will the loan really cost me overall. Enter the loan amount (principal), the annual interest rate and the number of years, and the standard amortization formula is applied instantly. The monthly payment is computed as P × r × (1+r)^n / ((1+r)^n − 1), where r is the monthly rate and n the number of monthly payments. Total interest is simply the sum of all payments minus the principal. Useful for mortgages, auto loans, student loans and personal loans — compare scenarios side by side to see how a shorter term or a lower rate changes the total cost. Everything runs locally in your browser with no data uploaded, so your financial figures stay private.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a><a class="btn btn-outline" href="base64.html">Base64 encode/decode</a><a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a><a class="btn btn-outline" href="password-generator.html">Password generator</a><a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a><a class="btn btn-outline" href="md5-generator.html">Hash generator</a><a class="btn btn-outline" href="uuid-generator.html">UUID generator</a><a class="btn btn-outline" href="word-counter.html">Word counter</a><a class="btn btn-outline" href="number-converter.html">Base converter</a><a class="btn btn-outline" href="unit-converter.html">Unit converter</a><a class="btn btn-outline" href="case-converter.html">Case converter</a><a class="btn btn-outline" href="percentage-calculator.html">Percentage calculator</a><a class="btn btn-outline" href="loan-calculator.html">Loan calculator</a><a class="btn btn-outline" href="temperature-converter.html">Temperature converter</a><a class="btn btn-outline" href="random-number-generator.html">Random number generator</a><a class="btn btn-outline" href="discount-calculator.html">Discount calculator</a><a class="btn btn-outline" href="compound-interest-calculator.html">Compound interest calculator</a></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2026 Online Toolbox · 887+ free browser-side tools</p></div></footer>
+<script>
+function lc(){var p=+document.getElementById('lc-p').value,r=+document.getElementById('lc-r').value/100/12,y=+document.getElementById('lc-y').value,n=y*12;var m=(isNaN(p)||isNaN(r)||isNaN(n)||n<=0)?NaN:(r===0?p/n:p*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1));if(isNaN(m)){document.getElementById('lc-m').textContent='—';document.getElementById('lc-ti').textContent='';document.getElementById('lc-tt').textContent='';return;}document.getElementById('lc-m').textContent='Monthly payment: '+m.toFixed(2);document.getElementById('lc-ti').textContent='Total interest paid: '+(m*n-p).toFixed(2);document.getElementById('lc-tt').textContent='Total repaid: '+(m*n).toFixed(2);}
+document.addEventListener('DOMContentLoaded',lc);
+</script>
+</body>
+</html>

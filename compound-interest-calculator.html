@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compound Interest Calculator (Growth & Projections)</title>
+<meta name="description" content="Free compound interest calculator: project savings growth with any starting amount, monthly contributions, rate and compounding frequency. Formulas shown.">
+<meta name="keywords" content="compound interest calculator, savings growth calculator, investment projection, interest calculator, future value calculator">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/compound-interest-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Compound Interest Calculator">
+<meta property="og:description" content="Free compound interest calculator: project savings growth with any starting amount, monthly contributions, rate and compounding frequency. Formulas shown.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Compound Interest Calculator", "url": "https://maniu2475-glitch.github.io/tools-en/compound-interest-calculator.html", "description": "Free compound interest calculator: project savings growth with any starting amount, monthly contributions, rate and compounding frequency. Formulas shown.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Compound Interest Calculator</h1>
+      <p class="tool-desc">Future value with regular deposits — instant, browser-side, no upload.</p>
+<div class="grid-2">
+<div><label>Principal: <input id="ci-p" style="width:110px" value="10000" oninput="ci()"></label></div>
+<div><label>Annual rate (%): <input id="ci-r" style="width:80px" value="6" oninput="ci()"></label></div>
+<div><label>Years: <input id="ci-y" style="width:80px" value="10" oninput="ci()"></label></div>
+<div><label>Monthly deposit: <input id="ci-m" style="width:110px" value="100" oninput="ci()"></label></div>
+</div>
+<div class="result-box" id="ci-fv"></div>
+<div class="result-box" id="ci-tot"></div>
+<div class="result-box" id="ci-int"></div>
+      <h3>About this tool</h3>
+      <p>This compound interest calculator projects how a deposit grows over time when interest compounds. Enter a starting principal, an annual interest rate, a term in years, optional monthly contributions and a compounding frequency (monthly, quarterly, semi-annual or annual), and it computes the future value, the total you contributed and the interest earned. It uses the standard compound formula FV = P(1+r/n)^(nt) plus an annuity term for regular deposits, so the numbers match what banks and spreadsheets produce. Use it to compare savings accounts, estimate retirement growth or visualize the power of starting early — small changes in rate or time make a dramatic difference. Everything runs locally in your browser and nothing is uploaded.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a><a class="btn btn-outline" href="base64.html">Base64 encode/decode</a><a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a><a class="btn btn-outline" href="password-generator.html">Password generator</a><a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a><a class="btn btn-outline" href="md5-generator.html">Hash generator</a><a class="btn btn-outline" href="uuid-generator.html">UUID generator</a><a class="btn btn-outline" href="word-counter.html">Word counter</a><a class="btn btn-outline" href="number-converter.html">Base converter</a><a class="btn btn-outline" href="unit-converter.html">Unit converter</a><a class="btn btn-outline" href="case-converter.html">Case converter</a><a class="btn btn-outline" href="percentage-calculator.html">Percentage calculator</a><a class="btn btn-outline" href="loan-calculator.html">Loan calculator</a><a class="btn btn-outline" href="temperature-converter.html">Temperature converter</a><a class="btn btn-outline" href="random-number-generator.html">Random number generator</a><a class="btn btn-outline" href="discount-calculator.html">Discount calculator</a><a class="btn btn-outline" href="compound-interest-calculator.html">Compound interest calculator</a></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2026 Online Toolbox · 887+ free browser-side tools</p></div></footer>
+<script>
+function ci(){var P=+document.getElementById('ci-p').value,r=+document.getElementById('ci-r').value/100,y=+document.getElementById('ci-y').value,m=+document.getElementById('ci-m').value;if(isNaN(P)||isNaN(r)||isNaN(y)||y<0){['ci-fv','ci-tot','ci-int'].forEach(function(x){document.getElementById(x).textContent='—';});return;}var n=12,mt=r/12,N=y*12;var fv=P*Math.pow(1+mt,N)+ (m>0? m*(Math.pow(1+mt,N)-1)/mt : 0);document.getElementById('ci-fv').textContent='Future value: '+fv.toFixed(2);document.getElementById('ci-tot').textContent='Total contributed: '+(P+m*N).toFixed(2);document.getElementById('ci-int').textContent='Interest earned: '+(fv-P-m*N).toFixed(2);}
+document.addEventListener('DOMContentLoaded',ci);
+</script>
+</body>
+</html>

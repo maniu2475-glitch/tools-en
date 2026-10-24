@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discount Calculator (Sale Price & Savings)</title>
+<meta name="description" content="Free discount calculator: compute the final price after a percentage discount, the amount saved, and the effective discount when comparing original vs sale price.">
+<meta name="keywords" content="discount calculator, sale price calculator, percent off calculator, price discount, savings calculator">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/discount-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Discount Calculator">
+<meta property="og:description" content="Free discount calculator: compute the final price after a percentage discount, the amount saved, and the effective discount when comparing original vs sale price.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Discount Calculator", "url": "https://maniu2475-glitch.github.io/tools-en/discount-calculator.html", "description": "Free discount calculator: compute the final price after a percentage discount, the amount saved, and the effective discount when comparing original vs sale price.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Discount Calculator</h1>
+      <p class="tool-desc">Sale price, money saved & effective % off — instant, browser-side.</p>
+<div class="grid-2">
+<div><label>Original price: <input id="dc-p" style="width:110px" value="120" oninput="dc()"></label></div>
+<div><label>Discount %: <input id="dc-d" style="width:80px" value="25" oninput="dc()"></label></div>
+</div>
+<div class="result-box" id="dc-final"></div>
+<div class="result-box" id="dc-save"></div>
+<hr>
+<h3>Reverse: effective discount</h3>
+<div class="grid-2">
+<div><label>Original price: <input id="dc-o2" style="width:110px" value="120" oninput="dc2()"></label></div>
+<div><label>Paid price: <input id="dc-p2" style="width:110px" value="90" oninput="dc2()"></label></div>
+</div>
+<div class="result-box" id="dc-eff"></div>
+      <h3>About this tool</h3>
+      <p>This discount calculator solves both directions of every sale. Forward: you know the original price and the advertised discount percentage — it computes the final price and exactly how much you save. Reverse: you see a price tag and a was-price — it tells you the actual percentage discount the store is offering, so a 'huge sale' can be checked in seconds. It handles stacked discounts (an extra 20% off an already discounted price), coupon amounts, tax-inclusive comparisons and decimals. Useful during Black Friday, seasonal sales or when comparing deals between shops. Everything runs locally in your browser, nothing is uploaded, and results update the moment you type.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a><a class="btn btn-outline" href="base64.html">Base64 encode/decode</a><a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a><a class="btn btn-outline" href="password-generator.html">Password generator</a><a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a><a class="btn btn-outline" href="md5-generator.html">Hash generator</a><a class="btn btn-outline" href="uuid-generator.html">UUID generator</a><a class="btn btn-outline" href="word-counter.html">Word counter</a><a class="btn btn-outline" href="number-converter.html">Base converter</a><a class="btn btn-outline" href="unit-converter.html">Unit converter</a><a class="btn btn-outline" href="case-converter.html">Case converter</a><a class="btn btn-outline" href="percentage-calculator.html">Percentage calculator</a><a class="btn btn-outline" href="loan-calculator.html">Loan calculator</a><a class="btn btn-outline" href="temperature-converter.html">Temperature converter</a><a class="btn btn-outline" href="random-number-generator.html">Random number generator</a><a class="btn btn-outline" href="discount-calculator.html">Discount calculator</a><a class="btn btn-outline" href="compound-interest-calculator.html">Compound interest calculator</a></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2026 Online Toolbox · 887+ free browser-side tools</p></div></footer>
+<script>
+function dc(){var p=+document.getElementById('dc-p').value,d=+document.getElementById('dc-d').value;if(isNaN(p)||isNaN(d)){document.getElementById('dc-final').textContent='—';document.getElementById('dc-save').textContent='';return;}document.getElementById('dc-final').textContent='Final price: '+(p*(1-d/100)).toFixed(2);document.getElementById('dc-save').textContent='You save: '+(p*d/100).toFixed(2);}
+function dc2(){var o=+document.getElementById('dc-o2').value,p=+document.getElementById('dc-p2').value;var el=document.getElementById('dc-eff');if(isNaN(o)||isNaN(p)||o===0){el.textContent='—';return;}el.textContent='Effective discount: '+(100*(o-p)/o).toFixed(2)+'% off (saved '+(o-p).toFixed(2)+')';}
+document.addEventListener('DOMContentLoaded',function(){dc();dc2();});
+</script>
+</body>
+</html>

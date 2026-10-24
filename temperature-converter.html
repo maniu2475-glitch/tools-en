@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Temperature Converter (Celsius, Fahrenheit, Kelvin, Rankine)</title>
+<meta name="description" content="Free online temperature converter between Celsius, Fahrenheit, Kelvin and Rankine. Type a value and all others update instantly. Browser-side, no upload.">
+<meta name="keywords" content="temperature converter, celsius to fahrenheit, fahrenheit to celsius, celsius to kelvin, kelvin converter">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/temperature-converter.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Temperature Converter">
+<meta property="og:description" content="Free online temperature converter between Celsius, Fahrenheit, Kelvin and Rankine. Type a value and all others update instantly. Browser-side, no upload.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Temperature Converter", "url": "https://maniu2475-glitch.github.io/tools-en/temperature-converter.html", "description": "Free online temperature converter between Celsius, Fahrenheit, Kelvin and Rankine. Type a value and all others update instantly. Browser-side, no upload.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Temperature Converter</h1>
+      <p class="tool-desc">Celsius ↔ Fahrenheit ↔ Kelvin ↔ Rankine — instant, bidirectional, browser-side.</p>
+<div class="grid-2">
+<div><label>Celsius (°C): <input id="tc-c" style="width:110px" value="25" oninput="tconv('c')"></label></div>
+<div><label>Fahrenheit (°F): <input id="tc-f" style="width:110px" oninput="tconv('f')"></label></div>
+<div><label>Kelvin (K): <input id="tc-k" style="width:110px" oninput="tconv('k')"></label></div>
+<div><label>Rankine (°R): <input id="tc-r" style="width:110px" oninput="tconv('r')"></label></div>
+</div>
+      <h3>About this tool</h3>
+      <p>This temperature converter converts between the four most common temperature scales: Celsius (°C), Fahrenheit (°F), Kelvin (K) and Rankine (°R). Type a value in any field and every other field updates instantly — no clicking a separate convert button. It uses the standard formulas: °F = °C × 9/5 + 32, K = °C + 273.15, and °R = (°C + 273.15) × 9/5. Absolute zero is −273.15 °C, and the tool correctly handles negative and decimal values, so it works equally well for science homework, cooking recipes, weather comparisons and engineering data. Everything runs locally in your browser: nothing is uploaded, no account is needed.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a><a class="btn btn-outline" href="base64.html">Base64 encode/decode</a><a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a><a class="btn btn-outline" href="password-generator.html">Password generator</a><a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a><a class="btn btn-outline" href="md5-generator.html">Hash generator</a><a class="btn btn-outline" href="uuid-generator.html">UUID generator</a><a class="btn btn-outline" href="word-counter.html">Word counter</a><a class="btn btn-outline" href="number-converter.html">Base converter</a><a class="btn btn-outline" href="unit-converter.html">Unit converter</a><a class="btn btn-outline" href="case-converter.html">Case converter</a><a class="btn btn-outline" href="percentage-calculator.html">Percentage calculator</a><a class="btn btn-outline" href="loan-calculator.html">Loan calculator</a><a class="btn btn-outline" href="temperature-converter.html">Temperature converter</a><a class="btn btn-outline" href="random-number-generator.html">Random number generator</a><a class="btn btn-outline" href="discount-calculator.html">Discount calculator</a><a class="btn btn-outline" href="compound-interest-calculator.html">Compound interest calculator</a></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2026 Online Toolbox · 887+ free browser-side tools</p></div></footer>
+<script>
+function tconv(src){var el=document.getElementById('tc-'+src);var v=parseFloat(el.value);if(isNaN(v)){['c','f','k','r'].forEach(function(x){if(x!==src)document.getElementById('tc-'+x).value='';});return;}var c;if(src==='c')c=v;else if(src==='f')c=(v-32)*5/9;else if(src==='k')c=v-273.15;else c=(v-491.67)*5/9;if(src!=='c')document.getElementById('tc-c').value=(Math.round(c*100)/100);if(src!=='f')document.getElementById('tc-f').value=(Math.round((c*9/5+32)*100)/100);if(src!=='k')document.getElementById('tc-k').value=(Math.round((c+273.15)*100)/100);if(src!=='r')document.getElementById('tc-r').value=(Math.round(((c+273.15)*9/5)*100)/100);}
+document.addEventListener('DOMContentLoaded',function(){tconv('c');});
+</script>
+</body>
+</html>
