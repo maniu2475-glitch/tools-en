@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pomodoro Timer Online - 25/5 Focus & Break Cycles with Alarm</title>
+<meta name="description" content="Free online Pomodoro timer with 25-minute focus sessions and 5-minute breaks, cycle counter, audible alarm and customizable durations.">
+<meta name="keywords" content="pomodoro timer,online pomodoro,focus timer,25 minute timer,study timer">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/pomodoro-timer.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Pomodoro Timer">
+<meta property="og:description" content="Free online Pomodoro timer with 25-minute focus sessions and 5-minute breaks, cycle counter, audible alarm and customizable durations.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Pomodoro Timer", "url": "https://maniu2475-glitch.github.io/tools-en/pomodoro-timer.html", "description": "Free online Pomodoro timer with 25-minute focus sessions and 5-minute breaks, cycle counter, audible alarm and customizable durations.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Pomodoro Timer</h1>
+      <p class="tool-desc">Classic 25/5 Pomodoro work–break cycles — everything runs in your browser, nothing is uploaded.</p>
+<div style="text-align:center">
+<div style="font-size:72px;font-family:monospace" id="pt-display">25:00</div>
+<div id="pt-phase" style="font-size:18px;margin:8px 0">Focus time</div>
+<div class="btn-group" style="justify-content:center">
+<button class="btn btn-primary" id="pt-start" onclick="ptToggle()">Start</button>
+<button class="btn btn-outline" onclick="ptReset()">Reset</button>
+</div>
+<label>Focus minutes</label><input id="pt-focus" type="number" value="25" min="1" max="90" style="width:80px">
+<label>Break minutes</label><input id="pt-break" type="number" value="5" min="1" max="30" style="width:80px">
+<div class="result-box" id="pt-stats">Completed pomodoros today: 0</div>
+</div>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">The Pomodoro Technique, invented by Francesco Cirillo in the late 1980s, splits work into 25-minute focused sprints separated by 5-minute breaks; after four cycles you take a longer 15–30 minute rest. This online Pomodoro timer implements the classic cycle in a single page: a large countdown, a phase label telling you whether you are focusing or resting, adjustable focus and break durations, an audible beep at every transition, and a counter of completed pomodoros kept in localStorage so your tally survives page reloads. Because the timer is a static page running entirely in your browser, you can keep it in a pinned tab all day without any server knowing your work habits. It pairs nicely with a to-do list: write down one task per pomodoro and start the timer.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a><a class="btn btn-outline" href="base64.html">Base64 encode/decode</a><a class="btn btn-outline" href="password-generator.html">Password generator</a><a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a><a class="btn btn-outline" href="word-counter.html">Word counter</a><a class="btn btn-outline" href="stopwatch.html">Online Stopwatch</a><a class="btn btn-outline" href="countdown-timer.html">Countdown Timer</a><a class="btn btn-outline" href="random-number-generator.html">Random Number Generator</a><a class="btn btn-outline" href="percentage-calculator.html">Percentage Calculator</a></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2026 Online Toolbox · 887+ free browser-side tools</p></div></footer>
+<script>
+var ptTimer=null,ptLeft=1500,ptMode='focus',ptDone=0;
+function ptFmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
+function ptRender(){document.getElementById('pt-display').textContent=ptFmt(ptLeft);document.getElementById('pt-phase').textContent=ptMode==='focus'?'Focus time':'Break time';document.getElementById('pt-stats').textContent='Completed pomodoros today: '+ptDone;}
+function ptTick(){ptLeft--;if(ptLeft<=0){ptBeep();if(ptMode==='focus'){ptDone++;try{localStorage.setItem('ptDone',ptDone);}catch(e){}ptMode='break';ptLeft=(+document.getElementById('pt-break').value||5)*60;}else{ptMode='focus';ptLeft=(+document.getElementById('pt-focus').value||25)*60;}}ptRender();}
+function ptToggle(){if(ptTimer){clearInterval(ptTimer);ptTimer=null;document.getElementById('pt-start').textContent='Start';}else{ptTimer=setInterval(ptTick,1000);document.getElementById('pt-start').textContent='Pause';}}
+function ptReset(){clearInterval(ptTimer);ptTimer=null;ptMode='focus';ptLeft=(+document.getElementById('pt-focus').value||25)*60;document.getElementById('pt-start').textContent='Start';ptRender();}
+function ptBeep(){try{var a=new (window.AudioContext||window.webkitAudioContext)();for(var i=0;i<3;i++){var o=a.createOscillator(),g=a.createGain();o.frequency.value=880;o.connect(g);g.connect(a.destination);o.start(a.currentTime+i*0.4);o.stop(a.currentTime+i*0.4+0.25);}}catch(e){}}
+try{ptDone=parseInt(localStorage.getItem('ptDone')||'0',10)||0;}catch(e){}
+ptRender();
+</script>
+</body>
+</html>

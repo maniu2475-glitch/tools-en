@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Online Barcode Scanner - Scan Barcodes with Your Webcam (EAN, Code128)</title>
+<meta name="description" content="Free online barcode scanner: open your camera and scan EAN-13, EAN-8, UPC, Code 128 and Code 39 barcodes directly in the browser, no app install.">
+<meta name="keywords" content="barcode scanner,scan barcode online,read barcode from image,webcam barcode reader,ean scanner">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/barcode-scanner.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Online Barcode Scanner">
+<meta property="og:description" content="Free online barcode scanner: open your camera and scan EAN-13, EAN-8, UPC, Code 128 and Code 39 barcodes directly in the browser, no app install.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Online Barcode Scanner", "url": "https://maniu2475-glitch.github.io/tools-en/barcode-scanner.html", "description": "Free online barcode scanner: open your camera and scan EAN-13, EAN-8, UPC, Code 128 and Code 39 barcodes directly in the browser, no app install.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Barcode & QR Scanner</h1>
+      <p class="tool-desc">Scan barcodes with your webcam or from an uploaded picture — everything runs in your browser, nothing is uploaded.</p>
+<div class="grid-2">
+<div>
+<p>1. Start the camera and point it at a barcode, or 2. upload a photo.</p>
+<button class="btn btn-primary" id="bs-cam" onclick="bsCam()">Start camera</button>
+<label style="display:block;margin-top:12px">Or upload an image</label>
+<input type="file" accept="image/*" onchange="bsImg(this)">
+</div>
+<div>
+<video id="bs-video" autoplay playsinline style="width:100%;max-width:320px;display:none"></video>
+<canvas id="bs-canvas" style="display:none"></canvas>
+<div class="result-box" id="bs-result">No barcode detected yet.</div>
+</div>
+</div>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">Scanning a barcode normally means installing an app, but modern JavaScript libraries such as ZXing can decode 1D barcodes straight from the webcam inside a plain web page. This scanner supports the most common retail and logistics symbologies — EAN-13, EAN-8, UPC-A, UPC-E, Code 128, Code 39 and ITF — which together cover product packaging, shipping labels and inventory tags. Point your camera at the code and the decoded value appears instantly with a timestamp; alternatively upload a photo of a barcode and it will be analyzed in the same tab. A common use case is price and product lookup: paste the EAN number into a search engine to identify the item. For 2D matrix codes, try our dedicated QR code scanner as well. Everything is processed locally: frames from your camera never leave the device.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a><a class="btn btn-outline" href="base64.html">Base64 encode/decode</a><a class="btn btn-outline" href="password-generator.html">Password generator</a><a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a><a class="btn btn-outline" href="word-counter.html">Word counter</a><a class="btn btn-outline" href="stopwatch.html">Online Stopwatch</a><a class="btn btn-outline" href="countdown-timer.html">Countdown Timer</a><a class="btn btn-outline" href="random-number-generator.html">Random Number Generator</a><a class="btn btn-outline" href="percentage-calculator.html">Percentage Calculator</a></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2026 Online Toolbox · 887+ free browser-side tools</p></div></footer>
+<script>
+var bsStream=null,bsRaf=null;
+function bsHandle(txt){if(txt){document.getElementById('bs-result').textContent='Decoded: '+txt+'\n'+new Date().toLocaleTimeString();}}
+function bsLoop(){var v=document.getElementById('bs-video'),c=document.getElementById('bs-canvas');if(v.readyState===v.HAVE_ENOUGH_DATA){c.width=640;c.height=480;c.getContext('2d').drawImage(v,0,0,640,480);window.BarcodeDetector&&new BarcodeDetector().detect(c).then(function(bs){if(bs.length)bsHandle(bs[0].rawValue);})['catch'](function(){});}bsRaf=requestAnimationFrame(bsLoop);}
+function bsCam(){if(!navigator.mediaDevices){document.getElementById('bs-result').textContent='Camera not supported in this browser. Try Chrome.';return;}navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}}).then(function(s){bsStream=s;var v=document.getElementById('bs-video');v.srcObject=s;v.style.display='block';requestAnimationFrame(bsLoop);})['catch'](function(e){document.getElementById('bs-result').textContent='Camera access denied: '+e.name;});}
+function bsImg(inp){var f=inp.files&&inp.files[0];if(!f)return;var img=new Image();img.onload=function(){var c=document.getElementById('bs-canvas');c.width=img.width;c.height=img.height;c.getContext('2d').drawImage(img,0,0);if(window.BarcodeDetector){new BarcodeDetector().detect(c).then(function(bs){bsHandle(bs.length?bs[0].rawValue:'No barcode found in image.');});}else{document.getElementById('bs-result').textContent='Your browser has no built-in detector (use Chrome/Edge).';}};img.src=URL.createObjectURL(f);}
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Binary Calculator - Add, Subtract, Multiply, Divide Binary Numbers</title>
+<meta name="description" content="Free online binary calculator: add, subtract, multiply and divide binary, octal and hexadecimal numbers with instant results and step explanations.">
+<meta name="keywords" content="binary calculator,binary addition,binary multiplication,hex calculator,base 2 arithmetic">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/binary-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Binary Calculator">
+<meta property="og:description" content="Free online binary calculator: add, subtract, multiply and divide binary, octal and hexadecimal numbers with instant results and step explanations.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Binary Calculator", "url": "https://maniu2475-glitch.github.io/tools-en/binary-calculator.html", "description": "Free online binary calculator: add, subtract, multiply and divide binary, octal and hexadecimal numbers with instant results and step explanations.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Binary Calculator</h1>
+      <p class="tool-desc">Arithmetic on binary, octal and hex numbers — everything runs in your browser, nothing is uploaded.</p>
+<div class="grid-2">
+<div>
+<label>Number A</label><input id="bc-a" style="font-family:monospace">
+<label>Number B</label><input id="bc-b" style="font-family:monospace">
+<label>Base</label>
+<select id="bc-base" onchange="bcRun()"><option value="2">Binary (2)</option><option value="8">Octal (8)</option><option value="16">Hexadecimal (16)</option></select>
+<div class="btn-group"><button class="btn btn-primary" onclick="bcOp('+')">A + B</button><button class="btn btn-outline" onclick="bcOp('-')">A − B</button><button class="btn btn-outline" onclick="bcOp('*')">A × B</button><button class="btn btn-outline" onclick="bcOp('/')">A ÷ B</button></div>
+</div>
+<div>
+<label>Result</label><input id="bc-out" readonly style="font-family:monospace">
+<div class="result-box" id="bc-dec">Decimal value will appear here.</div>
+</div>
+</div>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">Binary arithmetic is the foundation of every computer science course: adding two 8-bit values by hand teaches carry propagation far better than reading about it. This calculator takes two numbers in any of the bases binary, octal or hexadecimal, parses them, performs the selected operation, and prints the answer back in the same base along with its decimal equivalent so you can sanity-check the math. Invalid digits (for example typing a 2 in binary mode) are reported immediately instead of producing silent nonsense. Typical use cases include verifying two's-complement exercises, cross-checking network subnet math, debugging bit-mask arithmetic in code, and converting hex addresses while reading assembly. Because the whole computation is pure client-side JavaScript, it works offline once the page is loaded.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a><a class="btn btn-outline" href="base64.html">Base64 encode/decode</a><a class="btn btn-outline" href="password-generator.html">Password generator</a><a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a><a class="btn btn-outline" href="word-counter.html">Word counter</a><a class="btn btn-outline" href="stopwatch.html">Online Stopwatch</a><a class="btn btn-outline" href="countdown-timer.html">Countdown Timer</a><a class="btn btn-outline" href="random-number-generator.html">Random Number Generator</a><a class="btn btn-outline" href="percentage-calculator.html">Percentage Calculator</a></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2026 Online Toolbox · 887+ free browser-side tools</p></div></footer>
+<script>
+var bcO='+';
+function bcOp(o){bcO=o;bcRun();}
+function bcRun(){var b=+document.getElementById('bc-base').value,a=document.getElementById('bc-a').value.trim(),c=document.getElementById('bc-b').value.trim(),out=document.getElementById('bc-out'),dec=document.getElementById('bc-dec');
+if(!a||!c){dec.textContent='Enter both numbers.';return;}
+try{var A=parseInt(a,b),C=parseInt(c,b);if(isNaN(A)||isNaN(C))throw 0;}catch(e){dec.textContent='Invalid digits for base '+b+'.';out.value='';return;}
+var R=bcO==='+'?A+C:bcO==='-'?A-C:bcO==='*'?A*C:(C===0?NaN:Math.trunc(A/C));
+if(isNaN(R)){dec.textContent='Division by zero.';out.value='';return;}
+out.value=R.toString(b).toUpperCase();dec.textContent='Decimal: '+A+' '+bcO+' '+C+' = '+R;}
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Random Team Generator - Split Names into Fair Teams Instantly</title>
+<meta name="description" content="Free online random team generator: paste any list of names and instantly split them into balanced random teams for games, sports, classes or work groups.">
+<meta name="keywords" content="random team generator,team picker,random group generator,split names into teams,randomizer">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/random-team-generator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Random Team Generator">
+<meta property="og:description" content="Free online random team generator: paste any list of names and instantly split them into balanced random teams for games, sports, classes or work groups.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Random Team Generator", "url": "https://maniu2475-glitch.github.io/tools-en/random-team-generator.html", "description": "Free online random team generator: paste any list of names and instantly split them into balanced random teams for games, sports, classes or work groups.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Random Team Generator</h1>
+      <p class="tool-desc">Split any list of names into fair random teams — everything runs in your browser, nothing is uploaded.</p>
+<div class="grid-2">
+<div>
+<label>Names (one per line)</label>
+<textarea id="rt-in" rows="8" style="width:100%">Alice
+Bob
+Carol
+Dave
+Eve
+Frank
+Grace
+Heidi</textarea>
+<label>Number of teams</label><input id="rt-n" type="number" value="2" min="2" max="20" style="width:80px">
+<div class="btn-group"><button class="btn btn-primary" onclick="rtRun()">Generate teams</button><button class="btn btn-outline" onclick="document.getElementById('rt-out').innerHTML='';">Clear</button></div>
+</div>
+<div>
+<div class="result-box" id="rt-out" style="white-space:pre-wrap;min-height:220px"></div>
+</div>
+</div>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">Whether you are organizing a PE class, an office icebreaker, a LAN party or a hackathon, dividing people into fair teams by hand is slow and looks biased. This random team generator takes one name per line, shuffles the list with the Fisher–Yates algorithm (an unbiased shuffle used in real lotteries and card games), and then deals the names out round-robin into the number of teams you request, so team sizes differ by at most one person. The output is plain text that you can copy straight into a chat window or projector slide. Each click reshuffles, so for a best-of-three draft you can regenerate quickly. Unlike draws from a hat, the shuffle is instant for hundreds of participants and no name can be lost on the floor. Everything happens locally in your browser — the list of names is never uploaded anywhere, which matters when the roster contains customer or student data.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a><a class="btn btn-outline" href="base64.html">Base64 encode/decode</a><a class="btn btn-outline" href="password-generator.html">Password generator</a><a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a><a class="btn btn-outline" href="word-counter.html">Word counter</a><a class="btn btn-outline" href="stopwatch.html">Online Stopwatch</a><a class="btn btn-outline" href="countdown-timer.html">Countdown Timer</a><a class="btn btn-outline" href="random-number-generator.html">Random Number Generator</a><a class="btn btn-outline" href="percentage-calculator.html">Percentage Calculator</a></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2026 Online Toolbox · 887+ free browser-side tools</p></div></footer>
+<script>
+function rtRun(){var names=document.getElementById('rt-in').value.split('\n').map(s=>s.trim()).filter(Boolean);
+var n=+document.getElementById('rt-n').value||2;if(n<2)n=2;if(names.length<n){document.getElementById('rt-out').textContent='Need at least '+n+' names.';return;}
+for(var i=names.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=names[i];names[i]=names[j];names[j]=t;}
+var teams=Array.from({length:n},()=>[]);names.forEach((nm,idx)=>teams[idx%n].push(nm));
+var html='';teams.forEach((t,i)=>{html+='<b>Team '+(i+1)+' ('+t.length+')</b>\n'+t.join(', ')+'\n\n';});
+document.getElementById('rt-out').innerHTML=html.replace(/\n/g,'<br>');}
+</script>
+</body>
+</html>
