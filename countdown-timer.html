@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Countdown Timer Online — Free Pomodoro & Study Timer</title>
+<meta name="description" content="Free online countdown timer with start/pause/reset, big display and 5/10/25-minute Pomodoro presets. Great for study, workouts and cooking. Browser-side.">
+<meta name="keywords" content="countdown timer,online timer,pomodoro timer,study timer,kitchen timer,timer countdown">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/countdown-timer.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Countdown Timer">
+<meta property="og:description" content="Free online countdown timer with start/pause/reset, big display and 5/10/25-minute Pomodoro presets. Great for study, workouts and cooking. Browser-side.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Countdown Timer", "url": "https://maniu2475-glitch.github.io/tools-en/countdown-timer.html", "description": "Free online countdown timer with start/pause/reset, big display and 5/10/25-minute Pomodoro presets. Great for study, workouts and cooking. Browser-side.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Countdown Timer</h1>
+<div style="text-align:center">
+<div id="cd-disp" style="font-size:64px;font-weight:700;color:#4f6ef7;font-variant-numeric:tabular-nums">00:00:00</div>
+<div id="cd-status" style="min-height:24px;color:#6a737d"></div>
+<p>
+<label>Minutes<br><input type="number" id="cd-m" value="5" min="0" style="width:90px"></label>
+<label>Seconds<br><input type="number" id="cd-s" value="0" min="0" max="59" style="width:90px"></label>
+</p>
+<p>
+<button class="btn" onclick="cdStart()">Start</button>
+<button class="btn btn-outline" onclick="cdPause()">Pause</button>
+<button class="btn btn-outline" onclick="cdReset()">Reset</button>
+</p>
+<p>Presets:
+<button class="btn btn-outline" onclick="cdPreset(5)">5 min</button>
+<button class="btn btn-outline" onclick="cdPreset(10)">10 min</button>
+<button class="btn btn-outline" onclick="cdPreset(25)">25 min (Pomodoro)</button>
+</p>
+</div>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">A free online countdown timer with hours, minutes and seconds display, plus one-click presets including the popular 25-minute Pomodoro interval. Start, pause and reset controls make it suitable for workout circuits, exam practice, cooking, meetings and study sessions. The large tabular digits stay readable from across a room, and the display highlights in the site's accent colour while counting down. Everything runs locally in your browser: keep the tab open and the timer keeps ticking even if your internet drops, since no server round-trips are involved. When time runs out the status line switches to a clear "Time is up!" message you can see at a glance. There is nothing to install and no account to create — just set your duration and press Start.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap">
+        <a class="btn btn-outline" href="random-number-generator.html">Random number generator</a>
+        <a class="btn btn-outline" href="random-string-generator.html">Random string generator</a>
+        <a class="btn btn-outline" href="random-letter-generator.html">Random letter generator</a>
+        <a class="btn btn-outline" href="password-generator.html">Password generator</a>
+        <a class="btn btn-outline" href="percentage-calculator.html">Percentage calculator</a>
+        <a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a>
+      </div>
+      <hr>
+      <p><a href="index.html">← Back to all tools</a></p>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>Online Toolbox — free browser-side tools. Your data never leaves your device.</p></div></footer>
+<script>
+var cdRemain=0,cdIv=null,cdTotal=0;
+function cdFmt(t){t=Math.max(0,Math.round(t));const h=Math.floor(t/3600),m=Math.floor(t%3600/60),s=t%60;
+return (h>0?String(h).padStart(2,'0')+':':'')+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');}
+function cdShow(){document.getElementById('cd-disp').textContent=cdFmt(cdRemain);}
+function cdStart(){
+  if(cdIv)return;
+  if(cdRemain<=0){cdTotal=(parseInt(document.getElementById('cd-m').value)||0)*60+(parseInt(document.getElementById('cd-s').value)||0);cdRemain=cdTotal;}
+  if(cdTotal<=0){document.getElementById('cd-status').textContent='Set a duration first.';return;}
+  document.getElementById('cd-status').textContent='Running…';
+  cdIv=setInterval(()=>{
+    cdRemain-=0.1;
+    if(cdRemain<=0){cdRemain=0;cdShow();cdPause();document.getElementById('cd-status').textContent='⏰ Time is up!';return;}
+    cdShow();
+  },100);
+}
+function cdPause(){if(cdIv){clearInterval(cdIv);cdIv=null;if(cdRemain>0)document.getElementById('cd-status').textContent='Paused.';}}
+function cdReset(){cdPause();cdRemain=0;cdTotal=0;cdShow();document.getElementById('cd-status').textContent='';}
+function cdPreset(min){cdPause();document.getElementById('cd-m').value=min;document.getElementById('cd-s').value=0;cdRemain=min*60;cdTotal=cdRemain;cdShow();document.getElementById('cd-status').textContent='Ready.';}
+cdPreset(5);
+</script>
+</body>
+</html>

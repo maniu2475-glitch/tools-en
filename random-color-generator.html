@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Random Color Generator — Random HEX Colors with Copy</title>
+<meta name="description" content="Free random color generator: click to generate random HEX/RGB colors with big swatches, light/dark hint and click-to-copy history. Fast and browser-side.">
+<meta name="keywords" content="random color generator,random hex color,random rgb color,color picker random,random palette">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/random-color-generator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Random Color Generator">
+<meta property="og:description" content="Free random color generator: click to generate random HEX/RGB colors with big swatches, light/dark hint and click-to-copy history. Fast and browser-side.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Random Color Generator", "url": "https://maniu2475-glitch.github.io/tools-en/random-color-generator.html", "description": "Free random color generator: click to generate random HEX/RGB colors with big swatches, light/dark hint and click-to-copy history. Fast and browser-side.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Random Color Generator</h1>
+<div style="text-align:center">
+<div id="rc-swatch" style="width:100%;max-width:420px;height:160px;border-radius:12px;border:1px solid #ccc;margin:0 auto 12px"></div>
+<div class="result-box" id="rc-out"></div>
+<p><button class="btn" onclick="rcGen()">🎨 Generate random color</button></p>
+</div>
+<h3>Recent colors</h3>
+<div class="btn-group" id="rc-hist" style="flex-wrap:wrap"></div>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">Generate random colors with one click and copy their HEX codes instantly. Every click produces a fully random RGB value shown as a large swatch together with its rgb() notation and a note on whether the colour reads as light or dark — useful when picking text colours for contrast. The history strip keeps your recent colours as clickable chips: press one and the HEX code is copied to your clipboard automatically. Designers use random palettes like this to break out of habitual colour choices, spark inspiration for backgrounds, or find a starting hue to tweak in a palette editor. Teachers use it for probability and colour-mixing demonstrations. Because everything is computed locally with your browser's random generator, it works instantly and offline, and no colour history ever leaves your device.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap">
+        <a class="btn btn-outline" href="random-number-generator.html">Random number generator</a>
+        <a class="btn btn-outline" href="random-string-generator.html">Random string generator</a>
+        <a class="btn btn-outline" href="random-letter-generator.html">Random letter generator</a>
+        <a class="btn btn-outline" href="password-generator.html">Password generator</a>
+        <a class="btn btn-outline" href="percentage-calculator.html">Percentage calculator</a>
+        <a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a>
+      </div>
+      <hr>
+      <p><a href="index.html">← Back to all tools</a></p>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>Online Toolbox — free browser-side tools. Your data never leaves your device.</p></div></footer>
+<script>
+function rcOne(){
+  const r=Math.floor(Math.random()*256),g=Math.floor(Math.random()*256),b=Math.floor(Math.random()*256);
+  const hex='#'+[r,g,b].map(v=>v.toString(16).padStart(2,'0')).join('').toUpperCase();
+  const hsp=Math.sqrt(0.299*r*r+0.587*g*g+0.114*b*b);
+  return {hex,rgb:'rgb('+r+', '+g+', '+b+')',light:hsp>127};
+}
+function rcGen(){
+  const c=rcOne();
+  document.getElementById('rc-swatch').style.background=c.hex;
+  document.getElementById('rc-out').innerHTML='HEX: <b>'+c.hex+'</b><br>'+c.rgb+'<br>'+(c.light?'This is a light colour.':'This is a dark colour.');
+  const b=document.createElement('button');
+  b.className='btn btn-outline';b.textContent=c.hex;
+  b.style.background=c.hex;b.style.color=c.light?'#333':'#fff';
+  b.onclick=()=>{navigator.clipboard&&navigator.clipboard.writeText(c.hex);b.textContent=c.hex+' ✓';};
+  document.getElementById('rc-hist').prepend(b);
+}
+rcGen();
+</script>
+</body>
+</html>

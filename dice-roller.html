@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dice Roller Online — d4 d6 d8 d10 d12 d20 d100</title>
+<meta name="description" content="Free online dice roller: roll up to 20 dice with d4, d6, d8, d10, d12, d20 or d100 sides plus modifiers. Perfect for D&D and board games. Runs in your browser.">
+<meta name="keywords" content="dice roller,d20 roller,roll dice online,dnd dice,random dice,tabletop dice">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/dice-roller.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Dice Roller">
+<meta property="og:description" content="Free online dice roller: roll up to 20 dice with d4, d6, d8, d10, d12, d20 or d100 sides plus modifiers. Perfect for D&D and board games. Runs in your browser.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Dice Roller", "url": "https://maniu2475-glitch.github.io/tools-en/dice-roller.html", "description": "Free online dice roller: roll up to 20 dice with d4, d6, d8, d10, d12, d20 or d100 sides plus modifiers. Perfect for D&D and board games. Runs in your browser.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Dice Roller</h1>
+<div class="grid-2">
+<div>
+<h3>Roll dice</h3>
+<label>Number of dice<br><input type="number" id="dr-n" value="2" min="1" max="20"></label>
+<label>Sides per die<br>
+<select id="dr-s">
+<option>4</option><option selected>6</option><option>8</option><option>10</option>
+<option>12</option><option>20</option><option>100</option>
+</select></label>
+<label>Modifier (e.g. +2 / -1)<br><input type="number" id="dr-m" value="0"></label>
+<p><button class="btn" onclick="rollDice()">🎲 Roll</button></p>
+<div class="result-box" id="dr-out">Press Roll to start.</div>
+</div>
+<div>
+<h3>History</h3>
+<div class="result-box" id="dr-hist" style="min-height:120px"></div>
+<p><button class="btn btn-outline" onclick="document.getElementById('dr-hist').innerHTML=''">Clear history</button></p>
+</div>
+</div>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">A free online dice roller for board games, tabletop RPGs and classroom activities. Choose how many dice to throw, pick common polyhedral sides — d4, d6, d8, d10, d12, d20 or d100 — and add an optional modifier before rolling. Each die uses your browser's random number generator, so results are unpredictable and nothing is sent to a server. A running history panel keeps the last throws visible, which is handy for comparing rounds without writing anything down. The total line already includes the modifier, matching the standard notation like 2d6+3 used in most RPG rulebooks. Whether you lost the physical dice from a board game or you need twenty d20s at once for a horde encounter, this roller handles it instantly and works on phones as well as desktops.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap">
+        <a class="btn btn-outline" href="random-number-generator.html">Random number generator</a>
+        <a class="btn btn-outline" href="random-string-generator.html">Random string generator</a>
+        <a class="btn btn-outline" href="random-letter-generator.html">Random letter generator</a>
+        <a class="btn btn-outline" href="password-generator.html">Password generator</a>
+        <a class="btn btn-outline" href="percentage-calculator.html">Percentage calculator</a>
+        <a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a>
+      </div>
+      <hr>
+      <p><a href="index.html">← Back to all tools</a></p>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>Online Toolbox — free browser-side tools. Your data never leaves your device.</p></div></footer>
+<script>
+function rollDice(){
+  const n=Math.min(20,Math.max(1,parseInt(document.getElementById('dr-n').value)||1));
+  const s=parseInt(document.getElementById('dr-s').value);
+  const m=parseInt(document.getElementById('dr-m').value)||0;
+  const rolls=Array.from({length:n},()=>1+Math.floor(Math.random()*s));
+  const sum=rolls.reduce((a,b)=>a+b,0)+m;
+  document.getElementById('dr-out').innerHTML='Rolls: <b>'+rolls.join(', ')+'</b><br>Total with modifier: <b>'+sum+'</b>';
+  const h=document.getElementById('dr-hist');
+  h.innerHTML='<div>'+n+'d'+s+(m?(' '+(m>0?'+':'')+m):'')+' → '+rolls.join(', ')+' = <b>'+sum+'</b></div>'+h.innerHTML;
+}
+</script>
+</body>
+</html>
