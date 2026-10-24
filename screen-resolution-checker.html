@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Is My Screen Resolution - Free Online Tool</title>
+<meta name="description" content="Instantly check your screen resolution, viewport size, pixel ratio, color depth and orientation. See exactly what your browser and device report.">
+<meta name="keywords" content="what is my screen resolution, free online tool, browser-based, no upload">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/screen-resolution-checker.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="What Is My Screen Resolution">
+<meta property="og:description" content="Instantly check your screen resolution, viewport size, pixel ratio, color depth and orientation. See exactly what your browser and device report.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+<div class="container">
+<h1 class="site-title"><a href="index.html">&#128295; Free Online Tools</a></h1>
+<nav><a href="index.html">Home</a> <a href="all-tools.html">All Tools</a></nav>
+</div>
+</header>
+<main class="container">
+<h2>What Is My Screen Resolution</h2>
+<div class="tool-card">
+<p>Your screen resolution: <strong id="rScreen" style="font-size:1.4em"></strong></p>
+<p>Browser viewport: <strong id="rView"></strong></p>
+<p>Device pixel ratio: <strong id="rDpr"></strong></p>
+<p>Color depth: <strong id="rDepth"></strong> bits</p>
+<p>Orientation: <strong id="rOri"></strong></p>
+<p>Touch support: <strong id="rTouch"></strong></p>
+</div>
+<section class="about" style="margin-top:24px">
+<h3>About This Tool</h3>
+<p style="line-height:1.7">Instantly check your screen resolution, viewport size, pixel ratio, color depth and orientation. See exactly what your browser and device report.</p>
+<p style="line-height:1.7">This tool runs entirely in your browser using JavaScript, which means your data never leaves your device. There is no signup, no upload and no server-side processing. It works offline once the page is loaded, loads instantly on both desktop and mobile, and is completely free to use. Developers, students, designers and everyday users rely on this kind of utility because it removes the friction of installing software just to solve one small problem. If you use this tool regularly, consider bookmarking it for quick access. We also provide a growing collection of more than 50 other free browser-based tools covering encoding, hashing, text processing, math, converters and developer utilities.</p>
+</section>
+<section class="related" style="margin-top:24px">
+<h3>Related Tools</h3>
+<ul><li><a href="color-picker.html">Color Picker</a></li>
+<li><a href="aspect-ratio-calculator.html">Aspect Ratio Calculator</a></li>
+<li><a href="inches-to-cm.html">Inches To Cm</a></li></ul>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container">
+<p>&copy; 2026 Free Online Tools - <a href="index.html">Home</a> | <a href="all-tools.html">All Tools</a></p>
+</div>
+</footer>
+<script>
+function upd(){document.getElementById('rScreen').textContent=screen.width+' x '+screen.height+' px';document.getElementById('rView').textContent=window.innerWidth+' x '+window.innerHeight+' px';document.getElementById('rDpr').textContent=window.devicePixelRatio;document.getElementById('rDepth').textContent=screen.colorDepth;document.getElementById('rOri').textContent=screen.orientation?screen.orientation.type:'n/a';document.getElementById('rTouch').textContent=('ontouchstart' in window)?'Yes':'No';}
+window.addEventListener('load',upd);window.addEventListener('resize',upd);
+</script>
+</body>
+</html>

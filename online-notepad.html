@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Online Notepad - Free Online Tool</title>
+<meta name="description" content="A simple free online notepad with autosave. Write notes, drafts and lists in your browser - your text is saved locally and never uploaded.">
+<meta name="keywords" content="free online notepad, free online tool, browser-based, no upload">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/online-notepad.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free Online Notepad">
+<meta property="og:description" content="A simple free online notepad with autosave. Write notes, drafts and lists in your browser - your text is saved locally and never uploaded.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+<div class="container">
+<h1 class="site-title"><a href="index.html">&#128295; Free Online Tools</a></h1>
+<nav><a href="index.html">Home</a> <a href="all-tools.html">All Tools</a></nav>
+</div>
+</header>
+<main class="container">
+<h2>Free Online Notepad</h2>
+<div class="tool-card">
+<textarea id="notepad" rows="18" placeholder="Start typing your notes... Autosaved locally." style="width:100%;box-sizing:border-box;font-family:monospace"></textarea>
+<p><button id="btnSave">Save Now</button> <button id="btnDownload">Download .txt</button> <button id="btnWipe">Clear All</button> <span id="noteStatus"></span></p>
+</div>
+<section class="about" style="margin-top:24px">
+<h3>About This Tool</h3>
+<p style="line-height:1.7">A simple free online notepad with autosave. Write notes, drafts and lists in your browser - your text is saved locally and never uploaded.</p>
+<p style="line-height:1.7">This tool runs entirely in your browser using JavaScript, which means your data never leaves your device. There is no signup, no upload and no server-side processing. It works offline once the page is loaded, loads instantly on both desktop and mobile, and is completely free to use. Developers, students, designers and everyday users rely on this kind of utility because it removes the friction of installing software just to solve one small problem. If you use this tool regularly, consider bookmarking it for quick access. We also provide a growing collection of more than 50 other free browser-based tools covering encoding, hashing, text processing, math, converters and developer utilities.</p>
+</section>
+<section class="related" style="margin-top:24px">
+<h3>Related Tools</h3>
+<ul><li><a href="word-counter.html">Word Counter</a></li>
+<li><a href="text-diff.html">Text Diff</a></li>
+<li><a href="markdown-editor.html">Markdown Editor</a></li></ul>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container">
+<p>&copy; 2026 Free Online Tools - <a href="index.html">Home</a> | <a href="all-tools.html">All Tools</a></p>
+</div>
+</footer>
+<script>
+window.addEventListener('load',function(){var ta=document.getElementById('notepad');ta.value=localStorage.getItem('onlinenotepad')||'';var st=document.getElementById('noteStatus');
+function save(){localStorage.setItem('onlinenotepad',ta.value);st.textContent='Saved '+(new Date().toLocaleTimeString());}
+ta.addEventListener('input',function(){clearTimeout(window._t);window._t=setTimeout(save,600);});
+document.getElementById('btnSave').onclick=save;
+document.getElementById('btnDownload').onclick=function(){var b=new Blob([ta.value],{type:'text/plain'});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='notes.txt';a.click();};
+document.getElementById('btnWipe').onclick=function(){if(confirm('Clear all text?')){ta.value='';save();}};});
+</script>
+</body>
+</html>

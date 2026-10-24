@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Text to Speech (TTS) Reader - Free Online Tool</title>
+<meta name="description" content="Free online text to speech reader that converts your text into natural speech using your browser's built-in voices. No upload, no signup, works instantly.">
+<meta name="keywords" content="text to speech (tts) reader, free online tool, browser-based, no upload">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/text-to-speech.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Text to Speech (TTS) Reader">
+<meta property="og:description" content="Free online text to speech reader that converts your text into natural speech using your browser's built-in voices. No upload, no signup, works instantly.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+<div class="container">
+<h1 class="site-title"><a href="index.html">&#128295; Free Online Tools</a></h1>
+<nav><a href="index.html">Home</a> <a href="all-tools.html">All Tools</a></nav>
+</div>
+</header>
+<main class="container">
+<h2>Text to Speech (TTS) Reader</h2>
+<div class="tool-card">
+<textarea id="ttsText" rows="8" placeholder="Type or paste your text here..." style="width:100%;box-sizing:border-box"></textarea>
+<p><label>Voice: <select id="ttsVoice"></select></label> <label>Rate: <input type="range" id="ttsRate" min="0.5" max="2" step="0.1" value="1"> <span id="rateVal">1.0</span></label></p>
+<button id="btnSpeak">Speak</button> <button id="btnStop">Stop</button> <button id="btnClear">Clear</button>
+</div>
+<section class="about" style="margin-top:24px">
+<h3>About This Tool</h3>
+<p style="line-height:1.7">Free online text to speech reader that converts your text into natural speech using your browser's built-in voices. No upload, no signup, works instantly.</p>
+<p style="line-height:1.7">This tool runs entirely in your browser using JavaScript, which means your data never leaves your device. There is no signup, no upload and no server-side processing. It works offline once the page is loaded, loads instantly on both desktop and mobile, and is completely free to use. Developers, students, designers and everyday users rely on this kind of utility because it removes the friction of installing software just to solve one small problem. If you use this tool regularly, consider bookmarking it for quick access. We also provide a growing collection of more than 50 other free browser-based tools covering encoding, hashing, text processing, math, converters and developer utilities.</p>
+</section>
+<section class="related" style="margin-top:24px">
+<h3>Related Tools</h3>
+<ul><li><a href="word-counter.html">Word Counter</a></li>
+<li><a href="case-converter.html">Case Converter</a></li>
+<li><a href="reading-time-calculator.html">Reading Time Calculator</a></li></ul>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container">
+<p>&copy; 2026 Free Online Tools - <a href="index.html">Home</a> | <a href="all-tools.html">All Tools</a></p>
+</div>
+</footer>
+<script>
+function loadVoices(){var v=speechSynthesis.getVoices();var s=document.getElementById('ttsVoice');s.innerHTML='';v.forEach(function(x){var o=document.createElement('option');o.value=x.name;o.textContent=x.name+' ('+x.lang+')';s.appendChild(o);});}
+window.addEventListener('load',function(){if('speechSynthesis' in window){loadVoices();speechSynthesis.onvoiceschanged=loadVoices;}else{alert('Speech synthesis not supported in this browser.');}
+document.getElementById('ttsRate').addEventListener('input',function(){document.getElementById('rateVal').textContent=(+this.value).toFixed(1);});
+document.getElementById('btnSpeak').onclick=function(){speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(document.getElementById('ttsText').value);u.rate=+document.getElementById('ttsRate').value;var vs=speechSynthesis.getVoices();var sel=document.getElementById('ttsVoice').value;for(var i=0;i<vs.length;i++){if(vs[i].name===sel){u.voice=vs[i];break;}}speechSynthesis.speak(u);};
+document.getElementById('btnStop').onclick=function(){speechSynthesis.cancel();};
+document.getElementById('btnClear').onclick=function(){document.getElementById('ttsText').value='';};});
+</script>
+</body>
+</html>

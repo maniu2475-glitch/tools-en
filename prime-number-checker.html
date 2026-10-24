@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prime Number Checker - Free Online Tool</title>
+<meta name="description" content="Check whether any number is prime and see all prime factors instantly. Great for math homework, programming challenges and number theory.">
+<meta name="keywords" content="prime number checker, free online tool, browser-based, no upload">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/prime-number-checker.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Prime Number Checker">
+<meta property="og:description" content="Check whether any number is prime and see all prime factors instantly. Great for math homework, programming challenges and number theory.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+<div class="container">
+<h1 class="site-title"><a href="index.html">&#128295; Free Online Tools</a></h1>
+<nav><a href="index.html">Home</a> <a href="all-tools.html">All Tools</a></nav>
+</div>
+</header>
+<main class="container">
+<h2>Prime Number Checker</h2>
+<div class="tool-card">
+<p><input type="number" id="pnInput" placeholder="Enter a number" style="padding:8px"> <button id="pnBtn">Check</button></p>
+<div id="pnResult" style="margin-top:12px;font-size:1.1em"></div>
+<div id="pnFactors" style="margin-top:8px"></div>
+</div>
+<section class="about" style="margin-top:24px">
+<h3>About This Tool</h3>
+<p style="line-height:1.7">Check whether any number is prime and see all prime factors instantly. Great for math homework, programming challenges and number theory.</p>
+<p style="line-height:1.7">This tool runs entirely in your browser using JavaScript, which means your data never leaves your device. There is no signup, no upload and no server-side processing. It works offline once the page is loaded, loads instantly on both desktop and mobile, and is completely free to use. Developers, students, designers and everyday users rely on this kind of utility because it removes the friction of installing software just to solve one small problem. If you use this tool regularly, consider bookmarking it for quick access. We also provide a growing collection of more than 50 other free browser-based tools covering encoding, hashing, text processing, math, converters and developer utilities.</p>
+</section>
+<section class="related" style="margin-top:24px">
+<h3>Related Tools</h3>
+<ul><li><a href="lcm-gcd-calculator.html">Lcm Gcd Calculator</a></li>
+<li><a href="binary-calculator.html">Binary Calculator</a></li>
+<li><a href="number-converter.html">Number Converter</a></li></ul>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container">
+<p>&copy; 2026 Free Online Tools - <a href="index.html">Home</a> | <a href="all-tools.html">All Tools</a></p>
+</div>
+</footer>
+<script>
+function isPrime(n){if(n<2)return false;for(var i=2;i*i<=n;i++){if(n%i===0)return false;}return true;}
+function factors(n){var f=[],d=2;while(d*d<=n){while(n%d===0){f.push(d);n/=d;}d++;}if(n>1)f.push(n);return f;}
+window.addEventListener('load',function(){document.getElementById('pnBtn').onclick=function(){var n=parseInt(document.getElementById('pnInput').value,10);var r=document.getElementById('pnResult'),f=document.getElementById('pnFactors');
+if(isNaN(n)||n<0){r.textContent='Please enter a non-negative integer.';f.textContent='';return;}
+r.textContent=n+' is '+(isPrime(n)?'a PRIME number.':'NOT a prime number.');
+if(!isPrime(n)&&n>=2){f.textContent='Prime factorization: '+factors(n).join(' x ');}}});
+</script>
+</body>
+</html>
