@@ -4,24 +4,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Random String Generator - Secure Random Passwords, Keys &amp; IDs</title>
-<meta name="description" content="Free random string generator: create secure random strings of any length using uppercase, lowercase, digits and symbols, with cryptographic randomness. Runs locally.">
-<meta name="keywords" content="random string generator,random string online,secure random generator,random token generator,random api key">
+<title>Random String Generator - Secure Random Passwords &amp; IDs</title>
+<meta name="description" content="Free online random string generator: create cryptographically secure random strings, passwords, API keys and IDs with custom length, character sets and bulk output.">
+<meta name="keywords" content="random string generator, random password generator, random id generator, random key generator, free tool">
 <meta name="author" content="ToolBox">
 <meta name="robots" content="index,follow">
 <meta name="theme-color" content="#4f6ef7">
-<meta name="google-site-verification" content="online-toolbox">
-<meta name="baidu-site-verification" content="online-toolbox">
 <link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/random-string-generator.html">
 <link rel="sitemap" type="application/xml" href="sitemap.xml">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Random String Generator">
-<meta property="og:description" content="Free random string generator: create secure random strings of any length using uppercase, lowercase, digits and symbols, with cryptographic randomness. Runs locally.">
+<meta property="og:description" content="Generate cryptographically secure random strings, passwords, API keys and IDs in your browser.">
 <meta property="og:locale" content="en_US">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdqAsxVwJGACZjAUIAd8a7S0L/1/1r/HPn1vAmAAGIAJRWYAfwFVAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
 <link rel="stylesheet" href="style.css">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Random String Generator", "url": "https://maniu2475-glitch.github.io/tools-en/random-string-generator.html", "description": "Free random string generator: create secure random strings of any length using uppercase, lowercase, digits and symbols, with cryptographic randomness. Runs locally.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Random String Generator", "url": "https://maniu2475-glitch.github.io/tools-en/random-string-generator.html", "description": "Generate cryptographically secure random strings, passwords, API keys and IDs in your browser.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
 <body>
 <div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
 <header class="site-header">
@@ -33,90 +30,70 @@
 <main class="content" id="content">
   <section class="tool-panel active" id="tool-main">
       <h1>Random String Generator</h1>
-      <div class="form-row">
-<label>Length</label><input type="number" id="rs-len" value="32" min="1" max="4096">
-</div>
-<p class="tool-desc">Character sets:</p>
-<div class="form-row">
-<label><input type="checkbox" id="rs-upper" checked> A-Z</label>
-<label><input type="checkbox" id="rs-lower" checked> a-z</label>
-<label><input type="checkbox" id="rs-digits" checked> 0-9</label>
-<label><input type="checkbox" id="rs-symbols"> symbols (!@#$%…)</label>
-</div>
-<label>Quantity</label><input type="number" id="rs-count" value="5" min="1" max="100">
+      <p class="tool-desc">Cryptographically secure random strings — generated locally in your browser, never uploaded.</p>
+<div class="grid-2">
+<div>
+<label>Length</label><input id="rs-len" type="number" min="1" max="512" value="16">
+<label>How many</label><input id="rs-count" type="number" min="1" max="100" value="1">
+<label><input type="checkbox" id="rs-upper" checked onchange="rsGen()"> Uppercase A-Z</label>
+<label><input type="checkbox" id="rs-lower" checked onchange="rsGen()"> Lowercase a-z</label>
+<label><input type="checkbox" id="rs-digit" checked onchange="rsGen()"> Digits 0-9</label>
+<label><input type="checkbox" id="rs-symbol" onchange="rsGen()"> Symbols !@#$%^&amp;*</label>
+<label><input type="checkbox" id="rs-nolook" onchange="rsGen()"> Exclude look-alikes (0O1lI)</label>
 <div class="btn-group">
 <button class="btn" onclick="rsGen()">Generate</button>
-<button class="btn btn-outline" onclick="rsCopy()">Copy all</button>
+<button class="btn btn-outline" onclick="rsCopy()">Copy</button>
 </div>
-<textarea id="rs-output" rows="10" style="font-family:monospace" readonly></textarea>
+</div>
+<div>
+<label>Result</label>
+<textarea id="rs-out" rows="10" style="width:100%;font-family:monospace" readonly onclick="this.select()"></textarea>
+<div class="result-box" id="rs-info">Set your options and press Generate.</div>
+</div>
+</div>
       <hr>
       <h2>About this tool</h2>
-      <p style="line-height:1.9">Need an API key, a test fixture, a coupon code, or a one-time token? This generator produces random strings of any length using the exact character sets you choose, and it sources its randomness from the browser crypto API (crypto.getRandomValues) rather than Math.random - the same primitive used for real cryptographic key material. That makes the output suitable for session identifiers, salts, and other security-sensitive values, not just placeholder text. Generate up to 100 strings at once, mix uppercase, lowercase, digits and symbols, and copy everything with one click. For human-memorable secrets, prefer the dedicated password generator; for raw entropy, use this tool.</p>
+      <p style="line-height:1.9">This random string generator uses your browser's built-in cryptographically secure random number generator (<code>crypto.getRandomValues</code>), not <code>Math.random</code>, so the output is suitable for passwords, API keys, session tokens, coupon codes, salts and test fixtures. Pick a length, choose the character sets you need, optionally strip look-alike characters such as 0/O and 1/l/I to make strings easier to read out loud, and generate up to a hundred strings at once. Everything runs locally on your device: no string, length or option is ever sent to a server, which means you can safely use it for real credentials. For best security, use at least 16 characters with upper and lower case, digits and symbols.</p>
       <h3>Related tools</h3>
-      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a>
-<a class="btn btn-outline" href="base64.html">Base64 encode/decode</a>
-<a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a>
-<a class="btn btn-outline" href="qr-code-generator.html">QR code generator</a>
-<a class="btn btn-outline" href="password-generator.html">Password generator</a>
-<a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a>
-<a class="btn btn-outline" href="color-converter.html">Color converter</a>
-<a class="btn btn-outline" href="markdown-editor.html">Markdown editor</a>
-<a class="btn btn-outline" href="word-counter.html">Word counter</a>
-<a class="btn btn-outline" href="md5-generator.html">Hash generator</a>
-<a class="btn btn-outline" href="ip-lookup.html">IP lookup</a>
-<a class="btn btn-outline" href="number-converter.html">Base converter</a>
-<a class="btn btn-outline" href="unit-converter.html">Unit converter</a>
-<a class="btn btn-outline" href="case-converter.html">Case converter</a>
-<a class="btn btn-outline" href="text-sort.html">Text sorter</a>
-<a class="btn btn-outline" href="csv-to-json.html">CSV to JSON</a>
-<a class="btn btn-outline" href="uuid-generator.html">UUID generator</a>
-<a class="btn btn-outline" href="jwt-decoder.html">JWT decoder</a>
-<a class="btn btn-outline" href="lorem-ipsum-generator.html">Lorem ipsum</a>
-<a class="btn btn-outline" href="text-diff.html">Text diff</a>
-<a class="btn btn-outline" href="html-entities.html">HTML entities</a>
-<a class="btn btn-outline" href="slug-generator.html">Slug generator</a>
-<a class="btn btn-outline" href="password-strength.html">Password strength</a>
-<a class="btn btn-outline" href="image-to-base64.html">Image to Base64</a>
-<a class="btn btn-outline" href="url-parser.html">URL parser</a>
-<a class="btn btn-outline" href="color-picker.html">Color picker</a>
-<a class="btn btn-outline" href="text-to-binary.html">Text to binary</a>
-<a class="btn btn-outline" href="qr-scanner.html">QR scanner</a>
-<a class="btn btn-outline" href="base32.html">Base32 encode/decode</a>
-<a class="btn btn-outline" href="cron-generator.html">Cron job generator</a>
-<a class="btn btn-outline" href="aspect-ratio-calculator.html">Aspect ratio calculator</a>
-<a class="btn btn-outline" href="random-string-generator.html">Random string generator</a></div>
-      <h3>Frequently asked questions</h3>
-      <div style="line-height:1.9"><details><summary><strong>Is this tool really free?</strong></summary><p>Yes, completely free with no signup, no login and no usage limits. Just open the page and use it.</p></details>
-<details><summary><strong>Is my data uploaded to a server?</strong></summary><p>No. All processing happens locally in your browser - your data never leaves your device, so even sensitive content stays private.</p></details>
-<details><summary><strong>Which browsers are supported?</strong></summary><p>All modern browsers including Chrome, Edge, Firefox and Safari, on both desktop and mobile.</p></details></div>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="password-generator.html">Password generator</a><a class="btn btn-outline" href="uuid-generator.html">UUID generator</a><a class="btn btn-outline" href="md5-generator.html">Hash generator</a><a class="btn btn-outline" href="base64.html">Base64 encode/decode</a><a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a><a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a><a class="btn btn-outline" href="word-counter.html">Word counter</a><a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a><a class="btn btn-outline" href="case-converter.html">Case converter</a><a class="btn btn-outline" href="chmod-calculator.html">Chmod calculator</a><a class="btn btn-outline" href="regex-tester.html">Regex tester</a><a class="btn btn-outline" href="cron-generator.html">Cron job generator</a></div>
   </section>
 </main>
-<footer class="site-footer"><div class="container"><p>© 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">🧰 Online Toolbox</a></p></div></footer>
-<script src="app.js"></script>
-<script src="extra.js"></script>
+<footer class="site-footer"><div class="container"><p>© 2026 Online Toolbox · 887+ free browser-side tools</p></div></footer>
 <script>
-function rsGen(){
-  let pool='';
-  if(document.getElementById('rs-upper').checked) pool+='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  if(document.getElementById('rs-lower').checked) pool+='abcdefghijklmnopqrstuvwxyz';
-  if(document.getElementById('rs-digits').checked) pool+='0123456789';
-  if(document.getElementById('rs-symbols').checked) pool+='!@#$%^&*()-_=+[]{};:,.?/';
-  const out=document.getElementById('rs-output');
-  if(!pool){ out.value='Select at least one character set.'; return; }
-  const len=Math.max(1,Math.min(4096,+document.getElementById('rs-len').value||32));
-  const count=Math.max(1,Math.min(100,+document.getElementById('rs-count').value||1));
-  const rnd=new Uint32Array(len*count);
-  crypto.getRandomValues(rnd);
-  let res=[];
-  for(let c=0;c<count;c++){
-    let s='';
-    for(let i=0;i<len;i++) s+=pool[rnd[c*len+i]%pool.length];
-    res.push(s);
-  }
-  out.value=res.join('\n');
+function rsSets(){
+  var up='ABCDEFGHIJKLMNOPQRSTUVWXYZ',lo='abcdefghijklmnopqrstuvwxyz',di='0123456789',sy='!@#$%^&*()-_=+[]{};:,.?';
+  var pool='';
+  if(document.getElementById('rs-upper').checked) pool+=up;
+  if(document.getElementById('rs-lower').checked) pool+=lo;
+  if(document.getElementById('rs-digit').checked) pool+=di;
+  if(document.getElementById('rs-symbol').checked) pool+=sy;
+  if(document.getElementById('rs-nolook').checked) pool=pool.replace(/[0O1lI]/g,'');
+  return pool;
 }
-function rsCopy(){ navigator.clipboard.writeText(document.getElementById('rs-output').value).then(()=>alert('Copied!')); }
-document.addEventListener('DOMContentLoaded', rsGen);
+function rsOne(pool,len){
+  var out='',buf=new Uint32Array(len);
+  crypto.getRandomValues(buf);
+  for(var i=0;i<len;i++) out+=pool[buf[i]%pool.length];
+  return out;
+}
+function rsGen(){
+  var pool=rsSets();
+  var info=document.getElementById('rs-info'),out=document.getElementById('rs-out');
+  if(!pool){out.value='';info.textContent='Select at least one character set.';return;}
+  var len=Math.min(512,Math.max(1,parseInt(document.getElementById('rs-len').value||'16',10)));
+  var cnt=Math.min(100,Math.max(1,parseInt(document.getElementById('rs-count').value||'1',10)));
+  var rows=[];
+  for(var i=0;i<cnt;i++) rows.push(rsOne(pool,len));
+  out.value=rows.join('\n');
+  var bits=Math.round(len*Math.log(pool.length)/Math.log(2));
+  info.textContent=len+' chars × '+cnt+' · alphabet '+pool.length+' · ~'+bits+' bits of entropy';
+}
+function rsCopy(){
+  var out=document.getElementById('rs-out');
+  out.select();
+  try{document.execCommand('copy');document.getElementById('rs-info').textContent='Copied to clipboard.';}catch(e){}
+}
+document.addEventListener('DOMContentLoaded',rsGen);
 </script>
 </body>
 </html>
