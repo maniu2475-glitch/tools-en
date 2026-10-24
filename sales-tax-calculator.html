@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sales Tax Calculator - Add or Remove Tax From Any Price</title>
+<meta name="description" content="Free online sales tax calculator: add tax to a net price or remove tax from a gross price. Supports any rate and currency, 100% browser-side.">
+<meta name="keywords" content="sales tax calculator,add tax,remove tax,reverse sales tax,net price,gross price,tax rate calculator,price before tax">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/sales-tax-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sales Tax Calculator">
+<meta property="og:description" content="Free online sales tax calculator: add tax to a net price or remove tax from a gross price. Supports any rate and currency, 100% browser-side.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Sales Tax Calculator", "url": "https://maniu2475-glitch.github.io/tools-en/sales-tax-calculator.html", "description": "Free online sales tax calculator: add tax to a net price or remove tax from a gross price. Supports any rate and currency, 100% browser-side.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+<h1>Sales Tax Calculator</h1>
+<p class="lead">Enter a price and a tax rate to add tax (net → gross) or work backwards and strip the tax out of a shelf price (gross → net).</p>
+<div class="grid-2">
+<div><h3>Price</h3>
+<input type="number" id="st-price" class="full-input" placeholder="Price amount" step="0.01" min="0"></div>
+<div><h3>Tax rate (%)</h3>
+<input type="number" id="st-rate" class="full-input" placeholder="e.g. 8.25" step="0.001" min="0"></div>
+</div>
+<div class="btn-group">
+<button class="btn" onclick="stAdd()">Add tax (net → gross)</button>
+<button class="btn" onclick="stRemove()">Remove tax (gross → net)</button>
+</div>
+<div class="result-box" id="st-out">Enter a price and rate, then choose a direction.</div>
+<h2>About the Sales Tax Calculator</h2>
+<p>Sales tax, VAT and GST rates vary wildly between countries, states and even cities — from 0% to over 25%. This calculator handles any rate you type, and works in either direction: computing the tax-inclusive total for a quoted net price, or extracting the net price and tax amount from a tax-inclusive shelf price.</p>
+<p>The reverse direction is the part most people get wrong. If a gross price already includes 20% tax, the net price is gross ÷ 1.20, not gross × 0.80. Multiplying by (1 − rate) is a very common mistake that overstates the tax — this tool uses the correct division so accountants and bookkeepers get exact figures.</p>
+<p>Everything is computed locally in your browser with no data leaving your device, which matters when you are pricing confidential invoices or checking receipts. Results are rounded to two decimals for currency display, matching how real tax authorities round line items.</p>
+<div class="btn-group" style="margin-top:18px">
+<a class="btn btn-outline" href="percentage-calculator.html.html">Percentage calculator</a>
+<a class="btn btn-outline" href="discount-calculator.html.html">Discount calculator</a>
+<a class="btn btn-outline" href="tip-calculator.html.html">Tip calculator</a>
+<a class="btn btn-outline" href="vat-calculator.html.html">VAT calculator</a>
+<a class="btn btn-outline" href="markup-calculator.html.html">Markup calculator</a>
+<a class="btn btn-outline" href="index.html">All tools</a></div>
+<div class="faq-section">
+<h2>FAQ</h2>
+<details><summary><strong>What's the difference between this and the VAT calculator?</strong></summary><p>They use the same math; sales tax is typically charged at the point of sale in the US, while VAT/GST is charged throughout the supply chain in most other countries. This tool handles both.</p></details>
+<details><summary><strong>Why is removing tax a division?</strong></summary><p>A gross price G includes tax at rate r, so G = net × (1 + r). Therefore net = G ÷ (1 + r). Simply multiplying G by (1 − r) gives the wrong net amount.</p></details>
+<details><summary><strong>Can I use several decimal rates?</strong></summary><p>Yes — enter rates like 8.875% exactly; the calculator keeps full precision internally.</p></details>
+</div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">🧰 Online Toolbox</a></p></div></footer>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+<script>
+function stAdd(){
+  const p=parseFloat(document.getElementById('st-price').value), r=parseFloat(document.getElementById('st-rate').value);
+  const out=document.getElementById('st-out');
+  if(isNaN(p)||isNaN(r)||p<0){out.textContent='Enter a valid price and rate.';return;}
+  const tax=p*r/100, total=p+tax;
+  out.innerHTML='<strong>Net price:</strong> '+p.toFixed(2)+'<br><strong>Tax ('+r+'%):</strong> '+tax.toFixed(2)+'<br><strong>Gross total:</strong> '+total.toFixed(2);
+}
+function stRemove(){
+  const g=parseFloat(document.getElementById('st-price').value), r=parseFloat(document.getElementById('st-rate').value);
+  const out=document.getElementById('st-out');
+  if(isNaN(g)||isNaN(r)||g<0){out.textContent='Enter a valid price and rate.';return;}
+  if(r<=-100){out.textContent='Rate must be greater than -100%.';return;}
+  const net=g/(1+r/100), tax=g-net;
+  out.innerHTML='<strong>Gross price:</strong> '+g.toFixed(2)+'<br><strong>Net (before tax):</strong> '+net.toFixed(2)+'<br><strong>Tax contained:</strong> '+tax.toFixed(2);
+}
+</script>
+</body>
+</html>

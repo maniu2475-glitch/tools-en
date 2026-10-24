@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Typing Speed Test - Measure Your WPM Online</title>
+<meta name="description" content="Free online typing speed test: measure your WPM (words per minute) and accuracy in 60 seconds. Nothing leaves your browser — no sign-up needed.">
+<meta name="keywords" content="typing speed test,wpm test,typing test,words per minute,typing accuracy,online typing test,free wpm test">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/typing-speed-test.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Typing Speed Test">
+<meta property="og:description" content="Free online typing speed test: measure your WPM (words per minute) and accuracy in 60 seconds. Nothing leaves your browser — no sign-up needed.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Typing Speed Test", "url": "https://maniu2475-glitch.github.io/tools-en/typing-speed-test.html", "description": "Free online typing speed test: measure your WPM (words per minute) and accuracy in 60 seconds. Nothing leaves your browser — no sign-up needed.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+<h1>Typing Speed Test</h1>
+<p class="lead">Press start and type the sample text for 60 seconds — get your gross WPM, net WPM and accuracy percentage at the finish line.</p>
+<div class="result-box" id="ts-sample" style="min-height:60px">Press Start to load a text.</div>
+<textarea id="ts-input" class="full-input" rows="5" placeholder="Type here once the test starts…" disabled></textarea>
+<div class="btn-group">
+<button class="btn" id="ts-btn" onclick="tsStart()">Start 60s test</button>
+</div>
+<div class="result-box" id="ts-out">Time: 60s remaining &nbsp;|&nbsp; Progress: 0%</div>
+<h2>About the Typing Speed Test</h2>
+<p>This test measures gross WPM (all words typed) and net WPM (corrected for errors) over a 60-second window using the standard five-keystroke-per-word convention. Accuracy is the percentage of correctly typed characters, the two numbers recruiters and typing certifications care about most.</p>
+<p>Average adult typing speed is around 40 WPM; professional typists reach 65–75 WPM and beyond. Practicing in short focused bursts with immediate accuracy feedback is the proven way to improve — retake this test daily and track your net WPM trend rather than chasing raw speed at the expense of mistakes.</p>
+<p>The whole test runs client-side: keystrokes are counted locally in JavaScript and never transmitted, so you can safely use it for practice, warm-ups or screening tests. Different texts are loaded each round so you cannot simply memorize the passage.</p>
+<div class="btn-group" style="margin-top:18px">
+<a class="btn btn-outline" href="word-counter.html.html">Word counter</a>
+<a class="btn btn-outline" href="word-frequency-counter.html.html">Word frequency counter</a>
+<a class="btn btn-outline" href="case-converter.html.html">Case converter</a>
+<a class="btn btn-outline" href="reading-time-calculator.html.html">Reading time calculator</a>
+<a class="btn btn-outline" href="text-diff.html.html">Text diff</a>
+<a class="btn btn-outline" href="index.html">All tools</a></div>
+<div class="faq-section">
+<h2>FAQ</h2>
+<details><summary><strong>What is a good typing speed?</strong></summary><p>40 WPM is typical for casual typists, 60+ is considered fast, and 75+ is professional-level. Accuracy above 95% matters more than raw speed.</p></details>
+<details><summary><strong>Gross vs net WPM?</strong></summary><p>Gross WPM counts every word typed; net WPM subtracts incorrect words. Net WPM is the honest number employers look at.</p></details>
+<details><summary><strong>Why 60 seconds?</strong></summary><p>One minute is long enough to smooth out bursts while staying focused; it's also the most common standardized test duration.</p></details>
+</div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">🧰 Online Toolbox</a></p></div></footer>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+<script>
+const TS_TEXTS=[
+ "The quick brown fox jumps over the lazy dog while the calm river flows past the quiet village where people gather every evening to share stories and fresh bread.",
+ "Practice makes progress, not perfection. Every keystroke you type with care builds muscle memory, and muscle memory is what separates fast typists from frustrated ones.",
+ "Small daily habits compound into remarkable results over time. A page written each week becomes a book in a year, just as minutes of typing practice add up to real speed.",
+ "Programs must be written for people to read, and only incidentally for machines to execute. Clear writing, whether in prose or in code, always rewards the patient reader.",
+ "Coffee brews slowly in the morning kitchen as sunlight creeps across the floor and the city outside begins to hum with buses, bicycles and the first footsteps of the day."];
+let tsTimer=null, tsLeft=60, tsTarget='', tsStarted=false;
+function tsStart(){
+  clearInterval(tsTimer); tsLeft=60; tsStarted=false;
+  tsTarget=TS_TEXTS[Math.floor(Math.random()*TS_TEXTS.length)];
+  document.getElementById('ts-sample').textContent=tsTarget;
+  const inp=document.getElementById('ts-input'); inp.value=''; inp.disabled=false; inp.placeholder='Start typing — the clock starts with your first keypress.'; inp.focus();
+  document.getElementById('ts-btn').textContent='Restart test';
+  document.getElementById('ts-out').textContent='Time: 60s remaining | Progress: 0%';
+}
+document.addEventListener('DOMContentLoaded',function(){
+  const inp=document.getElementById('ts-input');
+  inp.addEventListener('input',function(){
+    if(!tsStarted){tsStarted=true;tsTimer=setInterval(tsTick,1000);}
+    const typed=inp.value, n=typed.length;
+    const prog=Math.min(100,Math.round(n/tsTarget.length*100));
+    document.getElementById('ts-out').textContent='Time: '+tsLeft+'s remaining | Progress: '+prog+'%';
+  });
+});
+function tsTick(){
+  tsLeft--;
+  if(tsLeft<=0){clearInterval(tsTimer);tsFinish();return;}
+  document.getElementById('ts-out').textContent=document.getElementById('ts-out').textContent.replace(/Time: \d+s/, 'Time: '+tsLeft+'s');
+}
+function tsFinish(){
+  const inp=document.getElementById('ts-input'); inp.disabled=true;
+  const typed=inp.value.trim();
+  const typedWords=typed?typed.split(/\s+/).length:0;
+  const targetWords=tsTarget.trim().split(/\s+/).length;
+  let correct=0;
+  for(let i=0;i<typed.length;i++){ if(typed[i]===tsTarget[i]) correct++; }
+  const acc=typed.length?Math.round(correct/typed.length*100):0;
+  const net=Math.max(0,Math.round(typedWords*(acc/100)));
+  document.getElementById('ts-out').innerHTML='<strong>Time!</strong> Gross WPM: <strong>'+typedWords+'</strong> &nbsp;|&nbsp; Net WPM: <strong>'+net+'</strong> &nbsp;|&nbsp; Accuracy: <strong>'+acc+'%</strong> &nbsp;|&nbsp; ('+typedWords+'/'+targetWords+' words typed)';
+}
+</script>
+</body>
+</html>

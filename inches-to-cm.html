@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inches to cm Converter - Instant Length Conversion</title>
+<meta name="description" content="Free online inches to cm converter: convert inches, centimeters, feet and meters instantly both ways. Accurate to full precision, 100% browser-side.">
+<meta name="keywords" content="inches to cm,cm to inches,length converter,inch calculator,feet to cm,metric conversion,1 inch cm,measurement converter">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/inches-to-cm.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Inches to cm Converter">
+<meta property="og:description" content="Free online inches to cm converter: convert inches, centimeters, feet and meters instantly both ways. Accurate to full precision, 100% browser-side.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Inches to cm Converter", "url": "https://maniu2475-glitch.github.io/tools-en/inches-to-cm.html", "description": "Free online inches to cm converter: convert inches, centimeters, feet and meters instantly both ways. Accurate to full precision, 100% browser-side.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+<h1>Inches to cm Converter</h1>
+<p class="lead">Type any length and get instant conversions between inches, centimeters, feet and meters — powered by the exact factor 1 inch = 2.54 cm.</p>
+<div class="grid-2">
+<div><h3>Inches</h3>
+<input type="number" id="ic-in" class="full-input" placeholder="e.g. 32" step="any" oninput="icFrom('in')"></div>
+<div><h3>Centimeters</h3>
+<input type="number" id="ic-cm" class="full-input" placeholder="e.g. 81.28" step="any" oninput="icFrom('cm')"></div>
+<div><h3>Feet (decimal)</h3>
+<input type="number" id="ic-ft" class="full-input" placeholder="e.g. 2.67" step="any" oninput="icFrom('ft')"></div>
+<div><h3>Meters</h3>
+<input type="number" id="ic-m" class="full-input" placeholder="e.g. 0.8128" step="any" oninput="icFrom('m')"></div>
+</div>
+<div class="result-box" id="ic-out">Type a value in any field — the others update live.</div>
+<h2>About the Inches to cm Converter</h2>
+<p>The inch to centimeter relationship is exact by international agreement: one inch equals exactly 2.54 centimeters, defined by the international yard and pound accord of 1959. That means every conversion here is mathematically precise, not an approximation — 32 inches is exactly 81.28 cm, because 32 × 2.54 = 81.28.</p>
+<p>Mixed-unit measurements like 5 feet 9 inches are common in daily life but awkward to convert mentally. Using the feet (decimal) field you can enter 5.75 ft for 5′9″ and read the metric equivalent instantly. TV screen sizes, monitor diagonals, waist measurements, paper sizes and furniture dimensions are the most frequent uses.</p>
+<p>All four fields stay synchronized as you type, so you can round-trip a value to check it, and full floating-point precision is preserved internally before display. The tool runs entirely in your browser, works offline once loaded, and requires no installation.</p>
+<div class="btn-group" style="margin-top:18px">
+<a class="btn btn-outline" href="unit-converter.html.html">Unit converter</a>
+<a class="btn btn-outline" href="temperature-converter.html.html">Temperature converter</a>
+<a class="btn btn-outline" href="aspect-ratio-calculator.html.html">Aspect ratio calculator</a>
+<a class="btn btn-outline" href="percentage-calculator.html.html">Percentage calculator</a>
+<a class="btn btn-outline" href="fuel-cost-calculator.html.html">Fuel cost calculator</a>
+<a class="btn btn-outline" href="index.html">All tools</a></div>
+<div class="faq-section">
+<h2>FAQ</h2>
+<details><summary><strong>How many cm in an inch?</strong></summary><p>Exactly 2.54 cm per inch — this is a defined constant, not a rounded measurement.</p></details>
+<details><summary><strong>How do I convert 5'9" to metric?</strong></summary><p>Enter 5.75 in the feet field: that's 175.26 cm or about 1.75 m.</p></details>
+<details><summary><strong>Can it convert meters to inches?</strong></summary><p>Yes — type in the meters field and inches, centimeters and feet all update instantly.</p></details>
+</div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">🧰 Online Toolbox</a></p></div></footer>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+<script>
+const IC={in:25.4,ft:304.8,m:1000,cm:10};
+function icFrom(u){
+  const v=parseFloat(document.getElementById('ic-'+u).value), out=document.getElementById('ic-out');
+  if(isNaN(v)){out.textContent='Enter a number to convert.';return;}
+  const mm=v*IC[u];
+  const other=Object.keys(IC).filter(k=>k!==u);
+  other.forEach(k=>{document.getElementById('ic-'+k).value=Math.round(mm/IC[k]*10000)/10000;});
+  out.textContent=v+' '+u+' = '+other.map(k=>Math.round(mm/IC[k]*10000)/10000+' '+k).join(', ');
+}
+</script>
+</body>
+</html>

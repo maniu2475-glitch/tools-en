@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Online Stopwatch - Free Millisecond-Accurate Timer</title>
+<meta name="description" content="Free online stopwatch with millisecond precision: start, stop, lap and reset. Keeps running accurately in your browser, nothing uploaded.">
+<meta name="keywords" content="online stopwatch,timer,laps,split times,stopwatch online,free timer,millisecond stopwatch">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/stopwatch.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Online Stopwatch">
+<meta property="og:description" content="Free online stopwatch with millisecond precision: start, stop, lap and reset. Keeps running accurately in your browser, nothing uploaded.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Online Stopwatch", "url": "https://maniu2475-glitch.github.io/tools-en/stopwatch.html", "description": "Free online stopwatch with millisecond precision: start, stop, lap and reset. Keeps running accurately in your browser, nothing uploaded.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+<h1>Online Stopwatch</h1>
+<p class="lead">A precise stopwatch with unlimited laps: start, pause, record split times and reset — all without installing an app.</p>
+<div class="result-box" id="sw-display" style="font-size:2.4em;font-variant-numeric:tabular-nums;text-align:center;padding:18px 0">00:00.00</div>
+<div class="btn-group" style="justify-content:center">
+<button class="btn" id="sw-start" onclick="swStart()">Start</button>
+<button class="btn" id="sw-stop" onclick="swStop()">Stop</button>
+<button class="btn" onclick="swLap()">Lap</button>
+<button class="btn btn-outline" onclick="swReset()">Reset</button>
+</div>
+<h3>Laps</h3>
+<div class="result-box" id="sw-laps" style="max-height:200px;overflow:auto">No laps yet.</div>
+<h2>About the Online Stopwatch</h2>
+<p>This stopwatch uses the browser's high-resolution performance timer rather than counting timer ticks, so it stays accurate even if the tab is briefly throttled — the displayed time is always computed from real elapsed wall-clock time with 10-millisecond resolution shown.</p>
+<p>Lap times are the heart of any serious stopwatch: each press of Lap records a split without stopping the clock, and the tool lists both the individual lap time and the cumulative elapsed time. This is ideal for training intervals, cooking stages, lab experiments or timing any repeated activity.</p>
+<p>Unlike native apps, this stopwatch requires no install and no permissions. It works on desktop and mobile, keeps running while you switch windows, and stores nothing on any server — your timing data stays entirely on your device.</p>
+<div class="btn-group" style="margin-top:18px">
+<a class="btn btn-outline" href="countdown-timer.html.html">Countdown timer</a>
+<a class="btn btn-outline" href="date-difference-calculator.html.html">Date difference calculator</a>
+<a class="btn btn-outline" href="timestamp-converter.html.html">Timestamp converter</a>
+<a class="btn btn-outline" href="pace-calculator.html.html">Pace calculator</a>
+<a class="btn btn-outline" href="reading-time-calculator.html.html">Reading time calculator</a>
+<a class="btn btn-outline" href="index.html">All tools</a></div>
+<div class="faq-section">
+<h2>FAQ</h2>
+<details><summary><strong>Does it stay accurate in a background tab?</strong></summary><p>Yes — elapsed time is derived from the wall clock (performance.now), so even if the browser throttles updates, resuming shows the correct total.</p></details>
+<details><summary><strong>How many laps can I record?</strong></summary><p>Unlimited laps; the lap list scrolls so long sessions stay usable.</p></details>
+<details><summary><strong>Is it free?</strong></summary><p>Completely — no sign-up, no ads in the tool itself, no data collection.</p></details>
+</div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">🧰 Online Toolbox</a></p></div></footer>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+<script>
+let swStart=0, swElapsed=0, swRunning=false, swTimer=null, swLapCount=0, swLastLap=0;
+function swFmt(ms){const t=Math.floor(ms),m=Math.floor(t/60000),s=Math.floor(t%60000/1000),cs=Math.floor(t%1000/10);return String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')+'.'+String(cs).padStart(2,'0');}
+function swNow(){return swElapsed+(swRunning?performance.now()-swStart:0);}
+function swRender(){document.getElementById('sw-display').textContent=swFmt(swNow());}
+function swStart(){if(swRunning)return;swStart=performance.now();swRunning=true;swTimer=setInterval(swRender,50);swRender();}
+function swStop(){if(!swRunning)return;swElapsed=swNow();swRunning=false;clearInterval(swTimer);swRender();}
+function swLap(){const now=swNow();swLapCount++;const split=now-swLastLap;swLastLap=now;const box=document.getElementById('sw-laps');if(swLapCount===1)box.innerHTML='';const d=document.createElement('div');d.style.padding='4px 0';d.style.borderBottom='1px solid #eee';d.innerHTML='Lap '+swLapCount+' &nbsp;—&nbsp; split: <strong>'+swFmt(split)+'</strong> &nbsp;—&nbsp; total: '+swFmt(now);box.prepend(d);}
+function swReset(){swStop();swElapsed=0;swLapCount=0;swLastLap=0;swRender();document.getElementById('sw-laps').innerHTML='No laps yet.';}
+</script>
+</body>
+</html>
