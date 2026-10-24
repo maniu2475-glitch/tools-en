@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Electricity Cost Calculator - Energy Usage &amp; kWh Cost</title>
+<meta name="description" content="Free electricity cost calculator: enter an appliance's power in watts, hours of use per day and your electricity rate to see its daily, monthly and yearly running cost. Runs in your browser.">
+<meta name="keywords" content="electricity cost calculator, energy cost calculator, kwh calculator, appliance running cost, free tool">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/electricity-cost-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Electricity Cost Calculator">
+<meta property="og:description" content="Free electricity cost calculator: enter an appliance's power in watts, hours of use per day and your electricity rate to see its daily, monthly and yearly running cost. Runs in your browser.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Electricity Cost Calculator", "url": "https://maniu2475-glitch.github.io/tools-en/electricity-cost-calculator.html", "description": "Free electricity cost calculator: enter an appliance's power in watts, hours of use per day and your electricity rate to see its daily, monthly and yearly running cost. Runs in your browser.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) &mdash; AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#128295;</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free &bull; Private &bull; Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Electricity Cost Calculator</h1>
+      <p class="tool-desc">Daily, monthly and yearly running cost for any appliance - everything runs in your browser.</p>
+<div class="grid-2">
+<div>
+<label>Power (watts)</label><input id="ec-w" value="1500" oninput="ecCalc()">
+<label>Hours used per day</label><input id="ec-h" value="3" oninput="ecCalc()">
+<label>Electricity rate ($ per kWh)</label><input id="ec-r" value="0.15" oninput="ecCalc()">
+</div>
+<div>
+<label>Energy per day (kWh)</label><input id="ec-kwh" readonly style="font-family:monospace">
+<label>Cost per day</label><input id="ec-d" readonly style="font-family:monospace;font-size:1.2em">
+<label>Cost per month (30 days)</label><input id="ec-m" readonly style="font-family:monospace">
+<label>Cost per year</label><input id="ec-y" readonly style="font-family:monospace">
+</div>
+</div>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">Have you ever wondered what that old space heater, gaming PC or spare freezer actually costs you? The math is simple but tedious: an appliance's power in watts times the hours it runs per day gives watt-hours; divide by 1000 to get kilowatt-hours, then multiply by the price your utility charges per kWh. This calculator does it instantly and extends the result to a monthly (30-day) and yearly figure, so a 1500 W heater used 3 hours a day at $0.15/kWh turns out to cost about $20 a month - exactly the kind of number that changes behaviour. You can also use it to compare appliances before buying, or to sanity-check an estimated bill. Typical rates range from roughly $0.08 to $0.35 per kWh depending on country and plan; check your latest utility bill for the exact figure. All computation is local JavaScript - nothing is sent anywhere.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="fuel-cost-calculator.html">fuel-cost-calculator.html</a><a class="btn btn-outline" href="percentage-calculator.html">Percentage calculator</a><a class="btn btn-outline" href="unit-converter.html">Unit converter</a><a class="btn btn-outline" href="loan-calculator.html">Loan calculator</a><a class="btn btn-outline" href="compound-interest-calculator.html">Compound interest calculator</a><a class="btn btn-outline" href="simple-interest-calculator.html">simple-interest-calculator.html</a><a class="btn btn-outline" href="json-formatter.html">JSON formatter</a><a class="btn btn-outline" href="base64.html">Base64 encode/decode</a><a class="btn btn-outline" href="password-generator.html">Password generator</a><a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a><a class="btn btn-outline" href="word-counter.html">Word counter</a></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>&copy; 2026 Online Toolbox &bull; 887+ free browser-side tools</p></div></footer>
+<script>
+function ecCalc(){
+ var w=+document.getElementById('ec-w').value||0,h=+document.getElementById('ec-h').value||0,r=+document.getElementById('ec-r').value||0;
+ var kwh=w*h/1000;
+ var f=function(v){return '$'+v.toFixed(2);};
+ document.getElementById('ec-kwh').value=kwh.toFixed(2)+' kWh';
+ document.getElementById('ec-d').value=f(kwh*r);
+ document.getElementById('ec-m').value=f(kwh*r*30);
+ document.getElementById('ec-y').value=f(kwh*r*365);
+}
+ecCalc();
+</script>
+</body>
+</html>

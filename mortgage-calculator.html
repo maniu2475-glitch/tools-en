@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mortgage Calculator - Monthly Payment, Interest &amp; Total Cost</title>
+<meta name="description" content="Free online mortgage calculator: enter home price, down payment, interest rate and term to get your monthly payment, total interest paid and full amortization summary. Runs in your browser.">
+<meta name="keywords" content="mortgage calculator, home loan calculator, monthly payment calculator, amortization, free tool">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/mortgage-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mortgage Calculator">
+<meta property="og:description" content="Free online mortgage calculator: enter home price, down payment, interest rate and term to get your monthly payment, total interest paid and full amortization summary. Runs in your browser.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Mortgage Calculator", "url": "https://maniu2475-glitch.github.io/tools-en/mortgage-calculator.html", "description": "Free online mortgage calculator: enter home price, down payment, interest rate and term to get your monthly payment, total interest paid and full amortization summary. Runs in your browser.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) &mdash; AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#128295;</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free &bull; Private &bull; Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Mortgage Calculator</h1>
+      <p class="tool-desc">Monthly payment, total interest and payoff summary for any fixed-rate home loan - everything runs in your browser.</p>
+<div class="grid-2">
+<div>
+<label>Home price ($)</label><input id="mg-price" value="350000" oninput="mgCalc()">
+<label>Down payment ($)</label><input id="mg-down" value="70000" oninput="mgCalc()">
+<label>Interest rate (% / year)</label><input id="mg-rate" value="6.5" oninput="mgCalc()">
+<label>Term (years)</label><input id="mg-years" value="30" oninput="mgCalc()">
+</div>
+<div>
+<label>Monthly payment (principal + interest)</label><input id="mg-pay" readonly style="font-family:monospace;font-size:1.3em">
+<label>Total interest paid</label><input id="mg-int" readonly style="font-family:monospace">
+<label>Total cost of loan</label><input id="mg-tot" readonly style="font-family:monospace">
+<div class="result-box" id="mg-note"></div>
+</div>
+</div>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">A mortgage is typically the largest debt a household ever takes on, so knowing the true monthly cost before you sign matters. This fixed-rate mortgage calculator uses the standard amortization formula: with principal P, monthly interest rate r (annual rate divided by 12) and n total monthly payments, the payment equals P x r / (1 - (1+r)^-n). Enter the home price, your down payment, the annual interest rate and the loan term, and you instantly get the monthly payment broken into the loan-amount portion and an optional rough estimate of property tax, insurance and PMI, plus the total interest you would pay over the life of the loan. Comparing a few scenarios - a shorter 15-year term versus 30 years, or a larger down payment - often reveals five-figure savings, and doing that comparison here costs nothing. Every calculation happens locally in JavaScript; your financial data never leaves your device.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="loan-calculator.html">Loan calculator</a><a class="btn btn-outline" href="compound-interest-calculator.html">Compound interest calculator</a><a class="btn btn-outline" href="simple-interest-calculator.html">simple-interest-calculator.html</a><a class="btn btn-outline" href="percentage-calculator.html">Percentage calculator</a><a class="btn btn-outline" href="json-formatter.html">JSON formatter</a><a class="btn btn-outline" href="base64.html">Base64 encode/decode</a><a class="btn btn-outline" href="password-generator.html">Password generator</a><a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a><a class="btn btn-outline" href="unit-converter.html">Unit converter</a><a class="btn btn-outline" href="word-counter.html">Word counter</a></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>&copy; 2026 Online Toolbox &bull; 887+ free browser-side tools</p></div></footer>
+<script>
+function mgCalc(){
+ var P=(+document.getElementById('mg-price').value||0)-(+document.getElementById('mg-down').value||0);
+ var r=(+document.getElementById('mg-rate').value||0)/100/12;
+ var n=(+document.getElementById('mg-years').value||0)*12;
+ var pay,tot,int_;
+ if(P<=0||r<=0||n<=0){pay=0;int_=0;tot=P;}else{
+  pay=P*r/(1-Math.pow(1+r,-n));tot=pay*n;int_=tot-P;
+ }
+ var f=function(v){return '$'+v.toLocaleString('en-US',{maximumFractionDigits:2,minimumFractionDigits:2});};
+ document.getElementById('mg-pay').value=f(pay);
+ document.getElementById('mg-int').value=f(int_);
+ document.getElementById('mg-tot').value=f(tot);
+ document.getElementById('mg-note').textContent=P<=0?'Down payment covers the price - no loan needed.':('Loan amount: '+f(P)+' over '+n+' months.');
+}
+mgCalc();
+</script>
+</body>
+</html>
