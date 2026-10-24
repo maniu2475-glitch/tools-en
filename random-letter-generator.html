@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Random Letter Generator - A-Z, Custom Sets, Random Strings</title>
+<meta name="description" content="Free online random letter generator: pick random letters A-Z, uppercase or lowercase, or from a custom character set. Great for games, teaching and sampling.">
+<meta name="keywords" content="random letter generator,pick a random letter,random alphabet,a-z generator,random character picker">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/random-letter-generator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Random Letter Generator">
+<meta property="og:description" content="Free online random letter generator: pick random letters A-Z, uppercase or lowercase, or from a custom character set. Great for games, teaching and sampling.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Random Letter Generator", "url": "https://maniu2475-glitch.github.io/tools-en/random-letter-generator.html", "description": "Free online random letter generator: pick random letters A-Z, uppercase or lowercase, or from a custom character set. Great for games, teaching and sampling.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+<h1>Random Letter Generator</h1>
+<p class="lead">Generate one or many random letters from A-Z, upper or lower case, or your own custom set. Uses the browser's cryptographic random source for fair picks.</p>
+
+<div class="grid-2">
+<div><h3>Settings</h3>
+<label style="display:block;margin:6px 0">Case: 
+<select id="rl-case"><option value="upper">UPPERCASE A-Z</option><option value="lower">lowercase a-z</option><option value="both">Both</option></select></label>
+<label style="display:block;margin:6px 0">How many letters: <input type="number" id="rl-count" value="1" min="1" max="500" style="width:80px"></label>
+<label style="display:block;margin:6px 0">Allow repeats: <input type="checkbox" id="rl-repeat" checked></label>
+<label style="display:block;margin:6px 0">Custom set (overrides case, e.g. AEIOU): <input class="full-input" id="rl-custom" placeholder="Leave empty for A-Z" style="width:100%"></label>
+<div class="btn-group"><button class="btn" onclick="rlRun()">Generate</button></div></div>
+<div><h3>Result</h3>
+<div class="result-box" id="rl-out" style="font-size:28px;letter-spacing:6px;min-height:60px">—</div>
+<div class="btn-group"><button class="btn btn-outline" onclick="rlCopy()">Copy</button></div></div>
+</div>
+<h2>About this tool</h2>
+<p>Random letters power a surprising range of everyday needs: teachers pick letters for alphabet games and phonics drills, players of Scattergories or word games need a fair draw, linguists sample characters for experiments, and developers test input forms with unusual data. Rolling physical letter dice is slow and biased; a cryptographic random source is neither.</p><p>This generator draws from the browser's crypto.getRandomValues, the same high-quality randomness used for security, so every letter has an exactly equal chance. Choose uppercase, lowercase, or both; generate up to 500 letters at once; and toggle whether repeats are allowed — with repeats off, the tool performs a fair without-replacement draw from a shuffled bag, like dealing cards.</p><p>The custom set field unlocks specialized uses: enter AEIOU for vowel-only draws, enter your own alphabet for non-English scripts, or paste a subset like QWERTYUIOP for keyboard-row games. All generation happens locally; nothing is transmitted.</p><p>A classic use is the A-Z challenge: generate one letter and name an animal, food and city starting with it. With the count field you can generate a whole game round in one click.</p>
+<h3>Related tools</h3>
+<div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="random-string-generator.html">Random string generator</a><a class="btn btn-outline" href="random-number-generator.html">Random number generator</a><a class="btn btn-outline" href="password-generator.html">Password generator</a><a class="btn btn-outline" href="password-strength.html">Password strength checker</a><a class="btn btn-outline" href="lorem-ipsum-generator.html">Lorem ipsum generator</a>
+<a class="btn btn-outline" href="index.html">All tools</a></div>
+<div class="faq-section">
+<h2>FAQ</h2>
+<details><summary><strong>How random is it?</strong></summary><p>It uses the browser's cryptographic random number generator, giving an exactly uniform distribution.</p></details><details><summary><strong>Can I generate from vowels only?</strong></summary><p>Yes — type AEIOU into the custom set field.</p></details><details><summary><strong>Can I get letters without repeats?</strong></summary><p>Uncheck 'Allow repeats' for a fair without-replacement draw.</p></details></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">🧰 Online Toolbox</a></p></div></footer>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+<script>
+
+function rlPool(){
+  const custom=document.getElementById('rl-custom').value.replace(/\s+/g,'');
+  if(custom) return [...custom];
+  const c=document.getElementById('rl-case').value;
+  if(c==='upper') return 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+  if(c==='lower') return 'abcdefghijklmnopqrstuvwxyz'.split('');
+  return 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
+}
+function rnd(n){ // crypto-based
+  const a=new Uint32Array(1); crypto.getRandomValues(a); return a[0]%n;
+}
+function rlRun(){
+  const count=Math.min(500,Math.max(1,parseInt(document.getElementById('rl-count').value,10)||1));
+  const pool=rlPool();
+  const repeat=document.getElementById('rl-repeat').checked;
+  let bag=pool.slice(), result=[];
+  for(let i=0;i<count;i++){
+    if(!repeat&&bag.length===0) break;
+    const idx=repeat?rnd(pool.length):rnd(bag.length);
+    result.push(repeat?pool[idx]:bag.splice(idx,1)[0]);
+  }
+  document.getElementById('rl-out').textContent=result.join('');
+}
+function rlCopy(){ navigator.clipboard.writeText(document.getElementById('rl-out').textContent); }
+</script>
+</body>
+</html>

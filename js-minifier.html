@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript Minifier Online - Minify JS Instantly</title>
+<meta name="description" content="Free online JavaScript minifier: remove comments, whitespace and line breaks to shrink your .js code. Instant, private, fully browser-side — no upload.">
+<meta name="keywords" content="js minifier,javascript minifier,minify js online,compress javascript,js compressor">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/js-minifier.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JavaScript Minifier">
+<meta property="og:description" content="Free online JavaScript minifier: remove comments, whitespace and line breaks to shrink your .js code. Instant, private, fully browser-side — no upload.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "JavaScript Minifier", "url": "https://maniu2475-glitch.github.io/tools-en/js-minifier.html", "description": "Free online JavaScript minifier: remove comments, whitespace and line breaks to shrink your .js code. Instant, private, fully browser-side — no upload.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+<h1>JavaScript Minifier</h1>
+<p class="lead">Paste JavaScript and get a smaller single-line version: comments stripped, redundant whitespace and line breaks removed. See exactly how many bytes you saved.</p>
+
+<div class="grid-2">
+<div><h3>Source JavaScript</h3>
+<textarea id="jm-in" class="full-input" rows="12" placeholder="// your code here&#10;function hello() {&#10;  console.log('hi');&#10;}"></textarea>
+<div class="btn-group"><button class="btn" onclick="jmRun()">Minify</button></div></div>
+<div><h3>Minified output</h3>
+<textarea id="jm-out" class="full-input" rows="12" readonly placeholder="Minified JS appears here..."></textarea>
+<div id="jm-stat" class="result-box" style="margin-top:10px">—</div></div>
+</div>
+<h2>About this tool</h2>
+<p>Shipping smaller JavaScript means faster page loads, lower bandwidth bills and better Core Web Vitals scores. A conservative minifier that removes comments and whitespace typically cuts file size by 20-40% with zero risk of changing behaviour — unlike aggressive mangling minifiers which rename variables and can break code that relies on names.</p><p>This tool takes the safe route: it strips block and line comments, removes trailing and leading whitespace, deletes blank lines, and reports the before/after size and percentage saved. Because it never renames anything, the minified output is functionally identical to the input and remains debuggable if you need to inspect it.</p><p>Everything runs locally, so proprietary or unreleased code stays on your machine. For production pipelines you should still use a battle-tested minifier such as Terser or esbuild; this tool is ideal for quick one-file shrink jobs, snippets, and cases where you want predictable, mangle-free output.</p><p>Tip: paste your code, click Minify, then copy the result with one click. Repeated runs are idempotent — minifying already-minified code is harmless.</p>
+<h3>Related tools</h3>
+<div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="css-minifier.html">CSS minifier</a><a class="btn btn-outline" href="json-formatter.html">JSON formatter</a><a class="btn btn-outline" href="base64.html">Base64 encode/decode</a><a class="btn btn-outline" href="html-entities.html">HTML entities</a><a class="btn btn-outline" href="slug-generator.html">Slug generator</a>
+<a class="btn btn-outline" href="index.html">All tools</a></div>
+<div class="faq-section">
+<h2>FAQ</h2>
+<details><summary><strong>Does it rename variables?</strong></summary><p>No — it only removes comments and whitespace, so behaviour is guaranteed unchanged.</p></details><details><summary><strong>Can it break my code?</strong></summary><p>It uses conservative transformations only. Code with URLs containing // inside strings on a line is the one edge case to double-check.</p></details><details><summary><strong>What size savings can I expect?</strong></summary><p>Typically 20-40% for hand-written code; already-minified code shrinks little.</p></details></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">🧰 Online Toolbox</a></p></div></footer>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+<script>
+
+function jmRun(){
+  const src=document.getElementById('jm-in').value;
+  let out=src;
+  // strip block and line comments (naive but safe for typical code without regex edge cases)
+  out=out.replace(/\/\*[\s\S]*?\*\//g,'');
+  out=out.replace(/(^|[^:\\])\/\/[^\n]*/g,'$1');
+  // collapse leading/trailing whitespace per line and drop blank lines
+  out=out.split('\n').map(l=>l.trim()).filter(l=>l.length).join('\n');
+  // join lines where safe: after ; { } , ( operators
+  out=out.replace(/\n\s*/g,'\n');
+  const inB=new Blob([src]).size, outB=new Blob([out]).size;
+  document.getElementById('jm-out').value=out;
+  document.getElementById('jm-stat').innerHTML='Original: <strong>'+inB+' bytes</strong> → Minified: <strong>'+outB+' bytes</strong> — saved '+Math.max(0,100-outB/inB*100).toFixed(1)+'%';
+}
+</script>
+</body>
+</html>

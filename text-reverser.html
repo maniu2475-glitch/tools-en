@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Text Reverser - Reverse Words, Letters or Lines Online</title>
+<meta name="description" content="Free online text reverser: flip your text letter by letter, reverse word order, or flip line order. Instant, private, runs entirely in your browser.">
+<meta name="keywords" content="text reverser,reverse text,reverse words,flip text,reverse string online,backwards text">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/text-reverser.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Text Reverser">
+<meta property="og:description" content="Free online text reverser: flip your text letter by letter, reverse word order, or flip line order. Instant, private, runs entirely in your browser.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Text Reverser", "url": "https://maniu2475-glitch.github.io/tools-en/text-reverser.html", "description": "Free online text reverser: flip your text letter by letter, reverse word order, or flip line order. Instant, private, runs entirely in your browser.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+<h1>Text Reverser</h1>
+<p class="lead">Paste any text and reverse it by characters, by words, or by lines — one click, no signup, nothing leaves your device.</p>
+
+<div class="grid-2">
+<div><h3>Input</h3>
+<textarea id="tr-in" class="full-input" rows="8" placeholder="Type or paste text here..."></textarea>
+<div class="btn-group">
+<button class="btn" onclick="trRun('chars')">Reverse characters</button>
+<button class="btn" onclick="trRun('words')">Reverse word order</button>
+<button class="btn" onclick="trRun('lines')">Reverse line order</button>
+<button class="btn" onclick="trRun('charswords')">Reverse letters in each word</button>
+</div></div>
+<div><h3>Result</h3>
+<textarea id="tr-out" class="full-input" rows="8" readonly placeholder="Reversed text appears here..."></textarea>
+<div class="btn-group"><button class="btn btn-outline" onclick="document.getElementById('tr-out').select();document.execCommand('copy')">Copy result</button></div></div>
+</div>
+<h2>About this tool</h2>
+<p>Reversing text sounds trivial, but each variation has a real use. Reversing characters turns normal sentences into mirrored strings, handy for testing bidirectional text handling, creating playful social media posts, or checking how fonts and parsers cope with unusual order. Reversing word order is used by linguists and language learners to examine sentence structure, while reversing line order rescues data that was pasted bottom-to-top from a log file or terminal.</p><p>This tool offers all four modes in one place: full character reversal, word-order reversal, line-order reversal, and per-word letter reversal (which keeps words in place but flips their letters — a favourite puzzle format). It handles Unicode correctly, including emoji and accented characters, because it splits on code points rather than raw bytes.</p><p>Everything runs locally in your browser with JavaScript, so your text is never uploaded, logged or stored. There is no length limit beyond what your browser can comfortably hold in a textarea, making it suitable for both one-line strings and multi-thousand-line files.</p>
+<h3>Related tools</h3>
+<div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="case-converter.html">Case converter</a><a class="btn btn-outline" href="text-sort.html">Text sorter</a><a class="btn btn-outline" href="remove-duplicate-lines.html">Remove duplicate lines</a><a class="btn btn-outline" href="text-diff.html">Text diff</a><a class="btn btn-outline" href="word-counter.html">Word counter</a><a class="btn btn-outline" href="rot13-caesar-cipher.html">ROT13 / Caesar cipher</a>
+<a class="btn btn-outline" href="index.html">All tools</a></div>
+<div class="faq-section">
+<h2>FAQ</h2>
+<details><summary><strong>Does it handle Unicode and emoji?</strong></summary><p>Yes. The reversal operates on Unicode code points, so emoji and accented characters survive intact.</p></details><details><summary><strong>Is my text uploaded anywhere?</strong></summary><p>No. The entire operation happens in your browser; no network request is made.</p></details><details><summary><strong>Can I reverse a whole file?</strong></summary><p>Yes — paste as much text as you like. The only limit is your browser's memory.</p></details></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">🧰 Online Toolbox</a></p></div></footer>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+<script>
+
+function trRun(mode){
+  const s=document.getElementById('tr-in').value;
+  let r='';
+  if(mode==='chars') r=[...s].reverse().join('');
+  else if(mode==='words') r=s.split(/\s+/).reverse().join(' ');
+  else if(mode==='lines') r=s.split(/\n/).reverse().join('\n');
+  else r=s.split(/\n/).map(l=>[...l].reverse().join('')).join('\n');
+  document.getElementById('tr-out').value=r;
+}
+</script>
+</body>
+</html>

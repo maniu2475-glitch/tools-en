@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JSON to YAML Converter Online - Free &amp; Instant</title>
+<meta name="description" content="Free online JSON to YAML converter: paste JSON and get clean, indented YAML instantly. Supports nested objects, arrays and Unicode. 100% browser-side.">
+<meta name="keywords" content="json to yaml,convert json to yaml,json yaml converter,yaml online,json formatter">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/json-to-yaml.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JSON to YAML Converter">
+<meta property="og:description" content="Free online JSON to YAML converter: paste JSON and get clean, indented YAML instantly. Supports nested objects, arrays and Unicode. 100% browser-side.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "JSON to YAML Converter", "url": "https://maniu2475-glitch.github.io/tools-en/json-to-yaml.html", "description": "Free online JSON to YAML converter: paste JSON and get clean, indented YAML instantly. Supports nested objects, arrays and Unicode. 100% browser-side.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+<h1>JSON to YAML Converter</h1>
+<p class="lead">Paste JSON on the left, get properly indented YAML on the right. Instant conversion, error messages for invalid JSON, and nothing is sent to a server.</p>
+
+<div class="grid-2">
+<div><h3>JSON input</h3>
+<textarea id="jy-in" class="full-input" rows="12" placeholder='{"name":"toolbox","items":[1,2,3]}'></textarea>
+<div class="btn-group"><button class="btn" onclick="jyRun()">Convert to YAML</button>
+<button class="btn btn-outline" onclick="jySample()">Load sample</button></div></div>
+<div><h3>YAML output</h3>
+<textarea id="jy-out" class="full-input" rows="12" readonly placeholder="YAML appears here..."></textarea>
+<div class="btn-group"><button class="btn btn-outline" onclick="document.getElementById('jy-out').select();document.execCommand('copy')">Copy YAML</button></div></div>
+</div>
+<h2>About this tool</h2>
+<p>YAML is the configuration format of choice for Kubernetes, Docker Compose, Ansible and GitHub Actions, while JSON dominates APIs and package files. Converting between the two is a routine task for every developer, and this tool removes the tedious manual reformatting. Paste any valid JSON — objects, arrays, nested structures, numbers, booleans, nulls — and receive clean two-space-indented YAML.</p><p>The converter runs a full JSON.parse validation first, so malformed input gives you a precise error message with position instead of silently producing broken YAML. Strings are emitted bare when possible, and empty arrays and objects are rendered compactly as [] and {} to keep output idiomatic.</p><p>Because the conversion is pure JavaScript in the browser, your configuration files — which often contain credentials or internal hostnames — never touch a server. This makes the tool safe for real production configs, unlike paste-it-online services of unknown provenance.</p>
+<h3>Related tools</h3>
+<div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="json-formatter.html">JSON formatter</a><a class="btn btn-outline" href="json-to-csv.html">JSON to CSV</a><a class="btn btn-outline" href="csv-to-json.html">CSV to JSON</a><a class="btn btn-outline" href="xml-formatter.html">XML formatter</a><a class="btn btn-outline" href="markdown-editor.html">Markdown editor</a>
+<a class="btn btn-outline" href="index.html">All tools</a></div>
+<div class="faq-section">
+<h2>FAQ</h2>
+<details><summary><strong>Is my config data uploaded?</strong></summary><p>No. Parsing and conversion happen entirely in your browser.</p></details><details><summary><strong>What happens with invalid JSON?</strong></summary><p>You get the parser's error message including the position, so you can fix the JSON first.</p></details><details><summary><strong>Does it handle deep nesting?</strong></summary><p>Yes, any depth of objects and arrays is supported.</p></details></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">🧰 Online Toolbox</a></p></div></footer>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+<script>
+
+function jySample(){document.getElementById('jy-in').value=JSON.stringify({server:{host:"0.0.0.0",port:8080,debug:false},features:["auth","logging","cache"],timeout:30},null,2);jyRun();}
+function jyRun(){
+  const out=document.getElementById('jy-out');
+  try{
+    const data=JSON.parse(document.getElementById('jy-in').value);
+    out.value=jyToYaml(data,0);
+  }catch(e){ out.value='Invalid JSON: '+e.message; }
+}
+function jyToYaml(v,ind){
+  const pad='  '.repeat(ind);
+  if(v===null) return 'null';
+  if(typeof v==='boolean'||typeof v==='number') return String(v);
+  if(typeof v==='string'){ return v; }
+  if(Array.isArray(v)){
+    if(v.length===0) return '[]';
+    return v.map(item=>{
+      if(item!==null&&typeof item==='object') return pad+'-\n'+jyToYaml(item,ind+1);
+      return pad+'- '+jyToYaml(item,ind);
+    }).join('\n');
+  }
+  const keys=Object.keys(v);
+  if(keys.length===0) return '{}';
+  return keys.map(k=>{
+    const val=v[k];
+    if(val!==null&&typeof val==='object'){
+      const sub=jyToYaml(val,ind+1);
+      return pad+k+':\n'+sub;
+    }
+    return pad+k+': '+jyToYaml(val,ind);
+  }).join('\n');
+}
+</script>
+</body>
+</html>
