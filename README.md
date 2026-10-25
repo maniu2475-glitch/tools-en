@@ -88,5 +88,10 @@ Newly added tools (2026-10-25, 8th batch):
 - [Split Bill Calculator](https://maniu2475-glitch.github.io/tools-en/split-bill-calculator.html) - divide any bill with tip/tax, rounding that always covers the total
 - [Random Name Generator](https://maniu2475-glitch.github.io/tools-en/random-name-generator.html) - realistic male/female/mixed names for games, demos & testing
 - [Factorial Calculator](https://maniu2475-glitch.github.io/tools-en/factorial-calculator.html) - exact n! up to 170! via BigInt, with digit count & trailing zeros
+- [Cm to Feet & Inches Converter](https://maniu2475-glitch.github.io/tools-en/cm-to-feet.html) - two-way height conversion with a quick reference table
+- [Kg to Pounds Converter](https://maniu2475-glitch.github.io/tools-en/kg-to-lbs.html) - kg ↔ lb/oz both ways, plus stones and a nearby-values table
+- [Savings Goal Calculator](https://maniu2475-glitch.github.io/tools-en/savings-calculator.html) - months-to-goal or required monthly deposit with compound interest
+- [Time Card Calculator](https://maniu2475-glitch.github.io/tools-en/time-card-calculator.html) - daily/weekly work hours with lunch breaks, overnight shifts and gross pay
+- [Area Converter](https://maniu2475-glitch.github.io/tools-en/area-converter.html) - m², ft², yd², acres, hectares, km², mi² all at once
 
 Total: 110 free online tools, all running 100% client-side.
