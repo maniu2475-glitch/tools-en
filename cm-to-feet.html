@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cm to Feet & Inches Converter (and Feet to Cm)</title>
+<meta name="description" content="Convert centimeters to feet and inches instantly, or feet/inches back to cm. Includes a handy conversion table. 100% free and browser-side.">
+<meta name="keywords" content="cm to feet,cm to feet and inches,feet to cm,centimeters to feet,height converter,180 cm in feet">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/cm-to-feet.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cm to Feet & Inches Converter">
+<meta property="og:description" content="Convert centimeters to feet and inches instantly, or feet/inches back to cm. Includes a handy conversion table. 100% free and browser-side.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Cm to Feet & Inches Converter", "url": "https://maniu2475-glitch.github.io/tools-en/cm-to-feet.html", "description": "Convert centimeters to feet and inches instantly, or feet/inches back to cm. Includes a handy conversion table. 100% free and browser-side.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) &mdash; AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#128736;</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free &bull; Private &bull; Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+<h1>Cm to Feet & Inches Converter</h1>
+<p class="lead">Type a height in centimeters to get the exact feet and inches, or switch the direction and convert feet + inches back to centimeters.</p>
+
+<div class="grid-2">
+<div>
+<h3>Centimeters &rarr; Feet</h3>
+<input type="number" id="cf-cm" class="full-input" placeholder="Height in cm" step="0.1" min="0">
+<div class="btn-group"><button class="btn" onclick="cfC2F()">Convert to feet &amp; inches</button></div>
+<div class="output-box" id="cf-out1">Enter a value above.</div>
+</div>
+<div>
+<h3>Feet &rarr; Centimeters</h3>
+<input type="number" id="cf-ft" class="full-input" placeholder="Feet" step="0.01" min="0" style="margin-bottom:8px">
+<input type="number" id="cf-in" class="full-input" placeholder="Inches" step="0.01" min="0" max="11.99">
+<div class="btn-group"><button class="btn" onclick="cfF2C()">Convert to cm</button></div>
+<div class="output-box" id="cf-out2">Enter values above.</div>
+</div>
+</div>
+<div class="output-box" id="cf-table"></div>
+<h2 style="margin-top:28px">About this tool</h2>
+<p>Centimeters and feet are both everyday height units: centimeters dominate metric countries, while feet and inches remain the standard for height in the United States, the United Kingdom and Canada. One foot is exactly 30.48 centimeters and one inch is exactly 2.54 centimeters, so converting is a simple division once you know the factor. The tricky part is expressing the remainder as inches rather than decimal feet — that is exactly what this converter does for you. Enter a value like 180 and you immediately learn that 180 cm is about 5 ft 10.9 in. The reverse direction is just as easy: type 5 and 11 to see that 5'11" is roughly 180.3 cm. The generated reference table around your value helps you eyeball nearby heights, which is handy when reading size charts, medical records or sports profiles. Everything runs in your browser — nothing is uploaded anywhere.</p>
+<h2>Related tools</h2>
+<div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="inches-to-cm.html">Inches to cm</a><a class="btn btn-outline" href="unit-converter.html">Unit converter</a><a class="btn btn-outline" href="bmi-calculator.html">BMI calculator</a></div>
+<p style="margin-top:20px"><a href="index.html">&#8592; All tools</a></p>
+</section>
+</main>
+<footer class="site-footer"><div class="container"><p>Free online tools &bull; Everything runs in your browser &bull; No data uploaded</p></div></footer>
+<script>
+
+function cfC2F(){
+ var cm=parseFloat(document.getElementById('cf-cm').value);
+ var o=document.getElementById('cf-out1');
+ if(isNaN(cm)||cm<0){o.textContent='Enter a valid number of centimeters.';return;}
+ var total=cm/2.54, ft=Math.floor(total/12), in_=(total-ft*12);
+ o.innerHTML='<strong>'+cm+' cm</strong> = <strong>'+ft+' ft '+(Math.round(in_*100)/100)+' in</strong><br>'+
+  'Decimal feet: '+(cm/30.48).toFixed(3)+' ft &nbsp;|&nbsp; Total inches: '+total.toFixed(1)+' in';
+ cfTable(cm);
+}
+function cfF2C(){
+ var ft=parseFloat(document.getElementById('cf-ft').value)||0;
+ var inch=parseFloat(document.getElementById('cf-in').value)||0;
+ var o=document.getElementById('cf-out2');
+ if(ft<0){o.textContent='Enter a valid height.';return;}
+ var cm=(ft*12+inch)*2.54;
+ o.innerHTML='<strong>'+ft+' ft '+inch+' in</strong> = <strong>'+cm.toFixed(1)+' cm</strong><br>'+
+  'Meters: '+(cm/100).toFixed(2)+' m';
+ cfTable(Math.round(cm));
+}
+function cfTable(cm){
+ var rows='',base=Math.floor(cm/10)*10,i;
+ for(i=0;i<12;i++){
+  var v=base+i*10,total=v/2.54,f=Math.floor(total/12),ins=(total-f*12);
+  if(v>=0) rows+='<tr><td>'+v+' cm</td><td>'+f+' ft '+ins.toFixed(1)+' in</td></tr>';
+ }
+ document.getElementById('cf-table').innerHTML='<h3>Quick reference table</h3><table style="width:100%;border-collapse:collapse"><tr style="border-bottom:1px solid #ddd"><th>Cm</th><th>Feet / Inches</th></tr>'+rows+'</table>';
+}
+
+</script>
+</body>
+</html>

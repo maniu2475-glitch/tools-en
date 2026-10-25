@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Savings Calculator - How Long to Reach Your Goal</title>
+<meta name="description" content="Free savings calculator: see how long it takes to reach a savings goal with monthly deposits and interest, or how much to save monthly to hit a target date.">
+<meta name="keywords" content="savings calculator,savings goal calculator,how much to save,monthly savings,compound savings">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/savings-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Savings Goal Calculator">
+<meta property="og:description" content="Free savings calculator: see how long it takes to reach a savings goal with monthly deposits and interest, or how much to save monthly to hit a target date.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Savings Goal Calculator", "url": "https://maniu2475-glitch.github.io/tools-en/savings-calculator.html", "description": "Free savings calculator: see how long it takes to reach a savings goal with monthly deposits and interest, or how much to save monthly to hit a target date.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) &mdash; AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#128736;</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free &bull; Private &bull; Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+<h1>Savings Goal Calculator</h1>
+<p class="lead">Set a savings goal, your starting balance and monthly deposit — instantly see how long it takes to get there, including compound interest.</p>
+
+<div class="grid-2">
+<div>
+<h3>How long to reach my goal?</h3>
+<input type="number" id="sv-goal" class="full-input" placeholder="Savings goal ($)" step="0.01" min="1" style="margin-bottom:8px">
+<input type="number" id="sv-start" class="full-input" placeholder="Starting balance ($)" step="0.01" min="0" style="margin-bottom:8px">
+<input type="number" id="sv-month" class="full-input" placeholder="Monthly deposit ($)" step="0.01" min="0" style="margin-bottom:8px">
+<input type="number" id="sv-rate" class="full-input" placeholder="Annual interest rate (%)" step="0.01" min="0" value="4">
+<div class="btn-group"><button class="btn" onclick="svCalc()">Calculate</button></div>
+<div class="output-box" id="sv-out">Fill in the fields above.</div>
+</div>
+<div>
+<h3>How much per month?</h3>
+<input type="number" id="sv-goal2" class="full-input" placeholder="Savings goal ($)" step="0.01" min="1" style="margin-bottom:8px">
+<input type="number" id="sv-start2" class="full-input" placeholder="Starting balance ($)" step="0.01" min="0" style="margin-bottom:8px">
+<input type="number" id="sv-years" class="full-input" placeholder="Years to reach goal" step="0.25" min="0.08" style="margin-bottom:8px">
+<input type="number" id="sv-rate2" class="full-input" placeholder="Annual interest rate (%)" step="0.01" min="0" value="4">
+<div class="btn-group"><button class="btn" onclick="svCalc2()">Calculate</button></div>
+<div class="output-box" id="sv-out2">Fill in the fields above.</div>
+</div>
+</div>
+<h2 style="margin-top:28px">About this tool</h2>
+<p>Planning savings is mostly a compounding problem: every deposit you make earns interest, and that interest earns interest too. This calculator simulates month by month so the numbers reflect how real accounts work. Mode one answers "how long will it take?" — enter your goal, current balance, monthly deposit and the annual rate your savings account or index fund is expected to return, and you get the exact number of months plus a breakdown of deposits versus interest. Mode two flips the question: choose a deadline (for example a house down payment in 5 years) and the calculator tells you the exact monthly deposit required, accounting for interest along the way. Typical rates to experiment with: 0% for cash under the mattress, 4-5% for high-yield savings accounts, and 7-8% for long-run stock market averages. All calculations happen locally in your browser.</p>
+<h2>Related tools</h2>
+<div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="compound-interest-calculator.html">Compound interest</a><a class="btn btn-outline" href="loan-calculator.html">Loan calculator</a><a class="btn btn-outline" href="simple-interest-calculator.html">Simple interest</a></div>
+<p style="margin-top:20px"><a href="index.html">&#8592; All tools</a></p>
+</section>
+</main>
+<footer class="site-footer"><div class="container"><p>Free online tools &bull; Everything runs in your browser &bull; No data uploaded</p></div></footer>
+<script>
+
+function svSim(start,goal,monthly,ratePct,maxYears){
+ var bal=start, m=0, mr=ratePct/100/12;
+ while(bal<goal&&m<maxYears*12){ bal=bal*(1+mr)+monthly; m++; }
+ return {bal:bal,m:m};
+}
+function svCalc(){
+ var goal=parseFloat(document.getElementById('sv-goal').value),
+     start=parseFloat(document.getElementById('sv-start').value)||0,
+     monthly=parseFloat(document.getElementById('sv-month').value),
+     rate=parseFloat(document.getElementById('sv-rate').value)||0,
+     o=document.getElementById('sv-out');
+ if(isNaN(goal)||goal<=0||isNaN(monthly)||monthly<0){o.textContent='Enter a valid goal and deposit.';return;}
+ if(start>=goal){o.innerHTML='You have already reached your goal! 🎉';return;}
+ if(monthly===0&&rate===0){o.textContent='With no deposits and no interest, the goal is never reached.';return;}
+ var r=svSim(start,goal,monthly,rate,120);
+ if(r.bal<goal){o.textContent='Not reached within 10 years — try a higher deposit.';return;}
+ var yrs=Math.floor(r.m/12), mo=r.m%12;
+ o.innerHTML='Goal reached in <strong>'+(yrs>0?(yrs+' year'+(yrs>1?'s ':' ')+mo):mo)+' month'+(r.m>1?'s':'')+'</strong><br>'+
+  'Balance at that point: <strong>$'+r.bal.toFixed(2)+'</strong><br>'+
+  'Total deposited: $'+(start+monthly*r.m).toFixed(2)+' &nbsp;|&nbsp; Interest earned: $'+(r.bal-start-monthly*r.m).toFixed(2);
+}
+function svCalc2(){
+ var goal=parseFloat(document.getElementById('sv-goal2').value),
+     start=parseFloat(document.getElementById('sv-start2').value)||0,
+     years=parseFloat(document.getElementById('sv-years').value),
+     rate=parseFloat(document.getElementById('sv-rate2').value)||0,
+     o=document.getElementById('sv-out2');
+ if(isNaN(goal)||goal<=0||isNaN(years)||years<=0){o.textContent='Enter a valid goal and timeframe.';return;}
+ var n=Math.max(1,Math.round(years*12)), mr=rate/100/12, fv=0;
+ for(var i=0;i<n;i++) fv=(fv+1)*(1+mr);
+ var need=(goal-start*Math.pow(1+mr,n))/fv;
+ if(need<=0){o.innerHTML='Your starting balance already grows into your goal — no deposits needed!';return;}
+ o.innerHTML='Deposit <strong>$'+need.toFixed(2)+' per month</strong> for '+years+' years<br>'+
+  'Total deposits: $'+(need*n).toFixed(2)+' &nbsp;|&nbsp; Interest earned: $'+(goal-start-need*n).toFixed(2);
+}
+
+</script>
+</body>
+</html>

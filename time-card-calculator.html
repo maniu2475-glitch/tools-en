@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Time Card Calculator - Work Hours & Pay</title>
+<meta name="description" content="Free time card calculator: enter clock-in and clock-out times, subtract breaks, and get total daily and weekly hours plus gross pay. Lunch break handling included.">
+<meta name="keywords" content="time card calculator,work hours calculator,hours worked calculator,payroll calculator,timesheet calculator">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/time-card-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Time Card Calculator">
+<meta property="og:description" content="Free time card calculator: enter clock-in and clock-out times, subtract breaks, and get total daily and weekly hours plus gross pay. Lunch break handling included.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Time Card Calculator", "url": "https://maniu2475-glitch.github.io/tools-en/time-card-calculator.html", "description": "Free time card calculator: enter clock-in and clock-out times, subtract breaks, and get total daily and weekly hours plus gross pay. Lunch break handling included.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) &mdash; AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#128736;</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free &bull; Private &bull; Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+<h1>Time Card Calculator</h1>
+<p class="lead">Log your clock-in and clock-out times for each day, subtract lunch breaks, and see total hours and gross pay for the week.</p>
+
+<div id="tcw-table"></div>
+<div class="grid-2" style="margin-top:12px">
+<div><h3>Pay</h3>
+<input type="number" id="tcw-rate" class="full-input" placeholder="Hourly rate ($)" step="0.01" min="0">
+<div class="btn-group"><button class="btn" onclick="tcwAddRow()">+ Add row</button><button class="btn" onclick="tcwCalc()">Calculate total</button></div>
+</div>
+<div><h3>Result</h3><div class="output-box" id="tcw-out">Enter times, then calculate.</div></div>
+</div>
+<h2 style="margin-top:28px">About this tool</h2>
+<p>A time card calculator turns scattered clock-in and clock-out notes into a clean weekly total. Enter the times you started and finished each day, how many minutes of unpaid lunch you took, and the tool computes the exact paid hours — handling overnight shifts (a 22:00 to 06:00 shift correctly counts 8 hours, not negative 16) and lunch deductions automatically. If you fill in an hourly rate, it also shows your gross pay for the week, which is useful for checking that a paycheck matches the hours you actually worked. The default layout covers Monday to Friday; press Add row to include Saturday and Sunday for shift workers. Everything is rounded honestly: totals are exact to the minute, with the equivalent hours-and-minutes shown per day. The whole calculation runs in your browser, so your timesheet data stays private — nothing is uploaded to any server.</p>
+<h2>Related tools</h2>
+<div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="countdown-timer.html">Countdown timer</a><a class="btn btn-outline" href="stopwatch.html">Stopwatch</a><a class="btn btn-outline" href="week-number-calculator.html">Week number</a></div>
+<p style="margin-top:20px"><a href="index.html">&#8592; All tools</a></p>
+</section>
+</main>
+<footer class="site-footer"><div class="container"><p>Free online tools &bull; Everything runs in your browser &bull; No data uploaded</p></div></footer>
+<script>
+
+var TCW_DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'], TCW_N=5;
+function tcwRender(){
+ var h='<table style="width:100%;border-collapse:collapse"><tr style="border-bottom:1px solid #ddd"><th>Day</th><th>Clock in</th><th>Lunch (min)</th><th>Clock out</th></tr>';
+ for(var i=0;i<TCW_N;i++){
+  h+='<tr style="text-align:center"><td>'+TCW_DAYS[i]+'</td>'+
+   '<td><input type="time" id="tcw-in-'+i+'" value="09:00"></td>'+
+   '<td><input type="number" id="tcw-lu-'+i+'" value="30" min="0" style="width:70px"></td>'+
+   '<td><input type="time" id="tcw-out-'+i+'" value="17:00"></td></tr>';
+ }
+ document.getElementById('tcw-table').innerHTML=h+'</table>';
+}
+function tcwAddRow(){ if(TCW_N<7){TCW_N++;tcwRender();} else {document.getElementById('tcw-out').textContent='Max 7 days.';} }
+function tcwMins(t){ var p=t.split(':'); return (parseInt(p[0],10)||0)*60+(parseInt(p[1],10)||0); }
+function tcwCalc(){
+ var total=0, rows='', rate=parseFloat(document.getElementById('tcw-rate').value)||0;
+ for(var i=0;i<TCW_N;i++){
+  var ti=document.getElementById('tcw-in-'+i).value||'',
+      to=document.getElementById('tcw-out-'+i).value||'',
+      lu=parseFloat(document.getElementById('tcw-lu-'+i).value)||0;
+  if(!ti||!to){continue;}
+  var a=tcwMins(ti), b=tcwMins(to);
+  if(b<=a) b+=1440;
+  var worked=(b-a-lu)/60;
+  if(worked<0) worked=0;
+  total+=worked;
+  rows+=TCW_DAYS[i]+': '+worked.toFixed(2)+' h · '+Math.floor(worked)+'h '+Math.round((worked%1)*60)+'m<br>';
+ }
+ var pay=rate>0?'<br><strong>Gross pay: $'+(total*rate).toFixed(2)+'</strong> (at $'+rate+'/h)':'';
+ document.getElementById('tcw-out').innerHTML=rows+'<br><strong>Total: '+total.toFixed(2)+' hours</strong>'+pay;
+}
+tcwRender();
+
+</script>
+</body>
+</html>

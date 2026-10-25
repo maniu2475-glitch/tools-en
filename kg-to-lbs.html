@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kg to Pounds Converter (and Pounds to Kg)</title>
+<meta name="description" content="Convert kilograms to pounds and ounces instantly, or pounds back to kilograms. Accurate to 2 decimals, includes a quick reference table.">
+<meta name="keywords" content="kg to lbs,kg to pounds,pounds to kg,weight converter,70 kg in pounds,lbs to kg">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/kg-to-lbs.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kg to Pounds Converter">
+<meta property="og:description" content="Convert kilograms to pounds and ounces instantly, or pounds back to kilograms. Accurate to 2 decimals, includes a quick reference table.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Kg to Pounds Converter", "url": "https://maniu2475-glitch.github.io/tools-en/kg-to-lbs.html", "description": "Convert kilograms to pounds and ounces instantly, or pounds back to kilograms. Accurate to 2 decimals, includes a quick reference table.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) &mdash; AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#128736;</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free &bull; Private &bull; Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+<h1>Kg to Pounds Converter</h1>
+<p class="lead">Enter a weight in kilograms or pounds and get the precise conversion, including the ounces remainder.</p>
+
+<div class="grid-2">
+<div>
+<h3>Kilograms &rarr; Pounds</h3>
+<input type="number" id="kl-kg" class="full-input" placeholder="Weight in kg" step="0.01" min="0">
+<div class="btn-group"><button class="btn" onclick="klK2P()">Convert to lb</button></div>
+<div class="output-box" id="kl-out1">Enter a value above.</div>
+</div>
+<div>
+<h3>Pounds &rarr; Kilograms</h3>
+<input type="number" id="kl-lb" class="full-input" placeholder="Weight in pounds" step="0.01" min="0">
+<div class="btn-group"><button class="btn" onclick="klP2K()">Convert to kg</button></div>
+<div class="output-box" id="kl-out2">Enter a value above.</div>
+</div>
+</div>
+<div class="output-box" id="kl-table"></div>
+<h2 style="margin-top:28px">About this tool</h2>
+<p>Kilograms are the standard unit of mass almost everywhere in the world, while pounds (lb) and ounces (oz) are still used for body weight, gym plates and produce in the United States, Liberia and a few other places. The exact conversion factor is 1 kilogram = 2.2046226218 pounds, and one pound contains 16 ounces. Because the factor is irrational-looking, mental math gets messy fast — 70 kg is about 154.3 lb, and 200 lb is roughly 90.7 kg. This converter does the arithmetic instantly in both directions and also breaks pounds into the familiar pound + ounce format used on scales. It shows nearby values in a small table so you can sanity-check your gym progress or a recipe without re-typing. The tool is pure client-side JavaScript: your data never leaves the browser.</p>
+<h2>Related tools</h2>
+<div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="inches-to-cm.html">Inches to cm</a><a class="btn btn-outline" href="bmi-calculator.html">BMI calculator</a><a class="btn btn-outline" href="unit-converter.html">Unit converter</a></div>
+<p style="margin-top:20px"><a href="index.html">&#8592; All tools</a></p>
+</section>
+</main>
+<footer class="site-footer"><div class="container"><p>Free online tools &bull; Everything runs in your browser &bull; No data uploaded</p></div></footer>
+<script>
+
+function klK2P(){
+ var kg=parseFloat(document.getElementById('kl-kg').value);
+ var o=document.getElementById('kl-out1');
+ if(isNaN(kg)||kg<0){o.textContent='Enter a valid weight.';return;}
+ var lb=kg*2.2046226218, whole=Math.floor(lb), oz=(lb-whole)*16;
+ o.innerHTML='<strong>'+kg+' kg</strong> = <strong>'+lb.toFixed(2)+' lb</strong> ('+whole+' lb '+oz.toFixed(1)+' oz)<br>'+
+  'Stones: '+(lb/14).toFixed(2)+' st';
+ klTable(kg);
+}
+function klP2K(){
+ var lb=parseFloat(document.getElementById('kl-lb').value);
+ var o=document.getElementById('kl-out2');
+ if(isNaN(lb)||lb<0){o.textContent='Enter a valid weight.';return;}
+ var kg=lb/2.2046226218;
+ o.innerHTML='<strong>'+lb+' lb</strong> = <strong>'+kg.toFixed(2)+' kg</strong><br>'+
+  'Grams: '+Math.round(kg*1000)+' g';
+ klTable(Math.round(kg*2)/2);
+}
+function klTable(kg){
+ var rows='',base=Math.floor(kg)-2,i;
+ for(i=0;i<6;i++){
+  var v=base+i; if(v<1) continue;
+  rows+='<tr><td>'+v+' kg</td><td>'+(v*2.2046226218).toFixed(1)+' lb</td></tr>';
+ }
+ document.getElementById('kl-table').innerHTML='<h3>Nearby conversions</h3><table style="width:100%;border-collapse:collapse"><tr style="border-bottom:1px solid #ddd"><th>Kg</th><th>Pounds</th></tr>'+rows+'</table>';
+}
+
+</script>
+</body>
+</html>

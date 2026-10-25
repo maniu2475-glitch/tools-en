@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Area Converter - Square Feet, Square Meters, Acres, Hectares</title>
+<meta name="description" content="Free area converter: instantly convert between square meters, square feet, square yards, acres, hectares, square miles and square kilometers.">
+<meta name="keywords" content="area converter,square feet to square meters,sqft to sqm,acres to hectares,area unit converter,square meter calculator">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/area-converter.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Area Converter (sqft, m², acres…)">
+<meta property="og:description" content="Free area converter: instantly convert between square meters, square feet, square yards, acres, hectares, square miles and square kilometers.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Area Converter (sqft, m\u00b2, acres\u2026)", "url": "https://maniu2475-glitch.github.io/tools-en/area-converter.html", "description": "Free area converter: instantly convert between square meters, square feet, square yards, acres, hectares, square miles and square kilometers.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) &mdash; AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#128736;</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free &bull; Private &bull; Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+<h1>Area Converter (sqft, m², acres…)</h1>
+<p class="lead">Enter an area in any unit and see it converted to every other common area unit at once.</p>
+
+<div>
+<h3>Convert area</h3>
+<input type="number" id="ac-val" class="full-input" placeholder="Value" step="any">
+<div class="btn-group" id="ac-units">
+<button class="btn" onclick="acSet('m2')">m²</button>
+<button class="btn" onclick="acSet('ft2')">ft²</button>
+<button class="btn" onclick="acSet('ac')">acre</button>
+<button class="btn" onclick="acSet('ha')">hectare</button>
+<button class="btn" onclick="acSet('yd2')">yd²</button>
+<button class="btn" onclick="acSet('km2')">km²</button>
+<button class="btn" onclick="acSet('mi2')">mi²</button>
+</div>
+<div class="output-box" id="ac-out">Enter a value and pick a unit.</div>
+</div>
+<h2 style="margin-top:28px">About this tool</h2>
+<p>Area units trip people up because they convert in squares, not straight lines: one square foot is 0.09290304 square meters (not 0.3048), and an acre is a surprising 4,046.86 m². Real estate listings, land surveys, flooring packages and gardening guides all use different units — square feet in the US, square meters nearly everywhere else, acres and hectares for land, square miles and kilometers for geography. This converter shows all seven common units at once, so you can see in a single glance, for example, that a 2,000 ft² apartment is about 185.8 m², or that a 10-acre plot is just over 4 hectares. Click a unit button, type a value, and every conversion updates instantly as you type. Precision is maintained using exact international definitions of the foot and the acre. All conversion math runs locally in your browser with zero data transfer.</p>
+<h2>Related tools</h2>
+<div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="inches-to-cm.html">Inches to cm</a><a class="btn btn-outline" href="unit-converter.html">Unit converter</a><a class="btn btn-outline" href="cm-to-feet.html">Cm to feet</a></div>
+<p style="margin-top:20px"><a href="index.html">&#8592; All tools</a></p>
+</section>
+</main>
+<footer class="site-footer"><div class="container"><p>Free online tools &bull; Everything runs in your browser &bull; No data uploaded</p></div></footer>
+<script>
+
+var AC_BASE={m2:1, ft2:0.09290304, yd2:0.83612736, ac:4046.8564224, ha:10000, km2:1e6, mi2:2589988.110336};
+var AC_NAME={m2:'Square meters', ft2:'Square feet', yd2:'Square yards', ac:'Acres', ha:'Hectares', km2:'Square kilometers', mi2:'Square miles'};
+var AC_UNIT='';
+function acSet(u){
+ AC_UNIT=u;
+ document.getElementById('ac-val').value=document.getElementById('ac-val').value||'1';
+ acCalc();
+}
+function acCalc(){
+ var v=parseFloat(document.getElementById('ac-val').value);
+ var o=document.getElementById('ac-out');
+ if(!AC_UNIT){o.textContent='Pick a unit first.';return;}
+ if(isNaN(v)){o.textContent='Enter a valid number.';return;}
+ var base=v*AC_BASE[AC_UNIT], rows='';
+ for(var k in AC_BASE){
+  var x=base/AC_BASE[k];
+  rows+=(k===AC_UNIT?'<strong>':'')+AC_NAME[k]+': '+(x>=1000?x.toLocaleString('en-US',{maximumFractionDigits:2}):x.toPrecision(6))+(k===AC_UNIT?'</strong>':'')+'<br>';
+ }
+ o.innerHTML='<strong>'+v+' '+AC_NAME[AC_UNIT]+'</strong> equals:<br>'+rows;
+}
+document.getElementById('ac-val').addEventListener('input',function(){if(AC_UNIT)acCalc();});
+acSet('m2');
+
+</script>
+</body>
+</html>
