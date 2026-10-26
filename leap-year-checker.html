@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leap Year Checker - Is This Year a Leap Year?</title>
+<meta name="description" content="Free online leap year checker: type any year and instantly learn whether it is a leap year, with the exact Gregorian calendar rule and the nearest past and future leap years.">
+<meta name="keywords" content="leap year checker,is 2026 a leap year,leap year rule,leap year list,next leap year,gregorian calendar rule">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/leap-year-checker.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Leap Year Checker">
+<meta property="og:description" content="Free online leap year checker: type any year and instantly learn whether it is a leap year, with the exact Gregorian calendar rule and the nearest past and future leap years.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Leap Year Checker", "url": "https://maniu2475-glitch.github.io/tools-en/leap-year-checker.html", "description": "Free online leap year checker: type any year and instantly learn whether it is a leap year, with the exact Gregorian calendar rule and the nearest past and future leap years.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Leap Year Checker</h1>
+      <p class="tool-desc">Test whether any year has a February 29th — everything runs in your browser, nothing is uploaded.</p>
+<div style="text-align:center">
+<label>Year</label><input id="ly-in" type="number" value="2026" style="width:120px" placeholder="e.g. 2026">
+<div class="btn-group" style="justify-content:center"><button class="btn btn-primary" onclick="lyRun()">Check</button></div>
+<div class="result-box" id="ly-out" style="margin-top:14px"></div>
+</div>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">A leap year exists because the Earth does not orbit the Sun in a whole number of days — the tropical year is about 365.2422 days, so without occasional extra days the calendar would drift by roughly one day every four years and, over centuries, Easter would wander into summer. The Gregorian reform of 1582 fixed the older Julian over-correction with a two-step rule that this checker applies exactly: a year is a leap year if it is divisible by 4, except century years (divisible by 100), which are not leap years — unless they are also divisible by 400. So 2024 and 2028 are leap years, 1900 was not, while 2000 was. The checker tells you the verdict for any year you type, explains which part of the rule fired, and lists the nearest previous and next leap years so you can plan 29-February birthdays or quarterly deadlines. Software engineers use it to sanity-check date libraries, since off-by-one leap-year bugs are notorious in billing and interest calculations. Everything is pure client-side JavaScript — no request is made for something as simple as dividing by four.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="age-calculator.html">Age Calculator</a><a class="btn btn-outline" href="date-difference-calculator.html">Date Difference</a><a class="btn btn-outline" href="percentage-calculator.html">Percentage Calculator</a><a class="btn btn-outline" href="password-generator.html">Password Generator</a><a class="btn btn-outline" href="word-counter.html">Word Counter</a><a class="btn btn-outline" href="gpa-calculator.html">GPA Calculator</a><a class="btn btn-outline" href="random-string-generator.html">Random String Generator</a><a class="btn btn-outline" href="time-card-calculator.html">Time Card Calculator</a></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2026 Online Toolbox · 887+ free browser-side tools</p></div></footer>
+<script>
+function lyIsLeap(y){return (y%4===0&&y%100!==0)||y%400===0;}
+function lyRun(){var y=+document.getElementById('ly-in').value;if(!y){document.getElementById('ly-out').textContent='Please enter a year.';return;}
+var out=document.getElementById('ly-out'),msg;if(lyIsLeap(y)){msg='✅ '+y+' IS a leap year (366 days, February has 29 days).';}
+else if(y%4!==0){msg='❌ '+y+' is not a leap year — not divisible by 4.';}
+else if(y%400!==0){msg='❌ '+y+' is not a leap year — a century year divisible by 100 must also be divisible by 400.';}
+var prev=y-1;while(!lyIsLeap(prev))prev--;var next=y+1;while(!lyIsLeap(next))next++;
+out.textContent=msg+'\nPrevious leap year: '+prev+'\nNext leap year: '+next;}
+</script>
+</body>
+</html>

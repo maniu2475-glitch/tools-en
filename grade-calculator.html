@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade Calculator - Weighted Final Grade from Test Scores</title>
+<meta name="description" content="Free online grade calculator: combine your scores with their weights to compute your current weighted grade, plus a final-exam calculator that tells you what you need on the final.">
+<meta name="keywords" content="grade calculator,weighted grade calculator,final grade calculator,what do i need on my final,calculate class grade,exam score average">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/grade-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Grade Calculator">
+<meta property="og:description" content="Free online grade calculator: combine your scores with their weights to compute your current weighted grade, plus a final-exam calculator that tells you what you need on the final.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Grade Calculator", "url": "https://maniu2475-glitch.github.io/tools-en/grade-calculator.html", "description": "Free online grade calculator: combine your scores with their weights to compute your current weighted grade, plus a final-exam calculator that tells you what you need on the final.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Grade Calculator</h1>
+      <p class="tool-desc">Compute weighted grades and final-exam targets — everything runs in your browser, nothing is uploaded.</p>
+<div class="grid-2">
+<div>
+<h3>Your scores</h3>
+<div id="gc-rows">
+<div><input class="gc-score" type="number" placeholder="Score %" style="width:90px"> <input class="gc-weight" type="number" placeholder="Weight %" style="width:90px">%</div>
+<div><input class="gc-score" type="number" placeholder="Score %" style="width:90px"> <input class="gc-weight" type="number" placeholder="Weight %" style="width:90px">%</div>
+</div>
+<div class="btn-group"><button class="btn btn-outline" onclick="gcAdd()">+ Add row</button><button class="btn btn-primary" onclick="gcCalc()">Calculate</button></div>
+<label>Final exam weight (for target calc)</label><input id="gc-finalw" type="number" value="30" style="width:80px">
+<label>Target overall grade (%)</label><input id="gc-target" type="number" value="85" style="width:80px">
+</div>
+<div>
+<div class="result-box" id="gc-out" style="white-space:pre-wrap;min-height:240px"></div>
+</div>
+</div>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">Students constantly ask two questions: "What is my grade right now?" and "What do I need on the final to reach the grade I want?" This calculator answers both. Graded components in most courses are weighted — homework 20%, quizzes 30%, midterm 25%, final 25% — so simply averaging raw scores gives the wrong answer. The calculator computes the weighted average: each score is multiplied by its weight, the products are summed, and the total is divided by the sum of entered weights, which also lets you enter partial data (e.g. only the work graded so far). The second part solves the final-exam equation algebraically: if your current weighted average is C, the final is worth W% and you want target T, then the required final score is (T − C·(100−W)/100)·100/W. If the required score is above 100% it will say so honestly, meaning the target is mathematically out of reach and extra credit is the only option; below 0% means you have already secured the target. All math runs locally in your browser — perfect for checking grades on a phone during class without installing anything.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="age-calculator.html">Age Calculator</a><a class="btn btn-outline" href="date-difference-calculator.html">Date Difference</a><a class="btn btn-outline" href="percentage-calculator.html">Percentage Calculator</a><a class="btn btn-outline" href="password-generator.html">Password Generator</a><a class="btn btn-outline" href="word-counter.html">Word Counter</a><a class="btn btn-outline" href="gpa-calculator.html">GPA Calculator</a><a class="btn btn-outline" href="random-string-generator.html">Random String Generator</a><a class="btn btn-outline" href="time-card-calculator.html">Time Card Calculator</a></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2026 Online Toolbox · 887+ free browser-side tools</p></div></footer>
+<script>
+function gcAdd(){var d=document.createElement('div');d.innerHTML='<input class="gc-score" type="number" placeholder="Score %" style="width:90px"> <input class="gc-weight" type="number" placeholder="Weight %" style="width:90px">%';document.getElementById('gc-rows').appendChild(d);}
+function gcCalc(){var scores=document.querySelectorAll('.gc-score'),weights=document.querySelectorAll('.gc-weight');var sw=0,w=0,n=0;
+for(var i=0;i<scores.length;i++){var s=+scores[i].value,wt=+weights[i].value;if(!isNaN(s)&&!isNaN(wt)&&weights[i].value!==''){sw+=s*wt;w+=wt;n++;}}
+var out=document.getElementById('gc-out');if(w===0){out.textContent='Enter at least one score and weight.';return;}
+var cur=sw/w;var lines=['Current weighted grade: '+cur.toFixed(2)+'%  ('+n+' items, weights sum '+w+'%)'];
+var letter=cur>=90?'A':cur>=80?'B':cur>=70?'C':cur>=60?'D':'F';lines.push('Approximate letter grade: '+letter);
+var fw=+document.getElementById('gc-finalw').value,target=+document.getElementById('gc-target').value;
+if(fw>0&&target>0){var need=(target-cur*(100-fw)/100)*100/fw;
+if(need>100)lines.push('\nOn a final worth '+fw+'%, to reach '+target+'% overall you would need '+need.toFixed(1)+'% — over 100%, so the target is out of reach without extra credit.');
+else if(need<=0)lines.push('\nOn a final worth '+fw+'%, you already have enough to reach '+target+'% overall (needed: '+need.toFixed(1)+'%).');
+else lines.push('\nYou need at least '+need.toFixed(1)+'% on the final (worth '+fw+'%) to reach '+target+'% overall.');}
+out.textContent=lines.join('\n');}
+</script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hours Calculator - Work Hours Between Two Times with Breaks</title>
+<meta name="description" content="Free online hours calculator: enter a start time and end time to get the exact duration between them, including overnight shifts, breaks and decimal-hours output for payroll.">
+<meta name="keywords" content="hours calculator,time duration calculator,work hours calculator,hours between two times,shift hours,time card">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/hours-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hours Calculator">
+<meta property="og:description" content="Free online hours calculator: enter a start time and end time to get the exact duration between them, including overnight shifts, breaks and decimal-hours output for payroll.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Hours Calculator", "url": "https://maniu2475-glitch.github.io/tools-en/hours-calculator.html", "description": "Free online hours calculator: enter a start time and end time to get the exact duration between them, including overnight shifts, breaks and decimal-hours output for payroll.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Hours Calculator</h1>
+      <p class="tool-desc">Compute hours between two clock times — everything runs in your browser, nothing is uploaded.</p>
+<div class="grid-2">
+<div>
+<label>Start time (HH:MM)</label>
+<input id="hc-start" type="time" value="09:00">
+<label>End time (HH:MM)</label>
+<input id="hc-end" type="time" value="17:30">
+<label>Unpaid break (minutes)</label>
+<input id="hc-break" type="number" value="0" min="0" style="width:100px">
+<label>Hourly rate (optional)</label>
+<input id="hc-rate" type="number" value="0" min="0" step="0.01" style="width:100px">
+<div class="btn-group"><button class="btn btn-primary" onclick="hcRun()">Calculate hours</button></div>
+</div>
+<div>
+<div class="result-box" id="hc-out" style="white-space:pre-wrap"></div>
+</div>
+</div>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">Adding up working hours sounds trivial until you meet a night shift that starts at 21:00 and ends at 05:00, or a timesheet that wants decimals rather than hours and minutes. This hours calculator handles all three problems at once. It parses both clock times, detects when the end time is earlier than the start (meaning the shift crossed midnight) and rolls the day over automatically. An optional unpaid break in minutes is subtracted from the gross duration, which is how most payroll systems compute payable time. The result is shown in two formats: human-readable "h:mm" for schedules and decimal hours ("8.50") for spreadsheets, plus an estimated pay amount when you enter an hourly rate. Everything is computed locally in JavaScript, so you can type real payroll data without any privacy worry. Combine it with the time card calculator for weekly totals or the date difference calculator for multi-day spans.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="age-calculator.html">Age Calculator</a><a class="btn btn-outline" href="date-difference-calculator.html">Date Difference</a><a class="btn btn-outline" href="percentage-calculator.html">Percentage Calculator</a><a class="btn btn-outline" href="password-generator.html">Password Generator</a><a class="btn btn-outline" href="word-counter.html">Word Counter</a><a class="btn btn-outline" href="gpa-calculator.html">GPA Calculator</a><a class="btn btn-outline" href="random-string-generator.html">Random String Generator</a><a class="btn btn-outline" href="time-card-calculator.html">Time Card Calculator</a></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2026 Online Toolbox · 887+ free browser-side tools</p></div></footer>
+<script>
+function hcRun(){var s=document.getElementById('hc-start').value,e=document.getElementById('hc-end').value;if(!s||!e){document.getElementById('hc-out').textContent='Please pick both times.';return;}
+var sp=s.split(':'),ep=e.split(':');var sm=+sp[0]*60+ +sp[1],em=+ep[0]*60+ +ep[1];var diff=em-sm;if(diff<0)diff+=1440;var br=+document.getElementById('hc-break').value||0;var net=diff-br;if(net<0)net=0;var h=Math.floor(net/60),m=net%60;var dec=(net/60).toFixed(2);var rate=+document.getElementById('hc-rate').value||0;var pay=(net/60*rate).toFixed(2);var out='Gross: '+Math.floor(diff/60)+'h '+String(diff%60).padStart(2,'0')+'m\nBreak: -'+br+' min\nPaid hours: '+h+'h '+String(m).padStart(2,'0')+'m\nDecimal hours: '+dec;if(rate>0)out+='\nEstimated pay: $'+pay;document.getElementById('hc-out').textContent=out;}
+</script>
+</body>
+</html>

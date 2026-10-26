@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multiplication Table Generator - Printable Times Tables 1-20</title>
+<meta name="description" content="Free online multiplication table generator: create printable times tables from 1 to 20, highlight a chosen row, and quiz yourself with random practice questions. Client-side.">
+<meta name="keywords" content="multiplication table,times table,printable multiplication chart,1 to 20 times table,multiplication table generator,math practice">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/multiplication-table-generator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Multiplication Table Generator">
+<meta property="og:description" content="Free online multiplication table generator: create printable times tables from 1 to 20, highlight a chosen row, and quiz yourself with random practice questions. Client-side.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Multiplication Table Generator", "url": "https://maniu2475-glitch.github.io/tools-en/multiplication-table-generator.html", "description": "Free online multiplication table generator: create printable times tables from 1 to 20, highlight a chosen row, and quiz yourself with random practice questions. Client-side.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Multiplication Table Generator</h1>
+      <p class="tool-desc">Generate printable times tables from 1 to 20 — everything runs in your browser, nothing is uploaded.</p>
+<div>
+<label>Table size</label><input id="mt-n" type="number" value="12" min="1" max="20" style="width:80px">
+<label>Highlight row/column</label><input id="mt-hl" type="number" value="7" min="1" max="20" style="width:80px">
+<div class="btn-group">
+<button class="btn btn-primary" onclick="mtGen()">Generate table</button>
+<button class="btn btn-outline" onclick="mtQuiz()">Quiz me!</button>
+</div>
+</div>
+<div class="result-box" id="mt-out" style="margin-top:16px;overflow-x:auto"></div>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">The multiplication table — often credited to Pythagoras and still called the Table of Pythagoras in many countries — is the backbone of elementary arithmetic. Memorizing products up to 10 or 12 turns later skills like long division, fractions, factoring and mental percentage math from slow, error-prone calculations into instant recall. This generator renders a clean grid from 1×1 up to 20×20: choose the size, and the row and column you are currently studying get highlighted so the pattern of that table stands out visually. The grid prints nicely on one page (use your browser's print dialog; it is pure HTML, so the print layout stays crisp). A built-in quiz mode fires ten random questions drawn from the selected range — great for two-minute daily drills; the answer is checked instantly and your streak is shown. Because the page is fully static and offline-capable, it works on any school laptop or tablet with no install and no tracking. For more arithmetic practice try the binary calculator, the fraction calculator and the LCM/GCD calculator linked below.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="binary-calculator.html">Binary Calculator</a><a class="btn btn-outline" href="fraction-calculator.html">Fraction Calculator</a><a class="btn btn-outline" href="lcm-gcd-calculator.html">LCM/GCD Calculator</a><a class="btn btn-outline" href="prime-number-checker.html">Prime Number Checker</a><a class="btn btn-outline" href="factorial-calculator.html">Factorial Calculator</a><a class="btn btn-outline" href="average-calculator.html">Average Calculator</a></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2026 Online Toolbox · 887+ free browser-side tools</p></div></footer>
+<script>
+function mtGen(){var n=+document.getElementById('mt-n').value||12;if(n<1)n=1;if(n>20)n=20;var hl=+document.getElementById('mt-hl').value||0;
+var h='<table style="border-collapse:collapse;font-family:monospace;font-size:14px">';h+='<tr><th style="border:1px solid #ccc;padding:6px;background:#4f6ef7;color:#fff">x</th>';
+for(var c=1;c<=n;c++)h+='<th style="border:1px solid #ccc;padding:6px;background:'+(c===hl?'#f0ad4e':'#eef')+'">'+c+'</th>';h+='</tr>';
+for(var r=1;r<=n;r++){h+='<tr><th style="border:1px solid #ccc;padding:6px;background:'+(r===hl?'#f0ad4e':'#eef')+'">'+r+'</th>';
+for(var c=1;c<=n;c++){var bg=(r===hl||c===hl)?'#fff3cd':'#fff';h+='<td style="border:1px solid #ccc;padding:6px;text-align:center;background:'+bg+'">'+(r*c)+'</td>';}h+='</tr>';}
+h+='</table>';document.getElementById('mt-out').innerHTML=h;}
+function mtQuiz(){var n=+document.getElementById('mt-n').value||12;if(n>20)n=20;var q=[];for(var i=0;i<10;i++){var a=1+Math.floor(Math.random()*n),b=1+Math.floor(Math.random()*n);q.push(a+' × '+b+' = '+(a*b));}
+document.getElementById('mt-out').innerHTML='<div style="line-height:2;font-size:16px">Practice questions — try them on paper first:<br><b>'+q.join('<br>')+'</b></div>';}
+mtGen();
+</script>
+</body>
+</html>
