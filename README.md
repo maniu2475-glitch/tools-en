@@ -1,11 +1,19 @@
 Free Online Toolbox
 ==================
 
-115 free online tools that run 100% in your browser — no data ever uploaded.
+120 free online tools that run 100% in your browser — no data ever uploaded.
 
 **Tools:** JSON Formatter, Base64 Encode/Decode, URL Encode/Decode, QR Code Generator, QR Code Scanner, Password Generator, Password Strength Checker, Timestamp Converter, Color Converter, Color Picker, Markdown Editor, Word Counter, MD5/SHA Hash, IP Lookup, Number Converter (Radix), Unit Converter, Case Converter, Text Sort, Text Diff, Text to Binary, CSV→JSON, UUID Generator, JWT Decoder, Base32 Encode/Decode, Cron Expression Parser, Cron Job Generator, Aspect Ratio Calculator, Random String Generator, Slug Generator, HTML Entities, Image to Base64, Lorem Ipsum Generator, URL Parser, Percentage Calculator, Chmod Calculator, Regex Tester, BMI Calculator, Age Calculator, Loan Calculator, Temperature Converter, Random Number Generator, Discount Calculator, Compound Interest Calculator.
 
-Newly added tools (2026-10-26 batch):
+Newly added tools (2026-10-26, batch 2):
+
+- [Tally Counter](https://maniu2475-glitch.github.io/tools-en/tally-counter.html) — click/space counting with step, undo and localStorage
+- [Hex to ASCII Converter](https://maniu2475-glitch.github.io/tools-en/hex-to-ascii.html) — hex bytes to text and back, 0x/spaces tolerated
+- [CSV to TSV Converter](https://maniu2475-glitch.github.io/tools-en/csv-to-tsv.html) — proper quoted-field CSV parsing, bidirectional
+- [Word to Number Converter](https://maniu2475-glitch.github.io/tools-en/word-to-number.html) — English number words to digits, up to trillions
+- [Decimal to Fraction Converter](https://maniu2475-glitch.github.io/tools-en/decimal-to-fraction.html) — fully simplified fractions via GCD
+
+Newly added tools (2026-10-26, batch 1):
 
 - [Hours Calculator](https://maniu2475-glitch.github.io/tools-en/hours-calculator.html) — work hours between two times, breaks, decimal hours & pay
 - [Password Strength Checker](https://maniu2475-glitch.github.io/tools-en/password-strength-checker.html) — entropy score, crack-time estimate and tips
