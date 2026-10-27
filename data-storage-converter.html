@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Storage Converter - Bytes, KB, MB, GB, TB</title>
+<meta name="description" content="data storage converter,bytes to kb,kb to mb,mb to gb,gb to tb,binary prefixes,kibibyte">
+<meta name="keywords" content="data storage converter,bytes to kb,kb to mb,mb to gb,gb to tb,binary prefixes,kibibyte">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/data-storage-converter.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Data storage converter">
+<meta property="og:description" content="data storage converter,bytes to kb,kb to mb,mb to gb,gb to tb,binary prefixes,kibibyte">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdqAsxVwJGACZjAUIAd8a7S0L/1/1r/HPn1vAmAAGIAJRWYAfwFVAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Data storage converter", "url": "https://maniu2475-glitch.github.io/tools-en/data-storage-converter.html", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "description": "data storage converter,bytes to kb,kb to mb,mb to gb,gb to tb,binary prefixes,kibibyte"}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="menu">☰</button>
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span><span class="logo-text">Online Toolbox</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#tool-json" data-tool="json">JSON</a>
+      <a href="index.html#tool-base64" data-tool="base64">Base64</a>
+      <a href="index.html#tool-url" data-tool="url">URL</a>
+      <a href="index.html#tool-qrcode" data-tool="qrcode">QR Code</a>
+      <a href="index.html#tool-password" data-tool="password">Password</a>
+      <a href="index.html#tool-timestamp" data-tool="timestamp">Timestamp</a>
+      <a href="index.html#tool-color" data-tool="color">Color</a>
+      <a href="index.html#tool-counter" data-tool="counter">Counter</a>
+      <a href="index.html#tool-hash" data-tool="hash">Hash</a>
+      <a href="index.html#tool-ip" data-tool="ip">IP Lookup</a>
+      <a href="index.html#tool-unit" data-tool="unit">Units</a>
+      <a href="index.html#tool-case" data-tool="case">Case</a>
+      <a href="all-tools.html">All Tools</a>
+    </nav>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-datastorageconverter">
+      <h1>Data Storage Converter (Bytes / KB / MB / GB / TB / KiB / MiB)</h1>
+<div class="opt-group"><select id="ds-from" class="wide"></select><label> to </label><select id="ds-to" class="wide"></select></div>
+<div class="opt-group"><input type="number" id="ds-input" value="1" step="any" style="width:100%" placeholder="Enter value"></div>
+<div class="btn-group"><button class="btn" onclick="dsConv()">Convert</button></div>
+<div class="result" id="ds-out">Result appears here</div>
+<script>
+var dsUnits=[["bit",1/8],["Byte",1],["KB (1000)",1e3],["MB (1000²)",1e6],["GB (1000³)",1e9],["TB (1000⁴)",1e12],
+["KiB (1024)",1024],["MiB (1024²)",1048576],["GiB (1024³)",1073741824],["TiB (1024⁴)",1099511627776]];
+function dsFill(){var f=document.getElementById('ds-from'),t=document.getElementById('ds-to');dsUnits.forEach(function(u,i){f.add(new Option(u[0],i));t.add(new Option(u[0],i));});f.value=3;t.value=1;}
+function dsConv(){var v=parseFloat(document.getElementById('ds-input').value);if(isNaN(v)){document.getElementById('ds-out').textContent='Please enter a valid number';return;}
+var fi=+document.getElementById('ds-from').value,ti=+document.getElementById('ds-to').value;
+var bytes=v*dsUnits[fi][1], r=bytes/dsUnits[ti][1];
+document.getElementById('ds-out').innerHTML='<strong>'+dsNum(v)+' '+dsUnits[fi][0]+' = '+dsNum(r)+' '+dsUnits[ti][0]+'</strong><br>'+dsNum(bytes)+' bytes';}
+function dsNum(x){if(x===0)return '0';if(Math.abs(x)>=1e15||Math.abs(x)<1e-6)return x.toExponential(6);return (+x.toPrecision(12)).toString();}
+dsFill();dsConv();
+</script>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">A data storage converter translates between the many units used to measure digital information: bits, bytes, kilobytes, megabytes, gigabytes, terabytes, and the binary prefixed kibibytes (KiB), mebibytes (MiB), gibibytes (GiB) and tebibytes (TiB). The classic source of confusion is that hard-drive and network marketers use decimal units where 1 KB = 1000 bytes, while operating systems often report sizes using binary units where 1 KiB = 1024 bytes. That is why a "500 GB" drive shows as roughly 465 GiB in Windows. This converter supports both families side by side so you can check the real numbers yourself. It handles scientific input, formats large and small results cleanly, and shows the intermediate byte count. Whether you are comparing cloud storage plans, sizing a database export, estimating how many photos fit on a memory card, or decoding an ISP data cap, this free browser-side tool gives instant answers with zero signup and no data uploaded anywhere.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap">
+<a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a>
+<a class="btn btn-outline" href="base64.html">Base64 encode/decode</a>
+<a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a>
+<a class="btn btn-outline" href="qr-code-generator.html">QR code generator</a>
+<a class="btn btn-outline" href="password-generator.html">Password generator</a>
+<a class="btn btn-outline" href="timestamp-converter.html">Timestamp converter</a>
+<a class="btn btn-outline" href="color-converter.html">Color converter</a>
+<a class="btn btn-outline" href="word-counter.html">Word counter</a>
+<a class="btn btn-outline" href="md5-generator.html">Hash generator</a>
+<a class="btn btn-outline" href="case-converter.html">Case converter</a>
+<a class="btn btn-outline" href="uuid-generator.html">UUID generator</a>
+<a class="btn btn-outline" href="cron-parser.html">Cron parser</a>
+<a class="btn btn-outline" href="percentage-calculator.html">Percentage calculator</a>
+<a class="btn btn-outline" href="bmi-calculator.html">BMI calculator</a>
+<a class="btn btn-outline" href="age-calculator.html">Age calculator</a>
+<a class="btn btn-outline" href="random-string-generator.html">Random string generator</a>
+<a class="btn btn-outline" href="chmod-calculator.html">Chmod calculator</a>
+<a class="btn btn-outline" href="regex-tester.html">Regex tester</a>
+      </div>
+      <h3>Frequently asked questions</h3>
+      <div style="line-height:1.9"><details><summary><strong>Is this tool really free?</strong></summary><p>Yes, completely free with no signup, no login and no usage limits. Just open the page and use it.</p></details>
+<details><summary><strong>Is my data uploaded to a server?</strong></summary><p>No. All processing happens locally in your browser - your data never leaves your device, so even sensitive content stays private.</p></details>
+<details><summary><strong>Which browsers are supported?</strong></summary><p>All modern browsers including Chrome, Edge, Firefox and Safari, on both desktop and mobile.</p></details></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">🧰 Online Toolbox</a></p></div></footer>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+</body>
+</html>
