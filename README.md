@@ -1,17 +1,17 @@
 Free Online Toolbox
 ==================
 
-130 free online tools that run 100% in your browser — no data ever uploaded.
+133 free online tools that run 100% in your browser — no data ever uploaded.
 
 **Tools:** JSON Formatter, Base64 Encode/Decode, URL Encode/Decode, QR Code Generator, QR Code Scanner, Password Generator, Password Strength Checker, Timestamp Converter, Color Converter, Color Picker, Markdown Editor, Word Counter, MD5/SHA Hash, IP Lookup, Number Converter (Radix), Unit Converter, Case Converter, Text Sort, Text Diff, Text to Binary, CSV→JSON, UUID Generator, JWT Decoder, Base32 Encode/Decode, Cron Expression Parser, Cron Job Generator, Aspect Ratio Calculator, Random String Generator, Slug Generator, HTML Entities, Image to Base64, Lorem Ipsum Generator, URL Parser, Percentage Calculator, Chmod Calculator, Regex Tester, BMI Calculator, Age Calculator, Loan Calculator, Temperature Converter, Random Number Generator, Discount Calculator, Compound Interest Calculator.
 
-Newly added tools (2026-11-02):
+Newly added tools (2026-11-02, batch 2):
 
-- [Time Zone Converter](https://maniu2475-glitch.github.io/tools-en/time-zone-converter.html) — convert any date/time between UTC, EST, PST, CET, IST, JST and more + live world clock
-- [Online Calculator](https://maniu2475-glitch.github.io/tools-en/online-calculator.html) — basic calculator with keyboard support, percent, sqrt and memory keys
-- [Remove Line Breaks](https://maniu2475-glitch.github.io/tools-en/remove-line-breaks.html) — strip newlines, replace with space/custom separator, or remove empty lines only
-- [Credit Card Validator](https://maniu2475-glitch.github.io/tools-en/credit-card-validator.html) — Luhn algorithm check with card brand detection (Visa/MC/Amex...)
-- [Ratio Calculator](https://maniu2475-glitch.github.io/tools-en/ratio-calculator.html) — simplify ratios to lowest terms, solve A:B = C:x, percentage split
+- [Fahrenheit to Celsius Converter](https://maniu2475-glitch.github.io/tools-en/fahrenheit-to-celsius.html) — instant °F ↔ °C with Kelvin & Rankine
+- [Base58 Encoder / Decoder](https://maniu2475-glitch.github.io/tools-en/base58-encoder-decoder.html) — Bitcoin-alphabet Base58, UTF-8 safe
+- [Rounding Calculator](https://maniu2475-glitch.github.io/tools-en/rounding-calculator.html) — round up / down / nearest, any decimal places
+- [Mean, Median & Mode Calculator](https://maniu2475-glitch.github.io/tools-en/mean-median-mode-calculator.html) — full stats from any number list
+- [Cm to Inches Converter](https://maniu2475-glitch.github.io/tools-en/cm-to-inches.html) — cm ↔ inches with feet-inch breakdown & height table
 
 Newly added tools (2026-11-02):
 
@@ -134,4 +134,4 @@ Newly added tools (2026-10-25, 8th batch):
 - [Time Card Calculator](https://maniu2475-glitch.github.io/tools-en/time-card-calculator.html) - daily/weekly work hours with lunch breaks, overnight shifts and gross pay
 - [Area Converter](https://maniu2475-glitch.github.io/tools-en/area-converter.html) - m², ft², yd², acres, hectares, km², mi² all at once
 
-Total: 130 free online tools, all running 100% client-side.
+Total: 135 free online tools, all running 100% client-side.

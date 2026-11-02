@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML Minifier - Compress & Minify HTML Online Free</title>
+<meta name="description" content="Free online HTML minifier: remove comments, collapse whitespace and shrink your HTML source in one click. 100% browser-side, works offline.">
+<meta name="keywords" content="html minifier,minify html,compress html,html compressor,html optimizer,reduce html size">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/html-minifier.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="HTML Minifier">
+<meta property="og:description" content="Free online HTML minifier: remove comments, collapse whitespace and shrink your HTML source in one click. 100% browser-side, works offline.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdqAsxVwJGACZjAUIAd8a7S0L/1/1r/HPn1vAmAAGIAJRWYAfwFVAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "HTML Minifier", "url": "https://maniu2475-glitch.github.io/tools-en/html-minifier.html", "description": "Free online HTML minifier: remove comments, collapse whitespace and shrink your HTML source in one click. 100% browser-side, works offline.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="menu">&#9776;</button>
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#129520;</span><span class="logo-text">Online Toolbox</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#tool-json">JSON</a>
+      <a href="index.html#tool-base64">Base64</a>
+      <a href="index.html#tool-url">URL</a>
+      <a href="index.html#tool-qrcode">QR Code</a>
+      <a href="index.html#tool-password">Password</a>
+      <a href="index.html#tool-timestamp">Timestamp</a>
+      <a href="index.html#tool-color">Color</a>
+      <a href="index.html#tool-hash">Hash</a>
+      <a href="all-tools.html">All Tools</a>
+    </nav>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-htmlmin">
+      <h1>HTML Minifier / Compressor</h1>
+      <div class="form-row">
+        <label for="in">HTML source</label>
+        <textarea id="in" rows="10" placeholder="&lt;!DOCTYPE html&gt;&#10;&lt;html&gt; ... paste your HTML here"></textarea>
+      </div>
+      <div class="btn-group" style="flex-wrap:wrap">
+        <label style="display:inline-flex;gap:6px;align-items:center"><input type="checkbox" id="opt-comments" checked> Remove comments</label>
+        <label style="display:inline-flex;gap:6px;align-items:center"><input type="checkbox" id="opt-space" checked> Collapse whitespace</label>
+        <label style="display:inline-flex;gap:6px;align-items:center"><input type="checkbox" id="opt-quote"> Remove optional quotes</label>
+      </div>
+      <div class="btn-group">
+        <button class="btn" onclick="minify()">Minify HTML</button>
+        <button class="btn btn-outline" onclick="copyOut()">Copy result</button>
+        <button class="btn btn-outline" onclick="document.getElementById('in').value='';document.getElementById('out').textContent='';document.getElementById('stats').textContent=''">Clear</button>
+      </div>
+      <div class="form-row">
+        <label>Minified output</label>
+        <pre id="out" class="output" style="white-space:pre-wrap;word-break:break-all">-</pre>
+      </div>
+      <p id="stats" class="hint"></p>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">An HTML minifier removes everything a browser does not need: HTML comments, indentation, repeated spaces and newlines between tags. These characters are invisible to visitors but they are still transferred over the network and parsed by the browser, so trimming them reduces page weight and can shave tens of milliseconds off time-to-first-byte on slow mobile connections. A typical hand-written page shrinks by 10% to 35% depending on how heavily it is indented and commented.</p>
+      <p style="line-height:1.9">This tool runs entirely in your browser with no upload step, so you can safely minify internal templates, email HTML or customer pages that you cannot paste into a third-party service. It applies three independent passes: comment removal (with <code>&lt;!-- --&gt;</code> blocks and conditional-comment safety), whitespace collapsing between tags while preserving the contents of <code>&lt;pre&gt;</code>, <code>&lt;textarea&gt;</code> and <code>&lt;script&gt;</code>, and an optional pass that drops quotes around single-token attribute values where HTML5 allows it.</p>
+      <p style="line-height:1.9">Before deploying, always confirm the minified page renders identically. Whitespace inside inline elements such as a <code>&lt;span&gt;</code> followed by another <code>&lt;span&gt;</code> is significant (it produces a visible space), so aggressive collapsing can occasionally join two words together. If that happens, disable the whitespace checkbox or keep a space inside the first inline element. Minification is lossless for structure but not always lossless for typography.</p>
+      <p style="line-height:1.9">For best production results, combine this tool with gzip or Brotli on your web server - minifying first and compressing second always beats compressing the original source. CSS and JavaScript files should be minified separately with the <a href="css-minifier.html">CSS minifier</a> and <a href="js-minifier.html">JS minifier</a>.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap">
+<a class="btn btn-outline" href="css-minifier.html">CSS Minifier</a>
+<a class="btn btn-outline" href="js-minifier.html">JS Minifier</a>
+<a class="btn btn-outline" href="html-entities.html">HTML Entities</a>
+<a class="btn btn-outline" href="html-table-generator.html">HTML Table Generator</a>
+<a class="btn btn-outline" href="xml-formatter.html">XML Formatter</a>
+<a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a>
+<a class="btn btn-outline" href="slug-generator.html">Slug Generator</a>
+<a class="btn btn-outline" href="text-diff.html">Text Diff</a>
+      </div>
+      <h3>Frequently asked questions</h3>
+      <div style="line-height:1.9">
+        <details><summary><strong>Is this tool really free?</strong></summary><p>Yes - free, no signup, no login, no usage limit.</p></details>
+        <details><summary><strong>Is my data uploaded anywhere?</strong></summary><p>No. All processing happens locally in your browser using JavaScript. Nothing is sent to a server.</p></details>
+        <details><summary><strong>Does it work offline?</strong></summary><p>Once the page has loaded you can usually keep using it without a connection.</p></details>
+      </div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>&copy; 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">Online Toolbox</a></p></div></footer>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+<script>
+function minify(){
+  var s=document.getElementById('in').value;
+  var orig=s.length;
+  if(document.getElementById('opt-comments').checked){
+    s=s.replace(/<!--(?!\[if)[\s\S]*?-->/g,'');
+  }
+  if(document.getElementById('opt-space').checked){
+    var keep=[];
+    s=s.replace(/<(pre|textarea|script|style)\b[\s\S]*?<\/\1>/gi,function(m){keep.push(m);return '\u0000'+(keep.length-1)+'\u0000';});
+    s=s.replace(/\s+/g,' ').replace(/>\s+</g,'><').replace(/\s+>/g,'>');
+    s=s.replace(/\u0000(\d+)\u0000/g,function(m,i){return keep[+i];});
+  }
+  if(document.getElementById('opt-quote').checked){
+    s=s.replace(/="([A-Za-z0-9_\-.:#%]+)"/g,'=$1');
+  }
+  document.getElementById('out').textContent=s.trim();
+  var n=s.trim().length;
+  var pct=orig?((1-n/orig)*100):0;
+  document.getElementById('stats').textContent='Original '+orig+' bytes -> minified '+n+' bytes (saved '+(orig-n)+' bytes, '+pct.toFixed(1)+'%).';
+}
+function copyOut(){
+  var s=document.getElementById('out').textContent;
+  if(navigator.clipboard&&s&&s!=='-'){navigator.clipboard.writeText(s);}
+}
+</script>
+</body>
+</html>

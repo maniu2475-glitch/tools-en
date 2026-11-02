@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHA-512 Hash Generator - Free Online SHA2-512 Calculator</title>
+<meta name="description" content="Free online SHA-512 hash generator. Compute the 512-bit SHA-2 digest of any text instantly in your browser - no upload, no signup, no tracking.">
+<meta name="keywords" content="sha512,sha-512 generator,sha512 hash,hashing tool,sha2-512,checksum generator">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/sha512-hash-generator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SHA-512 Hash Generator">
+<meta property="og:description" content="Free online SHA-512 hash generator. Compute the 512-bit SHA-2 digest of any text instantly in your browser - no upload, no signup, no tracking.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdqAsxVwJGACZjAUIAd8a7S0L/1/1r/HPn1vAmAAGIAJRWYAfwFVAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "SHA-512 Hash Generator", "url": "https://maniu2475-glitch.github.io/tools-en/sha512-hash-generator.html", "description": "Free online SHA-512 hash generator. Compute the 512-bit SHA-2 digest of any text instantly in your browser - no upload, no signup, no tracking.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="menu">&#9776;</button>
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#129520;</span><span class="logo-text">Online Toolbox</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#tool-json">JSON</a>
+      <a href="index.html#tool-base64">Base64</a>
+      <a href="index.html#tool-url">URL</a>
+      <a href="index.html#tool-qrcode">QR Code</a>
+      <a href="index.html#tool-password">Password</a>
+      <a href="index.html#tool-timestamp">Timestamp</a>
+      <a href="index.html#tool-color">Color</a>
+      <a href="index.html#tool-hash">Hash</a>
+      <a href="all-tools.html">All Tools</a>
+    </nav>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-sha512">
+      <h1>SHA-512 Hash Generator</h1>
+      <div class="form-row">
+        <label for="in">Text to hash</label>
+        <textarea id="in" rows="6" placeholder="Type or paste any text here..."></textarea>
+      </div>
+      <div class="btn-group">
+        <button class="btn" onclick="doHash()">Generate SHA-512</button>
+        <button class="btn btn-outline" onclick="document.getElementById('in').value='';document.getElementById('out').textContent='';document.getElementById('bits').textContent='';">Clear</button>
+        <button class="btn btn-outline" onclick="copyOut()">Copy hash</button>
+      </div>
+      <div class="form-row">
+        <label>SHA-512 digest (hex)</label>
+        <pre id="out" class="output" style="word-break:break-all">-</pre>
+      </div>
+      <p id="bits" class="hint"></p>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">SHA-512 is a cryptographic hash function from the SHA-2 family, defined in FIPS PUB 180-4 and published by NIST in 2001. It takes any amount of input data - a single character or a multi-gigabyte file - and produces a fixed 512-bit (64-byte) digest, normally written as 128 hexadecimal characters. Unlike encryption, hashing is a one-way operation: there is no key and no way to reverse a digest back into the original message.</p>
+      <p style="line-height:1.9">This page computes SHA-512 entirely with the Web Crypto API built into your browser (<code>crypto.subtle.digest</code>). Your text never leaves your device and there is no server-side logging, which makes the tool safe for hashing API keys, license strings, tokens or any other sensitive value you only want a fingerprint of. The same input always yields the same digest, so you can compare hashes computed here with hashes produced by <code>sha512sum</code> on Linux, <code>shasum -a 512</code> on macOS or <code>Get-FileHash -Algorithm SHA512</code> in PowerShell - the hex strings will match exactly.</p>
+      <p style="line-height:1.9">SHA-512 is used for integrity checks, digital signature schemes, password-derived keys (as part of HMAC and PBKDF2), blockchain address derivation and TLS certificate fingerprints. It is faster than SHA-256 on 64-bit CPUs because its internal word size matches the register width, while still offering a much larger output space. For new password storage you should still use a memory-hard KDF such as Argon2id or bcrypt rather than a bare hash, but for checksums and content addressing SHA-512 remains an excellent choice.</p>
+      <p style="line-height:1.9">Input is hashed as UTF-8 text, so accented characters and emoji are converted to their multi-byte form before hashing - this is exactly what most server-side libraries do, meaning your digest will match theirs. If you need the shorter 256-bit variant, use the <a href="sha256-hash-generator.html">SHA-256 generator</a>; for the legacy MD5 algorithm see the <a href="md5-generator.html">MD5 generator</a>.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap">
+<a class="btn btn-outline" href="sha256-hash-generator.html">SHA-256 Generator</a>
+<a class="btn btn-outline" href="md5-generator.html">MD5 Generator</a>
+<a class="btn btn-outline" href="base64.html">Base64 Encode</a>
+<a class="btn btn-outline" href="password-generator.html">Password Generator</a>
+<a class="btn btn-outline" href="uuid-generator.html">UUID Generator</a>
+<a class="btn btn-outline" href="jwt-decoder.html">JWT Decoder</a>
+<a class="btn btn-outline" href="base32.html">Base32 Encoder</a>
+<a class="btn btn-outline" href="password-strength.html">Password Strength</a>
+      </div>
+      <h3>Frequently asked questions</h3>
+      <div style="line-height:1.9">
+        <details><summary><strong>Is this tool really free?</strong></summary><p>Yes - free, no signup, no login, no usage limit.</p></details>
+        <details><summary><strong>Is my data uploaded anywhere?</strong></summary><p>No. All processing happens locally in your browser using JavaScript. Nothing is sent to a server.</p></details>
+        <details><summary><strong>Does it work offline?</strong></summary><p>Once the page has loaded you can usually keep using it without a connection.</p></details>
+      </div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>&copy; 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">Online Toolbox</a></p></div></footer>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+<script>
+function hex(buf){return Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,'0')}).join('');}
+function doHash(){
+  var t=document.getElementById('in').value;
+  crypto.subtle.digest('SHA-512', new TextEncoder().encode(t)).then(function(d){
+    document.getElementById('out').textContent=hex(d);
+    document.getElementById('bits').textContent='Input length: '+t.length+' chars, digest: 512 bits / 128 hex chars / '+t.length+' -> '+hex(d).length;
+  }).catch(function(e){document.getElementById('out').textContent='Error: '+e.message;});
+}
+function copyOut(){
+  var s=document.getElementById('out').textContent;
+  if(navigator.clipboard){navigator.clipboard.writeText(s);}
+}
+document.addEventListener('DOMContentLoaded',function(){
+  var el=document.getElementById('in');
+  if(el){el.addEventListener('input',doHash);}
+});
+</script>
+</body>
+</html>

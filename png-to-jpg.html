@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PNG to JPG Converter Online Free - No Upload, Instant</title>
+<meta name="description" content="Convert PNG images to JPG in your browser with adjustable quality. Files never leave your device - private, free and unlimited.">
+<meta name="keywords" content="png to jpg,png to jpeg,convert png to jpg online,image converter,free png converter,compress png">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/png-to-jpg.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="PNG to JPG Converter">
+<meta property="og:description" content="Convert PNG images to JPG in your browser with adjustable quality. Files never leave your device - private, free and unlimited.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdqAsxVwJGACZjAUIAd8a7S0L/1/1r/HPn1vAmAAGIAJRWYAfwFVAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "PNG to JPG Converter", "url": "https://maniu2475-glitch.github.io/tools-en/png-to-jpg.html", "description": "Convert PNG images to JPG in your browser with adjustable quality. Files never leave your device - private, free and unlimited.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="menu">&#9776;</button>
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#129520;</span><span class="logo-text">Online Toolbox</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#tool-json">JSON</a>
+      <a href="index.html#tool-base64">Base64</a>
+      <a href="index.html#tool-url">URL</a>
+      <a href="index.html#tool-qrcode">QR Code</a>
+      <a href="index.html#tool-password">Password</a>
+      <a href="index.html#tool-timestamp">Timestamp</a>
+      <a href="index.html#tool-color">Color</a>
+      <a href="index.html#tool-hash">Hash</a>
+      <a href="all-tools.html">All Tools</a>
+    </nav>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-pngtojpg">
+      <h1>PNG to JPG Converter</h1>
+      <div class="form-row">
+        <label for="file">Choose a PNG image</label>
+        <input type="file" id="file" accept="image/png,image/*">
+      </div>
+      <div class="form-row">
+        <label for="q">JPEG quality: <span id="qv">92</span>%</label>
+        <input type="range" id="q" min="30" max="100" value="92" oninput="document.getElementById('qv').textContent=this.value;convert()">
+      </div>
+      <div class="form-row">
+        <label>Background for transparency (JPG has no alpha channel)</label>
+        <input type="color" id="bg" value="#ffffff" oninput="convert()">
+      </div>
+      <div class="btn-group">
+        <a id="dl" class="btn" download="converted.jpg" href="#" style="display:none">Download JPG</a>
+      </div>
+      <p id="info" class="hint"></p>
+      <div class="form-row"><canvas id="cv" style="max-width:100%;border:1px solid #e2e6f0;border-radius:8px"></canvas></div>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">PNG is a lossless format that is ideal for screenshots, icons and graphics with sharp edges, but photographic images stored as PNG can easily be ten times larger than the equivalent JPEG. Converting to JPG lets you control the quality/size trade-off: at 90-95% quality most photos are visually indistinguishable from the source while occupying a fraction of the disk space, which is exactly what you need before uploading to a CMS, sending by email or embedding in a slide deck.</p>
+      <p style="line-height:1.9">Because JPEG has no alpha channel, every transparent pixel must be flattened onto a solid colour. This converter draws your PNG onto a canvas filled with the colour you pick (white by default) before encoding, so logos with transparency come out clean instead of showing black background artifacts. Pick a colour that matches the destination page background for the best result.</p>
+      <p style="line-height:1.9">Everything happens locally through the Canvas API and <code>canvas.toBlob('image/jpeg', quality)</code> - your images are never uploaded to any server, which matters if you are converting ID scans, medical images, unreleased product shots or client work under NDA. There are no file-size limits other than your device's memory, and no daily quota.</p>
+      <p style="line-height:1.9">Tips for the smallest acceptable file: lower quality to around 80% for web thumbnails, resize large photos before converting (a 4000px photo displayed at 800px wastes bandwidth), and remember that repeated re-encoding degrades quality, so always convert from the original PNG rather than from an already compressed JPG. Need the opposite direction? Try the <a href="image-to-base64.html">image to Base64</a> encoder.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap">
+<a class="btn btn-outline" href="image-to-base64.html">Image to Base64</a>
+<a class="btn btn-outline" href="qr-code-generator.html">QR Code Generator</a>
+<a class="btn btn-outline" href="barcode-generator.html">Barcode Generator</a>
+<a class="btn btn-outline" href="color-picker.html">Color Picker</a>
+<a class="btn btn-outline" href="hex-to-rgb.html">HEX to RGB</a>
+<a class="btn btn-outline" href="base64.html">Base64 Encode</a>
+<a class="btn btn-outline" href="screen-resolution-checker.html">Screen Resolution Checker</a>
+<a class="btn btn-outline" href="text-diff.html">Text Diff</a>
+      </div>
+      <h3>Frequently asked questions</h3>
+      <div style="line-height:1.9">
+        <details><summary><strong>Is this tool really free?</strong></summary><p>Yes - free, no signup, no login, no usage limit.</p></details>
+        <details><summary><strong>Is my data uploaded anywhere?</strong></summary><p>No. All processing happens locally in your browser using JavaScript. Nothing is sent to a server.</p></details>
+        <details><summary><strong>Does it work offline?</strong></summary><p>Once the page has loaded you can usually keep using it without a connection.</p></details>
+      </div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>&copy; 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">Online Toolbox</a></p></div></footer>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+<script>
+var img=null, lastName='converted.jpg';
+document.getElementById('file').addEventListener('change',function(e){
+  var f=e.target.files[0]; if(!f) return;
+  lastName=(f.name||'image').replace(/\.[^.]+$/,'')+'.jpg';
+  var r=new FileReader();
+  r.onload=function(){ var im=new Image(); im.onload=function(){ img=im; convert(); }; im.src=r.result; };
+  r.readAsDataURL(f);
+});
+function convert(){
+  if(!img) return;
+  var cv=document.getElementById('cv');
+  var max=2600, w=img.naturalWidth, h=img.naturalHeight;
+  if(w>max){ h=Math.round(h*max/w); w=max; }
+  cv.width=w; cv.height=h;
+  var ctx=cv.getContext('2d');
+  ctx.fillStyle=document.getElementById('bg').value;
+  ctx.fillRect(0,0,w,h);
+  ctx.drawImage(img,0,0,w,h);
+  var q=parseInt(document.getElementById('q').value,10)/100;
+  cv.toBlob(function(b){
+    if(!b){document.getElementById('info').textContent='Conversion failed.';return;}
+    var url=URL.createObjectURL(b);
+    var a=document.getElementById('dl');
+    a.href=url; a.download=lastName; a.style.display='inline-block';
+    a.textContent='Download JPG ('+Math.round(b.size/1024)+' KB)';
+    document.getElementById('info').textContent='Output size: '+Math.round(b.size/1024)+' KB at '+w+'x'+h+' px, quality '+Math.round(q*100)+'%.';
+  },'image/jpeg',q);
+}
+</script>
+</body>
+</html>
