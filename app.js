@@ -323,19 +323,39 @@ async function hashCompute() {
 /* IP 查询 */
 async function ipLookup() {
   const out = document.getElementById('ip-out');
+  if (!out) return;
   out.textContent = 'Looking up…';
-  try {
-    const r = await fetch('https://ipapi.co/json/');
-    const d = await r.json();
-    out.textContent = 'Your IP: ' + d.ip + '\nLocation: ' + (d.country_name || '') + ' ' + (d.region || '') + ' ' + (d.city || '') +
-      '\nOrg: ' + (d.org || '未知') + '\nTimezone: ' + (d.timezone || '未知');
-  } catch (e) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 8000);
+  const apis = [
+    {
+      url: 'https://ipinfo.io/json',
+      parse: (d) => 'Your IP: ' + d.ip + '\nLocation: ' + (d.country || '') + ' ' + (d.region || '') + ' ' + (d.city || '') +
+        '\nOrg: ' + (d.org || 'N/A') + '\nTimezone: ' + (d.timezone || 'N/A')
+    },
+    {
+      url: 'https://whois.pconline.com.cn/ipJson.jsp?json=true',
+      parse: (d) => 'Your IP: ' + d.ip + '\nLocation: ' + (d.pro || '') + ' ' + (d.city || '') +
+        '\nOrg: ' + (d.addr || 'N/A')
+    },
+    {
+      url: 'https://api.ipify.org?format=json',
+      parse: (d) => 'Your IP: ' + d.ip + '\n(geo lookup unavailable)'
+    }
+  ];
+  for (const api of apis) {
     try {
-      const r2 = await fetch('https://ip.useragentinfo.com/json');
-      const d2 = await r2.json();
-      out.textContent = 'Your IP: ' + d2.ip + '\nLocation: ' + d2.province + ' ' + d2.city + ' ' + (d2.isp || '');
-    } catch (e2) { out.textContent = '❌ Lookup failed, try again later'; }
+      const r = await fetch(api.url, { signal: ctrl.signal });
+      if (!r.ok) continue;
+      const d = await r.json();
+      clearTimeout(timer);
+      out.textContent = api.parse(d);
+      out.style.whiteSpace = 'pre-wrap';
+      return;
+    } catch (e) { /* try next */ }
   }
+  clearTimeout(timer);
+  out.textContent = '❌ Lookup failed, all APIs unavailable';
   out.style.whiteSpace = 'pre-wrap';
 }
 
@@ -360,25 +380,42 @@ const UNITS = {
   area: [['平方厘米 (cm²)', 1], ['平方米 (m²)', 1e4], ['平方千米 (km²)', 1e10], ['公顷 (ha)', 1e8], ['英亩 (acre)', 4.047e7]]
 };
 function unitChangeCat() {
-  const cat = document.getElementById('unit-cat').value;
+  const catEl = document.getElementById('unit-cat');
+  if (!catEl) return;
+  let cat = catEl.value;
+  if (!cat || !UNITS[cat]) {
+    cat = Object.keys(UNITS)[0];
+    if (catEl.options.length > 0) catEl.selectedIndex = 0;
+  }
   const list = UNITS[cat];
+  if (!list) return;
   const from = document.getElementById('unit-from');
   const to = document.getElementById('unit-to');
+  if (!from || !to) return;
   from.innerHTML = list.map((u, i) => '<option value="' + i + '">' + u[0] + '</option>').join('');
   to.innerHTML = from.innerHTML;
   from.selectedIndex = 0; to.selectedIndex = Math.min(1, list.length - 1);
   unitConvert();
 }
 function unitConvert() {
-  const cat = document.getElementById('unit-cat').value;
+  const catEl = document.getElementById('unit-cat');
+  if (!catEl) return;
+  let cat = catEl.value;
+  if (!cat || !UNITS[cat]) { cat = Object.keys(UNITS)[0]; }
   const list = UNITS[cat];
+  if (!list) return;
   const v = parseFloat(document.getElementById('unit-val').value);
   const out = document.getElementById('unit-out');
   if (isNaN(v)) { out.textContent = ''; return; }
-  const f = list[+document.getElementById('unit-from').value];
-  const t = list[+document.getElementById('unit-to').value];
+  const fromEl = document.getElementById('unit-from');
+  const toEl = document.getElementById('unit-to');
+  if (!fromEl || fromEl.options.length === 0) { unitChangeCat(); return; }
+  const fi = Math.min(+fromEl.value || 0, list.length - 1);
+  const ti = Math.min(+toEl.value || 0, list.length - 1);
+  const f = list[fi];
+  const t = list[ti];
+  if (!f || !t) return;
   if (cat === 'temp') {
-    // 先换算回摄氏度再转到目标
     let c = f[2] === 0 ? v : (v + f[2]) * f[1];
     let result = t[2] === 0 ? c : c / t[1] - t[2];
     out.textContent = v + ' ' + f[0] + ' = ' + +result.toFixed(4) + ' ' + t[0];
@@ -387,7 +424,11 @@ function unitConvert() {
     out.textContent = v + ' ' + f[0] + ' = ' + +(base / t[1]).toPrecision(8) + ' ' + t[0];
   }
 }
-document.addEventListener('DOMContentLoaded', unitChangeCat);
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', unitChangeCat);
+} else {
+  unitChangeCat();
+}
 
 /* 大小写 */
 function caseDo(mode) {

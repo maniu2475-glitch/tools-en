@@ -58,7 +58,7 @@
 <footer class="site-footer"><div class="container"><p>© 2026 Online Toolbox · 887+ free browser-side tools</p></div></footer>
 <script>
 var reFlags={g:true,i:false,m:false,s:false};
-function reFlag(f,btn){reFlags[f]=!reFlags[f];btn.className='btn'+(reFlags[f]?'':' btn-outline');reTest();}
+function reFlag(f,btn){if(f===undefined||!btn)return;reFlags[f]=!reFlags[f];btn.className='btn'+(reFlags[f]?'':' btn-outline');reTest();}
 function reTest(){
  var pat=document.getElementById('re-pat').value,txt=document.getElementById('re-txt').value,out=document.getElementById('re-out');
  var flags=Object.keys(reFlags).filter(f=>reFlags[f]).join('');
