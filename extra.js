@@ -37,10 +37,23 @@ function parseCronField(expr,f){
 }
 function fieldWord(v,f){
   v=parseInt(v,10);
-  if(f.n==="month")return MONTHS[v-1];
-  if(f.n==="day of week")return DOW[v%7];
+  if(isNaN(v))return "?";
+  if(f.n==="month")return MONTHS[v-1]||("month "+v);
+  if(f.n==="day of week")return DOW[v%7]||("day "+v);
   if(f.n==="hour")return v+":00";
   return String(v);
+}
+/* 把单个 cron 字段转成可读短语；通配符返回 null 由调用方处理默认文案。
+   支持：* 、单值、范围 a-b、列表 a,b,c、步长 */n。 */
+function summarizeField(expr,f){
+  if(expr==="*")return null;
+  const segs=expr.split(",");
+  const parts=segs.map(seg=>{
+    if(seg.startsWith("*/"))return "every "+seg.slice(2)+" "+f.n+"s";
+    if(seg.includes("-")){const[a,b]=seg.split("-");return fieldWord(a,f)+" to "+fieldWord(b,f);}
+    return fieldWord(seg,f);
+  });
+  return parts.join(", ");
 }
 function cronExplain(){
   const raw=document.getElementById('cron-input').value.trim();
@@ -53,9 +66,11 @@ function cronExplain(){
     catch(e){out.textContent="❌ Invalid field: "+CRON_FIELDS[i].n;return;}
   }
   let summary="In plain English: this job runs ";
-  if(f[0]!=="*")summary+=describeField(f[0],"minute")+" ";
-  if(f[1]!=="*")summary+=describeField(f[1],"hour")+" ";
-  summary+="on days "+(f[2]==="*"?"of every month":f[2])+", in "+(f[3]==="*"?"every month":MONTHS[+f[3]-1])+", when it is "+(f[4]==="*"?"any day of the week":DOW[+f[4]%7])+".";
+  const mt=summarizeField(f[0],CRON_FIELDS[0]); if(mt)summary+=mt+" ";
+  const ht=summarizeField(f[1],CRON_FIELDS[1]); if(ht)summary+=ht+" ";
+  summary+="on days "+(summarizeField(f[2],CRON_FIELDS[2])||"of every month")+", ";
+  summary+="in "+(summarizeField(f[3],CRON_FIELDS[3])||"every month")+", ";
+  summary+="when it is "+(summarizeField(f[4],CRON_FIELDS[4])||"any day of the week")+".";
   out.textContent=lines.join("\n")+"\n\n"+summary+"\n\nCommon examples:\n*/5 * * * *  → every 5 minutes\n0 * * * *  → every hour\n0 0 * * *  → daily at midnight\n0 9 * * 1-5  → weekdays at 9 AM\n0 0 1 * *  → first day of every month";
 }
 function describeField(e,name){if(e.startsWith("*/"))return "every "+e.slice(2)+" minutes";if(e.includes("-"))return "at minutes "+e;return "at minute "+e;}
@@ -174,18 +189,8 @@ function urlParse(){
   }catch(e){document.getElementById('urlp-output').textContent="❌ Invalid URL. Include the protocol, e.g. https://example.com/path?q=1";}
 }
 
-/* ---------- Color picker ---------- */
-function hexToRgb(h){h=h.replace("#","");if(h.length===3)h=h.split("").map(c=>c+c).join("");const n=parseInt(h,16);return[(n>>16)&255,(n>>8)&255,n&255];}
-function rgbToHsl(r,g,b){r/=255;g/=255;b/=255;const mx=Math.max(r,g,b),mn=Math.min(r,g,b);let h=0,s=0,l=(mx+mn)/2;if(mx!==mn){const d=mx-mn;s=l>0.5?d/(2-mx-mn):d/(mx+mn);switch(mx){case r:h=(g-b)/d+(g<b?6:0);break;case g:h=(b-r)/d+2;break;default:h=(r-g)/d+4;}h*=60;}return[Math.round(h),Math.round(s*100),Math.round(l*100)];}
-function colorUpdate(hex){
-  const[r,g,b]=hexToRgb(hex);
-  const[h,s,l]=rgbToHsl(r,g,b);
-  document.getElementById('cp-hex').value=hex;
-  document.getElementById('cp-rgb').value="rgb("+r+", "+g+", "+b+")";
-  document.getElementById('cp-hsl').value="hsl("+h+", "+s+"%, "+l+"%)";
-  document.getElementById('cp-preview').style.background=hex;
-}
-function cpFromHex(){const v=document.getElementById('cp-hex').value.trim();if(/^#?[0-9a-fA-F]{3,6}$/.test(v)){colorUpdate(v.startsWith("#")?v:"#"+v);document.getElementById('cp-picker').value=(v.startsWith("#")?v:"#"+v);}}
+/* ---------- Color picker（复用 app.js 的统一 colorUpdate，避免同名覆盖） ---------- */
+function cpFromHex(){const v=document.getElementById('cp-hex').value.trim();if(v)colorUpdate(v);}
 function cpCopy(id){navigator.clipboard.writeText(document.getElementById(id).value).then(()=>alert('Copied!'));}
 
 /* ---------- Text ↔ Binary ---------- */
