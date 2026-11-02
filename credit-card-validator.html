@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Credit Card Validator - Free Online Tool</title>
+<meta name="description" content="Validate credit and debit card numbers with the Luhn algorithm. Detect card type (Visa, Mastercard, Amex...) - runs 100% offline in your browser.">
+<meta name="keywords" content="credit card validator, luhn algorithm check, card number checker, visa mastercard amex test, validate card online">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/credit-card-validator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Credit Card Validator">
+<meta property="og:description" content="Validate credit and debit card numbers with the Luhn algorithm. Detect card type (Visa, Mastercard, Amex...) - runs 100% offline in your browser.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Credit Card Validator", "url": "https://maniu2475-glitch.github.io/tools-en/credit-card-validator.html", "description": "Validate credit and debit card numbers with the Luhn algorithm. Detect card type (Visa, Mastercard, Amex...) - runs 100% offline in your browser.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) &mdash; AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#128295;</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free &bull; Private &bull; Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Credit Card Validator (Luhn Check)</h1>
+      <p class="tool-desc">Validate credit and debit card numbers with the Luhn algorithm. Detect card type (Visa, Mastercard, Amex...) -</p>
+<label>Card number</label>
+<input type="text" id="cc-num" placeholder="e.g. 4111 1111 1111 1111" oninput="ccCheck()" style="font-size:1.1em">
+<div class="result-box" id="cc-out">Enter a card number to validate.</div>
+<h3>Common Luhn test numbers</h3>
+<div class="result-box">Visa: 4111 1111 1111 1111<br>Mastercard: 5500 0000 0000 0004<br>Amex: 3782 822463 10005<br>Discover: 6011 1111 1111 1117</div>
+<h2>About the Credit Card Validator (Luhn Check)</h2>
+<p>This tool checks whether a card number is structurally valid using the Luhn algorithm (also called the modulus 10 or mod 10 checksum), the standard formula used on virtually every credit and debit card worldwide. As you type, it also detects the card brand from the leading digits: Visa starts with 4, Mastercard with 51-55 or 2221-2720, American Express with 34 or 37, Discover with 6011/65, Diners Club with 300-305 or 36, and JCB with 3528-3589. The length is validated per brand as well (16 digits for most, 15 for Amex, 14 for Diners). Developers frequently use it together with standard Luhn test numbers (for example 4111 1111 1111 1111) while testing payment forms. Important: this tool only verifies the number format and checksum - it cannot tell whether a card is real, active or has funds, and it does not perform any payment. Everything is computed locally in your browser; no number is ever transmitted.</p>
+<h3>Related tools</h3>
+<p class="footer-links" style="line-height:2"><a href="random-number-generator.html">Random Number Generator</a> &middot; <a href="password-strength-checker.html">Password Strength Checker</a> &middot; <a href="regex-tester.html">Regex Tester</a></p>
+<script>
+function ccBrand(n){
+ if(/^4/.test(n))return ['Visa',16];
+ if(/^(5[1-5]|2[2-7])/.test(n))return ['Mastercard',16];
+ if(/^3[47]/.test(n))return ['American Express',15];
+ if(/^(6011|65|64[4-9])/.test(n))return ['Discover',16];
+ if(/^(30[0-5]|36|38)/.test(n))return ['Diners Club',14];
+ if(/^(35)/.test(n))return ['JCB',16];
+ return [null,null];
+}
+function luhn(n){
+ var s=0,alt=false;
+ for(var i=n.length-1;i>=0;i--){var d=+n[i];if(alt){d*=2;if(d>9)d-=9;}s+=d;alt=!alt;}
+ return s%10===0;
+}
+function ccCheck(){
+ var raw=document.getElementById('cc-num').value;
+ var n=raw.replace(/[^0-9]/g,'');
+ var out=document.getElementById('cc-out');
+ if(!n){out.textContent='Enter a card number to validate.';return;}
+ var b=ccBrand(n);
+ var brand=b[0]?(b[0]+' (expected length '+b[1]+')'):'Unknown brand';
+ var lenOk=b[1]?n.length+' digits':'no length rule';
+ var ok=luhn(n);
+ var msg='Digits: '+n.length+' | Brand: '+brand+'\nLuhn checksum: '+(ok?'VALID \u2714':'INVALID \u2716')+(b[1]?(n.length===b[1]?' (length matches)':' (length mismatch)'):'');
+ out.textContent=msg;
+}
+</script>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="container"><p>&copy; 2026 ToolBox &bull; Runs 100% client-side &bull; No data uploaded</p></div>
+</footer>
+<div class="ad-banner" id="ad-bottom"><div class="ad-placeholder-text">Ad slot (responsive banner) &mdash; AdSense code goes here</div></div>
+</body>
+</html>

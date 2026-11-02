@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ratio Calculator - Free Online Tool</title>
+<meta name="description" content="Solve, simplify and scale ratios online: reduce A:B to lowest terms, find missing values in equivalent ratios, and convert ratios to percentages.">
+<meta name="keywords" content="ratio calculator, simplify ratio, equivalent ratio, solve for x ratio, ratio to percent, aspect ratio">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/ratio-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ratio Calculator">
+<meta property="og:description" content="Solve, simplify and scale ratios online: reduce A:B to lowest terms, find missing values in equivalent ratios, and convert ratios to percentages.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Ratio Calculator", "url": "https://maniu2475-glitch.github.io/tools-en/ratio-calculator.html", "description": "Solve, simplify and scale ratios online: reduce A:B to lowest terms, find missing values in equivalent ratios, and convert ratios to percentages.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) &mdash; AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#128295;</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free &bull; Private &bull; Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Ratio Calculator</h1>
+      <p class="tool-desc">Solve, simplify and scale ratios online: reduce A:B to lowest terms, find missing values in equivalent ratios,</p>
+<div class="grid-2">
+<div>
+<h3 style="margin-top:0">Simplify a ratio</h3>
+<label>Ratio (a : b : c ...)</label><input type="text" id="r-in" value="1920:1080" oninput="rSimp()">
+<div class="result-box" id="r-out"></div>
+</div>
+<div>
+<h3 style="margin-top:0">Solve A:B = C:x</h3>
+<label>A</label><input type="number" id="r-a" value="3" oninput="rSolve()">
+<label>B</label><input type="number" id="r-b" value="4" oninput="rSolve()">
+<label>C</label><input type="number" id="r-c" value="15" oninput="rSolve()">
+<div class="result-box" id="r-solve"></div>
+</div>
+</div>
+<h2>About the Ratio Calculator</h2>
+<p>This ratio calculator solves the three most common ratio problems in one place. Simplify a ratio: enter values like 1920:1080 or 8:12 and get the reduced form (16:9 and 2:3) by dividing out the greatest common divisor. Solve for the missing value: given A:B = C:? or A:? = B:C, it finds the unknown using cross multiplication - perfect for scaling recipes, map scales, mixing paint or concrete, and resizing images proportionally. It also shows each ratio as a percentage split so you can divide amounts by ratio, for example sharing 900 dollars in a 2:3:4 ratio. Ratios appear everywhere in daily life: cooking (ingredient proportions), finance (debt-to-income), screen sizes (aspect ratios), maps and models (scale), and mixing solutions. All calculations run instantly in your browser with no data upload.</p>
+<h3>Related tools</h3>
+<p class="footer-links" style="line-height:2"><a href="aspect-ratio-calculator.html">Aspect Ratio Calculator</a> &middot; <a href="fraction-calculator.html">Fraction Calculator</a> &middot; <a href="percentage-calculator.html">Percentage Calculator</a> &middot; <a href="lcm-gcd-calculator.html">LCM &amp; GCD Calculator</a></p>
+<script>
+function gcd(a,b){while(b){var t=a%b;a=b;b=t;}return a;}
+function rSimp(){
+ var v=document.getElementById('r-in').value.split(/[:x\s*\/]+/).map(Number).filter(function(x){return isFinite(x)&&x!==0;});
+ if(v.length<2){document.getElementById('r-out').textContent='Enter at least two numbers.';return;}
+ var g=v.reduce(gcd);
+ var simp=v.map(function(x){return x/g;});
+ var sum=simp.reduce(function(a,b){return a+b;},0);
+ var pct=simp.map(function(x){return (x/sum*100).toFixed(1)+'%';}).join(' : ');
+ document.getElementById('r-out').textContent='Simplified: '+simp.join(' : ')+'\nAs percentage split: '+pct;
+}
+function rSolve(){
+ var a=+document.getElementById('r-a').value,b=+document.getElementById('r-b').value,c=+document.getElementById('r-c').value;
+ if(!a||!b){document.getElementById('r-solve').textContent='Enter A and B.';return;}
+ var x=b*c/a;
+ document.getElementById('r-solve').textContent=(a+' : '+b+' = '+c+' : '+x.toFixed(6).replace(/\.?0+$/,''))+'\n(check: '+a+'\u00d7'+(b*c/a)+' = '+b+'\u00d7'+c+')';
+}
+rSimp();rSolve();
+</script>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="container"><p>&copy; 2026 ToolBox &bull; Runs 100% client-side &bull; No data uploaded</p></div>
+</footer>
+<div class="ad-banner" id="ad-bottom"><div class="ad-placeholder-text">Ad slot (responsive banner) &mdash; AdSense code goes here</div></div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Remove Line Breaks - Free Online Tool</title>
+<meta name="description" content="Remove line breaks from any text online: strip all newlines, or replace them with spaces or custom separators. Paste, click, copy - 100% browser-side.">
+<meta name="keywords" content="remove line breaks, remove newlines, strip carriage returns, join lines, text on one line, free tool">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/remove-line-breaks.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Remove Line Breaks">
+<meta property="og:description" content="Remove line breaks from any text online: strip all newlines, or replace them with spaces or custom separators. Paste, click, copy - 100% browser-side.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Remove Line Breaks", "url": "https://maniu2475-glitch.github.io/tools-en/remove-line-breaks.html", "description": "Remove line breaks from any text online: strip all newlines, or replace them with spaces or custom separators. Paste, click, copy - 100% browser-side.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) &mdash; AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#128295;</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free &bull; Private &bull; Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Remove Line Breaks</h1>
+      <p class="tool-desc">Remove line breaks from any text online: strip all newlines, or replace them with spaces or custom separators.</p>
+<label>Mode</label>
+<select id="rlb-mode">
+<option value="space">Replace line breaks with a space</option>
+<option value="none">Remove line breaks completely</option>
+<option value="custom">Replace with custom text</option>
+<option value="empty">Remove empty lines only</option>
+</select>
+<label>Custom separator (for custom mode)</label><input type="text" id="rlb-sep" value=", ">
+<textarea id="rlb-in" rows="10" placeholder="Paste text with line breaks here..."></textarea>
+<div class="btn-group">
+<button class="btn" onclick="rlbRun()">Remove Line Breaks</button>
+<button class="btn btn-outline" onclick="rlbCopy()">Copy Result</button>
+</div>
+<textarea id="rlb-out" rows="8" class="output-text" readonly placeholder="Result"></textarea>
+<h2>About the Remove Line Breaks</h2>
+<p>This tool removes line breaks from any text in one click. Paste text copied from a PDF, an email, a spreadsheet or a web page and choose what to do with the line breaks: remove them entirely (merging everything into one continuous line), replace each break with a single space to keep words readable, or join paragraphs with a custom separator such as a comma. An extra option removes fully empty lines only, which is handy for cleaning exported lists where every row has a trailing newline. Common uses include fixing PDF text that is broken into short lines, preparing addresses or descriptions for single-line form fields, cleaning keyword lists, and formatting data before pasting into Excel. All processing happens locally in your browser, so confidential text never leaves your device.</p>
+<h3>Related tools</h3>
+<p class="footer-links" style="line-height:2"><a href="text-sort.html">Text Sort &amp; Dedup</a> &middot; <a href="remove-duplicate-lines.html">Remove Duplicate Lines</a> &middot; <a href="case-converter.html">Case Converter</a> &middot; <a href="word-counter.html">Word Counter</a></p>
+<script>
+function rlbRun(){
+ var t=document.getElementById('rlb-in').value;
+ var m=document.getElementById('rlb-mode').value;
+ var sep=document.getElementById('rlb-sep').value;
+ if(m==='none')t=t.replace(/[\r\n]+/g,'');
+ else if(m==='space')t=t.replace(/[\r\n]+/g,' ');
+ else if(m==='custom')t=t.replace(/[\r\n]+/g,sep);
+ else t=t.split('\n').filter(function(l){return l.trim()!=='';}).join('\n');
+ document.getElementById('rlb-out').value=t;
+}
+function rlbCopy(){var o=document.getElementById('rlb-out');o.select();document.execCommand('copy');}
+</script>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="container"><p>&copy; 2026 ToolBox &bull; Runs 100% client-side &bull; No data uploaded</p></div>
+</footer>
+<div class="ad-banner" id="ad-bottom"><div class="ad-placeholder-text">Ad slot (responsive banner) &mdash; AdSense code goes here</div></div>
+</body>
+</html>

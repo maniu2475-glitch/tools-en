@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Time Zone Converter - Free Online Tool</title>
+<meta name="description" content="Convert any date and time between world time zones (UTC, EST, PST, GMT, CET, IST, CST, JST and more) instantly in your browser.">
+<meta name="keywords" content="time zone converter, utc to est, est to pst, gmt converter, world clock converter, time difference, free tool">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/time-zone-converter.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Time Zone Converter">
+<meta property="og:description" content="Convert any date and time between world time zones (UTC, EST, PST, GMT, CET, IST, CST, JST and more) instantly in your browser.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Time Zone Converter", "url": "https://maniu2475-glitch.github.io/tools-en/time-zone-converter.html", "description": "Convert any date and time between world time zones (UTC, EST, PST, GMT, CET, IST, CST, JST and more) instantly in your browser.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) &mdash; AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#128295;</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free &bull; Private &bull; Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Time Zone Converter</h1>
+      <p class="tool-desc">Convert any date and time between world time zones (UTC, EST, PST, GMT, CET, IST, CST, JST and more) instantly</p>
+<div class="grid-2">
+<div>
+<h3 style="margin-top:0">Convert a time</h3>
+<label>Date &amp; time</label><input type="datetime-local" id="tz-dt" oninput="tzConvert()">
+<label>From zone</label><select id="tz-from" onchange="tzConvert()"></select>
+<div class="result-box" id="tz-out"></div>
+</div>
+<div>
+<h3 style="margin-top:0">World clock</h3>
+<div class="result-box" id="tz-world"></div>
+</div>
+</div>
+<h2>About the Time Zone Converter</h2>
+<p>A time zone converter helps you translate a date and time from one world region to another in a single step. Enter a time, pick the source zone such as UTC, New York (EST/EDT), London (GMT/BST), Los Angeles (PST/PDT), Berlin (CET/CEST), Mumbai (IST), Shanghai (CST) or Tokyo (JST), and the tool instantly shows the equivalent local time in every other zone. It uses your browser's built-in Internationalization API together with the IANA time zone database, so daylight-saving transitions are handled correctly. This is essential for scheduling international meetings, planning webinars, coordinating remote teams across continents, checking flight arrival times, or simply calling family abroad at a reasonable hour. Everything is computed locally in your browser; nothing is sent to a server.</p>
+<h3>Related tools</h3>
+<p class="footer-links" style="line-height:2"><a href="timestamp-converter.html">Timestamp Converter</a> &middot; <a href="date-difference-calculator.html">Date Difference Calculator</a> &middot; <a href="week-number-calculator.html">Week Number Calculator</a> &middot; <a href="hours-calculator.html">Hours Calculator</a></p>
+<script>
+var ZONES=[["UTC","UTC"],["America/New_York","New York"],["America/Los_Angeles","Los Angeles"],["America/Chicago","Chicago"],["Europe/London","London"],["Europe/Berlin","Berlin"],["Europe/Paris","Paris"],["Asia/Kolkata","Mumbai (IST)"],["Asia/Shanghai","Shanghai"],["Asia/Tokyo","Tokyo"],["Australia/Sydney","Sydney"]];
+function fmt(d,z){try{return new Intl.DateTimeFormat('en-GB',{timeZone:z,dateStyle:'medium',timeStyle:'short'}).format(d);}catch(e){return d.toUTCString();}}
+function tzConvert(){
+ var v=document.getElementById('tz-dt').value;
+ var zf=document.getElementById('tz-from').value;
+ if(!v){document.getElementById('tz-out').textContent='Pick a date and time.';return;}
+ var d=new Date(v);
+ var rows=ZONES.map(function(z){return z[1]+': '+fmt(d,z[0]);}).join('\n');
+ document.getElementById('tz-out').textContent=rows;
+}
+function tzWorld(){
+ var d=new Date();
+ document.getElementById('tz-world').textContent=ZONES.map(function(z){return z[1]+' now: '+fmt(d,z[0]);}).join('\n');
+}
+(function(){
+ var s=document.getElementById('tz-from');
+ ZONES.forEach(function(z){var o=document.createElement('option');o.value=z[0];o.textContent=z[1];s.appendChild(o);});
+ s.value='UTC';
+ document.getElementById('tz-dt').value=new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,16);
+ tzConvert();tzWorld();setInterval(tzWorld,30000);
+})();
+</script>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="container"><p>&copy; 2026 ToolBox &bull; Runs 100% client-side &bull; No data uploaded</p></div>
+</footer>
+<div class="ad-banner" id="ad-bottom"><div class="ad-placeholder-text">Ad slot (responsive banner) &mdash; AdSense code goes here</div></div>
+</body>
+</html>

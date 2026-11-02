@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Online Calculator - Free Online Tool</title>
+<meta name="description" content="Free online calculator with full keyboard support: add, subtract, multiply, divide, percent and memory. Runs instantly in your browser.">
+<meta name="keywords" content="online calculator, free calculator, web calculator, percent calculator, basic calculator, no install">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/online-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Online Calculator">
+<meta property="og:description" content="Free online calculator with full keyboard support: add, subtract, multiply, divide, percent and memory. Runs instantly in your browser.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Online Calculator", "url": "https://maniu2475-glitch.github.io/tools-en/online-calculator.html", "description": "Free online calculator with full keyboard support: add, subtract, multiply, divide, percent and memory. Runs instantly in your browser.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) &mdash; AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#128295;</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free &bull; Private &bull; Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Online Calculator</h1>
+      <p class="tool-desc">Free online calculator with full keyboard support: add, subtract, multiply, divide, percent and memory. Runs i</p>
+<div style="max-width:340px;margin:0 auto">
+<div class="result-box" id="calc-expr">&nbsp;</div>
+<div class="result-box" id="calc-disp" style="font-size:1.6em;text-align:right">0</div>
+<div class="btn-group" id="calc-pad">
+<button class="btn btn-outline" data-k="MC">MC</button><button class="btn btn-outline" data-k="MR">MR</button><button class="btn btn-outline" data-k="M+">M+</button><button class="btn btn-outline" data-k="M-">M-</button>
+<button class="btn btn-outline" data-k="C">C</button><button class="btn btn-outline" data-k="±">±</button><button class="btn btn-outline" data-k="%">%</button><button class="btn" data-k="/">÷</button>
+<button class="btn btn-outline" data-k="7">7</button><button class="btn btn-outline" data-k="8">8</button><button class="btn btn-outline" data-k="9">9</button><button class="btn" data-k="*">×</button>
+<button class="btn btn-outline" data-k="4">4</button><button class="btn btn-outline" data-k="5">5</button><button class="btn btn-outline" data-k="6">6</button><button class="btn" data-k="-">−</button>
+<button class="btn btn-outline" data-k="1">1</button><button class="btn btn-outline" data-k="2">2</button><button class="btn btn-outline" data-k="3">3</button><button class="btn" data-k="+">+</button>
+<button class="btn btn-outline" data-k="sqrt">√</button><button class="btn btn-outline" data-k="0">0</button><button class="btn btn-outline" data-k=".">.</button><button class="btn" data-k="=">=</button>
+</div>
+</div>
+<h2>About the Online Calculator</h2>
+<p>A free online calculator for everyday arithmetic: addition, subtraction, multiplication, division, percentages and square roots. It works just like a physical calculator - you can click the on-screen buttons or use your keyboard number pad, operators, Enter for equals, Escape to clear, and Backspace to delete a digit. A small display above the main one shows the running expression so you always know what you typed. The memory keys (M+, M-, MR, MC) let you store intermediate results while doing multi-step math such as splitting a bill, checking an invoice, or converting units by hand. Everything runs locally in your browser with no installation, no account and no data upload, so you can safely use it for any numbers, including private or financial values.</p>
+<h3>Related tools</h3>
+<p class="footer-links" style="line-height:2"><a href="percentage-calculator.html">Percentage Calculator</a> &middot; <a href="average-calculator.html">Average Calculator</a> &middot; <a href="fraction-calculator.html">Fraction Calculator</a> &middot; <a href="factorial-calculator.html">Factorial Calculator</a></p>
+<script>
+var calcCur='0',calcExpr='',calcMem=0;
+function calcShow(){document.getElementById('calc-disp').textContent=calcCur;document.getElementById('calc-expr').textContent=calcExpr||'\u00a0';}
+function calcEval(a,op,b){a=+a;b=+b;switch(op){case '+':return a+b;case '-':return a-b;case '*':return a*b;case '/':return b===0?NaN:a/b;}return b;}
+function calcKey(k){
+ var ops='+-*/';
+ if(k>='0'&&k<='9'){calcCur=(calcCur==='0')?k:calcCur+k;}
+ else if(k==='.'){if(calcCur.indexOf('.')<0)calcCur+='.';}
+ else if(ops.indexOf(k)>=0){calcExpr=calcCur+' '+k+' ';calcCur='0';}
+ else if(k==='='){var m=calcExpr.match(/(-?[\d.]+) ([+\-*/]) /);if(m){var r=calcEval(m[1],m[2],calcCur);calcCur=(+r.toPrecision(12)).toString();calcExpr='';}}
+ else if(k==='C'){calcCur='0';calcExpr='';}
+ else if(k==='±'){calcCur=calcCur.charAt(0)==='-'?calcCur.slice(1):'-'+calcCur;}
+ else if(k==='%'){calcCur=(+calcCur/100).toString();}
+ else if(k==='sqrt'){calcCur=(+calcCur<0)?'Error':Math.sqrt(+calcCur).toString();}
+ else if(k==='M+'){calcMem+=+calcCur;}
+ else if(k==='M-'){calcMem-=+calcCur;}
+ else if(k==='MR'){calcCur=calcMem.toString();}
+ else if(k==='MC'){calcMem=0;}
+ calcShow();
+}
+document.getElementById('calc-pad').addEventListener('click',function(e){var b=e.target.closest('button');if(b)calcKey(b.getAttribute('data-k'));});
+document.addEventListener('keydown',function(e){
+ if(e.key>='0'&&e.key<='9'||'+-*/.'.indexOf(e.key)>=0){calcKey(e.key);}
+ else if(e.key==='Enter'||e.key==='='){e.preventDefault();calcKey('=');}
+ else if(e.key==='Escape'){calcKey('C');}
+ else if(e.key==='Backspace'){calcCur=calcCur.length>1?calcCur.slice(0,-1):'0';calcShow();}
+});
+calcShow();
+</script>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="container"><p>&copy; 2026 ToolBox &bull; Runs 100% client-side &bull; No data uploaded</p></div>
+</footer>
+<div class="ad-banner" id="ad-bottom"><div class="ad-placeholder-text">Ad slot (responsive banner) &mdash; AdSense code goes here</div></div>
+</body>
+</html>
