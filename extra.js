@@ -43,8 +43,8 @@ function fieldWord(v,f){
   if(f.n==="hour")return v+":00";
   return String(v);
 }
-/* 把单个 cron 字段转成可读短语；通配符返回 null 由调用方处理默认文案。
-   支持：* 、单值、范围 a-b、列表 a,b,c、步长 */n。 */
+// 把单个 cron 字段转成可读短语；通配符返回 null 由调用方处理默认文案。
+// 支持：通配、单值、范围 a-b、列表 a,b,c、步长。
 function summarizeField(expr,f){
   if(expr==="*")return null;
   const segs=expr.split(",");

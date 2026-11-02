@@ -100,7 +100,7 @@ function xfRun(){
       if(node.nodeType!==1) return [];
       var lines=[pad+'<'+node.nodeName+attrs(node)];
       var kids=[]; node.childNodes.forEach(function(k){ kids= kids.concat(fmt(k,depth+1)); });
-      if(!kids.length){ lines[lines.length-1]+='"/>'; lines[lines.length-1]=lines[lines.length-1].replace('"',''); lines[lines.length-1]+='/>'; return lines; }
+      if(!kids.length){ lines[lines.length-1]+='/>'; return lines; }
       if(kids.length===1 && kids[0].trim().indexOf('<')!==0){ return [pad+'<'+node.nodeName+attrs(node)+'>'+kids[0].trim()+'</'+node.nodeName+'>']; }
       lines[lines.length-1]+='>';
       lines=lines.concat(kids);

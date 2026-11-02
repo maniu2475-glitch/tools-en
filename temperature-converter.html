@@ -45,8 +45,8 @@
 </main>
 <footer class="site-footer"><div class="container"><p>© 2026 Online Toolbox · 887+ free browser-side tools</p></div></footer>
 <script>
-function tconv(src){var el=document.getElementById('tc-'+src);var v=parseFloat(el.value);if(isNaN(v)){['c','f','k','r'].forEach(function(x){if(x!==src)document.getElementById('tc-'+x).value='';});return;}var c;if(src==='c')c=v;else if(src==='f')c=(v-32)*5/9;else if(src==='k')c=v-273.15;else c=(v-491.67)*5/9;if(src!=='c')document.getElementById('tc-c').value=(Math.round(c*100)/100);if(src!=='f')document.getElementById('tc-f').value=(Math.round((c*9/5+32)*100)/100);if(src!=='k')document.getElementById('tc-k').value=(Math.round((c+273.15)*100)/100);if(src!=='r')document.getElementById('tc-r').value=(Math.round(((c+273.15)*9/5)*100)/100);}
-document.addEventListener('DOMContentLoaded',function(){tconv('c');});
+function tconv(src){if(!src||['c','f','k','r'].indexOf(src)<0)src='c';var el=document.getElementById('tc-'+src);if(!el)return;var v=parseFloat(el.value);if(isNaN(v)){['c','f','k','r'].forEach(function(x){if(x!==src){var e=document.getElementById('tc-'+x);if(e)e.value='';}});return;}var c;if(src==='c')c=v;else if(src==='f')c=(v-32)*5/9;else if(src==='k')c=v-273.15;else c=(v-491.67)*5/9;if(src!=='c')document.getElementById('tc-c').value=(Math.round(c*100)/100);if(src!=='f')document.getElementById('tc-f').value=(Math.round((c*9/5+32)*100)/100);if(src!=='k')document.getElementById('tc-k').value=(Math.round((c+273.15)*100)/100);if(src!=='r')document.getElementById('tc-r').value=(Math.round(((c+273.15)*9/5)*100)/100);}
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){tconv('c');});}else{tconv('c');}
 </script>
 </body>
 </html>

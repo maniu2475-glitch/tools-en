@@ -65,11 +65,11 @@
 <script src="app.js"></script>
 <script src="extra.js"></script>
 <script>
-let swStart=0, swElapsed=0, swRunning=false, swTimer=null, swLapCount=0, swLastLap=0;
+let swStartTime=0, swElapsed=0, swRunning=false, swTimer=null, swLapCount=0, swLastLap=0;
 function swFmt(ms){const t=Math.floor(ms),m=Math.floor(t/60000),s=Math.floor(t%60000/1000),cs=Math.floor(t%1000/10);return String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')+'.'+String(cs).padStart(2,'0');}
-function swNow(){return swElapsed+(swRunning?performance.now()-swStart:0);}
+function swNow(){return swElapsed+(swRunning?performance.now()-swStartTime:0);}
 function swRender(){document.getElementById('sw-display').textContent=swFmt(swNow());}
-function swStart(){if(swRunning)return;swStart=performance.now();swRunning=true;swTimer=setInterval(swRender,50);swRender();}
+function swStart(){if(swRunning)return;swStartTime=performance.now();swRunning=true;swTimer=setInterval(swRender,50);swRender();}
 function swStop(){if(!swRunning)return;swElapsed=swNow();swRunning=false;clearInterval(swTimer);swRender();}
 function swLap(){const now=swNow();swLapCount++;const split=now-swLastLap;swLastLap=now;const box=document.getElementById('sw-laps');if(swLapCount===1)box.innerHTML='';const d=document.createElement('div');d.style.padding='4px 0';d.style.borderBottom='1px solid #eee';d.innerHTML='Lap '+swLapCount+' &nbsp;—&nbsp; split: <strong>'+swFmt(split)+'</strong> &nbsp;—&nbsp; total: '+swFmt(now);box.prepend(d);}
 function swReset(){swStop();swElapsed=0;swLapCount=0;swLastLap=0;swRender();document.getElementById('sw-laps').innerHTML='No laps yet.';}

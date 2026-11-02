@@ -192,7 +192,8 @@ function dateToTs() {
 
 /* ---------- 颜色 ---------- */
 function hexToRgb(hex) {
-  hex = hex.replace('#', '');
+  if (typeof hex !== 'string') return null;
+  hex = hex.trim().replace('#', '');
   if (hex.length === 3) hex = hex.split('').map(c => c + c).join('');
   if (!/^[0-9a-fA-F]{6}$/.test(hex)) return null;
   return [parseInt(hex.slice(0,2),16), parseInt(hex.slice(2,4),16), parseInt(hex.slice(4,6),16)];
@@ -216,17 +217,63 @@ function hslToHex(h, s, l) {
   const f = n => {
     const k = (n + h/30) % 12;
     const a = s * Math.min(l, 1-l);
-    const c = l - a * Math.min(-1, Math.min(k-3, Math.min(9-k, 1)));
+    const c = l - a * Math.max(-1, Math.min(k-3, 9-k, 1));
     return Math.round(255*c).toString(16).padStart(2,'0');
   };
   return '#' + f(0)+f(8)+f(4);
 }
+function rgbToHex(rgb) {
+  return '#' + rgb.map(v => v.toString(16).padStart(2, '0')).join('');
+}
+function parseColor(raw) {
+  if (typeof raw !== 'string') return null;
+  const s = raw.trim();
+  if (!s) return null;
+  let m = s.match(/^rgba?\(\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})/i);
+  if (m) {
+    const rgb = [+m[1], +m[2], +m[3]];
+    if (rgb.every(v => v >= 0 && v <= 255)) return { rgb, hex: rgbToHex(rgb) };
+    return null;
+  }
+  m = s.match(/^hsla?\(\s*([0-9]+(?:\.[0-9]+)?)\s*,\s*([0-9]+(?:\.[0-9]+)?)%\s*,\s*([0-9]+(?:\.[0-9]+)?)%/i);
+  if (m) {
+    const hex = hslToHex(+m[1], +m[2], +m[3]);
+    const rgb = hexToRgb(hex);
+    return rgb ? { rgb, hex } : null;
+  }
+  const rgb = hexToRgb(s);
+  return rgb ? { rgb, hex: rgbToHex(rgb) } : null;
+}
+// 统一实现：兼容颜色转换页（color-info/palette-out）与取色器页（cp-hex/cp-rgb/cp-hsl/cp-preview）
 function colorUpdate(fromHex) {
-  const hex = document.getElementById('color-hex').value.trim();
-  const rgb = hexToRgb(hex);
-  if (!rgb) return;
-  document.getElementById('color-picker').value = '#' + hex.replace('#','').toLowerCase();
-  renderColor(rgb, hex.startsWith('#') ? hex.toLowerCase() : ('#' + hex.toLowerCase()));
+  let raw = fromHex;
+  if (raw === undefined || raw === null || raw === '') {
+    const hexInput = document.getElementById('color-hex') || document.getElementById('cp-hex');
+    if (hexInput) raw = hexInput.value;
+  }
+  if (raw === undefined || raw === null || raw === '') {
+    const picker = document.getElementById('color-picker') || document.getElementById('cp-picker');
+    if (picker) raw = picker.value;
+  }
+  const parsed = parseColor(raw);
+  if (!parsed) return;
+  const { rgb, hex } = parsed;
+
+  const picker = document.getElementById('color-picker');
+  if (picker) picker.value = hex;
+  if (document.getElementById('color-info') || document.getElementById('palette-out')) renderColor(rgb, hex);
+
+  const cpPicker = document.getElementById('cp-picker');
+  if (cpPicker) cpPicker.value = hex;
+  const cpHex = document.getElementById('cp-hex');
+  if (cpHex) cpHex.value = hex;
+  const cpRgb = document.getElementById('cp-rgb');
+  if (cpRgb) cpRgb.value = 'rgb(' + rgb.join(', ') + ')';
+  const [h, s, l] = rgbToHsl(rgb[0], rgb[1], rgb[2]);
+  const cpHsl = document.getElementById('cp-hsl');
+  if (cpHsl) cpHsl.value = 'hsl(' + h + ', ' + s + '%, ' + l + '%)';
+  const cpPreview = document.getElementById('cp-preview');
+  if (cpPreview) cpPreview.style.background = hex;
 }
 function colorFromHex() { colorUpdate(); }
 function renderColor(rgb, hex) {
@@ -256,8 +303,9 @@ function renderColor(rgb, hex) {
 // 取色器变化
 document.addEventListener('DOMContentLoaded', () => {
   const picker = document.getElementById('color-picker');
-  if (picker) picker.addEventListener('input', () => {
-    document.getElementById('color-hex').value = picker.value.toUpperCase();
+  const hexInput = document.getElementById('color-hex');
+  if (picker && hexInput) picker.addEventListener('input', () => {
+    hexInput.value = picker.value.toUpperCase();
     colorUpdate();
   });
   colorUpdate();
