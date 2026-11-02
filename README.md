@@ -1,9 +1,25 @@
 Free Online Toolbox
 ==================
 
-125 free online tools that run 100% in your browser — no data ever uploaded.
+130 free online tools that run 100% in your browser — no data ever uploaded.
 
 **Tools:** JSON Formatter, Base64 Encode/Decode, URL Encode/Decode, QR Code Generator, QR Code Scanner, Password Generator, Password Strength Checker, Timestamp Converter, Color Converter, Color Picker, Markdown Editor, Word Counter, MD5/SHA Hash, IP Lookup, Number Converter (Radix), Unit Converter, Case Converter, Text Sort, Text Diff, Text to Binary, CSV→JSON, UUID Generator, JWT Decoder, Base32 Encode/Decode, Cron Expression Parser, Cron Job Generator, Aspect Ratio Calculator, Random String Generator, Slug Generator, HTML Entities, Image to Base64, Lorem Ipsum Generator, URL Parser, Percentage Calculator, Chmod Calculator, Regex Tester, BMI Calculator, Age Calculator, Loan Calculator, Temperature Converter, Random Number Generator, Discount Calculator, Compound Interest Calculator.
+
+Newly added tools (2026-11-02):
+
+- [Time Zone Converter](https://maniu2475-glitch.github.io/tools-en/time-zone-converter.html) — convert any date/time between UTC, EST, PST, CET, IST, JST and more + live world clock
+- [Online Calculator](https://maniu2475-glitch.github.io/tools-en/online-calculator.html) — basic calculator with keyboard support, percent, sqrt and memory keys
+- [Remove Line Breaks](https://maniu2475-glitch.github.io/tools-en/remove-line-breaks.html) — strip newlines, replace with space/custom separator, or remove empty lines only
+- [Credit Card Validator](https://maniu2475-glitch.github.io/tools-en/credit-card-validator.html) — Luhn algorithm check with card brand detection (Visa/MC/Amex...)
+- [Ratio Calculator](https://maniu2475-glitch.github.io/tools-en/ratio-calculator.html) — simplify ratios to lowest terms, solve A:B = C:x, percentage split
+
+Newly added tools (2026-11-02):
+
+- [Time Zone Converter](https://maniu2475-glitch.github.io/tools-en/time-zone-converter.html) — convert any date/time between UTC, EST, PST, CET, IST, JST and more + live world clock
+- [Online Calculator](https://maniu2475-glitch.github.io/tools-en/online-calculator.html) — basic calculator with keyboard support, percent, sqrt and memory keys
+- [Remove Line Breaks](https://maniu2475-glitch.github.io/tools-en/remove-line-breaks.html) — strip newlines, replace with space/custom separator, or remove empty lines only
+- [Credit Card Validator](https://maniu2475-glitch.github.io/tools-en/credit-card-validator.html) — Luhn algorithm check with card brand detection (Visa/MC/Amex...)
+- [Ratio Calculator](https://maniu2475-glitch.github.io/tools-en/ratio-calculator.html) — simplify ratios to lowest terms, solve A:B = C:x, percentage split
 
 Newly added tools (2026-10-27):
 
@@ -84,7 +100,7 @@ Newly added tools (2026-10-24, 4th batch):
 
 There is also an `all-tools.html` directory page that lists and links every tool page alphabetically, giving each standalone page a site-wide internal link.
 
-Built with vanilla HTML/CSS/JS. The home page is a single-page app with hash routing, and every tool also has its own standalone page (for example `/json-formatter.html`) with its own title, canonical URL and sitemap entry — all 108 pages are listed in `sitemap.xml` and submitted to search engines via IndexNow.
+Built with vanilla HTML/CSS/JS. The home page is a single-page app with hash routing, and every tool also has its own standalone page (for example `/json-formatter.html`) with its own title, canonical URL and sitemap entry — all 130 pages are listed in `sitemap.xml` and submitted to search engines via IndexNow.
 
 ## Deploy (GitHub Pages)
 ```bash
@@ -118,4 +134,4 @@ Newly added tools (2026-10-25, 8th batch):
 - [Time Card Calculator](https://maniu2475-glitch.github.io/tools-en/time-card-calculator.html) - daily/weekly work hours with lunch breaks, overnight shifts and gross pay
 - [Area Converter](https://maniu2475-glitch.github.io/tools-en/area-converter.html) - m², ft², yd², acres, hectares, km², mi² all at once
 
-Total: 115 free online tools, all running 100% client-side.
+Total: 130 free online tools, all running 100% client-side.
