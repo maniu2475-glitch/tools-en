@@ -58,7 +58,7 @@
 <div style="font-size:32px;font-weight:700;color:#4f6ef7" id="df-out">—</div>
 <script>
 function gcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b){var t=b;b=a%b;a=t;}return a;}
-function dfDec(){var s=document.getElementById('df-dec').value.trim().replace(/,/g,'');if(!/^-?\d*\.?\d+$/.test(s)){document.getElementById('df-out').textContent='Enter a decimal like 0.375';return;}var neg=s[0]=='-';if(neg)s=s.slice(1);var dot=s.indexOf('.');var den,parts;if(dot<0){den=1;}else{den=Math.pow(10,s.length-dot-1);parts=s.replace('.','');}var num=parseInt(dot<0?s:s.replace('.',''),10);var g=gcd(num,den);num/=g;den/=g;document.getElementById('df-out').textContent=(neg?'−':'')+num+' / '+den+(den===1?'':'  (≈ '+(neg?-num:num/den)+')');}
+function dfDec(){var s=document.getElementById('df-dec').value.trim().replace(/,/g,'');if(!/^-?\d*\.?\d+$/.test(s)){document.getElementById('df-out').textContent='Enter a decimal like 0.375';return;}var neg=s[0]=='-';if(neg)s=s.slice(1);var dot=s.indexOf('.');var den,parts;if(dot<0){den=1;}else{den=Math.pow(10,s.length-dot-1);parts=s.replace('.','');}var num=parseInt(dot<0?s:s.replace('.',''),10);var g=gcd(num,den);num/=g;den/=g;document.getElementById('df-out').textContent=(neg?'−':'')+num+' / '+den+(den===1?'':'  (≈ '+((neg?-num:num)/den)+')');}
 function dfFrac(){var s=document.getElementById('df-frac').value.trim();var m=s.match(/^(-?\d+)\s*\/\s*(\d+)$/);if(!m){document.getElementById('df-out').textContent='Enter a fraction like 7/8';return;}var a=parseInt(m[1],10),b=parseInt(m[2],10);if(!b){document.getElementById('df-out').textContent='Divide by zero';return;}var g=gcd(a,b);var out=(a/b);document.getElementById('df-out').textContent=(a/g)+' / '+(b/g)+' = '+(Math.round(out*1e10)/1e10);}
 </script>
       <hr>

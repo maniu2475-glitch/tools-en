@@ -173,7 +173,7 @@ function startClock() {
 function tsToDate() {
   let ts = document.getElementById('ts-input').value.trim();
   const out = document.getElementById('ts-date-out');
-  if (!/^\d{10,13}$/.test(ts)) { out.textContent = '❌ Enter a 10-digit (sec) or 13-digit (ms) timestamp'; return; }
+  if (!/^(?:\d{10}|\d{13})$/.test(ts)) { out.textContent = '❌ Enter a 10-digit (sec) or 13-digit (ms) timestamp'; return; }
   if (ts.length === 10) ts = +ts * 1000;
   const d = new Date(+ts);
   out.textContent = 'Local: ' + d.toLocaleString('en-US', { hour12: false })
@@ -414,6 +414,8 @@ function radixConvert() {
   const val = document.getElementById('radix-input').value.trim();
   const out = document.getElementById('radix-out');
   if (!val) { out.textContent = ''; return; }
+  const digits = { 2: /^-?[01]+$/, 8: /^-?[0-7]+$/, 10: /^-?[0-9]+$/, 16: /^-?[0-9a-f]+$/i }[from];
+  if (!digits || !digits.test(val)) { out.textContent = '❌ Not a valid base-' + from + ' number'; return; }
   const num = parseInt(val, from);
   if (isNaN(num)) { out.textContent = '❌ Not a valid base-' + from + ' number'; return; }
   out.textContent = 'Binary : ' + num.toString(2) + '\nOctal  : ' + num.toString(8) +

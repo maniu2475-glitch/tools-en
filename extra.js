@@ -25,13 +25,26 @@ function loremCopy(){navigator.clipboard.writeText(document.getElementById('lore
 const CRON_FIELDS=[{n:"minute",min:0,max:59},{n:"hour",min:0,max:23},{n:"day of month",min:1,max:31},{n:"month",min:1,max:12},{n:"day of week",min:0,max:7}];
 const MONTHS=["January","February","March","April","May","June","July","August","September","October","November","December"];
 const DOW=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+function cronNum(tok,f){
+  if(!/^\d+$/.test(tok))throw new Error("bad");
+  const v=+tok;
+  if(v<f.min||v>f.max)throw new Error("bad");
+  return v;
+}
 function parseCronField(expr,f){
   if(expr==="*")return "every "+f.n;
   const parts=[];
   expr.split(",").forEach(seg=>{
-    if(seg.startsWith("*/")){parts.push("every "+seg.slice(2)+" "+f.n+"s");}
-    else if(seg.includes("-")){const[a,b]=seg.split("-");let s=fieldWord(a,f),e=fieldWord(b,f);parts.push("from "+s+" to "+e);}
-    else{parts.push("at "+fieldWord(seg,f));}
+    if(seg.startsWith("*/")){
+      const st=seg.slice(2);
+      if(!/^\d+$/.test(st)||+st<=0||+st>f.max)throw new Error("bad");
+      parts.push("every "+st+" "+f.n+"s");
+    }
+    else if(seg.includes("-")){
+      const[a,b]=seg.split("-");cronNum(a,f);cronNum(b,f);
+      let s=fieldWord(a,f),e=fieldWord(b,f);parts.push("from "+s+" to "+e);
+    }
+    else{cronNum(seg,f);parts.push("at "+fieldWord(seg,f));}
   });
   return parts.join(" and ");
 }

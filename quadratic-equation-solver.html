@@ -65,7 +65,13 @@
 function qeRun(){
   const a=parseFloat(document.getElementById('qe-a').value),b=parseFloat(document.getElementById('qe-b').value),c=parseFloat(document.getElementById('qe-c').value);
   if(!isFinite(a)||!isFinite(b)||!isFinite(c)){document.getElementById('qe-out').textContent='Enter numbers for a, b, c.';return;}
-  if(a===0){document.getElementById('qe-out').textContent='a cannot be 0 — the equation is not quadratic. Root = '+(c===0?0:(-b/c));return;}
+  if(a===0){
+    let msg='a cannot be 0 — the equation is not quadratic. ';
+    if(b===0) msg+=(c===0?'This is an identity — infinite solutions.':'no solution: 0 = '+c+' is false.');
+    else msg+='Root = '+(-c/b);
+    document.getElementById('qe-out').textContent=msg;
+    return;
+  }
   const D=b*b-4*a*c;
   let out='Discriminant D = '+D+'<br>';
   const vx=-b/(2*a), vy=c-b*b/(4*a);

@@ -76,15 +76,18 @@ function ddCalc(){
     let d=new Date(d1);
     for(let i=0;i<total;i++){ const w=d.getDay(); if(w!==0&&w!==6) bdays++; d=new Date(d.getTime()+msDay); }
   }
-  // calendar breakdown
-  let y=d2.getFullYear()-d1.getFullYear(), m=d2.getMonth()-d1.getMonth(), day=d2.getDate()-d1.getDate();
-  if(day<0){ m--; day+=new Date(d2.getFullYear(),d2.getMonth(),0).getDate(); }
-  if(m<0){ y--; m+=12; }
+  // calendar breakdown: anchor on d1, add whole months, count remaining days
+  const addMonths=(base,n)=>{const last=new Date(base.getFullYear(),base.getMonth()+n+1,0).getDate();
+    return new Date(base.getFullYear(),base.getMonth()+n,Math.min(base.getDate(),last));};
+  const monthsBetween=(a,b)=>(b.getFullYear()-a.getFullYear())*12+(b.getMonth()-a.getMonth());
+  let m=monthsBetween(d1,d2), anchor=addMonths(d1,m);
+  if(anchor>d2){ m--; anchor=addMonths(d1,m); }
+  let y=Math.floor(m/12), rem=m-y*12, day=Math.round((d2-anchor)/msDay);
   const weeks=(total/7).toFixed(1);
   document.getElementById('dd-out').innerHTML=
    '<strong>Total days:</strong> '+total+'<br>'+
    '<strong>Total weeks:</strong> '+weeks+'<br>'+
-   '<strong>Calendar:</strong> '+y+' years, '+m+' months, '+day+' days<br>'+
+   '<strong>Calendar:</strong> '+y+' years, '+rem+' months, '+day+' days<br>'+
    (biz?('<strong>Business days (Mon–Fri):</strong> '+bdays+'<br><strong>Weekend days:</strong> '+(total-bdays)):'')+
    '<br><span style="opacity:.7;font-size:.9em">From '+d1.toDateString()+' to '+d2.toDateString()+'</span>';
 }
