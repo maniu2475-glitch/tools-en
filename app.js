@@ -5,6 +5,7 @@
 function initNav() {
   const toggle = document.getElementById('menuToggle');
   const nav = document.getElementById('mainNav');
+  if (!toggle || !nav) return;
   toggle.addEventListener('click', () => nav.classList.toggle('open'));
 
   nav.querySelectorAll('a').forEach(a => {
