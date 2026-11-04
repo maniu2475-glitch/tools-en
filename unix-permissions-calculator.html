@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unix Permissions (chmod) Calculator - Convert permissions to and from octal</title>
+<meta name="description" content="Convert Unix/Linux file permissions between octal (755, 0644, 4755) and symbolic (rwxr-xr-x) notation. Free online chmod calculator with SUID, SGID and sticky bit support.">
+<link rel="canonical" href="https://toolbox.example.com/unix-permissions-calculator.html">
+<link rel="stylesheet" href="style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0000000000000000" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Unix Permissions (chmod) Calculator","applicationCategory":"UtilitiesApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="menu">☰</button>
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span><span class="logo-text">Online Toolbox</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#tool-json" data-tool="json">JSON</a>
+      <a href="index.html#tool-base64" data-tool="base64">Base64</a>
+      <a href="index.html#tool-url" data-tool="url">URL</a>
+      <a href="index.html#tool-password" data-tool="password">Password</a>
+      <a href="index.html#tool-hash" data-tool="hash">Hash</a>
+      <a href="index.html#tool-timestamp" data-tool="timestamp">Timestamp</a>
+      <a href="index.html#tool-uuid" data-tool="uuid">UUID</a>
+      <a href="index.html#tool-color" data-tool="color">Color</a>
+    </nav>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-unix-permissions-calculator">
+      <h1>Unix Permissions (chmod) Calculator</h1>
+      <div class="opt-group">
+        <p style="margin:0 0 8px"><strong>Parse a permission value</strong></p>
+        <input type="text" id="up-input" placeholder="755  /  0755  /  rwxr-xr-x" style="width:60%;font-family:monospace" oninput="upRun()">
+        <div class="btn-group"><button class="btn" onclick="upRun()">Parse</button></div>
+        <p id="up-msg" style="font-size:13px;color:#666"></p>
+      </div>
+      <div class="opt-group">
+        <p style="margin:0 0 8px"><strong>Or tick the permissions</strong></p>
+        <table style="width:100%;max-width:520px;border-collapse:collapse;font-size:14px">
+          <tr><th></th><th>read (r,4)</th><th>write (w,2)</th><th>execute (x,1)</th><th>special (s/t,+8)</th></tr>
+          <tr><td>Owner (u)</td>
+            <td><input type="checkbox" id="up-r0" checked></td>
+            <td><input type="checkbox" id="up-w0" checked></td>
+            <td><input type="checkbox" id="up-x0" checked></td>
+            <td><input type="checkbox" id="up-s0"></td></tr>
+          <tr><td>Group (g)</td>
+            <td><input type="checkbox" id="up-r1" checked></td>
+            <td><input type="checkbox" id="up-w1"></td>
+            <td><input type="checkbox" id="up-x1" checked></td>
+            <td><input type="checkbox" id="up-s1"></td></tr>
+          <tr><td>Others (o)</td>
+            <td><input type="checkbox" id="up-r2" checked></td>
+            <td><input type="checkbox" id="up-w2"></td>
+            <td><input type="checkbox" id="up-x2" checked></td>
+            <td><input type="checkbox" id="up-s2"></td></tr>
+        </table>
+      </div>
+      <div class="grid2" style="display:flex;gap:16px;flex-wrap:wrap">
+        <div style="flex:1;min-width:200px">
+          <label>Octal</label>
+          <input type="text" id="up-octal" readonly style="width:100%;font-family:monospace" onclick="upCopy('up-octal')">
+          <label>Symbolic</label>
+          <input type="text" id="up-symbolic" readonly style="width:100%;font-family:monospace" onclick="upCopy('up-symbolic')">
+          <label>Numeric</label>
+          <input type="text" id="up-numeric" readonly style="width:100%;font-family:monospace">
+        </div>
+        <div style="flex:1;min-width:200px">
+          <label>Breakdown</label>
+          <div id="up-breakdown" style="font-family:monospace;line-height:1.9;padding:8px;background:#f6f7f9;border-radius:6px"></div>
+        </div>
+      </div>
+      <script>upFromBits();</script>
+
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">Unix file permissions are written as a 3- or 4-digit octal number, e.g. <code>755</code>. Each digit controls one class of user: the <strong>owner</strong>, the <strong>group</strong> and <strong>others</strong>. The value of each digit is the sum of <code>read=4</code>, <code>write=2</code> and <code>execute=1</code>. So <code>7 = 4+2+1 = rwx</code>, <code>5 = 4+1 = r-x</code> and <code>4 = r--</code>.</p>
+<p style="line-height:1.9">A leading 4th digit sets the special bits: <code>4</code> = setuid (SUID), <code>2</code> = setgid (SGID), <code>1</code> = sticky bit, so <code>4755</code> means SUID + 755, and <code>1777</code> is the classic sticky-bit directory (like <code>/tmp</code>). The symbolic form (<code>-rwxr-xr-x</code>, <code>chmod u+x</code>) is mapped one-to-one with the numeric form above.</p>
+<p style="line-height:1.9">Common values: <code>644</code> regular files, <code>600</code> private keys and secrets, <code>755</code> directories and executables, <code>700</code> private directory, <code>775</code> shared by group, <code>777</code> world-writable (risky).</p>
+
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="json-formatter.html">Json Formatter</a>
+<a class="btn btn-outline" href="base64.html">Base64</a>
+<a class="btn btn-outline" href="url-encode-decode.html">Url Encode Decode</a>
+<a class="btn btn-outline" href="password-generator.html">Password Generator</a>
+<a class="btn btn-outline" href="md5-generator.html">Md5 Generator</a>
+<a class="btn btn-outline" href="sha256-hash-generator.html">Sha256 Hash Generator</a>
+<a class="btn btn-outline" href="word-counter.html">Word Counter</a>
+<a class="btn btn-outline" href="case-converter.html">Case Converter</a>
+<a class="btn btn-outline" href="text-diff.html">Text Diff</a>
+<a class="btn btn-outline" href="cron-parser.html">Cron Parser</a>
+<a class="btn btn-outline" href="chmod-calculator.html">Chmod Calculator</a>
+<a class="btn btn-outline" href="regex-tester.html">Regex Tester</a>
+<a class="btn btn-outline" href="uuid-generator.html">Uuid Generator</a>
+<a class="btn btn-outline" href="timestamp-converter.html">Timestamp Converter</a></div>
+      <h3>Frequently asked questions</h3>
+      <div style="line-height:1.9"><details><summary><strong>Is this tool free?</strong></summary><p>Yes - completely free, no signup, no login, no limits.</p></details>
+<details><summary><strong>Does my data leave my browser?</strong></summary><p>No. Everything is computed locally in JavaScript, so your input never touches a server.</p></details>
+<details><summary><strong>Does it work offline?</strong></summary><p>Once the page is loaded it works without a network connection.</p></details></div>
+  </section>
+</main>
+<script>
+
+function upInit(){
+  [0,1,2].forEach(function(i){
+    ['r','w','x','s'].forEach(function(p){
+      var cb=document.getElementById('up-'+p+i);
+      if(cb) cb.addEventListener('change', upFromBits);
+    });
+  });
+}
+function upVal(){
+  var v=0;
+  for(var i=0;i<3;i++){
+    var b=0;
+    if(document.getElementById('up-r'+i).checked) b|=4;
+    if(document.getElementById('up-w'+i).checked) b|=2;
+    if(document.getElementById('up-x'+i).checked) b|=1;
+    var s=document.getElementById('up-s'+i);
+    if(s && s.checked) b|=8;
+    v=(v<<4)|b;
+  }
+  // octal digits: last3 normal + setuid/setgid/sticky encoded in digit 4s
+  var o='',special=0;
+  for(var j=0;j<3;j++){
+    var b2=0;
+    if(document.getElementById('up-r'+j).checked) b2|=4;
+    if(document.getElementById('up-w'+j).checked) b2|=2;
+    if(document.getElementById('up-x'+j).checked) b2|=1;
+    var sv=document.getElementById('up-s'+j);
+    if(sv && sv.checked) special |= (j===0?4:(j===1?2:1));
+    o+=b2;
+  }
+  return {octal:'0'+special+o, special:special, digits:o};
+}
+function upRender(){
+  var r=upVal();
+  document.getElementById('up-octal').value=r.octal;
+  document.getElementById('up-special').value=String(r.special>0 ? r.special : 0);
+  var names=['owner','group','others'];
+  var rows=[];
+  var sym='';
+  var letters=['u','g','o'];
+  for(var i=0;i<3;i++){
+    var rv=document.getElementById('up-r'+i).checked?'r':'-';
+    var wv=document.getElementById('up-w'+i).checked?'w':'-';
+    var xv=document.getElementById('up-x'+i).checked?'x':'-';
+    var sv=document.getElementById('up-s'+i).checked;
+    if(sv) xv=document.getElementById('up-x'+i).checked?'s':'S';
+    sym+=rv+wv+xv;
+    rows.push(names[i]+': '+rv+wv+(sv?(document.getElementById('up-x'+i).checked?'s':'S'):xv));
+  }
+  document.getElementById('up-symbolic').value=sym;
+  document.getElementById('up-numeric').value=parseInt(r.octal.substring(1),8);
+  document.getElementById('up-breakdown').innerHTML = rows.join('<br>');
+}
+function upFromBits(){
+  var r=upVal();
+  document.getElementById('up-octal').value=r.octal;
+  document.getElementById('up-symbolic').value=(function(){var s='';for(var i=0;i<3;i++){var sv=document.getElementById('up-s'+i).checked;s+=(document.getElementById('up-r'+i).checked?'r':'-')+(document.getElementById('up-w'+i).checked?'w':'-')+(sv?(document.getElementById('up-x'+i).checked?'s':'S'):(document.getElementById('up-x'+i).checked?'x':'-'));}return s;})();
+  document.getElementById('up-numeric').value=parseInt(r.octal.substring(1),8);
+  var names=['owner','group','others'],rows=[];
+  for(var j=0;j<3;j++){
+    var sv2=document.getElementById('up-s'+j).checked;
+    rows.push(names[j]+': '+(document.getElementById('up-r'+j).checked?'r':'-')+(document.getElementById('up-w'+j).checked?'w':'-')+(sv2?(document.getElementById('up-x'+j).checked?'s':'S'):(document.getElementById('up-x'+j).checked?'x':'-')));
+  }
+  document.getElementById('up-breakdown').innerHTML=rows.join('<br>');
+}
+function upParse(str){
+  str=str.trim();
+  var m=str.match(/^(?:0?)([0-7]{3,4})$/);
+  if(m){
+    var s=m[1].padStart(4,'0');
+    for(var i=0;i<3;i++){
+      var d=parseInt(s[i+1],8);
+      document.getElementById('up-r'+i).checked=!!(d&4);
+      document.getElementById('up-w'+i).checked=!!(d&2);
+      var sv=!!(d&1), sp=+(s[i]>0?1:0);
+      document.getElementById('up-s'+i).checked=!!(sp);
+      document.getElementById('up-x'+i).checked=sv;
+    }
+    upFromBits();
+    return 'octal';
+  }
+  if(/^[rwxsStT-]{9}$/.test(str)){
+    for(var j=0;j<3;j++){
+      var tri=str.substr(j*3,3);
+      document.getElementById('up-r'+j).checked=tri[0]==='r';
+      document.getElementById('up-w'+j).checked=tri[1]==='w';
+      var c=tri[2];
+      if(c==='s'||c==='S'){document.getElementById('up-s'+j).checked=true;document.getElementById('up-x'+j).checked=(c==='s');}
+      else if(c==='t'||c==='T'){document.getElementById('up-s'+j).checked=true;document.getElementById('up-x'+j).checked=(c==='t');}
+      else {document.getElementById('up-s'+j).checked=false;document.getElementById('up-x'+j).checked=(c==='x');}
+    }
+    upFromBits();
+    return 'symbolic';
+  }
+  return null;
+}
+function upRun(){
+  var v=document.getElementById('up-input').value;
+  var r=upParse(v);
+  var msg=document.getElementById('up-msg');
+  if(!r){msg.textContent='Cannot parse "'+v+'" - use 755, 0755, 4755 or rwxr-xr-x';return;}
+  msg.textContent='Parsed as '+(r==='octal'?'octal':'symbolic')+' notation';
+}
+function upCopy(id){
+  var el=document.getElementById(id);
+  el.select();document.execCommand('copy');
+}
+upInit();
+
+</script>
+</body>
+</html>
