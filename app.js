@@ -562,7 +562,7 @@ function jwtDecode() {
   const token = document.getElementById('jwt-input').value.trim();
   const out = document.getElementById('jwt-output');
   const parts = token.split('.');
-  if (parts.length < 2) { out.textContent = '❌ Invalid JWT (expected header.payload.signature)'; return; }
+  if (parts.length < 3) { out.textContent = '❌ Invalid JWT (expected header.payload.signature)'; return; }
   const dec = s => {
     s = s.replace(/-/g, '+').replace(/_/g, '/');
     while (s.length % 4) s += '=';

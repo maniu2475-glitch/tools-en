@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Byte Counter - Count UTF-8 Bytes of Text Online</title>
+<meta name="description" content="Count the exact UTF-8 byte size of any text, with character, DB limit, JSON and Base64 estimates. Free online byte counter.">
+<link rel="canonical" href="https://toolbox.example.com/byte-counter.html">
+<link rel="stylesheet" href="style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0000000000000000" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Byte Counter (UTF-8)","applicationCategory":"UtilitiesApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="menu">☰</button>
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span><span class="logo-text">Online Toolbox</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#tool-json" data-tool="json">JSON</a>
+      <a href="index.html#tool-base64" data-tool="base64">Base64</a>
+      <a href="index.html#tool-url" data-tool="url">URL</a>
+      <a href="index.html#tool-password" data-tool="password">Password</a>
+      <a href="index.html#tool-hash" data-tool="hash">Hash</a>
+      <a href="index.html#tool-timestamp" data-tool="timestamp">Timestamp</a>
+      <a href="index.html#tool-uuid" data-tool="uuid">UUID</a>
+      <a href="index.html#tool-color" data-tool="color">Color</a>
+    </nav>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-byte-counter">
+      <h1>Byte Counter (UTF-8)</h1>
+      <textarea id="bc-input" oninput="bcUpdate()" placeholder="Paste or type text here (UTF-8, emoji and CJK supported)..." style="width:100%;height:140px;font-family:monospace"></textarea>
+      <div class="btn-group"><button class="btn" onclick="document.getElementById('bc-input').value='';bcUpdate()">Clear</button><button class="btn btn-outline" onclick="bcUpdate()">Recount</button></div>
+      <h3>Size</h3>
+      <table style="width:100%;max-width:520px;border-collapse:collapse;font-size:14px">
+        <tr><td>UTF-8 bytes</td><td style="text-align:right;font-family:monospace"><strong id="bc-bytes">0</strong></td></tr>
+        <tr><td>Characters (code points)</td><td style="text-align:right;font-family:monospace" id="bc-chars">0</td></tr>
+        <tr><td>UTF-16 code units</td><td style="text-align:right;font-family:monospace" id="bc-utf16">0</td></tr>
+        <tr><td>Kilobytes (KB)</td><td style="text-align:right;font-family:monospace" id="bc-kb">0</td></tr>
+        <tr><td>Lines</td><td style="text-align:right;font-family:monospace" id="bc-lines">0</td></tr>
+        <tr><td>Approx. JSON string size</td><td style="text-align:right;font-family:monospace" id="bc-json">0</td></tr>
+        <tr><td>Approx. Base64 size</td><td style="text-align:right;font-family:monospace" id="bc-base64">0</td></tr>
+        <tr><td>URL-encoded length</td><td style="text-align:right;font-family:monospace" id="bc-url">0</td></tr>
+      </table>
+      <h3>Byte distribution</h3>
+      <table style="width:100%;max-width:520px;border-collapse:collapse;font-size:14px">
+        <tr><td>1-byte (ASCII)</td><td style="text-align:right;font-family:monospace" id="bc-1">0</td></tr>
+        <tr><td>2-byte (Latin, Greek, Cyrillic)</td><td style="text-align:right;font-family:monospace" id="bc-2">0</td></tr>
+        <tr><td>3-byte (CJK, symbols)</td><td style="text-align:right;font-family:monospace" id="bc-3">0</td></tr>
+        <tr><td>4-byte (emoji, rare scripts)</td><td style="text-align:right;font-family:monospace" id="bc-4">0</td></tr>
+      </table>
+      <p style="font-size:13px;color:#666">Non-ASCII characters: <span id="bc-nonascii" style="font-family:monospace">-</span></p>
+      <script>document.addEventListener('DOMContentLoaded',function(){bcUpdate();});</script>
+
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">This counter reports the exact <strong>UTF-8 byte size</strong> of your text, which is what actually gets sent over the network and what database columns such as <code>VARCHAR(255)</code> or APIs like Twitter/X, Discord, Slack and Google count. A character is not always a byte: <code>a</code> is 1 byte, <code>é</code> is 2, <code>中</code> is 3 and <code>😀</code> is 4.</p>
+<p style="line-height:1.9">Use it to check field limits (e.g. 280 characters vs 280 bytes), to stay under SMS/GSM and JSON payload limits, or to find out why a string that looks short is rejected as too long.</p>
+<p style="line-height:1.9">Also shown: character (code point) count, UTF-16 code units, line count, approximate JSON/Base64 expansion and URL-encoded length.</p>
+
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="json-formatter.html">Json Formatter</a>
+<a class="btn btn-outline" href="base64.html">Base64</a>
+<a class="btn btn-outline" href="url-encode-decode.html">Url Encode Decode</a>
+<a class="btn btn-outline" href="password-generator.html">Password Generator</a>
+<a class="btn btn-outline" href="md5-generator.html">Md5 Generator</a>
+<a class="btn btn-outline" href="sha256-hash-generator.html">Sha256 Hash Generator</a>
+<a class="btn btn-outline" href="word-counter.html">Word Counter</a>
+<a class="btn btn-outline" href="case-converter.html">Case Converter</a>
+<a class="btn btn-outline" href="text-diff.html">Text Diff</a>
+<a class="btn btn-outline" href="cron-parser.html">Cron Parser</a>
+<a class="btn btn-outline" href="chmod-calculator.html">Chmod Calculator</a>
+<a class="btn btn-outline" href="regex-tester.html">Regex Tester</a>
+<a class="btn btn-outline" href="uuid-generator.html">Uuid Generator</a>
+<a class="btn btn-outline" href="timestamp-converter.html">Timestamp Converter</a></div>
+      <h3>Frequently asked questions</h3>
+      <div style="line-height:1.9"><details><summary><strong>Is this tool free?</strong></summary><p>Yes - completely free, no signup, no login, no limits.</p></details>
+<details><summary><strong>Does my data leave my browser?</strong></summary><p>No. Everything is computed locally in JavaScript, so your input never touches a server.</p></details>
+<details><summary><strong>Does it work offline?</strong></summary><p>Once the page is loaded it works without a network connection.</p></details></div>
+  </section>
+</main>
+<script>
+
+var bcText='';
+function bcUpdate(){
+  var t=document.getElementById('bc-input').value;
+  var enc=new TextEncoder();
+  var bytes=enc.encode(t);
+  var chars=Array.from(t).length;
+  var utf16=t.length;
+  document.getElementById('bc-bytes').textContent=bytes.length.toLocaleString();
+  document.getElementById('bc-chars').textContent=chars.toLocaleString();
+  document.getElementById('bc-utf16').textContent=utf16.toLocaleString();
+  document.getElementById('bc-kb').textContent=(bytes.length/1024).toFixed(2);
+  document.getElementById('bc-lines').textContent=(t?t.split(/\r\n|\r|\n/).length:0);
+  // per-codepoint byte length
+  var agg={1:0,2:0,3:0,4:0};
+  var nonAscii=[];
+  for(var i=0;i<t.length;){
+    var cp=t.codePointAt(i);
+    var len=cp<0x80?1:cp<0x800?2:cp<0x10000?3:4;
+    agg[len]++;
+    if(len>1 && nonAscii.length<60) nonAscii.push(t.substr(i,cp>0xffff?2:1));
+    i+=cp>0xffff?2:1;
+  }
+  document.getElementById('bc-1').textContent=agg[1];
+  document.getElementById('bc-2').textContent=agg[2];
+  document.getElementById('bc-3').textContent=agg[3];
+  document.getElementById('bc-4').textContent=agg[4];
+  document.getElementById('bc-nonascii').textContent=nonAscii.join(' ')||'-';
+  var j=bytes.length,json=JSON.stringify(t).length;
+  document.getElementById('bc-json').textContent=json.toLocaleString();
+  document.getElementById('bc-base64').textContent=Math.ceil(bytes.length/3)*4;
+  document.getElementById('bc-url').textContent=encodeURIComponent(t).length.toLocaleString();
+}
+
+</script>
+</body>
+</html>

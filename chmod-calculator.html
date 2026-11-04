@@ -70,7 +70,7 @@ document.getElementById('ch-cmd').value='chmod '+num+' file';
 document.getElementById('ch-desc').textContent=num+' ('+sym+') — '+describe(num);}
 function describe(n){var r=[];var cls=['Owner','Group','Others'];var words=['read','write','execute'];
 String(n).split('').forEach(function(d,i){var v=parseInt(d,8),acts=[];[4,2,1].forEach(function(b,j){if(v&b)acts.push(words[j]);});r.push(cls[i]+': '+(acts.length?acts.join(', '):'no permissions'));});return r.join('; ');}
-function chFromNum(v){v=String(v).replace(/[^0-7]/g,'').slice(0,3);if(v.length!==3)return;for(var i=0;i<3;i++){var d=parseInt(v[i],8);for(var j=0;j<3;j++)document.getElementById('ch-'+i+'-'+j).checked=!!(d&Math.pow(2,2-j));}chm();}
+function chFromNum(v){v=String(v);if(/[^0-7]/.test(v)){document.getElementById('ch-desc').textContent='Invalid mode: use only octal digits 0-7 (e.g. 755).';return;}if(v.length!==3)return;for(var i=0;i<3;i++){var d=parseInt(v[i],8);for(var j=0;j<3;j++)document.getElementById('ch-'+i+'-'+j).checked=!!(d&Math.pow(2,2-j));}chm();}
 function chPreset(p){chFromNum(p);}
 document.addEventListener('DOMContentLoaded',function(){chFromNum('755');});
 </script>

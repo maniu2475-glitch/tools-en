@@ -57,7 +57,7 @@
       </div>
       <button class="btn" onclick="doRound()">Round</button>
       <script>
-function doRound(){var x=parseFloat(document.getElementById('rIn').value);var p=parseInt(document.getElementById('rP').value||'0',10);if(isNaN(x)){document.getElementById('rOut').textContent='Please enter a valid number.';return;}var f=Math.pow(10,p);var near=Math.round(x*f)/f,up=Math.ceil(x*f)/f,down=Math.floor(x*f)/f;document.getElementById('rOut').innerHTML='Nearest ('+p+' dp): <b>'+near+'</b><br>Rounded up: <b>'+up+'</b><br>Rounded down: <b>'+down+'</b><br>Integer: <b>'+Math.round(x)+'</b>';document.getElementById('rOut').style.display='block';}
+function doRound(){var x=parseFloat(document.getElementById('rIn').value);var p=parseInt(document.getElementById('rP').value||'0',10);if(isNaN(x)){document.getElementById('rOut').textContent='Please enter a valid number.';return;}var f=Math.pow(10,p);var near=Math.round(+((x*f).toPrecision(15)))/f,up=Math.ceil(x*f)/f,down=Math.floor(x*f)/f;document.getElementById('rOut').innerHTML='Nearest ('+p+' dp): <b>'+near+'</b><br>Rounded up: <b>'+up+'</b><br>Rounded down: <b>'+down+'</b><br>Integer: <b>'+Math.round(x)+'</b>';document.getElementById('rOut').style.display='block';}
       </script>
       <hr>
       <h2>About this tool</h2>

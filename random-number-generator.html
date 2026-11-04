@@ -47,7 +47,7 @@
 </main>
 <footer class="site-footer"><div class="container"><p>© 2026 Online Toolbox · 887+ free browser-side tools</p></div></footer>
 <script>
-function rnd(min,max){var a=Math.ceil(min),b=Math.floor(max);var range=b-a+1;var max32=4294967296;var lim=max32-(max32%range);var a2=new Uint32Array(1);do{crypto.getRandomValues(a2);}while(a2[0]>=lim);return a+(a2[0]%range);}
+function rnd(min,max){var a=Math.ceil(min),b=Math.floor(max);var range=b-a+1;if(range<=0)return a;if(range>4294967296)return a+Math.floor(Math.random()*range);var max32=4294967296;var lim=max32-(max32%range);var a2=new Uint32Array(1);do{crypto.getRandomValues(a2);}while(a2[0]>=lim);return a+(a2[0]%range);}
 function rn(){var min=+document.getElementById('rn-min').value,max=+document.getElementById('rn-max').value,n=+document.getElementById('rn-n').value,u=document.getElementById('rn-u').checked;var out=document.getElementById('rn-out');if(isNaN(min)||isNaN(max)||isNaN(n)||n<1||min>max){out.textContent='Invalid input';return;}var res=[];if(u){if(max-min+1<n){out.textContent='Range too small for '+n+' unique numbers';return;}var seen={};while(res.length<n){var x=rnd(min,max);if(!seen[x]){seen[x]=1;res.push(x);}}}else{for(var i=0;i<n;i++)res.push(rnd(min,max));}out.textContent=res.join(', ');}
 document.addEventListener('DOMContentLoaded',rn);
 </script>

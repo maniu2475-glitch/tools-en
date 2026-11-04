@@ -60,7 +60,7 @@ function dsConv(){var v=parseFloat(document.getElementById('ds-input').value);if
 var fi=+document.getElementById('ds-from').value,ti=+document.getElementById('ds-to').value;
 var bytes=v*dsUnits[fi][1], r=bytes/dsUnits[ti][1];
 document.getElementById('ds-out').innerHTML='<strong>'+dsNum(v)+' '+dsUnits[fi][0]+' = '+dsNum(r)+' '+dsUnits[ti][0]+'</strong><br>'+dsNum(bytes)+' bytes';}
-function dsNum(x){if(x===0)return '0';if(Math.abs(x)>=1e15||Math.abs(x)<1e-6)return x.toExponential(6);return (+x.toPrecision(12)).toString();}
+function dsNum(x){if(x===0)return '0';if(Math.abs(x)>=1e15||Math.abs(x)<1e-6)return x.toExponential(6);return (+x.toPrecision(15)).toString();}
 dsFill();dsConv();
 </script>
       <hr>

@@ -56,8 +56,8 @@
 <div class="btn-group"><button class="btn btn-outline" onclick="hxBack()">Convert text → hex</button>
 <label style="margin-left:12px"><input type="checkbox" id="hx-sp" checked> separate bytes with spaces</label></div>
 <script>
-function cleanHex(s){var m=s.replace(/0[xX]/g,'').replace(/[^0-9a-fA-F]/g,'');if(m.length%2)m=m+'0';return m;}
-function hxConv(){var m=cleanHex(document.getElementById('hx-in').value);var out='';for(var i=0;i<m.length;i+=2){var c=parseInt(m.substr(i,2),16);out+=(c>=32&&c<127)?String.fromCharCode(c):'.';}document.getElementById('hx-out').value=out;}
+function cleanHex(s){return s.replace(/0[xX]/g,'').replace(/[\s,:;_-]/g,'');}
+function hxConv(){var m=cleanHex(document.getElementById('hx-in').value);var o=document.getElementById('hx-out');if(/[^0-9a-fA-F]/.test(m)){o.value='Invalid hex: use only 0-9 and a-f characters.';return;}if(m.length%2){o.value='Invalid hex: odd number of digits ('+m.length+').';return;}var out='';for(var i=0;i<m.length;i+=2){var c=parseInt(m.substr(i,2),16);out+=(c>=32&&c<127)?String.fromCharCode(c):'.';}o.value=out;}
 function hxBack(){var s=document.getElementById('hx-out').value,sp=document.getElementById('hx-sp').checked,h='';for(var i=0;i<s.length;i++){h+=s.charCodeAt(i).toString(16).padStart(2,'0');if(sp)h+=' ';}document.getElementById('hx-in').value=h.trim();}
 </script>
       <hr>
