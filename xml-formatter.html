@@ -96,25 +96,24 @@ function xfRun(){
     }
     function fmt(node,depth){
       var pad=Array(depth+1).join(unit);
-      if(node.nodeType===3){ var t=node.textContent.trim(); return t?[pad+t]:[]; }
+      if(node.nodeType===3){ return node.textContent.trim()?[pad+node.textContent]:[]; }
+      if(node.nodeType===4){ return [pad+'<![CDATA['+node.data+']]>']; }
+      if(node.nodeType===8){ return [pad+'<!--'+node.data+'-->']; }
       if(node.nodeType!==1) return [];
-      var lines=[pad+'<'+node.nodeName+attrs(node)];
+      var open=pad+'<'+node.nodeName+attrs(node);
       var kids=[]; node.childNodes.forEach(function(k){ kids= kids.concat(fmt(k,depth+1)); });
-      if(!kids.length){ lines[lines.length-1]+='/>'; return lines; }
-      if(kids.length===1 && kids[0].trim().indexOf('<')!==0){ return [pad+'<'+node.nodeName+attrs(node)+'>'+kids[0].trim()+'</'+node.nodeName+'>']; }
-      lines[lines.length-1]+='>';
-      lines=lines.concat(kids);
-      lines.push(pad+'</'+node.nodeName+'>');
-      return lines;
+      if(!kids.length){ return [open+'/>']; }
+      if(node.childNodes.length===1 && node.childNodes[0].nodeType===3){ return [pad+'<'+node.nodeName+attrs(node)+'>'+node.textContent+'</'+node.nodeName+'>']; }
+      return [open+'>'].concat(kids,[pad+'</'+node.nodeName+'>']);
     }
-    function attrs(n){ var s=''; for(var i=0;i<n.attributes.length;i++){ var a=n.attributes[i]; s+=' '+a.name+'="'+a.value+'"'; } return s; }
+    function attrs(n){ var s=''; for(var i=0;i<n.attributes.length;i++){ var a=n.attributes[i]; s+=' '+a.name+'="'+a.value.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'"'; } return s; }
     out.value=fmt(doc.documentElement,0).join('\n');
     msg.textContent='Formatted successfully.';
   }catch(e){ out.value=''; msg.textContent='Error: '+e.message; }
 }
 function xfMin(){
-  var s=document.getElementById('xf-input').value.replace(/>\s+</g,'><').replace(/\s+/g,' ').trim();
-  document.getElementById('xf-output').value=s.replace(/ </g,'<').replace(/> /g,'>');
+  var s=document.getElementById('xf-input').value.replace(/>\s+</g,'><').trim();
+  document.getElementById('xf-output').value=s;
   document.getElementById('xf-msg').textContent='Minified.';
 }
 

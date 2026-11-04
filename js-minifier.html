@@ -55,19 +55,35 @@
 <script src="extra.js"></script>
 <script>
 
+function jmStripComments(src){
+  let out='',i=0,quote=null;
+  while(i<src.length){
+    const c=src[i];
+    if(quote){
+      out+=c;
+      if(c.charCodeAt(0)===92&&i+1<src.length){out+=src[i+1];i+=2;continue;}
+      if(c===quote)quote=null;
+      i++;continue;
+    }
+    if(c==='"'||c==="'"||c==='`'){quote=c;out+=c;i++;continue;}
+    if(c==='/'&&src[i+1]==='/'){i+=2;while(i<src.length&&src.charCodeAt(i)!==10)i++;continue;}
+    if(c==='/'&&src[i+1]==='*'){i+=2;while(i<src.length&&!(src[i]==='*'&&src[i+1]==='/'))i++;if(i<src.length)i+=2;continue;}
+    out+=c;i++;
+  }
+  return out;
+}
+
 function jmRun(){
   const src=document.getElementById('jm-in').value;
-  let out=src;
-  // strip block and line comments (naive but safe for typical code without regex edge cases)
-  out=out.replace(/\/\*[\s\S]*?\*\//g,'');
-  out=out.replace(/(^|[^:\\])\/\/[^\n]*/g,'$1');
+  let out=jmStripComments(src);
   // collapse leading/trailing whitespace per line and drop blank lines
   out=out.split('\n').map(l=>l.trim()).filter(l=>l.length).join('\n');
   // join lines where safe: after ; { } , ( operators
   out=out.replace(/\n\s*/g,'\n');
   const inB=new Blob([src]).size, outB=new Blob([out]).size;
+  const pct=inB?Math.max(0,100-outB/inB*100):0;
   document.getElementById('jm-out').value=out;
-  document.getElementById('jm-stat').innerHTML='Original: <strong>'+inB+' bytes</strong> → Minified: <strong>'+outB+' bytes</strong> — saved '+Math.max(0,100-outB/inB*100).toFixed(1)+'%';
+  document.getElementById('jm-stat').innerHTML='Original: <strong>'+inB+' bytes</strong> → Minified: <strong>'+outB+' bytes</strong> — saved '+pct.toFixed(1)+'%';
 }
 </script>
 </body>

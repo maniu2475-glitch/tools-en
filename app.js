@@ -487,9 +487,9 @@ function caseDo(mode) {
   let r = text;
   if (mode === 'upper') r = text.toUpperCase();
   else if (mode === 'lower') r = text.toLowerCase();
-  else if (mode === 'cap') r = text.toLowerCase().replace(/(^|\s+)([a-z])/g, (m, a, b) => a + b.toUpperCase());
-  else if (mode === 'camel') r = text.toLowerCase().replace(/[^a-zA-Z0-9]+(.)?/g, (m, c) => c ? c.toUpperCase() : '');
-  else if (mode === 'snake') r = text.replace(/([a-z])([A-Z])/g, '$1_$2').replace(/[\s-]+/g, '_').toLowerCase();
+  else if (mode === 'cap') r = text.toLowerCase().replace(/(^|\s)(\p{L})/gu, (m, a, b) => a + b.toUpperCase());
+  else if (mode === 'camel') r = text.toLowerCase().replace(/[^\p{L}\p{N}]+(\p{L})?/gu, (m, c) => c ? c.toUpperCase() : '');
+  else if (mode === 'snake') r = text.replace(/([A-Z]+)([A-Z][a-z])/g, '$1_$2').replace(/([a-z0-9])([A-Z])/g, '$1_$2').replace(/[\s-]+/g, '_').toLowerCase();
   document.getElementById('case-output').value = r;
 }
 
@@ -513,22 +513,32 @@ function csvToJson() {
   const sep = document.getElementById('csv-sep').value;
   const out = document.getElementById('csv-output');
   if (!text) { out.textContent = 'Enter CSV content'; return; }
-  const lines = text.split(/\r?\n/).filter(l => l.trim());
-  const parseLine = l => {
-    const cells = [];
-    let cur = '', inQ = false;
-    for (const ch of l) {
-      if (ch === '"' && (inQ || cur === '' || true)) { inQ = !inQ; continue; }
-      if (ch === sep && !inQ) { cells.push(cur); cur = ''; } else cur += ch;
-    }
-    cells.push(cur);
-    return cells.map(c => c.trim());
-  };
-  const header = parseLine(lines[0]);
-  const data = lines.slice(1).map(l => {
-    const cells = parseLine(l);
+  const records = [];
+  let row = [], cur = '', inQ = false;
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (inQ) {
+      if (ch === '"') {
+        if (text[i + 1] === '"') { cur += '"'; i++; } else inQ = false;
+      } else cur += ch;
+    } else if (ch === '"') {
+      inQ = true;
+    } else if (ch === sep) {
+      row.push(cur); cur = '';
+    } else if (ch === '\n' || ch === '\r') {
+      if (ch === '\r' && text[i + 1] === '\n') i++;
+      row.push(cur); records.push(row); row = []; cur = '';
+    } else cur += ch;
+  }
+  if (cur !== '' || row.length) { row.push(cur); records.push(row); }
+  const rows = records.filter(r => !(r.length === 1 && r[0].trim() === ''));
+  const header = rows.length ? rows[0].map(c => c.trim()) : [];
+  const data = rows.slice(1).map(r => {
     const obj = {};
-    header.forEach((h, i) => obj[h] = isNaN(+cells[i]) || cells[i] === '' ? cells[i] : +cells[i]);
+    header.forEach((h, i) => {
+      const c = (r[i] === undefined ? '' : r[i]).trim();
+      obj[h] = /^-?(0|[1-9]\d*)(\.\d+)?$/.test(c) ? +c : c;
+    });
     return obj;
   });
   out.textContent = JSON.stringify(data, null, 2);

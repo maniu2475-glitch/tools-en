@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JSON to TypeScript - Generate Interfaces Online</title>
+<meta name="description" content="Convert any JSON sample into TypeScript interfaces automatically. Nested objects, arrays and primitives handled; runs 100% in your browser.">
+<link rel="canonical" href="https://toolbox.example.com/json-to-typescript.html">
+<link rel="stylesheet" href="style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0000000000000000" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"JSON to TypeScript Interface Generator","applicationCategory":"UtilitiesApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="menu">☰</button>
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span><span class="logo-text">Online Toolbox</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#tool-json" data-tool="json">JSON</a>
+      <a href="index.html#tool-base64" data-tool="base64">Base64</a>
+      <a href="index.html#tool-url" data-tool="url">URL</a>
+      <a href="index.html#tool-password" data-tool="password">Password</a>
+      <a href="index.html#tool-hash" data-tool="hash">Hash</a>
+      <a href="index.html#tool-timestamp" data-tool="timestamp">Timestamp</a>
+      <a href="index.html#tool-uuid" data-tool="uuid">UUID</a>
+      <a href="index.html#tool-color" data-tool="color">Color</a>
+    </nav>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-json-to-typescript">
+      <h1>JSON to TypeScript Interface Generator</h1>
+      <p style="margin:0 0 6px"><strong>JSON input</strong></p>
+      <textarea id="ts-input" oninput="tsConvert()" placeholder='{"id": 1, "name": "Ada", "tags": ["admin"], "profile": {"city": "Paris"}}' style="width:100%;height:150px;font-family:monospace"></textarea>
+      <div class="btn-group">
+        <input type="text" id="ts-root" value="Root" placeholder="Root interface name" style="font-family:monospace;max-width:220px" oninput="tsConvert()">
+        <button class="btn" onclick="tsConvert()">Generate TypeScript</button>
+        <button class="btn btn-outline" onclick="tsCopy()">Copy</button>
+      </div>
+      <p style="margin:10px 0 6px"><strong>TypeScript output</strong></p>
+      <textarea id="ts-output" readonly style="width:100%;height:260px;font-family:monospace;background:#f6f7f9"></textarea>
+      <script>tsConvert();</script>
+
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">Typing API responses by hand is slow and error-prone. Paste a JSON sample and this tool generates ready-to-paste <strong>TypeScript interfaces</strong>: nested objects become their own interfaces, arrays are detected from their element type, and primitive fields get <code>string</code> / <code>number</code> / <code>boolean</code> / <code>null</code> types.</p>
+<p style="line-height:1.9">It handles arrays of objects, arrays of arrays and mixed JSON, renames unsafe keys to valid identifiers and names nested interfaces after their parent key. Everything runs locally - safe for private API payloads.</p>
+
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="json-formatter.html">Json Formatter</a>
+<a class="btn btn-outline" href="base64.html">Base64</a>
+<a class="btn btn-outline" href="url-encode-decode.html">Url Encode Decode</a>
+<a class="btn btn-outline" href="password-generator.html">Password Generator</a>
+<a class="btn btn-outline" href="md5-generator.html">Md5 Generator</a>
+<a class="btn btn-outline" href="sha256-hash-generator.html">Sha256 Hash Generator</a>
+<a class="btn btn-outline" href="word-counter.html">Word Counter</a>
+<a class="btn btn-outline" href="case-converter.html">Case Converter</a>
+<a class="btn btn-outline" href="text-diff.html">Text Diff</a>
+<a class="btn btn-outline" href="cron-parser.html">Cron Parser</a>
+<a class="btn btn-outline" href="chmod-calculator.html">Chmod Calculator</a>
+<a class="btn btn-outline" href="regex-tester.html">Regex Tester</a>
+<a class="btn btn-outline" href="uuid-generator.html">Uuid Generator</a>
+<a class="btn btn-outline" href="timestamp-converter.html">Timestamp Converter</a></div>
+      <h3>Frequently asked questions</h3>
+      <div style="line-height:1.9"><details><summary><strong>Is this tool free?</strong></summary><p>Yes - completely free, no signup, no login, no limits.</p></details>
+<details><summary><strong>Does my data leave my browser?</strong></summary><p>No. Everything is computed locally in JavaScript, so your input never touches a server.</p></details>
+<details><summary><strong>Does it work offline?</strong></summary><p>Once the page is loaded it works without a network connection.</p></details></div>
+  </section>
+</main>
+<script>
+
+function tsConvert(){
+  var src=document.getElementById('ts-input').value;
+  var root=document.getElementById('ts-root') ? document.getElementById('ts-root').value.trim() : 'Root';
+  if(!root) root='Root';
+  root=root.replace(/[^A-Za-z0-9_$]+/g,'_');
+  if(!/^[A-Za-z_$]/.test(root)) root='_'+root;
+  var out=document.getElementById('ts-output');
+  var parsed;
+  try{ parsed=JSON.parse(src); }catch(e){ out.value='// Invalid JSON: '+e.message; return; }
+  var seen={}, lines=[];
+  function id(k){
+    var n=k.replace(/[^A-Za-z0-9_]+(.)?/g,function(m,c){return c?c.toUpperCase():'';});
+    n=n.charAt(0).toUpperCase()+n.slice(1);
+    if(/^[0-9]/.test(n)) n='T'+n;
+    return n||'Empty';
+  }
+  function walk(val,name,forceName){
+    if(val===null){ return 'null'; }
+    if(Array.isArray(val)){
+      if(val.length===0) return 'unknown[]';
+      var kinds={}, sub=[];
+      val.forEach(function(v){
+        var t=typeof v;
+        if(v===null) kinds['null']=1;
+        else if(Array.isArray(v)) kinds['array']=1;
+        else kinds[t]=1;
+      });
+      var ks=Object.keys(kinds);
+      if(ks.length===1 && ks[0]==='object'){
+        var nm=name;
+        var merged={};
+        val.forEach(function(x){ if(x&&typeof x==='object'&&!Array.isArray(x)) Object.keys(x).forEach(function(k){ if(!(k in merged)) merged[k]=x[k]; }); });
+        gen(merged,nm);
+        return nm+'[]';
+      }
+      if(ks.length===1 && ks[0]==='array'){
+        var inner=walk(val[0],name,forceName);
+        return inner+'[]';
+      }
+      var uniq={};
+      ks.forEach(function(k){
+        if(k==='object'){ var nm2=name; var m2={}; val.forEach(function(x){ if(x&&typeof x==='object'&&!Array.isArray(x)) Object.keys(x).forEach(function(kk){ if(!(kk in m2)) m2[kk]=x[kk]; }); }); gen(m2,nm2); uniq[nm2]=1; }
+        else if(k==='array'){ uniq[walk(val.find(function(x){return Array.isArray(x);}),name)]=1; }
+        else if(k==='string'||k==='number'||k==='boolean') uniq[k]=1;
+        else uniq['null']=1;
+      });
+      var union=Object.keys(uniq).join(' | ');
+      return union.indexOf(' | ')>=0 ? '('+union+')[]' : union+'[]';
+    }
+    if(typeof val==='object'){
+      var nm3=name;
+      gen(val,nm3);
+      return nm3;
+    }
+    return typeof val;
+  }
+  function gen(obj,name){
+    if(!obj||typeof obj!=='object'||Array.isArray(obj)) return;
+    if(seen[name]) return;
+    seen[name]=true;
+    var body=[];
+    Object.keys(obj).forEach(function(k){
+      var v=obj[k];
+      var key=JSON.stringify(k);
+      var typ;
+      if(Array.isArray(v)){
+        typ=walk(v,id(k),true);
+      } else if(v&&typeof v==='object'){
+        typ=walk(v,id(k));
+      } else if(v===null){ typ='null'; }
+      else typ=typeof v;
+      body.push('  '+key+': '+typ+';');
+    });
+    lines.push('interface '+name+' {\n'+body.join('\n')+'\n}');
+  }
+  if(Array.isArray(parsed)){
+    if(parsed.length && parsed.every(function(x){return x&&typeof x==='object'&&!Array.isArray(x);})){
+      var mergedRoot={};
+      parsed.forEach(function(x){ Object.keys(x).forEach(function(k){ if(!(k in mergedRoot)) mergedRoot[k]=x[k]; }); });
+      gen(mergedRoot,root);
+      out.value=lines.join('\n\n')+'\n\n// Root type: '+root+'[]';
+    } else {
+      out.value='type '+root+' = '+walk(parsed,root)+';';
+    }
+  } else if(parsed && typeof parsed==='object'){
+    gen(parsed,root);
+    out.value=lines.join('\n\n');
+  } else {
+    out.value='type '+root+' = '+typeof parsed+';';
+  }
+}
+function tsCopy(){
+  var el=document.getElementById('ts-output');
+  el.select();document.execCommand('copy');
+}
+
+</script>
+</body>
+</html>

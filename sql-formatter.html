@@ -60,19 +60,23 @@
 <script>
 const SQLKW=['SELECT','FROM','WHERE','GROUP BY','ORDER BY','HAVING','LIMIT','OFFSET','INNER JOIN','LEFT JOIN','RIGHT JOIN','FULL JOIN','CROSS JOIN','LEFT OUTER JOIN','RIGHT OUTER JOIN','JOIN','UNION','UNION ALL','INTERSECT','EXCEPT','INSERT INTO','VALUES','UPDATE','SET','DELETE FROM','CREATE TABLE','ALTER TABLE','DROP TABLE','AND','OR','CASE','WHEN','THEN','ELSE','END','ON','USING'];
 function fmtSQL(){
-  let s=document.getElementById('sql-in').value.replace(/\s+/g,' ').trim();
-  if(!s){document.getElementById('sql-out').textContent='Paste some SQL first.';return;}
+  let s=document.getElementById('sql-in').value;
   const sorted=[...SQLKW].sort((a,b)=>b.length-a.length);
   const kw=new Set(sorted);
-  // protect literals
-  const lits=[]; s=s.replace(/'[^']*'|"[^"]*"|`[^`]*`/g,m=>{lits.push(m);return '\u0001'+(lits.length-1)+'\u0001';});
+  // protect literals and comments before any whitespace collapsing
+  const lits=[], cmts=[];
+  s=s.replace(/'[^']*'|"[^"]*"|`[^`]*`/g,m=>{lits.push(m);return '\u0001'+(lits.length-1)+'\u0001';});
+  s=s.replace(/--[^\r\n]*|\/\*[\s\S]*?\*\//g,m=>{cmts.push(m);return '\u0002'+(cmts.length-1)+'\u0002';});
+  s=s.replace(/\s+/g,' ').trim();
+  if(!s){document.getElementById('sql-out').textContent='Paste some SQL first.';return;}
   for(const k of sorted) s=s.replace(new RegExp('\\b'+k+'\\b','gi'),k);
   // newline before major clauses
   const majors=['SELECT','FROM','WHERE','GROUP BY','ORDER BY','HAVING','LIMIT','UNION','UNION ALL','INNER JOIN','LEFT JOIN','RIGHT JOIN','FULL JOIN','CROSS JOIN','JOIN','INSERT INTO','VALUES','UPDATE','SET','DELETE FROM','AND','OR'];
   for(const m of majors) s=s.replace(new RegExp('\\s+\\b'+m+'\\b','g'),'\n'+m);
   s=s.replace(/\n\s*AND\b|\n\s*OR\b/g,m=>m.replace(/\n/,'\n  '));
   s=s.split('\n').map(l=>l.trim()).join('\n');
-  // restore literals
+  // restore comments then literals
+  s=s.replace(/\u0002(\d+)\u0002/g,(_,i)=>cmts[+i]);
   s=s.replace(/\u0001(\d+)\u0001/g,(_,i)=>lits[+i]);
   document.getElementById('sql-out').textContent=s;
 }

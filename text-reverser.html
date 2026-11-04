@@ -60,13 +60,31 @@
 <script src="extra.js"></script>
 <script>
 
+function trGraphemes(s){
+  if(typeof Intl!=='undefined'&&Intl.Segmenter){
+    return Array.from(new Intl.Segmenter(undefined,{granularity:'grapheme'}).segment(s),x=>x.segment);
+  }
+  const cps=Array.from(s),out=[];let cur='';
+  const isRI=c=>c>=0x1F1E6&&c<=0x1F1FF;
+  for(const cp of cps){
+    const code=cp.codePointAt(0);
+    if(!cur){cur=cp;continue;}
+    const curFirst=Array.from(cur)[0].codePointAt(0);
+    const curLast=Array.from(cur).pop().codePointAt(0);
+    const ext=/\p{M}/u.test(cp)||code===0xFE0F||code===0xFE0E||code===0x200D||(code>=0x1F3FB&&code<=0x1F3FF);
+    if(ext||curLast===0x200D||(isRI(code)&&isRI(curFirst)&&Array.from(cur).length===1)){cur+=cp;}
+    else{out.push(cur);cur=cp;}
+  }
+  if(cur)out.push(cur);
+  return out;
+}
 function trRun(mode){
   const s=document.getElementById('tr-in').value;
   let r='';
-  if(mode==='chars') r=[...s].reverse().join('');
+  if(mode==='chars') r=trGraphemes(s).reverse().join('');
   else if(mode==='words') r=s.split(/\s+/).reverse().join(' ');
   else if(mode==='lines') r=s.split(/\n/).reverse().join('\n');
-  else r=s.split(/\n/).map(l=>[...l].reverse().join('')).join('\n');
+  else r=s.split(/\n/).map(l=>l.replace(/\S+/g,w=>trGraphemes(w).reverse().join(''))).join('\n');
   document.getElementById('tr-out').value=r;
 }
 </script>

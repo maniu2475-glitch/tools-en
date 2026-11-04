@@ -70,8 +70,11 @@
 <script src="extra.js"></script>
 <script>
 var hSpaced=true;
-function hDec(){var s=document.getElementById('h-in').value.toLowerCase().replace(/0x/g,'').replace(/[^0-9a-f]/g,'');var el=document.getElementById('h-dec-out');
-if(!s){el.textContent='';return;}if(s.length%2){el.textContent='Odd number of hex digits.';return;}
+function hDec(){var raw=document.getElementById('h-in').value;var el=document.getElementById('h-dec-out');
+if(!raw.trim()){el.textContent='';return;}
+var s=raw.toLowerCase().replace(/\s+/g,'').replace(/0x/g,'');
+if(!/^[0-9a-f]+$/.test(s)){el.textContent='Invalid hex input.';return;}
+if(s.length%2){el.textContent='Odd number of hex digits.';return;}
 try{var bytes=new Uint8Array(s.length/2);for(var i=0;i<s.length;i+=2){bytes[i/2]=parseInt(s.substr(i,2),16);}
 el.textContent=new TextDecoder().decode(bytes);}catch(e){el.textContent='Decoding error.';}}
 function hEnc(){var s=document.getElementById('h-ti').value;var out=[];var b=new TextEncoder().encode(s);

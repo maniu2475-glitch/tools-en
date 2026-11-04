@@ -60,7 +60,7 @@
 function wfRun(){
   const txt=document.getElementById('wf-in').value;
   if(!txt.trim()){document.getElementById('wf-out').textContent='Paste some text first.';return;}
-  const words=txt.toLowerCase().match(/[a-z\u00c0-\u024f\u4e00-\u9fff0-9']+/g)||[];
+  const words=txt.toLowerCase().match(/[\p{L}\p{N}]+(?:['\u2019][\p{L}\p{N}]+)*/gu)||[];
   const counts={};
   for(const w of words) counts[w]=(counts[w]||0)+1;
   const total=words.length;

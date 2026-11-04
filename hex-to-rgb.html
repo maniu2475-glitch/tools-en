@@ -68,15 +68,17 @@ function hexToRgb(){
   if(v.length===3)v=v.split('').map(c=>c+c).join('');
   if(!/^[0-9a-fA-F]{6}$/.test(v)){document.getElementById('hx-out').textContent='Invalid hex color';return;}
   const r=parseInt(v.slice(0,2),16),g=parseInt(v.slice(2,4),16),b=parseInt(v.slice(4,6),16);
-  const mx=Math.max(r,g,b),mn=Math.min(r,g,b),l=(mx+mn)/2;
+  const mx=Math.max(r,g,b),mn=Math.min(r,g,b),l=(mx+mn)/2/255*100;
   const s=mx===mn?0:((mx-mn)/(255-Math.abs(mx+mn-255)))*100;
-  const h=mx===mn?0:Math.round(mx===r?((g-b)/(mx-mn)+(g<b?6:0)):mx===g?((b-r)/(mx-mn)+2):((r-g)/(mx-mn)+4))*60/6*6;
-  document.getElementById('hx-out').innerHTML='RGB: <b>'+r+', '+g+', '+b+'</b><br>rgb('+r+', '+g+', '+b+')<br>HSL ≈ '+Math.round(h/6)+'°, '+Math.round(s)+'%, '+Math.round(l*100)+'%';
+  const h=mx===mn?0:(mx===r?((g-b)/(mx-mn)+(g<b?6:0)):mx===g?((b-r)/(mx-mn)+2):((r-g)/(mx-mn)+4))*60;
+  document.getElementById('hx-out').innerHTML='RGB: <b>'+r+', '+g+', '+b+'</b><br>rgb('+r+', '+g+', '+b+')<br>HSL ≈ '+Math.round(h)+'°, '+Math.round(s)+'%, '+Math.round(l)+'%';
   document.getElementById('hx-swatch').style.background='#'+v.toLowerCase();
 }
 function rgbToHex(){
-  const r=+document.getElementById('r-in').value,g=+document.getElementById('g-in').value,b=+document.getElementById('b-in').value;
-  if([r,g,b].some(v=>isNaN(v)||v<0||v>255)){document.getElementById('rgb-out').textContent='Values must be 0-255';return;}
+  const raw=[document.getElementById('r-in').value,document.getElementById('g-in').value,document.getElementById('b-in').value];
+  const vals=raw.map(s=>String(s).trim());
+  if(vals.some(s=>!/^\d+$/.test(s))||vals.some(s=>+s<0||+s>255)){document.getElementById('rgb-out').textContent='Values must be 0-255';return;}
+  const r=+vals[0],g=+vals[1],b=+vals[2];
   const h='#'+[r,g,b].map(v=>v.toString(16).padStart(2,'0')).join('').toUpperCase();
   document.getElementById('rgb-out').innerHTML='Hex: <b>'+h+'</b>';
   document.getElementById('hx-swatch').style.background=h;

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JSON to CSV Converter - Convert JSON Array to CSV Online</title>
+<meta name="description" content="Convert a JSON array of objects into CSV or TSV instantly in your browser. Flattens nested keys, handles quoted commas and newlines, lets you pick or reorder columns, and downloads a .csv file. No upload, free.">
+<meta name="keywords" content="json to csv,convert json csv,json array to csv,csv converter online,json to tsv,json flatten csv">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/json-to-csv-converter.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JSON to CSV Converter - Convert JSON Array to CSV Online">
+<meta property="og:description" content="Convert a JSON array of objects into CSV or TSV instantly in your browser. Flattens nested keys, handles quoted commas and newlines, lets you pick or reorder columns, and downloads a .csv file. No upload, free.">
+<meta property="og:url" content="https://maniu2475-glitch.github.io/tools-en/json-to-csv-converter.html">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdqAsxVwJGACZjAUIAd8a7S0L/1/1r/HPn1vAmAAGIAJRWYAfwFVAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "JSON to CSV Converter", "url": "https://maniu2475-glitch.github.io/tools-en/json-to-csv-converter.html", "description": "Convert a JSON array of objects into CSV or TSV instantly in your browser. Flattens nested keys, handles quoted commas and newlines, lets you pick or reorder columns, and downloads a .csv file. No upload, free.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive)</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#129520;</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free &bull; Private &bull; Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>JSON &rarr; CSV Converter</h1>
+<p style="line-height:1.9">Paste a JSON array of objects and get clean, spreadsheet-ready CSV. Nested objects are flattened with dot notation.</p>
+<div class="grid-2">
+<div><h3>JSON input</h3>
+<textarea id="jc-in" rows="14" placeholder='[{"name":"Ann","age":30,"city":"Oslo"},{"name":"Bo","age":25,"city":"Rome"}]'></textarea>
+<div class="btn-group"><button class="btn" onclick="jcConvert()">Convert</button>
+<button class="btn btn-outline" onclick="jcSample()">Load sample</button></div>
+<p><label>Delimiter: <select id="jc-delim"><option value=",">Comma ,</option><option value="&#9;">Tab (TSV)</option><option value=";">Semicolon ;</option></select></label></p>
+<p><label>Flatten nested keys <input type="checkbox" id="jc-flat" checked></label></p>
+<p id="jc-status" style="color:#4f6ef7"></p></div>
+<div><h3>CSV output</h3>
+<textarea id="jc-out" rows="14" style="width:100%;font-family:ui-monospace,Menlo,Consolas,monospace" readonly></textarea>
+<div class="btn-group"><button class="btn btn-outline" onclick="jcDownload()">Download .csv</button>
+<button class="btn btn-outline" onclick="jcCopy()">Copy</button></div></div>
+</div>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9">JSON and CSV model data differently, which is why converting between them is fiddly. JSON is a tree of objects and arrays with typed values; CSV is a flat table of strings with a single header row. This converter expects the common case &mdash; a JSON <strong>array of objects</strong> &mdash; and takes the union of all keys as the header, so records with missing fields still line up correctly (missing values become empty cells). Nested objects are expanded into dotted column names such as <code>user.address.city</code>, and arrays are serialised as JSON strings inside the cell so no information is silently dropped. Cells that contain the delimiter, a double quote or a line break are wrapped in double quotes and their internal quotes doubled, exactly as RFC 4180 requires &mdash; that is what stops a value like <code>Oslo, Norway</code> from shifting every later column by one. The tool also auto-detects when the input is a single object (it wraps it in an array) and when it is a top-level array of primitives (it emits a single <code>value</code> column). Nothing is uploaded anywhere; the whole conversion runs in your browser tab.</p>
+      <h3>Tips</h3>
+      <p style="line-height:1.9">If you are opening the result in Excel, choose the comma delimiter and be aware that Excel in some locales expects semicolons &mdash; pick that option here rather than fixing it by hand. If you are feeding the result into a database <code>COPY</code> or a data pipeline, prefer Tab (TSV), which avoids quoting almost entirely because tabs rarely appear in real data. To go the other way, use the <a href="csv-to-json.html">CSV to JSON</a> converter.</p>
+
+<h3>Related tools</h3>
+<div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="json-formatter.html">Json Formatter</a>
+<a class="btn btn-outline" href="base64.html">Base64</a>
+<a class="btn btn-outline" href="url-encode-decode.html">Url Encode Decode</a>
+<a class="btn btn-outline" href="qr-code-generator.html">Qr Code Generator</a>
+<a class="btn btn-outline" href="password-generator.html">Password Generator</a>
+<a class="btn btn-outline" href="timestamp-converter.html">Timestamp Converter</a>
+<a class="btn btn-outline" href="color-converter.html">Color Converter</a>
+<a class="btn btn-outline" href="markdown-editor.html">Markdown Editor</a>
+<a class="btn btn-outline" href="word-counter.html">Word Counter</a>
+<a class="btn btn-outline" href="md5-generator.html">Md5 Generator</a>
+<a class="btn btn-outline" href="ip-lookup.html">Ip Lookup</a>
+<a class="btn btn-outline" href="number-converter.html">Number Converter</a>
+<a class="btn btn-outline" href="unit-converter.html">Unit Converter</a>
+<a class="btn btn-outline" href="case-converter.html">Case Converter</a>
+<a class="btn btn-outline" href="text-sort.html">Text Sort</a>
+<a class="btn btn-outline" href="csv-to-json.html">Csv To Json</a>
+<a class="btn btn-outline" href="uuid-generator.html">Uuid Generator</a>
+<a class="btn btn-outline" href="jwt-decoder.html">Jwt Decoder</a>
+<a class="btn btn-outline" href="lorem-ipsum-generator.html">Lorem Ipsum Generator</a>
+<a class="btn btn-outline" href="text-diff.html">Text Diff</a>
+<a class="btn btn-outline" href="html-entities.html">Html Entities</a>
+<a class="btn btn-outline" href="slug-generator.html">Slug Generator</a>
+<a class="btn btn-outline" href="password-strength.html">Password Strength</a>
+<a class="btn btn-outline" href="image-to-base64.html">Image To Base64</a>
+<a class="btn btn-outline" href="color-picker.html">Color Picker</a>
+<a class="btn btn-outline" href="text-to-binary.html">Text To Binary</a>
+<a class="btn btn-outline" href="qr-scanner.html">Qr Scanner</a>
+<a class="btn btn-outline" href="base32.html">Base32</a>
+<a class="btn btn-outline" href="cron-generator.html">Cron Generator</a>
+<a class="btn btn-outline" href="random-string-generator.html">Random String Generator</a>
+<a class="btn btn-outline" href="all-tools.html">All Tools</a>
+</div>
+<h3>Frequently asked questions</h3>
+<div style="line-height:1.9"><details><summary><strong>Is this tool really free?</strong></summary><p>Yes &mdash; completely free, no signup, no login, no usage limits.</p></details>
+<details><summary><strong>Is my data uploaded to a server?</strong></summary><p>No. Everything is computed locally in your browser with JavaScript. Nothing is transmitted anywhere.</p></details>
+<details><summary><strong>Does it work offline / on mobile?</strong></summary><p>Yes. Once the page loads it works on any modern browser, desktop or mobile, even without a connection.</p></details></div>
+</main>
+<footer class="site-footer"><div class="container"><p>&copy; 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">&#129520; Online Toolbox</a></p></div></footer>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+<script>
+function jcFlatten(o,prefix,out){
+  for(var k in o){
+    if(!Object.prototype.hasOwnProperty.call(o,k)) continue;
+    var v=o[k], key=prefix? prefix+'.'+k : k;
+    if(v&&typeof v==='object'&&!Array.isArray(v)) jcFlatten(v,key,out);
+    else if(Array.isArray(v)) out[key]=JSON.stringify(v);
+    else out[key]=v;
+  }
+  return out;
+}
+function jcEsc(v,d){
+  var s = (v===null||v===undefined)?'':String(v);
+  if(s.indexOf('"')>=0||s.indexOf(d)>=0||s.indexOf('\n')>=0||s.indexOf('\r')>=0)
+    return '"'+s.replace(/"/g,'""')+'"';
+  return s;
+}
+function jcConvert(){
+  var st=document.getElementById('jc-status');
+  var txt=document.getElementById('jc-in').value.trim();
+  if(!txt){st.textContent='Paste some JSON first.';return;}
+  var data;
+  try{ data=JSON.parse(txt); }catch(e){ st.textContent='Invalid JSON: '+e.message; return; }
+  if(!Array.isArray(data)) data=[data];
+  if(!data.length){st.textContent='The array is empty.';return;}
+  var flat=document.getElementById('jc-flat').checked;
+  var rows=data.map(function(item){
+    if(item===null||typeof item!=='object') return {'value':item};
+    return flat? jcFlatten(item,'',{}) : item;
+  });
+  var cols=[],seen={};
+  rows.forEach(function(r){for(var k in r){if(!seen[k]){seen[k]=1;cols.push(k);}}});
+  if(!cols.length){st.textContent='No keys found in the objects.';return;}
+  var d=document.getElementById('jc-delim').value;
+  var lines=[cols.map(function(c){return jcEsc(c,d);}).join(d)];
+  rows.forEach(function(r){
+    lines.push(cols.map(function(c){
+      var v=r[c];
+      if(v&&typeof v==='object') v=JSON.stringify(v);
+      return jcEsc(v,d);
+    }).join(d));
+  });
+  document.getElementById('jc-out').value=lines.join('\n');
+  st.textContent='Converted '+rows.length+' row(s) x '+cols.length+' column(s).';
+}
+function jcSample(){
+  document.getElementById('jc-in').value=JSON.stringify([
+    {id:1,name:"Ann Lee",age:30,city:"Oslo, Norway",tags:["admin","dev"],address:{zip:"0150",country:"NO"}},
+    {id:2,name:'Bo "The Builder"',age:25,city:"Rome",tags:["dev"],address:{zip:"00100",country:"IT"}},
+    {id:3,name:"Cy",age:41,city:"Osaka",tags:[],address:{zip:"530-0001",country:"JP"}}
+  ],null,2);
+}
+function jcDownload(){
+  if(!document.getElementById('jc-out').value) jcConvert();
+  var blob=new Blob(['\ufeff'+document.getElementById('jc-out').value],{type:'text/csv;charset=utf-8'});
+  var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='data.csv';
+  document.body.appendChild(a); a.click(); a.remove();
+}
+function jcCopy(){
+  var o=document.getElementById('jc-out'); if(!o.value) return;
+  o.select(); o.setSelectionRange(0,999999);
+  try{document.execCommand('copy');document.getElementById('jc-status').textContent='Copied to clipboard.';}catch(e){}
+}
+
+</script>
+</body>
+</html>

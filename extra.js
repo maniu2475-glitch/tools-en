@@ -92,7 +92,7 @@ function cap(s){return s.charAt(0).toUpperCase()+s.slice(1);}
 
 /* ---------- Text diff (LCS line diff) ---------- */
 function diffLines(a,b){
-  const A=a.split("\n"),B=b.split("\n"),n=A.length,m=B.length;
+  const A=a===""?[]:a.split("\n"),B=b===""?[]:b.split("\n"),n=A.length,m=B.length;
   const dp=Array.from({length:n+1},()=>new Array(m+1).fill(0));
   for(let i=n-1;i>=0;i--)for(let j=m-1;j>=0;j--)
     dp[i][j]=A[i]===B[j]?dp[i+1][j+1]+1:Math.max(dp[i+1][j],dp[i][j+1]);
@@ -137,6 +137,10 @@ function entitiesDecode(){
 function slugify(){
   let s=document.getElementById('slug-input').value;
   if(document.getElementById('slug-lower').checked)s=s.toLowerCase();
+  s=s.replace(/ß/g,"ss").replace(/[Øø]/g,m=>m==="Ø"?"O":"o").replace(/[Ææ]/g,m=>m==="Æ"?"AE":"ae")
+    .replace(/[Åå]/g,m=>m==="Å"?"AA":"aa")
+    .replace(/[Œœ]/g,m=>m==="Œ"?"OE":"oe").replace(/[Đđ]/g,m=>m==="Đ"?"D":"d")
+    .replace(/[Łł]/g,m=>m==="Ł"?"L":"l").replace(/[Þþ]/g,m=>m==="Þ"?"TH":"th");
   s=s.normalize("NFKD").replace(/[\u0300-\u036f]/g,"");
   s=s.replace(/[^a-zA-Z0-9]+/g,"-").replace(/^-+|-+$/g,"");
   document.getElementById('slug-output').value=s;
@@ -216,6 +220,7 @@ function textToBinary(){
 function binaryToText(){
   const parts=document.getElementById('bin-input').value.trim().split(/\s+/).filter(Boolean);
   try{
+    if(parts.some(p=>!/^[01]{8}$/.test(p)))throw new Error("not valid binary bytes");
     const bytes=parts.map(p=>parseInt(p,2));
     if(bytes.some(b=>isNaN(b)||b<0||b>255))throw new Error("not valid binary bytes");
     document.getElementById('bin-output').value=new TextDecoder().decode(new Uint8Array(bytes));
