@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Color Contrast Checker (WCAG) - Free Online Tool</title>
+<meta name="description" content="Check the contrast ratio between text and background colours against WCAG 2.1 AA and AAA thresholds, with live preview and a one-click accessible colour suggestion.">
+<meta name="keywords" content="color contrast checker, wcag contrast, accessibility checker, contrast ratio calculator, aa aaa compliance, web accessibility, hex contrast">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/color-contrast-checker.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Color Contrast Checker (WCAG)">
+<meta property="og:description" content="Check the contrast ratio between text and background colours against WCAG 2.1 AA and AAA thresholds, with live preview and a one-click accessible colour suggestion.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Color Contrast Checker (WCAG)", "url": "https://maniu2475-glitch.github.io/tools-en/color-contrast-checker.html", "description": "Check the contrast ratio between text and background colours against WCAG 2.1 AA and AAA thresholds, with live preview and a one-click accessible colour suggestion.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) &mdash; AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#128295;</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free &bull; Private &bull; Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Color Contrast Checker</h1>
+      <p class="tool-desc">Check the contrast ratio between text and background colours against WCAG 2.1 AA and AAA thresholds, with live preview and a one-c</p>
+<div class="grid-2">
+<div><label>Text colour (hex)</label><input type="text" id="cc-fg" value="#4f6ef7" oninput="runContrast()">
+<label>Background colour (hex)</label><input type="text" id="cc-bg" value="#ffffff" oninput="runContrast()">
+<div class="btn-group"><button class="btn btn-outline" onclick="swapColors()">Swap</button><button class="btn btn-outline" onclick="suggestFix()">Suggest accessible text colour</button></div></div>
+<div><label>Preview</label><div id="cc-preview" style="padding:20px;border-radius:8px;border:1px solid #ddd;font-size:1.2em">The quick brown fox jumps over the lazy dog. 1234567890</div></div>
+</div>
+<div class="result-box" id="cc-res">Calculating…</div>
+<h2>About the Color Contrast Checker</h2>
+<p>Low-contrast text is the single most common accessibility failure on the web, and WCAG 2.1 sets exact numeric thresholds: normal text needs a contrast ratio of at least 4.5:1 for level AA and 7:1 for level AAA, while large text (18pt, or 14pt bold, and above) needs 3:1 for AA and 4.5:1 for AAA. Icons and form borders need 3:1 under the non-text contrast rule 1.4.11. This tool computes the ratio from two hex colours using the official relative-luminance formula - it linearises each sRGB channel, weights them by 0.2126, 0.7152 and 0.0722, then applies (L1 + 0.05) / (L2 + 0.05) - and shows pass/fail badges for every threshold at once. A live preview renders sample text in your chosen colours so you can judge readability, and the 'suggest accessible colour' button finds the better of black or white and applies it instantly. Designers use it while building design systems and brand palettes; developers use it before shipping a marketing page or a dark theme. All computation is local.</p>
+<h3>Related tools</h3>
+<p class="footer-links" style="line-height:2"><a href="color-converter.html">Color Converter</a> &middot; <a href="hex-to-rgb.html">HEX to RGB</a> &middot; <a href="color-picker.html">Color Picker</a> &middot; <a href="random-color-generator.html">Random Color Generator</a></p>
+<script>
+
+function hexToRgb(h){
+ h=h.replace('#','').trim();
+ if(h.length===3)h=h[0]+h[0]+h[1]+h[1]+h[2]+h[2];
+ if(!/^[0-9a-fA-F]{6}$/.test(h))return null;
+ return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];
+}
+function lum(rgb){
+ var a=rgb.map(function(v){v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4);});
+ return 0.2126*a[0]+0.7152*a[1]+0.0722*a[2];
+}
+function ratio(c1,c2){
+ var l1=lum(c1),l2=lum(c2);
+ var hi=Math.max(l1,l2),lo=Math.min(l1,l2);
+ return (hi+0.05)/(lo+0.05);
+}
+function badge(ok){return ok?'<span style="color:#0a7d33;font-weight:700">PASS \\u2714</span>':'<span style="color:#c00;font-weight:700">FAIL \\u2716</span>';}
+function runContrast(){
+ var fg=hexToRgb(document.getElementById('cc-fg').value);
+ var bg=hexToRgb(document.getElementById('cc-bg').value);
+ var out=document.getElementById('cc-res');
+ if(!fg||!bg){out.textContent='Enter two 3- or 6-digit hex colours.';return;}
+ var r=ratio(fg,bg);
+ var prev=document.getElementById('cc-preview');
+ prev.style.color=document.getElementById('cc-fg').value;
+ prev.style.background=document.getElementById('cc-bg').value;
+ var rows=[
+  ['Normal text (AA, 4.5:1)',r>=4.5],
+  ['Large text (AA, 3:1)',r>=3],
+  ['Normal text (AAA, 7:1)',r>=7],
+  ['Large text (AAA, 4.5:1)',r>=4.5],
+  ['UI component / border (3:1)',r>=3]
+ ];
+ out.innerHTML='<div style="font-size:1.6em;font-weight:700">Contrast ratio: '+r.toFixed(2)+':1</div>'+
+  rows.map(function(x){return '<div>'+x[0]+' &rarr; '+badge(x[1])+'</div>';}).join('');
+}
+function swapColors(){
+ var a=document.getElementById('cc-fg'),b=document.getElementById('cc-bg');
+ var t=a.value;a.value=b.value;b.value=t;runContrast();
+}
+function suggestFix(){
+ var bg=hexToRgb(document.getElementById('cc-bg').value);
+ if(!bg){return;}
+ var fg=hexToRgb(document.getElementById('cc-fg').value)||[0,0,0];
+ var dark=[0,0,0],light=[255,255,255];
+ var pick=ratio(dark,bg)>=ratio(light,bg)?dark:light;
+ document.getElementById('cc-fg').value='#'+pick.map(function(v){return ('0'+v.toString(16)).slice(-2);}).join('');
+ runContrast();
+}
+runContrast();
+
+</script>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="container"><p>&copy; 2026 ToolBox &bull; Runs 100% client-side &bull; No data uploaded</p></div>
+</footer>
+<div class="ad-banner" id="ad-bottom"><div class="ad-placeholder-text">Ad slot (responsive banner) &mdash; AdSense code goes here</div></div>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAC Address Lookup &amp; Formatter - Free Online Tool</title>
+<meta name="description" content="Look up the vendor of any MAC address from its OUI prefix, and convert between colon, hyphen, Cisco dot, bare and EUI-64 formats. Runs offline.">
+<meta name="keywords" content="mac address lookup, oui lookup, vendor lookup, mac address format converter, cisco mac format, eui-64, unicast multicast, locally administered">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/mac-address-lookup.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MAC Address Lookup &amp; Formatter">
+<meta property="og:description" content="Look up the vendor of any MAC address from its OUI prefix, and convert between colon, hyphen, Cisco dot, bare and EUI-64 formats. Runs offline.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "MAC Address Lookup &amp; Formatter", "url": "https://maniu2475-glitch.github.io/tools-en/mac-address-lookup.html", "description": "Look up the vendor of any MAC address from its OUI prefix, and convert between colon, hyphen, Cisco dot, bare and EUI-64 formats. Runs offline.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) &mdash; AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#128295;</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free &bull; Private &bull; Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>MAC Address Lookup & Formatter</h1>
+      <p class="tool-desc">Look up the vendor of any MAC address from its OUI prefix, and convert between colon, hyphen, Cisco dot, bare and EUI-64 formats. </p>
+<label>MAC address</label>
+<input type="text" id="mac-in" placeholder="e.g. 00:1A:2B:3C:4D:5E" oninput="macLookup()" style="font-family:monospace">
+<div class="result-box" id="mac-out">Enter a MAC address.</div>
+<div class="btn-group"><button class="btn btn-outline" onclick="randomMac()">Random MAC</button><span id="mac-count" style="padding:8px 0">loading OUI database…</span></div>
+<h3>Bundled vendor database</h3>
+<p>To keep this tool fully client-side and fast, it loads a compact subset of the IEEE OUI registry from <code>oui-subset.csv</code> in the same folder. Major vendors (Apple, Intel, Cisco, Samsung, Xiaomi, Huawei, VMware, VirtualBox and others) are included. If a prefix is missing, the tool says so instead of guessing.</p>
+<h2>About the MAC Address Lookup & Formatter</h2>
+<p>Every network card carries a 48-bit MAC address whose first 24 bits (the OUI) are assigned by the IEEE to a specific manufacturer. This tool splits any MAC address into its OUI and NIC parts, looks the prefix up in a bundled subset of the IEEE registry, and tells you the vendor. It also decodes the two special bits in the first octet that people often trip over: the multicast bit and the locally administered bit - the latter is set on randomised (privacy) MAC addresses used by phones and on virtual adapters, which is why those addresses never resolve to a vendor. Finally it converts the same address into every format you may need: colon-separated for Linux and macOS, hyphenated for Windows, Cisco dotted quad, bare hex for scripts and databases, and the EUI-64 form used for IPv6 link-local addresses (with the FFFE insertion and the U/L bit flip). Useful for network troubleshooting, switch and router configuration, inventory work and security analysis. Everything happens in your browser; no address is uploaded.</p>
+<h3>Related tools</h3>
+<p class="footer-links" style="line-height:2"><a href="subnet-calculator.html">Subnet Calculator</a> &middot; <a href="ip-lookup.html">IP Lookup</a> &middot; <a href="uuid-generator.html">UUID Generator</a> &middot; <a href="random-string-generator.html">Random String Generator</a></p>
+<script>
+
+var OUI={};
+function parseOui(txt){
+ txt.split(/\n/).forEach(function(line){
+  var p=line.split(',');
+  if(p.length>=2&&/^[0-9A-Fa-f]{6}$/.test(p[0].trim())){
+   OUI[p[0].trim().toUpperCase()]=p[1].replace(/"/g,'').trim();
+  }
+ });
+ document.getElementById('mac-count').textContent=Object.keys(OUI).length.toLocaleString()+' vendor prefixes loaded';
+}
+function normMac(s){
+ var hex=s.replace(/[^0-9A-Fa-f]/g,'').toUpperCase();
+ return hex;
+}
+function macLookup(){
+ var raw=document.getElementById('mac-in').value;
+ var hex=normMac(raw);
+ var out=document.getElementById('mac-out');
+ if(hex.length!==12){out.textContent='Enter 12 hex digits (a full MAC address).';return;}
+ var groups=hex.match(/.{2}/g);
+ var oui=hex.slice(0,6),nic=hex.slice(6);
+ var vendor=OUI[oui]||'Not found in bundled IEEE OUI list (partial)';
+ var second=parseInt(hex.slice(0,2),16);
+ var localBit=(second&0x02)?'Locally administered (not a vendor OUI)':'Globally unique (vendor assigned)';
+ var mcast=(second&0x01)?'MULTICAST':'UNICAST';
+ var enc={
+  'colon (Linux/macOS)':groups.join(':'),
+  'hyphen (Windows)':groups.join('-'),
+  'dot (Cisco)':hex.match(/.{4}/g).join('.'),
+  'bare':hex,
+  'eui64': (function(){var g=hex.match(/.{2}/g);g[0]=(parseInt(g[0],16)^0x02).toString(16).toUpperCase();return g.slice(0,3).join('')+'FFFE'+g.slice(3).join('');})()
+ };
+ var lines=[];
+ for(var k in enc)lines.push(k+': '+enc[k]);
+ out.textContent='OUI: '+oui+' | NIC: '+nic+'\nVendor: '+vendor+'\n'+localBit+' | '+mcast+'\n\n'+lines.join('\n');
+}
+<script>
+(function(){
+ fetch('oui-subset.csv',{cache:'force-cache'}).then(function(r){return r.text();}).then(function(t){
+   parseOui(t);macLookup();
+ }).catch(function(){document.getElementById('mac-count').textContent='OUI file not loaded (offline preview)';});
+})();
+function randomMac(){
+ var h='0123456789ABCDEF',s='';
+ for(var i=0;i<12;i++)s+=h[Math.floor(Math.random()*16)];
+ s='02'+s.slice(2);
+ var g=s.match(/.{2}/g);
+ document.getElementById('mac-in').value=g.join(':');
+ macLookup();
+}
+</script>
+</script>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="container"><p>&copy; 2026 ToolBox &bull; Runs 100% client-side &bull; No data uploaded</p></div>
+</footer>
+<div class="ad-banner" id="ad-bottom"><div class="ad-placeholder-text">Ad slot (responsive banner) &mdash; AdSense code goes here</div></div>
+</body>
+</html>
