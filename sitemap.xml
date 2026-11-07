@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://maniu2475-glitch.github.io/tools-en/</loc>
-    <lastmod>2026-10-23</lastmod>
+    <lastmod>2026-11-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -50,7 +50,7 @@
   </url>
   <url>
     <loc>https://maniu2475-glitch.github.io/tools-en/image-to-base64.html</loc>
-    <lastmod>2026-10-23</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -152,7 +152,7 @@
   </url>
   <url>
     <loc>https://maniu2475-glitch.github.io/tools-en/url-encode-decode.html</loc>
-    <lastmod>2026-11-04</lastmod>
+    <lastmod>2026-11-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -164,7 +164,7 @@
   </url>
   <url>
     <loc>https://maniu2475-glitch.github.io/tools-en/uuid-generator.html</loc>
-    <lastmod>2026-11-04</lastmod>
+    <lastmod>2026-11-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -200,23 +200,23 @@
   </url>
   <url>
     <loc>https://maniu2475-glitch.github.io/tools-en/random-string-generator.html</loc>
-    <lastmod>2026-10-23</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 <url><loc>https://maniu2475-glitch.github.io/tools-en/percentage-calculator.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-<url><loc>https://maniu2475-glitch.github.io/tools-en/chmod-calculator.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-<url><loc>https://maniu2475-glitch.github.io/tools-en/regex-tester.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://maniu2475-glitch.github.io/tools-en/chmod-calculator.html</loc><lastmod>2026-11-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://maniu2475-glitch.github.io/tools-en/regex-tester.html</loc><lastmod>2026-11-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>https://maniu2475-glitch.github.io/tools-en/bmi-calculator.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>https://maniu2475-glitch.github.io/tools-en/age-calculator.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>https://maniu2475-glitch.github.io/tools-en/loan-calculator.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-<url><loc>https://maniu2475-glitch.github.io/tools-en/temperature-converter.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-<url><loc>https://maniu2475-glitch.github.io/tools-en/random-number-generator.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://maniu2475-glitch.github.io/tools-en/temperature-converter.html</loc><lastmod>2026-11-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://maniu2475-glitch.github.io/tools-en/random-number-generator.html</loc><lastmod>2026-11-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>https://maniu2475-glitch.github.io/tools-en/discount-calculator.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>https://maniu2475-glitch.github.io/tools-en/compound-interest-calculator.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url>
   <loc>https://maniu2475-glitch.github.io/tools-en/all-tools.html</loc>
-  <lastmod>2026-10-24</lastmod>
+  <lastmod>2026-11-08</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.9</priority>
 </url>
@@ -224,18 +224,18 @@
 <url><loc>https://maniu2475-glitch.github.io/tools-en/sha256-hash-generator.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>https://maniu2475-glitch.github.io/tools-en/remove-duplicate-lines.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>https://maniu2475-glitch.github.io/tools-en/css-minifier.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-<url><loc>https://maniu2475-glitch.github.io/tools-en/xml-formatter.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-<url><loc>https://maniu2475-glitch.github.io/tools-en/date-difference-calculator.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://maniu2475-glitch.github.io/tools-en/xml-formatter.html</loc><lastmod>2026-11-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://maniu2475-glitch.github.io/tools-en/date-difference-calculator.html</loc><lastmod>2026-11-03</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>https://maniu2475-glitch.github.io/tools-en/roman-numeral-converter.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>https://maniu2475-glitch.github.io/tools-en/tip-calculator.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>https://maniu2475-glitch.github.io/tools-en/vat-calculator.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>https://maniu2475-glitch.github.io/tools-en/pace-calculator.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>https://maniu2475-glitch.github.io/tools-en/barcode-generator.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-<url><loc>https://maniu2475-glitch.github.io/tools-en/rot13-caesar-cipher.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://maniu2475-glitch.github.io/tools-en/rot13-caesar-cipher.html</loc><lastmod>2026-11-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>https://maniu2475-glitch.github.io/tools-en/morse-code-translator.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>https://maniu2475-glitch.github.io/tools-en/number-to-words.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-<url><loc>https://maniu2475-glitch.github.io/tools-en/hex-to-text.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-<url><loc>https://maniu2475-glitch.github.io/tools-en/text-reverser.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url><url><loc>https://maniu2475-glitch.github.io/tools-en/json-to-yaml.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url><url><loc>https://maniu2475-glitch.github.io/tools-en/js-minifier.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url><url><loc>https://maniu2475-glitch.github.io/tools-en/gpa-calculator.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url><url><loc>https://maniu2475-glitch.github.io/tools-en/random-letter-generator.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>  <url>
+<url><loc>https://maniu2475-glitch.github.io/tools-en/hex-to-text.html</loc><lastmod>2026-11-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://maniu2475-glitch.github.io/tools-en/text-reverser.html</loc><lastmod>2026-11-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url><url><loc>https://maniu2475-glitch.github.io/tools-en/json-to-yaml.html</loc><lastmod>2026-11-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url><url><loc>https://maniu2475-glitch.github.io/tools-en/js-minifier.html</loc><lastmod>2026-11-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url><url><loc>https://maniu2475-glitch.github.io/tools-en/gpa-calculator.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url><url><loc>https://maniu2475-glitch.github.io/tools-en/random-letter-generator.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>  <url>
     <loc>https://maniu2475-glitch.github.io/tools-en/binary-to-text.html</loc>
     <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
@@ -249,25 +249,25 @@
   </url>
   <url>
     <loc>https://maniu2475-glitch.github.io/tools-en/sql-formatter.html</loc>
-    <lastmod>2026-10-24</lastmod>
+    <lastmod>2026-11-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://maniu2475-glitch.github.io/tools-en/word-frequency-counter.html</loc>
-    <lastmod>2026-10-24</lastmod>
+    <lastmod>2026-11-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://maniu2475-glitch.github.io/tools-en/quadratic-equation-solver.html</loc>
-    <lastmod>2026-10-24</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://maniu2475-glitch.github.io/tools-en/hex-to-rgb.html</loc>
-    <lastmod>2026-10-24</lastmod>
+    <lastmod>2026-11-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -330,15 +330,15 @@
 <url><loc>https://maniu2475-glitch.github.io/tools-en/calories-burned-calculator.html</loc><lastmod>2026-10-25</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>https://maniu2475-glitch.github.io/tools-en/ideal-weight-calculator.html</loc><lastmod>2026-10-25</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>https://maniu2475-glitch.github.io/tools-en/heart-rate-zone-calculator.html</loc><lastmod>2026-10-25</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-<url><loc>https://maniu2475-glitch.github.io/tools-en/fraction-calculator.html</loc><lastmod>2026-10-25</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-<url><loc>https://maniu2475-glitch.github.io/tools-en/sales-tax-calculator.html</loc><lastmod>2026-10-25</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-<url><loc>https://maniu2475-glitch.github.io/tools-en/stopwatch.html</loc><lastmod>2026-10-25</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-<url><loc>https://maniu2475-glitch.github.io/tools-en/inches-to-cm.html</loc><lastmod>2026-10-25</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-<url><loc>https://maniu2475-glitch.github.io/tools-en/typing-speed-test.html</loc><lastmod>2026-10-25</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://maniu2475-glitch.github.io/tools-en/fraction-calculator.html</loc><lastmod>2026-11-07</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://maniu2475-glitch.github.io/tools-en/sales-tax-calculator.html</loc><lastmod>2026-11-07</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://maniu2475-glitch.github.io/tools-en/stopwatch.html</loc><lastmod>2026-11-07</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://maniu2475-glitch.github.io/tools-en/inches-to-cm.html</loc><lastmod>2026-11-07</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://maniu2475-glitch.github.io/tools-en/typing-speed-test.html</loc><lastmod>2026-11-07</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>https://maniu2475-glitch.github.io/tools-en/pomodoro-timer.html</loc><lastmod>2026-10-25</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>https://maniu2475-glitch.github.io/tools-en/barcode-scanner.html</loc><lastmod>2026-10-25</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>https://maniu2475-glitch.github.io/tools-en/binary-calculator.html</loc><lastmod>2026-10-25</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-<url><loc>https://maniu2475-glitch.github.io/tools-en/lcm-gcd-calculator.html</loc><lastmod>2026-10-25</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://maniu2475-glitch.github.io/tools-en/lcm-gcd-calculator.html</loc><lastmod>2026-11-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>https://maniu2475-glitch.github.io/tools-en/random-team-generator.html</loc><lastmod>2026-10-25</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>https://maniu2475-glitch.github.io/tools-en/text-to-speech.html</loc><lastmod>2026-10-25</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>https://maniu2475-glitch.github.io/tools-en/online-notepad.html</loc><lastmod>2026-10-25</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -423,7 +423,7 @@
   </url>
   <url>
     <loc>https://maniu2475-glitch.github.io/tools-en/hex-to-ascii.html</loc>
-    <lastmod>2026-10-26</lastmod>
+    <lastmod>2026-11-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -435,19 +435,19 @@
   </url>
   <url>
     <loc>https://maniu2475-glitch.github.io/tools-en/word-to-number.html</loc>
-    <lastmod>2026-10-26</lastmod>
+    <lastmod>2026-11-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://maniu2475-glitch.github.io/tools-en/decimal-to-fraction.html</loc>
-    <lastmod>2026-10-26</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://maniu2475-glitch.github.io/tools-en/data-storage-converter.html</loc>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-11-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -479,33 +479,33 @@
   <url><loc>https://maniu2475-glitch.github.io/tools-en/online-calculator.html</loc><lastmod>2026-11-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://maniu2475-glitch.github.io/tools-en/remove-line-breaks.html</loc><lastmod>2026-11-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://maniu2475-glitch.github.io/tools-en/credit-card-validator.html</loc><lastmod>2026-11-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://maniu2475-glitch.github.io/tools-en/ratio-calculator.html</loc><lastmod>2026-11-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://maniu2475-glitch.github.io/tools-en/ratio-calculator.html</loc><lastmod>2026-11-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>https://maniu2475-glitch.github.io/tools-en/fahrenheit-to-celsius.html</loc><lastmod>2026-11-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>https://maniu2475-glitch.github.io/tools-en/base58-encoder-decoder.html</loc><lastmod>2026-11-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-<url><loc>https://maniu2475-glitch.github.io/tools-en/rounding-calculator.html</loc><lastmod>2026-11-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://maniu2475-glitch.github.io/tools-en/rounding-calculator.html</loc><lastmod>2026-11-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>https://maniu2475-glitch.github.io/tools-en/mean-median-mode-calculator.html</loc><lastmod>2026-11-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>https://maniu2475-glitch.github.io/tools-en/cm-to-inches.html</loc><lastmod>2026-11-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url>
     <loc>https://maniu2475-glitch.github.io/tools-en/json-to-csv-converter.html</loc>
-    <lastmod>2026-11-04</lastmod>
+    <lastmod>2026-11-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://maniu2475-glitch.github.io/tools-en/totp-generator.html</loc>
-    <lastmod>2026-11-05</lastmod>
+    <lastmod>2026-11-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://maniu2475-glitch.github.io/tools-en/mac-address-lookup.html</loc>
-    <lastmod>2026-11-05</lastmod>
+    <lastmod>2026-11-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://maniu2475-glitch.github.io/tools-en/color-contrast-checker.html</loc>
-    <lastmod>2026-11-05</lastmod>
+    <lastmod>2026-11-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
