@@ -1,0 +1,55 @@
+12901
+C, FT_MAP["Script"][1]); }],
+  ["Double-struck", function(t){ return ftMapAscii(t, 0x1D538, FT_MAP["Double-struck"][1]); }],
+  ["Fraktur", function(t){ return ftMapAscii(t, 0x1D504, FT_MAP["Fraktur"][1]); }],
+  ["Monospace", function(t){ return ftMapAscii(t, 0x1D670, FT_MAP["Monospace"][1]); }],
+  ["Sans Bold", function(t){ return ftMapAscii(t, 0x1D5D4, FT_MAP["Sans Bold"][1]); }],
+  ["Small Caps", ftSmallCaps],
+  ["Circled", ftCircled],
+  ["Squared", ftSquared],
+  ["Fullwidth", ftFullwidth],
+  ["Strikethrough", ftStrike],
+  ["Underline", ftUnderline],
+  ["Upside Down", ftUpsideDown],
+  ["Wavy", ftWaves],
+  ["Stars", ftStars],
+  ["Hearts", ftHearts],
+  ["Decorated", ftBrackets],
+  ["Blocks", ftGlitch]
+];
+
+function ftRender() {
+  var txt = document.getElementById('ft-in').value;
+  var box = document.getElementById('ft-out');
+  if (!txt) { box.innerHTML = '<p style="opacity:.7">Type something above to see 20 styles.</p>'; return; }
+  var html = "";
+  for (var i = 0; i < FT_STYLES.length; i++) {
+    var label = FT_STYLES[i][0];
+    var value = FT_STYLES[i][1](txt);
+    var safe = value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    html += '<div style="display:flex;gap:10px;align-items:center;margin:8px 0;padding:8px 10px;border:1px solid #e3e6ef;border-radius:8px">' +
+            '<span style="min-width:110px;font-size:12px;opacity:.65">' + label + '</span>' +
+            '<span data-copy="' + safe + '" onclick="ftCopy(this)" style="flex:1;cursor:pointer;font-size:17px;word-break:break-word">' + safe + '</span>' +
+            '<button class="btn btn-outline" style="padding:4px 10px;font-size:12px" onclick="ftCopy(this.parentNode.querySelector(\'span[data-copy]\'))">Copy</button>' +
+            '</div>';
+  }
+  box.innerHTML = html;
+}
+
+function ftCopy(el) {
+  var text = el.getAttribute('data-copy');
+  var done = function(){ var m = document.getElementById('ft-copied'); m.textContent = 'Copied!'; setTimeout(function(){ m.textContent = ''; }, 1500); };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(done, function(){ ftFallback(text, done); });
+  } else { ftFallback(text, done); }
+}
+function ftFallback(text, done) {
+  var ta = document.createElement('textarea');
+  ta.value = text; document.body.appendChild(ta); ta.select();
+  try { document.execCommand('copy'); done(); } catch (e) {}
+  document.body.removeChild(ta);
+}
+document.addEventListener('DOMContentLoaded', function(){ if (document.getElementById('ft-in')) ftRender(); });
+</script>
+</body>
+</html>

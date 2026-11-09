@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ohm&#x27;s Law Calculator - Voltage, Current &amp; Resistance</title>
+<meta name="description" content="Free Ohm&#x27;s law calculator. Enter any two of voltage, current, resistance or power and get the other two instantly, with formulas, unit handling and worked examples.">
+<meta name="keywords" content="ohms law calculator,voltage calculator,current calculator,resistance calculator,power calculator,electrical calculator,v=ir,watts calculator">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/ohms-law-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ohm&#x27;s Law Calculator">
+<meta property="og:description" content="Free Ohm&#x27;s law calculator. Enter any two of voltage, current, resistance or power and get the other two instantly, with formulas, unit handling and worked examples.">
+<meta property="og:url" content="https://maniu2475-glitch.github.io/tools-en/ohms-law-calculator.html">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ohm&#x27;s Law Calculator">
+<meta name="twitter:description" content="Free Ohm&#x27;s law calculator. Enter any two of voltage, current, resistance or power and get the other two instantly, with formulas, unit handling and worked examples.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Ohm&#x27;s Law Calculator","url":"https://maniu2475-glitch.github.io/tools-en/ohms-law-calculator.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free Ohm&#x27;s law calculator. Enter any two of voltage, current, resistance or power and get the other two instantly, with formulas, unit handling and worked examples."}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="menu">&#9776;</button>
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#129520;</span><span class="logo-text">Online Toolbox</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#tool-json">JSON</a>
+      <a href="index.html#tool-base64">Base64</a>
+      <a href="index.html#tool-url">URL</a>
+      <a href="index.html#tool-qrcode">QR</a>
+      <a href="index.html#tool-password">Password</a>
+      <a href="index.html#tool-timestamp">Timestamp</a>
+      <a href="index.html#tool-color">Color</a>
+      <a href="index.html#tool-hash">Hash</a>
+      <a href="index.html#tool-uuid">UUID</a>
+      <a href="index.html#tool-jwt">JWT</a>
+      <a href="all-tools.html">All tools</a>
+    </nav>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-ohms-law-calculator">
+      <h1>Ohm&#x27;s Law Calculator</h1>
+<p style="line-height:1.8">Fill in any <strong>two</strong> fields; the remaining values are calculated automatically. Leave the unknown fields empty.</p>
+<div class="opt-group"><label>Voltage V (volts)</label><input type="number" id="ol-v" step="any" style="width:100%" oninput="olCalc('v')"></div>
+<div class="opt-group"><label>Current I (amps)</label><input type="number" id="ol-i" step="any" style="width:100%" oninput="olCalc('i')"></div>
+<div class="opt-group"><label>Resistance R (ohms)</label><input type="number" id="ol-r" step="any" style="width:100%" oninput="olCalc('r')"></div>
+<div class="opt-group"><label>Power P (watts)</label><input type="number" id="ol-p" step="any" style="width:100%" oninput="olCalc('p')"></div>
+<div class="btn-group"><button class="btn btn-outline" onclick="['v','i','r','p'].forEach(function(k){document.getElementById('ol-'+k).value=''});document.getElementById('ol-msg').textContent=''">Reset</button></div>
+<p id="ol-msg" style="line-height:1.8;color:#b3261e"></p>
+<p id="ol-formula" style="line-height:1.8"></p>
+<script>
+function gi(k){var v=parseFloat(document.getElementById('ol-'+k).value);return isNaN(v)?null:v;}
+function sp(k,v){document.getElementById('ol-'+k).value=(Math.round(v*10000)/10000);}
+function olCalc(src){
+  var V=gi('v'),I=gi('i'),R=gi('r'),P=gi('p');
+  var msg=document.getElementById('ol-msg'),f=document.getElementById('ol-formula');
+  msg.textContent='';f.textContent='';
+  var known=[V,I,R,P].filter(function(x){return x!==null&&x!==0}).length;
+  if(known<2){f.textContent='Enter at least two values (V, I, R or P).';return;}
+  if(V!==null&&I!==null&&I!==0){R=V/I;P=V*I;sp('r',R);sp('p',P);f.textContent='R = V / I = '+R.toFixed(4)+' \u03a9  \u00b7  P = V \u00d7 I = '+P.toFixed(4)+' W';}
+  else if(V!==null&&R!==null&&R!==0){I=V/R;P=V*I;sp('i',I);sp('p',P);f.textContent='I = V / R = '+I.toFixed(4)+' A  \u00b7  P = V \u00d7 I = '+P.toFixed(4)+' W';}
+  else if(I!==null&&R!==null){V=I*R;P=V*I;sp('v',V);sp('p',P);f.textContent='V = I \u00d7 R = '+V.toFixed(4)+' V  \u00b7  P = V \u00d7 I = '+P.toFixed(4)+' W';}
+  else if(P!==null&&V!==null&&V!==0){I=P/V;R=V/I;sp('i',I);sp('r',R);f.textContent='I = P / V = '+I.toFixed(4)+' A  \u00b7  R = V / I = '+R.toFixed(4)+' \u03a9';}
+  else if(P!==null&&I!==null&&I!==0){V=P/I;R=V/I;sp('v',V);sp('r',R);f.textContent='V = P / I = '+V.toFixed(4)+' V  \u00b7  R = V / I = '+R.toFixed(4)+' \u03a9';}
+  else if(P!==null&&R!==null&&R>0){var V2=Math.sqrt(P*R);sp('v',V2);sp('i',P/V2);f.textContent='V = \u221a(P \u00d7 R) = '+V2.toFixed(4)+' V  \u00b7  I = P / V = '+(P/V2).toFixed(4)+' A';}
+  else{msg.textContent='Not enough information - the two known values must be independent.';}
+}
+</script>
+      <hr>
+      <h2>About this tool</h2>
+<p style="line-height:1.9">Ohm's law states that the current through a conductor is directly proportional to the voltage across it and inversely proportional to its resistance, written as <strong>V = I &times; R</strong>. Combined with Joule's law for electrical power, <strong>P = V &times; I</strong>, you get a compact set of equations that lets you derive any unknown quantity from any two known ones. This calculator applies all of them automatically, including the less obvious combinations such as power plus resistance, which require a square root.</p>
+<p style="line-height:1.9">Typical uses: sizing a current-limiting resistor for an LED (for a 5&nbsp;V supply and a 2&nbsp;V LED at 20&nbsp;mA, R = (5&minus;2)/0.02 = 150&nbsp;&Omega;), checking that a 12&nbsp;V / 2&nbsp;A power supply can drive a 5&nbsp;&Omega; load (it needs 2.4&nbsp;A, so it cannot), or working out how much heat a resistor will dissipate before choosing its wattage rating. Always pick a resistor rated at least twice the calculated power dissipation for a comfortable safety margin.</p>
+<p style="line-height:1.9">The calculator assumes ideal components at DC or low frequency, and positive values only. For AC circuits with capacitors and inductors you also need reactance and impedance, and for very high frequencies or long wires the assumption of a purely resistive load breaks down. Values are shown to four decimal places; the underlying math uses full double precision. Everything runs client-side, so it works offline and is safe for confidential engineering numbers.</p>
+      <h2>Related tools</h2>
+      <div class="btn-group" style="flex-wrap:wrap">
+        <a class="btn btn-outline" href="electricity-cost-calculator.html">Electricity Cost Calculator</a>
+        <a class="btn btn-outline" href="data-storage-converter.html">Data Storage Converter</a>
+        <a class="btn btn-outline" href="unit-converter.html">Unit Converter</a>
+        <a class="btn btn-outline" href="scientific-notation-converter.html">Scientific Notation</a>
+        <a class="btn btn-outline" href="rounding-calculator.html">Rounding Calculator</a>
+        <a class="btn btn-outline" href="percentage-calculator.html">Percentage Calculator</a>
+        <a class="btn btn-outline" href="quadratic-equation-solver.html">Quadratic Solver</a>
+        <a class="btn btn-outline" href="online-calculator.html">Online Calculator</a>
+      </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; 2026 Online Toolbox &middot; <a href="index.html">Home</a> &middot; <a href="all-tools.html">All tools</a> &middot; <a href="sitemap.xml">Sitemap</a></p>
+    <p style="font-size:12px;opacity:.75">All tools run entirely in your browser. No files are uploaded to any server.</p>
+  </div>
+</footer>
+<script>
+(function(){var t=document.getElementById('menuToggle'),n=document.getElementById('mainNav');if(t&&n){t.addEventListener('click',function(){n.classList.toggle('open');});}})();
+</script>
+</body>
+</html>

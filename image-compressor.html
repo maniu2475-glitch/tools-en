@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Compressor - Compress JPG, PNG &amp; WebP Free Online</title>
+<meta name="description" content="Free online image compressor. Reduce JPG, PNG and WebP file size in your browser with a quality slider - instant download, no upload, no signup, no watermark.">
+<meta name="keywords" content="image compressor,compress image online,reduce image file size,jpg compressor,png compressor,webp compressor,free image optimizer,no upload">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/image-compressor.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Image Compressor">
+<meta property="og:description" content="Free online image compressor. Reduce JPG, PNG and WebP file size in your browser with a quality slider - instant download, no upload, no signup, no watermark.">
+<meta property="og:url" content="https://maniu2475-glitch.github.io/tools-en/image-compressor.html">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Image Compressor">
+<meta name="twitter:description" content="Free online image compressor. Reduce JPG, PNG and WebP file size in your browser with a quality slider - instant download, no upload, no signup, no watermark.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Image Compressor","url":"https://maniu2475-glitch.github.io/tools-en/image-compressor.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free online image compressor. Reduce JPG, PNG and WebP file size in your browser with a quality slider - instant download, no upload, no signup, no watermark."}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="menu">&#9776;</button>
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#129520;</span><span class="logo-text">Online Toolbox</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#tool-json">JSON</a>
+      <a href="index.html#tool-base64">Base64</a>
+      <a href="index.html#tool-url">URL</a>
+      <a href="index.html#tool-qrcode">QR</a>
+      <a href="index.html#tool-password">Password</a>
+      <a href="index.html#tool-timestamp">Timestamp</a>
+      <a href="index.html#tool-color">Color</a>
+      <a href="index.html#tool-hash">Hash</a>
+      <a href="index.html#tool-uuid">UUID</a>
+      <a href="index.html#tool-jwt">JWT</a>
+      <a href="all-tools.html">All tools</a>
+    </nav>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-image-compressor">
+      <h1>Image Compressor</h1>
+<p style="line-height:1.8">Pick an image, choose a quality level and download the compressed result. Everything happens locally in your browser using the HTML5 Canvas API, so nothing is ever uploaded.</p>
+<div class="opt-group"><label>Quality: <strong id="ic-qv">0.75</strong></label><input type="range" id="ic-quality" min="0.1" max="1" step="0.05" value="0.75" style="width:100%" oninput="document.getElementById('ic-qv').textContent=this.value"></div>
+<div class="opt-group"><label>Max width (px, 0 = keep original)</label><input type="number" id="ic-maxw" value="0" min="0" style="width:120px"></div>
+<div class="btn-group"><input type="file" id="ic-file" accept="image/*" onchange="icCompress()"></div>
+<div id="ic-result" style="margin-top:14px;line-height:1.9"></div>
+<div class="btn-group"><a class="btn" id="ic-dl" style="display:none" download="compressed.jpg">Download compressed image</a></div>
+<img id="ic-preview" alt="compressed preview" style="max-width:100%;margin-top:12px;display:none;border-radius:8px">
+<script>
+function icCompress(){
+  var f=document.getElementById('ic-file').files[0];
+  if(!f)return;
+  var res=document.getElementById('ic-result');
+  res.textContent='Processing...';
+  var img=new Image();
+  var url=URL.createObjectURL(f);
+  img.onload=function(){
+    var maxw=parseInt(document.getElementById('ic-maxw').value,10)||0;
+    var w=img.naturalWidth,h=img.naturalHeight;
+    if(maxw>0&&w>maxw){h=Math.round(h*maxw/w);w=maxw;}
+    var c=document.createElement('canvas');c.width=w;c.height=h;
+    var ctx=c.getContext('2d');ctx.drawImage(img,0,0,w,h);
+    var q=parseFloat(document.getElementById('ic-quality').value);
+    var isPng=f.type.indexOf('png')>-1;
+    var mime=isPng?'image/png':'image/jpeg';
+    c.toBlob(function(blob){
+      if(!blob){res.textContent='Compression failed on this file.';return;}
+      var kb=blob.size/1024;
+      var okb=f.size/1024;
+      var save=okb>0?Math.round((1-blob.size/f.size)*100):0;
+      res.innerHTML='Original: <strong>'+okb.toFixed(1)+' KB</strong> ('+img.naturalWidth+'&times;'+img.naturalHeight+')<br>Compressed: <strong>'+kb.toFixed(1)+' KB</strong> ('+w+'&times;'+h+')<br>Saved: <strong>'+save+'%</strong>';
+      var a=document.getElementById('ic-dl');
+      a.href=URL.createObjectURL(blob);
+      a.download='compressed.'+(isPng?'png':'jpg');
+      a.style.display='inline-block';
+      var p=document.getElementById('ic-preview');p.src=a.href;p.style.display='block';
+    },mime,q);
+    URL.revokeObjectURL(url);
+  };
+  img.onerror=function(){res.textContent='Could not read this file as an image.';};
+  img.src=url;
+}
+</script>
+      <hr>
+      <h2>About this tool</h2>
+<p style="line-height:1.9">Large images slow down websites, clog up email inboxes and eat mobile data. This compressor re-encodes your picture on the device using the browser's built-in canvas encoder, letting you trade a small amount of visual quality for a much smaller file. Drag in a product photo, a screenshot or a photo from your phone, move the quality slider until the preview still looks sharp, and download the result.</p>
+<p style="line-height:1.9">The tool supports any image format your browser can decode - JPEG, PNG, WebP, GIF (first frame) and BMP. PNG files keep their lossless format, so the biggest savings come from the optional <em>max width</em> resize, which is also the single most effective way to shrink screenshots for documentation or bug reports. JPEG and WebP inputs are re-encoded at your chosen quality, and a quality of 0.75 to 0.85 is usually indistinguishable from the original while cutting the file size by half or more.</p>
+<p style="line-height:1.9">Because nothing is uploaded, the tool works offline once the page has loaded, is safe for confidential screenshots and contracts, and has no file size limit other than your own device memory. No signup, no watermark, no daily quota. If you need to convert between formats instead, try the PNG to JPG converter; if you need a data URI for CSS, use the Image to Base64 tool.</p>
+      <h2>Related tools</h2>
+      <div class="btn-group" style="flex-wrap:wrap">
+        <a class="btn btn-outline" href="png-to-jpg.html">PNG to JPG</a>
+        <a class="btn btn-outline" href="webp-to-png.html">WEBP to PNG</a>
+        <a class="btn btn-outline" href="image-to-base64.html">Image to Base64</a>
+        <a class="btn btn-outline" href="qr-code-generator.html">QR Generator</a>
+        <a class="btn btn-outline" href="barcode-generator.html">Barcode Generator</a>
+        <a class="btn btn-outline" href="base64.html">Base64 Encoder</a>
+        <a class="btn btn-outline" href="byte-counter.html">Byte Counter</a>
+        <a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a>
+      </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; 2026 Online Toolbox &middot; <a href="index.html">Home</a> &middot; <a href="all-tools.html">All tools</a> &middot; <a href="sitemap.xml">Sitemap</a></p>
+    <p style="font-size:12px;opacity:.75">All tools run entirely in your browser. No files are uploaded to any server.</p>
+  </div>
+</footer>
+<script>
+(function(){var t=document.getElementById('menuToggle'),n=document.getElementById('mainNav');if(t&&n){t.addEventListener('click',function(){n.classList.toggle('open');});}})();
+</script>
+</body>
+</html>

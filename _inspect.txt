@@ -1,0 +1,55 @@
+LEN=12901
+===BODY HEAD===
+
+<header class="site-header">
+  <div class="container header-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="menu">&#9776;</button>
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#129520;</span><span class="logo-text">Online Toolbox</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#tool-json">JSON</a>
+      <a href="index.html#tool-base64">Base64</a>
+      <a href="index.html#tool-url">URL</a>
+      <a href="index.html#tool-qrcode">QR</a>
+      <a href="index.html#tool-password">Password</a>
+      <a href="index.html#tool-timestamp">Timestamp</a>
+      <a href="index.html#tool-color">Color</a>
+      <a href="index.html#tool-hash">Hash</a>
+      <a href="index.html#tool-uuid">UUID</a>
+      <a href="index.html#tool-jwt">JWT</a>
+      <a href="all-tools.html">All tools</a>
+    </nav>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-fancy-text-generator">
+      <h1>Fancy Text Generator</h1>
+<p style="line-height:1.8">Type or paste your text and click any result to copy it. Every style is made of standard Unicode characters, so it works on Instagram, TikTok, X/Twitter, Facebook, Discord and most chat apps.</p>
+<textarea id="ft-in" rows="3" style="width:100%" placeholder="Type your text here..." oninput="ftRender()">hello world</textarea>
+<div class="btn-group"><button class="btn btn-outline" onclick="document.getElementById('ft-in').value='';ftRender()">Clear</button><span id="ft-copied" style="align-self:center;color:#2e7d32"></span></div>
+<div id="ft-out" style="margin-top:14px"></div>
+      <hr>
+      <h2>About this tool</h2>
+<p style="line-height:1.9">Fancy text generators work by swapping ordinary ASCII letters for visually similar Unicode code points from the Mathematical Alphanumeric Symbols block, the Enclosed Alphanumerics block and many other ranges defined by the Unicode Consortium. That is why the result can be copied straight into Instagram bios, TikTok captions, X posts, YouTube titles, Discord nicknames and WhatsApp messages: they are not images or fonts, just characters that most systems already render.</p>
+<p style="line-height:1.9">This page offers bold, italic, bold-italic, script, double-struck, fraktur, monospace, circled, squared, small-caps, bubble, upside-down, strikethrough and several decorative symbol wrappers, all generated instantly as you type. Everything runs in your browser with a plain JavaScript character map, so there is no upload, no rate limit and no account needed.</p>
+<p style="line-height:1.9">A practical caveat: screen readers and search engines cannot always parse these characters, so keep headings and SEO-critical text in normal letters and save fancy styles for bios, captions and casual chat. Some older Android keyboards and SMS gateways may also drop characters outside the Basic Multilingual Plane, in which case try a simpler style such as bold or small caps.</p>
+      <h2>Related tools</
+===BEFORE FOOTER===
+y ASCII letters for visually similar Unicode code points from the Mathematical Alphanumeric Symbols block, the Enclosed Alphanumerics block and many other ranges defined by the Unicode Consortium. That is why the result can be copied straight into Instagram bios, TikTok captions, X posts, YouTube titles, Discord nicknames and WhatsApp messages: they are not images or fonts, just characters that most systems already render.</p>
+<p style="line-height:1.9">This page offers bold, italic, bold-italic, script, double-struck, fraktur, monospace, circled, squared, small-caps, bubble, upside-down, strikethrough and several decorative symbol wrappers, all generated instantly as you type. Everything runs in your browser with a plain JavaScript character map, so there is no upload, no rate limit and no account needed.</p>
+<p style="line-height:1.9">A practical caveat: screen readers and search engines cannot always parse these characters, so keep headings and SEO-critical text in normal letters and save fancy styles for bios, captions and casual chat. Some older Android keyboards and SMS gateways may also drop characters outside the Basic Multilingual Plane, in which case try a simpler style such as bold or small caps.</p>
+      <h2>Related tools</h2>
+      <div class="btn-group" style="flex-wrap:wrap">
+        <a class="btn btn-outline" href="case-converter.html">Case Converter</a>
+        <a class="btn btn-outline" href="text-reverser.html">Text Reverser</a>
+        <a class="btn btn-outline" href="word-counter.html">Word Counter</a>
+        <a class="btn btn-outline" href="slug-generator.html">Slug Generator</a>
+        <a class="btn btn-outline" href="html-entities.html">HTML Entities</a>
+        <a class="btn btn-outline" href="rot13-caesar-cipher.html">ROT13 Cipher</a>
+        <a class="btn btn-outline" href="lorem-ipsum-generator.html">Lorem Ipsum</a>
+        <a class="btn btn-outline" href="random-name-generator.html">Random Name Generator</a>
+      </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; 2026 Online Toolbox &middot; <a href="index.html">Home</a> &middot; <a href="all-tools.html">All tools</a> &middot; <a href
