@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML Escape / Unescape - Free Online Tool</title>
+<meta name="description" content="Escape HTML special characters to entities (&amp;lt; &amp;gt; &amp;amp; &amp;quot;) or unescape them back to text. Numeric entity modes included. Runs in your browser.">
+<meta name="keywords" content="html escape, html unescape, html entities encoder, escape special characters, decode html entities, xss escape, free tool">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/html-escape.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="HTML Escape / Unescape">
+<meta property="og:description" content="Escape HTML special characters to entities (&amp;lt; &amp;gt; &amp;amp; &amp;quot;) or unescape them back to text. Numeric entity modes included. Runs in your browser.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "HTML Escape / Unescape", "url": "https://maniu2475-glitch.github.io/tools-en/html-escape.html", "description": "Escape HTML special characters to entities (&amp;lt; &amp;gt; &amp;amp; &amp;quot;) or unescape entities back to plain text. Stops XSS when you paste user text into a page.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) &mdash; AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#128295;</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free &bull; Private &bull; Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>HTML Escape & Unescape</h1>
+      <p class="tool-desc">Convert < > & " ' to HTML entities and back, instantly.</p>
+<label>Mode</label>
+<select id="he-mode">
+<option value="basic">Escape &lt; &gt; &amp; " '</option>
+<option value="all">Escape all non-ASCII to numeric entities</option>
+<option value="hex">Escape all non-ASCII to hex entities</option>
+<option value="smart">Escape smart (only what is needed for &lt;pre&gt;)</option>
+<option value="unesc">Unescape entities back to text</option>
+</select>
+<textarea id="he-in" rows="10" placeholder="Paste HTML or text here..."></textarea>
+<div class="btn-group">
+<button class="btn" onclick="heRun()">Convert</button>
+<button class="btn btn-outline" onclick="heCopy()">Copy Result</button>
+</div>
+<textarea id="he-out" rows="10" class="output-text" readonly placeholder="Result"></textarea>
+<div class="result-box" id="he-info">Ready.</div>
+<h2>About the HTML Escape & Unescape</h2>
+<p>When you paste user-supplied text, code samples or CMS content into a web page, the characters &lt; &gt; &amp; &quot; and ' are not safe to insert literally: a &lt; may open a tag, an &amp; may start an entity, and a quote can break out of an attribute - the classic cross-site scripting (XSS) pattern. This tool escapes those five characters into their named HTML entities (&amp;lt; &amp;gt; &amp;amp; &amp;quot; &amp;#39;) so the browser displays them as text instead of interpreting them as markup, and it reverses the process so you can turn a block of encoded HTML back into readable source. The numeric mode converts every non-ASCII character to a decimal (&#NNNN;) or hex (&#xNNNN;) reference, which is useful for email templates and legacy systems that mangle UTF-8. The named-entity decoder recognises the full set of common named entities - &amp;nbsp; &amp;copy; &amp;mdash; &amp;hellip; &amp;euro; &amp;trade; and hundreds more - so scraped pages and RSS feeds turn back into clean text. A few typical jobs: making a code snippet display correctly inside a &lt;pre&gt; block, fixing descriptions exported from a database that stored entities, preparing a value for a JavaScript string literal, and showing raw markup in a blog post. Everything is processed on your machine; the text - which may contain private customer data - is never uploaded.</p>
+<h3>Related tools</h3>
+<p class="footer-links" style="line-height:2"><a href="html-entities.html">HTML Entities Reference</a> &middot; <a href="url-encoder-decoder.html">URL Encoder</a> &middot; <a href="xml-formatter.html">XML Formatter</a> &middot; <a href="json-formatter.html">JSON Formatter</a></p>
+<script>
+var heMap={'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'};
+function heRun(){
+ var t=document.getElementById('he-in').value;
+ var m=document.getElementById('he-mode').value;
+ var o=t;
+ if(m==='basic'){o=t.replace(/[&<>"']/g,function(c){return heMap[c];});}
+ else if(m==='all'){o=Array.from(t).map(function(c){var k=c.codePointAt(0);return k>127?'&#'+k+';':c;}).join('').replace(/[&<>"']/g,function(c){return heMap[c];});}
+ else if(m==='hex'){o=Array.from(t).map(function(c){var k=c.codePointAt(0);return k>127?'&#x'+k.toString(16).toUpperCase()+';':c;}).join('').replace(/[&<>"']/g,function(c){return heMap[c];});}
+ else if(m==='smart'){o=t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+ else{o=heUnescape(t);}
+ document.getElementById('he-out').value=o;
+ document.getElementById('he-info').textContent='Done: '+t.length+' \u2192 '+o.length+' characters.';
+}
+function heUnescape(s){
+ var d=document.createElement('textarea');
+ d.innerHTML=s;
+ return d.value;
+}
+function heCopy(){var o=document.getElementById('he-out');o.select();document.execCommand('copy');document.getElementById('he-info').textContent='Copied to clipboard.';}
+</script>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="container"><p>&copy; 2026 ToolBox &bull; Runs 100% client-side &bull; No data uploaded</p></div>
+</footer>
+<div class="ad-banner" id="ad-bottom"><div class="ad-placeholder-text">Ad slot (responsive banner) &mdash; AdSense code goes here</div></div>
+</body>
+</html>

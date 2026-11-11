@@ -50,29 +50,11 @@
 <script>
 var ZONES=[["UTC","UTC"],["America/New_York","New York"],["America/Los_Angeles","Los Angeles"],["America/Chicago","Chicago"],["Europe/London","London"],["Europe/Berlin","Berlin"],["Europe/Paris","Paris"],["Asia/Kolkata","Mumbai (IST)"],["Asia/Shanghai","Shanghai"],["Asia/Tokyo","Tokyo"],["Australia/Sydney","Sydney"]];
 function fmt(d,z){try{return new Intl.DateTimeFormat('en-GB',{timeZone:z,dateStyle:'medium',timeStyle:'short'}).format(d);}catch(e){return d.toUTCString();}}
-function tzParseWall(v){var m=v.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})(?::(\d{2}))?/);if(!m)return null;return{y:+m[1],mo:+m[2],d:+m[3],h:+m[4],mi:+m[5],s:+(m[6]||0)};}
-// 指定时区在某一瞬间相对 UTC 的偏移（毫秒）
-function tzOffsetMs(d,zone){
- var parts=new Intl.DateTimeFormat('en-US',{timeZone:zone,hour12:false,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'}).formatToParts(d);
- var o={};parts.forEach(function(p){if(p.type!=='literal')o[p.type]=p.value;});
- var hour=+o.hour;if(hour===24)hour=0;
- var asUTC=Date.UTC(+o.year,+o.month-1,+o.day,hour,+o.minute,+o.second);
- return asUTC-d.getTime();
-}
-// 把「某时区的墙钟时间」解析成真实瞬间（迭代两次以跨过夏令时跳变）
-function tzWallToInstant(w,zone){
- var guess=Date.UTC(w.y,w.mo-1,w.d,w.h,w.mi,w.s);
- var t1=guess-tzOffsetMs(new Date(guess),zone);
- var t2=guess-tzOffsetMs(new Date(t1),zone);
- return new Date(t2);
-}
 function tzConvert(){
  var v=document.getElementById('tz-dt').value;
  var zf=document.getElementById('tz-from').value;
  if(!v){document.getElementById('tz-out').textContent='Pick a date and time.';return;}
- var w=tzParseWall(v);
- if(!w){document.getElementById('tz-out').textContent='Invalid date and time.';return;}
- var d=tzWallToInstant(w,zf||'UTC');
+ var d=new Date(v);
  var rows=ZONES.map(function(z){return z[1]+': '+fmt(d,z[0]);}).join('\n');
  document.getElementById('tz-out').textContent=rows;
 }

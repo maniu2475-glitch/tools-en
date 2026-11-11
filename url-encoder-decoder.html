@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>URL Encoder / Decoder - Free Online Tool</title>
+<meta name="description" content="Free URL encoder and decoder: percent-encode or decode URLs, query strings and form data instantly in your browser. Two modes, 100% offline.">
+<meta name="keywords" content="url encoder, url decoder, percent encoding, urldecode online, encodeuricomponent, query string encoder, url escape, free tool">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/url-encoder-decoder.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="URL Encoder / Decoder">
+<meta property="og:description" content="Free URL encoder and decoder: percent-encode or decode URLs, query strings and form data instantly in your browser. Two modes, 100% offline.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "URL Encoder / Decoder", "url": "https://maniu2475-glitch.github.io/tools-en/url-encoder-decoder.html", "description": "Free online URL encoder and decoder: percent-encode or decode URLs, query strings and form data instantly in your browser. Supports encodeURIComponent and full-URI modes.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) &mdash; AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#128295;</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free &bull; Private &bull; Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>URL Encoder & Decoder</h1>
+      <p class="tool-desc">Percent-encode or decode any URL, query string or form value instantly.</p>
+<div class="grid-2">
+<div>
+<h3 style="margin-top:0">Input</h3>
+<textarea id="ue-in" rows="10" placeholder="Paste a URL, query string or plain text here..."></textarea>
+<label>Mode</label>
+<select id="ue-mode">
+<option value="component">Component mode (encodeURIComponent) - for a single value</option>
+<option value="uri">Full URL mode (encodeURI) - keeps : / ? &amp; = #</option>
+</select>
+<div class="btn-group">
+<button class="btn" onclick="ueDo('enc')">Encode</button>
+<button class="btn" onclick="ueDo('dec')">Decode</button>
+<button class="btn btn-outline" onclick="ueSwap()">Use output as input</button>
+<button class="btn btn-outline" onclick="ueCopy()">Copy Result</button>
+</div>
+</div>
+<div>
+<h3 style="margin-top:0">Result</h3>
+<textarea id="ue-out" rows="10" class="output-text" readonly placeholder="Result appears here"></textarea>
+<div class="result-box" id="ue-info">Ready.</div>
+</div>
+</div>
+<h2>About the URL Encoder & Decoder</h2>
+<p>A URL can only contain a limited set of characters, so spaces, ampersands, Chinese characters, emoji and many symbols must be percent-encoded before they can safely travel inside a URL. This tool gives you two encoding modes that mirror the JavaScript built-ins exactly. <strong>Component mode</strong> (encodeURIComponent / decodeURIComponent) escapes every reserved character, which is what you need for a single query-string value, a redirect URL passed as a parameter, or a search term containing &amp;, # or +. <strong>Full URL mode</strong> (encodeURI / decodeURI) leaves the structural characters such as : / ? &amp; = # alone and only escapes what would actually break the URL, so you can safely encode a whole address bar value or a path segment containing unicode. Every operation runs locally: the text you paste - including tokens, tracking parameters and private deep links - never leaves your browser. Typical uses include building utm_source / utm_campaign tracking links, fixing double-encoded URLs copied out of analytics tools, debugging a 404 caused by a space in a filename, encoding non-ASCII filenames for a web server, and preparing form values for a POST body. Round-tripping is lossless: encode then decode returns your original string byte-for-byte, and malformed percent sequences are reported instead of silently mangled.</p>
+<h3>Related tools</h3>
+<p class="footer-links" style="line-height:2"><a href="base64.html">Base64 Encoder</a> &middot; <a href="html-entities.html">HTML Entities</a> &middot; <a href="json-formatter.html">JSON Formatter</a> &middot; <a href="jwt-decoder.html">JWT Decoder</a></p>
+<script>
+function ueMode(){return document.getElementById('ue-mode').value;}
+function ueDo(kind){
+ var t=document.getElementById('ue-in').value;
+ var out=document.getElementById('ue-out');
+ var info=document.getElementById('ue-info');
+ try{
+  if(kind==='enc'){
+   out.value = (ueMode()==='uri') ? encodeURI(t) : encodeURIComponent(t);
+   var n=out.value.length;
+   info.textContent='Encoded '+t.length+' chars \u2192 '+n+' chars ('+(n-t.length)+' added by %-escapes).';
+  }else{
+   out.value = (ueMode()==='uri') ? decodeURI(t) : decodeURIComponent(t);
+   info.textContent='Decoded successfully \u2714 ('+out.value.length+' chars).';
+  }
+ }catch(e){
+  out.value='';
+  info.textContent='Malformed input: '+e.message+' (check for a stray % or a broken %XX sequence)';
+ }
+}
+function ueSwap(){var a=document.getElementById('ue-in');a.value=document.getElementById('ue-out').value;}
+function ueCopy(){var o=document.getElementById('ue-out');o.select();document.execCommand('copy');document.getElementById('ue-info').textContent='Copied to clipboard.';}
+(function(){
+ var s=document.getElementById('ue-in');
+ s.value=s.placeholder;
+})();
+</script>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="container"><p>&copy; 2026 ToolBox &bull; Runs 100% client-side &bull; No data uploaded</p></div>
+</footer>
+<div class="ad-banner" id="ad-bottom"><div class="ad-placeholder-text">Ad slot (responsive banner) &mdash; AdSense code goes here</div></div>
+</body>
+</html>

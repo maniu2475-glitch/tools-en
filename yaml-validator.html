@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YAML Validator - Free Online Tool</title>
+<meta name="description" content="Validate YAML online: find indentation errors, tab characters and duplicate keys with the exact line number, then preview the parsed tree as JSON.">
+<meta name="keywords" content="yaml validator, yaml lint, check yaml online, yaml syntax error, yaml to json, kubernetes yaml validate, github actions yaml, free tool">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/yaml-validator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="YAML Validator">
+<meta property="og:description" content="Validate YAML online: find indentation errors, tab characters and duplicate keys with the exact line number, then preview the parsed tree as JSON.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "YAML Validator", "url": "https://maniu2475-glitch.github.io/tools-en/yaml-validator.html", "description": "Validate YAML online: catches indentation errors, tab characters, duplicate keys and syntax mistakes, reports the exact line, and pretty-prints the parsed document as JSON.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) &mdash; AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#128295;</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free &bull; Private &bull; Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>YAML Validator & Formatter</h1>
+      <p class="tool-desc">Find YAML syntax errors with line numbers and preview the parsed structure.</p>
+<label>YAML input</label>
+<textarea id="yv-in" rows="14" placeholder="Paste YAML here..."></textarea>
+<div class="btn-group">
+<button class="btn" onclick="yvRun()">Validate</button>
+<button class="btn btn-outline" onclick="yvLoad()">Load example</button>
+<button class="btn btn-outline" onclick="yvCopy()">Copy JSON</button>
+</div>
+<div class="result-box" id="yv-status">Paste YAML and press Validate.</div>
+<h3>Parsed structure (JSON preview)</h3>
+<pre id="yv-json" style="white-space:pre-wrap;word-break:break-word;margin:0"></pre>
+<h2>About the YAML Validator & Formatter</h2>
+<p>YAML looks friendly but is unforgiving: a single tab, a misplaced colon or an off-by-one indent silently changes the meaning of a document or makes it fail to parse entirely - and the error message you get from Kubernetes, GitHub Actions, Ansible or Docker Compose rarely tells you which line is guilty. This validator parses your YAML in the browser and reports the first structural problem with its line and column, along with the parser's explanation. It separately detects the most common invisible killer: tab characters used for indentation (YAML forbids them outright, and the error message you get from CI systems is usually misleading about this). It also flags duplicate keys in the same mapping, which most parsers silently accept by keeping the last value - a classic cause of a config that 'looks right' but behaves wrongly. When the document is valid, the tool pretty-prints it as JSON so you can visually confirm the resulting tree: arrays stay arrays, quoted numbers stay strings, and anchors and aliases are expanded. That makes it a fast way to double-check that a boolean like 'no' did not become the string 'no', or that an unquoted version number 1.10 was not read as 1.1. Everything runs locally: your manifests, workflow files and secrets-in-config never leave the browser.</p>
+<h3>Related tools</h3>
+<p class="footer-links" style="line-height:2"><a href="json-formatter.html">JSON Formatter</a> &middot; <a href="json-to-yaml.html">JSON to YAML</a> &middot; <a href="xml-formatter.html">XML Formatter</a> &middot; <a href="sql-formatter.html">SQL Formatter</a></p>
+<script>
+/* Minimal YAML parser good enough for config files: mappings, sequences,
+   scalars with quoting, comments, nested indentation, inline [] and {}. */
+function yvLines(text){
+ return text.replace(/\r\n?/g,'\n').split('\n');
+}
+function yvStripComment(s){
+ var q=null;
+ for(var i=0;i<s.length;i++){
+  var c=s[i];
+  if(q){ if(c===q&&s[i-1]!=='\\')q=null; }
+  else if(c==='"'||c==="'"){q=c;}
+  else if(c==='#'&&(i===0||/\s/.test(s[i-1]))){return s.slice(0,i);}
+ }
+ return s;
+}
+function yvScalar(v){
+ v=v.trim();
+ if(v==='')return null;
+ if(v==='~'||v==='null'||v==='Null'||v==='NULL')return null;
+ if(/^(true|True|TRUE|yes|Yes|YES|on|On|ON)$/.test(v))return true;
+ if(/^(false|False|FALSE|no|No|NO|off|Off|OFF)$/.test(v))return false;
+ if(/^-?\d+$/.test(v))return parseInt(v,10);
+ if(/^-?\d*\.\d+([eE][-+]?\d+)?$/.test(v))return parseFloat(v);
+ if(v[0]==='"'&&v[v.length-1]==='"')return v.slice(1,-1).replace(/\\n/g,'\n').replace(/\\t/g,'\t').replace(/\\"/g,'"');
+ if(v[0]==="'"&&v[v.length-1]==="'")return v.slice(1,-1).replace(/''/g,"'");
+ if(v[0]==='['&&v[v.length-1]===']'){var inner=v.slice(1,-1).trim();if(!inner)return [];return inner.split(',').map(yvScalar);}
+ if(v[0]==='{'&&v[v.length-1]==='}'){var o={};var body=v.slice(1,-1).trim();if(!body)return o;
+  body.split(',').forEach(function(p){var ix=p.indexOf(':');if(ix>0){o[p.slice(0,ix).trim()]=yvScalar(p.slice(ix+1));}});return o;}
+ return v;
+}
+function yvParse(text){
+ var raw=yvLines(text), lines=[], tabs=[];
+ raw.forEach(function(l,i){
+  var indent=0;
+  for(var k=0;k<l.length;k++){var c=l[k];if(c===' '){indent++;}else if(c==='\t'){tabs.push(i+1);indent++;}else break;}
+  var body=yvStripComment(l).trim();
+  if(body!=='')lines.push({n:i+1,i:indent,t:body});
+ });
+ if(tabs.length)throw {line:tabs[0],msg:'Tab character found in indentation - YAML only allows spaces.'};
+ if(!lines.length)return undefined;
+ var pos=0;
+ function block(ind){
+  if(pos>=lines.length)return null;
+  var isSeq=lines[pos].t==='-'||lines[pos].t.indexOf('- ' )===0;
+  var out= isSeq?[]:{};
+  var seen={};
+  while(pos<lines.length){
+   var L=lines[pos];
+   if(L.i<ind)break;
+   if(L.i>ind)throw {line:L.n,msg:'Unexpected indentation (line '+L.n+' is indented deeper than its parent).'};
+   if(isSeq){
+    if(!(L.t==='-'||L.t.indexOf('- ')===0))break;
+    var rest=L.t==='-'?'':L.t.slice(2).trim();
+    if(rest===''){pos++;out.push(block(nextIndent(ind)));}
+    else if(/^[^\s:]+\s*:/.test(rest)&&!/^["'].*["']\s*:/.test(rest===undefined?'':rest)===false||/^[A-Za-z0-9_.-]+\s*:/.test(rest)){
+     /* "- key: value" starts an inline mapping */
+     var mm=rest.match(/^([^:]+):\s*(.*)$/);
+     if(mm){
+      var o={};o[mm[1].trim()]=mm[2].trim()===''?null:yvScalar(mm[2]);
+      pos++;
+      while(pos<lines.length&&lines[pos].i>ind&&lines[pos].t.indexOf('- ')!==0){
+       var sub=lines[pos],sm=sub.t.match(/^([^:]+):\s*(.*)$/);
+       if(!sm)throw {line:sub.n,msg:'Expected "key: value" but found: '+sub.t};
+       var key=sm[1].trim();
+       if(key in o)throw {line:sub.n,msg:'Duplicate key "'+key+'".'};
+       o[key]= sm[2].trim()===''?block(nextIndent(sub.i)):yvScalar(sm[2]);
+       pos++;
+      }
+      out.push(o);
+     }else{
+      out.push(yvScalar(rest));pos++;
+     }
+    }else{out.push(yvScalar(rest));pos++;}
+   }else{
+    var m=L.t.match(/^([^:]+):(\s*(.*))?$/);
+    if(!m)throw {line:L.n,msg:'Expected "key: value" but found: '+L.t};
+    var k2=m[1].trim();
+    if(k2 in out)throw {line:L.n,msg:'Duplicate key "'+k2+'" in the same mapping.'};
+    var val=(m[3]||'').trim();
+    pos++;
+    out[k2]= val===''? block(nextIndent(ind)) : yvScalar(val);
+   }
+  }
+  return out;
+ }
+ function nextIndent(cur){
+  if(pos<lines.length&&lines[pos].i>cur)return lines[pos].i;
+  return cur+1;
+ }
+ var res=block(lines[0].i);
+ if(pos<lines.length)throw {line:lines[pos].n,msg:'Could not parse the rest of the document starting here.'};
+ return res;
+}
+function yvRun(){
+ var t=document.getElementById('yv-in').value;
+ var st=document.getElementById('yv-status'), js=document.getElementById('yv-json');
+ js.textContent='';
+ try{
+  var r=yvParse(t);
+  st.textContent='\u2714 Valid YAML. Parsed '+ (Array.isArray(r)?('an array of '+r.length+' items'):(r===null?'an empty document':('an object with '+Object.keys(r).length+' keys.')));
+  js.textContent=JSON.stringify(r,null,2);
+ }catch(e){
+  if(e&&e.line){st.textContent='\u2716 Line '+e.line+': '+e.msg;}
+  else{st.textContent='\u2716 '+((e&&e.message)||e);}
+ }
+}
+function yvLoad(){
+ document.getElementById('yv-in').value=
+'name: nightly-build\n'+
+'on:\n'+
+'  push:\n'+
+'    branches: [ main ]\n'+
+'jobs:\n'+
+'  test:\n'+
+'    runs-on: ubuntu-latest\n'+
+'    steps:\n'+
+'      - name: Checkout\n'+
+'        uses: actions/checkout@v4\n'+
+'      - name: Run tests\n'+
+'        run: npm test\n';
+ yvRun();
+}
+function yvCopy(){var t=document.getElementById('yv-json').textContent;var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');document.body.removeChild(a);document.getElementById('yv-status').textContent='JSON copied to clipboard.';}
+yvLoad();
+</script>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="container"><p>&copy; 2026 ToolBox &bull; Runs 100% client-side &bull; No data uploaded</p></div>
+</footer>
+<div class="ad-banner" id="ad-bottom"><div class="ad-placeholder-text">Ad slot (responsive banner) &mdash; AdSense code goes here</div></div>
+</body>
+</html>

@@ -52,10 +52,9 @@
 <script>
 function gcd(a,b){while(b){var t=a%b;a=b;b=t;}return a;}
 function rSimp(){
- var v=document.getElementById('r-in').value.split(/[:x\s*\/]+/).map(Number).filter(function(x){return isFinite(x);});
+ var v=document.getElementById('r-in').value.split(/[:x\s*\/]+/).map(Number).filter(function(x){return isFinite(x)&&x!==0;});
  if(v.length<2){document.getElementById('r-out').textContent='Enter at least two numbers.';return;}
  var g=v.reduce(gcd);
- if(!g){document.getElementById('r-out').textContent='Cannot simplify a ratio of all zeros.';return;}
  var simp=v.map(function(x){return x/g;});
  var sum=simp.reduce(function(a,b){return a+b;},0);
  var pct=simp.map(function(x){return (x/sum*100).toFixed(1)+'%';}).join(' : ');

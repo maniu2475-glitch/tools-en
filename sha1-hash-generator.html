@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHA-1 Hash Generator - Free Online Tool</title>
+<meta name="description" content="Generate SHA-1 hashes of any text online, in the browser with Web Crypto. Also verifies Git-style commit hashes. Nothing is uploaded to a server.">
+<meta name="keywords" content="sha1 hash generator, sha1 online, sha1 checksum, hash text sha1, web crypto sha1, git commit hash, free tool">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/sha1-hash-generator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SHA-1 Hash Generator">
+<meta property="og:description" content="Generate SHA-1 hashes of any text online, in the browser with Web Crypto. Also verifies Git-style commit hashes. Nothing is uploaded to a server.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "SHA-1 Hash Generator", "url": "https://maniu2475-glitch.github.io/tools-en/sha1-hash-generator.html", "description": "Generate SHA-1 hashes of any text online, in the browser with Web Crypto. Also verifies Git-style commit hashes. Nothing is uploaded to a server.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) &mdash; AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#128295;</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free &bull; Private &bull; Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>SHA-1 Hash Generator</h1>
+      <p class="tool-desc">Compute the SHA-1 digest of any text instantly, locally.</p>
+<label>Input text</label>
+<textarea id="s1-in" rows="8" placeholder="Type or paste text to hash..." oninput="s1Run()"></textarea>
+<div class="result-box" id="s1-out">Waiting for input...</div>
+<div class="result-box" id="s1-meta">&nbsp;</div>
+<label>Verify a SHA-1 value</label>
+<input type="text" id="s1-verify" placeholder="Paste a 40-character hex digest to check it" oninput="s1Verify()">
+<div class="result-box" id="s1-vout">&nbsp;</div>
+<h3>Example digests (UTF-8)</h3>
+<div class="result-box" id="s1-examples">Computing...</div>
+<h2>About the SHA-1 Hash Generator</h2>
+<p>SHA-1 (Secure Hash Algorithm 1) produces a fixed 160-bit / 40-character hexadecimal digest from any input. This tool computes it with the browser's native Web Crypto API, so the text you paste is hashed on your own machine and never transmitted. Type or paste text and the 40-character hex digest updates on every keystroke; a character and UTF-8 byte counter is shown alongside so you can confirm what exactly was hashed (Unicode characters take two or more bytes, and a trailing newline changes the digest). SHA-1 is no longer considered collision-resistant - in 2017 the SHAttered attack produced two different PDFs with the same SHA-1 hash - so it must not be used to store passwords, sign certificates or design new protocols. It is still widely encountered in practice, though: Git uses SHA-1 to identify commits, trees and blobs (a commit hash like 3f786850e387550fdab836ed7e6dc881de23001b is a SHA-1 of the commit object); old checksums, ETags, deduplication keys and legacy database indexes are still SHA-1; and many tutorials ask for the SHA-1 of a string to check whether two files are byte-identical. Use this tool to verify those legacy values, compare two strings, or paste a hex digest to confirm it is 40 valid hex characters. For anything security-sensitive, prefer the SHA-256 generator instead.</p>
+<h3>Related tools</h3>
+<p class="footer-links" style="line-height:2"><a href="sha256-hash-generator.html">SHA-256 Hash Generator</a> &middot; <a href="sha512-hash-generator.html">SHA-512 Hash Generator</a> &middot; <a href="md5-generator.html">MD5 Hash Generator</a> &middot; <a href="password-strength-checker.html">Password Strength Checker</a></p>
+<script>
+var s1enc=new TextEncoder();
+function s1Hex(buf){return Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');}
+function s1Run(){
+ var t=document.getElementById('s1-in').value;
+ var bytes=s1enc.encode(t).length;
+ document.getElementById('s1-meta').textContent=t.length+' characters, '+bytes+' UTF-8 bytes';
+ if(!t){document.getElementById('s1-out').textContent='Waiting for input...';return;}
+ crypto.subtle.digest('SHA-1',s1enc.encode(t)).then(function(b){
+  document.getElementById('s1-out').textContent=s1Hex(b);
+ }).catch(function(e){document.getElementById('s1-out').textContent='Error: '+e.message;});}
+function s1Verify(){
+ var v=document.getElementById('s1-verify').value.trim().toLowerCase();
+ var o=document.getElementById('s1-vout');
+ if(!v){o.textContent='\u00a0';return;}
+ if(!/^[0-9a-f]{40}$/.test(v)){o.textContent='\u2716 Not a SHA-1 digest: needs exactly 40 hex characters (got '+v.length+').';return;}
+ var cur=document.getElementById('s1-out').textContent;
+ o.textContent = (cur===v) ? '\u2714 Matches the digest of the text above.' : 'Valid shape, but does not match the digest above.';
+}
+(function(){
+ var samples=['abc','hello','The quick brown fox jumps over the lazy dog',''];
+ var box=document.getElementById('s1-examples');
+ Promise.all(samples.slice(0,3).map(function(s){
+  return crypto.subtle.digest('SHA-1',s1enc.encode(s)).then(function(b){return s+'  \u2192  '+s1Hex(b);});
+ })).then(function(rows){box.innerHTML=rows.join('<br>');}).catch(function(){box.textContent='Examples unavailable in this browser.';});
+})();
+</script>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="container"><p>&copy; 2026 ToolBox &bull; Runs 100% client-side &bull; No data uploaded</p></div>
+</footer>
+<div class="ad-banner" id="ad-bottom"><div class="ad-placeholder-text">Ad slot (responsive banner) &mdash; AdSense code goes here</div></div>
+</body>
+</html>
