@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YAML to JSON Converter - Free, Online, No Upload | Online Toolbox</title>
+<meta name="description" content="Convert YAML to JSON online for free. Paste a YAML file and get formatted JSON instantly. Runs in your browser, no upload, no signup.">
+<meta name="keywords" content="yaml to json, yaml to json converter, convert yaml to json online, yaml parser, yaml to json free, yml to json, kubernetes yaml to json, docker compose to json">
+<meta name="author" content="Online Toolbox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/yaml-to-json.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="YAML to JSON Converter">
+<meta property="og:description" content="Convert YAML to JSON online for free. Paste a YAML file and get formatted JSON instantly. Runs in your browser, no upload, no signup.">
+<meta property="og:url" content="https://maniu2475-glitch.github.io/tools-en/yaml-to-json.html">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="YAML to JSON Converter">
+<meta name="twitter:description" content="Convert YAML to JSON online for free. Paste a YAML file and get formatted JSON instantly. Runs in your browser, no upload, no signup.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"YAML to JSON Converter","url":"https://maniu2475-glitch.github.io/tools-en/yaml-to-json.html","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Convert YAML to JSON online for free. Paste a YAML file and get formatted JSON instantly. Runs in your browser, no upload, no signup."}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="menu">&#9776;</button>
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#129520;</span><span class="logo-text">Online Toolbox</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#tool-json" data-tool="json">JSON</a>
+      <a href="index.html#tool-base64" data-tool="base64">Base64</a>
+      <a href="index.html#tool-url" data-tool="url">URL</a>
+      <a href="index.html#tool-qrcode" data-tool="qrcode">QR Code</a>
+      <a href="index.html#tool-password" data-tool="password">Password</a>
+      <a href="index.html#tool-timestamp" data-tool="timestamp">Timestamp</a>
+      <a href="index.html#tool-color" data-tool="color">Color</a>
+      <a href="index.html#tool-counter" data-tool="counter">Counter</a>
+      <a href="index.html#tool-hash" data-tool="hash">Hash</a>
+      <a href="index.html#tool-ip" data-tool="ip">IP Lookup</a>
+      <a href="index.html#tool-unit" data-tool="unit">Units</a>
+      <a href="index.html#tool-case" data-tool="case">Case</a>
+      <a href="all-tools.html">All Tools</a>
+    </nav>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-yamltojson">
+      <h1>YAML to JSON Converter</h1>
+      <p>Convert YAML to JSON instantly, free and in your browser. Handles nested maps, lists, quoted strings,
+      block scalars (<code>|</code> and <code>&gt;</code>), comments, booleans, nulls and numbers.</p>
+      <div style="display:grid;grid-template-columns:1fr;gap:0.5rem">
+        <label for="yIn"><strong>YAML input</strong></label>
+        <textarea id="yIn" rows="12" spellcheck="false" placeholder="name: my-app&#10;version: 1.0&#10;tags:&#10;  - dev" style="font-family:ui-monospace,Consolas,monospace;width:100%;box-sizing:border-box"></textarea>
+        <div class="btn-group" style="flex-wrap:wrap">
+          <button class="btn btn-primary" onclick="convert()">Convert to JSON</button>
+          <button class="btn btn-outline" onclick="loadSample()">Load sample</button>
+          <button class="btn btn-outline" onclick="clearAll()">Clear</button>
+          <label style="display:inline-flex;align-items:center;gap:0.35rem">Indent
+            <select id="yIndent" style="padding:0.35rem">
+              <option value="2" selected>2 spaces</option>
+              <option value="4">4 spaces</option>
+              <option value="0">compact</option>
+            </select>
+          </label>
+        </div>
+        <label for="jOut"><strong>JSON output</strong></label>
+        <textarea id="jOut" rows="12" spellcheck="false" readonly style="font-family:ui-monospace,Consolas,monospace;width:100%;box-sizing:border-box"></textarea>
+        <div class="btn-group">
+          <button class="btn btn-outline" onclick="copyJson()">Copy JSON</button>
+          <button class="btn btn-outline" onclick="downloadJson()">Download .json</button>
+        </div>
+        <p id="yStatus" style="font-weight:600;min-height:1.4em"></p>
+      </div>
+      <script>
+var yIn=document.getElementById('yIn'),jOut=document.getElementById('jOut'),yStatus=document.getElementById('yStatus');
+
+function stripComment(raw){
+  var q=null;
+  for(var k=0;k<raw.length;k++){
+    var ch=raw[k];
+    if(q){ if(ch===q) q=null; continue; }
+    if(ch==='"'||ch==="'"){ q=ch; continue; }
+    if(ch==='#'&&(k===0||raw[k-1]===' '||raw[k-1]==='\t')) return raw.slice(0,k);
+  }
+  return raw;
+}
+function indentOf(s){ return s.length-s.replace(/^ +/,'').length; }
+function unquote(s){ return s.replace(/^["']/,'').replace(/["']$/,''); }
+function splitFlow(s){
+  var out=[],cur='',d=0,q=null;
+  for(var k=0;k<s.length;k++){
+    var ch=s[k];
+    if(q){ cur+=ch; if(ch===q) q=null; continue; }
+    if(ch==='"'||ch==="'"){ q=ch; cur+=ch; continue; }
+    if(ch==='['||ch==='{') d++;
+    if(ch===']'||ch==='}') d--;
+    if(ch===','&&d===0){ out.push(cur); cur=''; continue; }
+    cur+=ch;
+  }
+  if(cur.trim()) out.push(cur);
+  return out;
+}
+function scalar(s){
+  s=s.trim();
+  if(s===''||s==='~'||s==='null'||s==='Null'||s==='NULL') return null;
+  if(/^(true|True|TRUE|yes|Yes|on)$/.test(s)) return true;
+  if(/^(false|False|FALSE|no|No|off)$/.test(s)) return false;
+  if(/^-?(0|[1-9][0-9]*)(\.[0-9]+)?([eE][-+]?[0-9]+)?$/.test(s)) return Number(s);
+  if(/^0x[0-9a-fA-F]+$/.test(s)) return parseInt(s,16);
+  if(s.length>1&&s[0]==='"'&&s[s.length-1]==='"') return s.slice(1,-1).replace(/\\"/g,'"').replace(/\\n/g,'\n').replace(/\\t/g,'\t').replace(/\\\\/g,'\\');
+  if(s.length>1&&s[0]==="'"&&s[s.length-1]==="'") return s.slice(1,-1).replace(/''/g,"'");
+  if(s[0]==='['&&s[s.length-1]===']') return splitFlow(s.slice(1,-1)).map(scalar);
+  if(s[0]==='{'&&s[s.length-1]==='}'){
+    var o={};
+    splitFlow(s.slice(1,-1)).forEach(function(p){
+      var idx=p.indexOf(':');
+      if(idx>0) o[unquote(p.slice(0,idx).trim())]=scalar(p.slice(idx+1));
+    });
+    return o;
+  }
+  return s;
+}
+var L=[], i=0;
+function blockScalar(baseIndent, style){
+  var buf=[], ind=null;
+  while(i<L.length){
+    var l=L[i], li=indentOf(l);
+    if(l.trim()===''){ buf.push(''); i++; continue; }
+    if(li<=baseIndent) break;
+    if(ind===null) ind=li;
+    buf.push(l.slice(Math.min(ind,l.length)));
+    i++;
+  }
+  while(buf.length&&buf[buf.length-1]==='') buf.pop();
+  if(style==='|') return buf.join('\n');
+  return buf.join(' ').replace(/ +/g,' ').trim();
+}
+function parseBlock(minIndent){
+  if(i>=L.length) return null;
+  var ind=indentOf(L[i]);
+  if(ind<minIndent) return null;
+  var isSeq=/^ *-( |$)/.test(L[i]);
+  if(isSeq){
+    var arr=[];
+    while(i<L.length){
+      var line=L[i], li=indentOf(line);
+      if(li<ind) break;
+      if(!/^ *-( |$)/.test(line)) break;
+      var rest=line.slice(li+1).replace(/^ /,'');
+      if(rest.trim()===''){ i++; arr.push(parseBlock(ind+1)); continue; }
+      if(/^("([^"\\]|\\.)*"|'([^']|'')*'|[^:#]+?):( .*|)$/.test(rest)&&rest[0]!=='['&&rest[0]!=='{'){
+        L[i]=' '.repeat(li+2)+rest;
+        arr.push(parseBlock(li+2));
+      } else {
+        i++; arr.push(scalar(rest));
+      }
+    }
+    return arr;
+  }
+  var obj={};
+  while(i<L.length){
+    var ln=L[i], li2=indentOf(ln);
+    if(li2<ind) break;
+    if(li2>ind){ i++; continue; }
+    if(/^ *-( |$)/.test(ln)) break;
+    var body=ln.slice(ind);
+    var km=body.match(/^("([^"\\]|\\.)*"|'([^']|'')*'|[^:#]+?):( .*|)$/);
+    if(!km){ i++; continue; }
+    var key=unquote(km[1].trim());
+    var val=(km[3]||'').trim();
+    if(val===''){
+      i++;
+      if(i<L.length){
+        var nx=L[i], ni=indentOf(nx);
+        if(ni>ind){ obj[key]=parseBlock(ni); continue; }
+        if(ni===ind&&/^ *-/.test(nx)){ obj[key]=parseBlock(ind); continue; }
+      }
+      obj[key]=null;
+      continue;
+    }
+    if(/^[|>][+-]?$/.test(val)){ i++; obj[key]=blockScalar(ind,val[0]); continue; }
+    obj[key]=scalar(val);
+    i++;
+  }
+  return obj;
+}
+function yamlParse(src){
+  var raw=src.replace(/\t/g,'  ').split(/\r?\n/);
+  L=[];
+  for(var k=0;k<raw.length;k++){
+    var line=stripComment(raw[k]).replace(/\s+$/,'');
+    var t=line.trim();
+    if(t==='---'||t==='...') continue;
+    if(t===''&&line.length===0) continue;
+    L.push(line);
+  }
+  i=0;
+  return parseBlock(0);
+}
+function convert(){
+  var src=yIn.value;
+  if(!src.trim()){ yStatus.textContent='Paste some YAML above to convert it.'; yStatus.style.color='#b45309'; jOut.value=''; return; }
+  try{
+    var data=yamlParse(src);
+    var ind=parseInt(document.getElementById('yIndent').value,10);
+    jOut.value=(ind===0)?JSON.stringify(data):JSON.stringify(data,null,ind);
+    yStatus.textContent='Converted successfully - '+jOut.value.length+' characters of JSON.';
+    yStatus.style.color='#15803d';
+  } catch(e){
+    yStatus.textContent='YAML error: '+e.message;
+    yStatus.style.color='#b91c1c';
+    jOut.value='';
+  }
+}
+function clearAll(){ yIn.value=''; jOut.value=''; yStatus.textContent=''; }
+function loadSample(){
+  yIn.value='# Sample YAML document\nname: online-toolbox\nversion: 1.4\nprivate: false\ntools:\n  - yaml-to-json\n  - json-to-xml\nfeatures:\n  local: true\n  signup: false\nlimits: null\nnotes: |\n  Everything runs in your browser.\n  No data is uploaded.';
+  convert();
+}
+function copyJson(){
+  if(!jOut.value) return;
+  jOut.select(); document.execCommand('copy');
+  yStatus.textContent='JSON copied to clipboard.';
+}
+function downloadJson(){
+  if(!jOut.value) return;
+  var b=new Blob([jOut.value],{type:'application/json'});
+  var a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download='converted.json'; a.click();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); },2000);
+}
+yIn.addEventListener('input',function(){ clearTimeout(window.__yt); window.__yt=setTimeout(convert,300); });
+document.getElementById('yIndent').addEventListener('change',convert);
+loadSample();
+</script>
+      <hr>
+      <h2>About this tool</h2>
+      <p style="line-height:1.9"><strong>YAML to JSON</strong> is a free online converter that turns YAML configuration into JSON. YAML is the
+human-friendly format behind Docker Compose files, Kubernetes manifests, GitHub Actions workflows, Ansible playbooks,
+Helm charts and most CI pipelines, but nearly every programming language and HTTP API consumes JSON instead. This
+converter lets you paste a YAML document and immediately see the equivalent JSON object, which is exactly what you want
+when you are debugging a deployment file, checking whether a value is really the boolean <code>false</code> or the
+string <code>"false"</code>, or migrating configuration from one tool to another. The parser runs entirely in
+JavaScript on your own device, so proprietary configuration, API tokens and internal service names never leave your
+browser - nothing is uploaded and nothing is logged, which makes it safe for work documents you would not paste into
+a random SaaS converter. Supported syntax includes nested mappings and sequences, inline flow collections such as
+<code>[a, b]</code> and <code>{k: v}</code>, single-quoted and double-quoted strings with escape sequences, literal and
+folded block scalars, comments, document start markers, nulls, booleans, integers, decimals, scientific notation and
+hexadecimal values. Output can be pretty-printed with two or four spaces, or minified to a single line, and the result
+can be copied to the clipboard or downloaded as a .json file in one click. Because the whole thing is client-side,
+it keeps working offline once the page has loaded and there is no file-size limit other than your browser's memory.
+If your document relies on advanced YAML features such as anchors, merge keys or custom tags for typed objects, the
+faithful route is a full YAML 1.2 library - but for everyday configuration files this page gives you the answer in
+milliseconds. Related converters on this site include JSON to YAML for the reverse direction, a JSON formatter for
+pretty-printing and validating JSON, JSON to CSV for tabular exports and JSON to TypeScript for generating interfaces.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap">
+<a class="btn btn-outline" href="json-to-yaml.html">JSON to YAML</a>
+<a class="btn btn-outline" href="json-formatter.html">JSON Formatter</a>
+<a class="btn btn-outline" href="json-to-csv.html">JSON to CSV</a>
+<a class="btn btn-outline" href="json-to-typescript.html">JSON to TypeScript</a>
+<a class="btn btn-outline" href="base64.html">Base64 encode/decode</a>
+<a class="btn btn-outline" href="cron-parser.html">Cron parser</a>
+<a class="btn btn-outline" href="regex-tester.html">Regex tester</a>
+<a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a>
+      </div>
+      <h3>Frequently asked questions</h3>
+      <div style="line-height:1.9">
+      <details><summary><strong>Is this tool really free?</strong></summary><p>Yes. Completely free, no signup, no login, no usage limit.</p></details>
+      <details><summary><strong>Is my data uploaded to a server?</strong></summary><p>No. All processing happens locally in your browser, so your data never leaves your device.</p></details>
+      <details><summary><strong>Which browsers are supported?</strong></summary><p>Chrome, Edge, Firefox, Safari and any other modern browser, on desktop and mobile.</p></details>
+      <details><summary><strong>Can I use it offline?</strong></summary><p>Once the page has loaded, yes - the conversion logic is plain JavaScript.</p></details>
+      </div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>&copy; 2025 Online Toolbox</p><p class="footer-links"><a href="index.html#home">Online Toolbox</a> &middot; <a href="all-tools.html">All tools</a></p></div></footer>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+</body>
+</html>
