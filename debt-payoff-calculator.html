@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Debt Payoff Calculator - Payoff Date & Total Interest</title>
+<meta name="description" content="Free debt payoff calculator: enter balance, APR and monthly payment to see how many months until you're debt-free, total interest paid and how extra payments save money.">
+<meta name="keywords" content="debt payoff calculator, credit card payoff calculator, debt free date, total interest calculator, extra payment savings, minimum payment calculator">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/debt-payoff-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Debt Payoff Calculator">
+<meta property="og:description" content="Free debt payoff calculator: enter balance, APR and monthly payment to see how many months until you're debt-free, total interest paid and how extra payments save money.">
+<meta property="og:url" content="https://maniu2475-glitch.github.io/tools-en/debt-payoff-calculator.html">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Debt Payoff Calculator", "url": "https://maniu2475-glitch.github.io/tools-en/debt-payoff-calculator.html", "description": "Free debt payoff calculator: enter balance, APR and monthly payment to see how many months until you're debt-free, total interest paid and how extra payments save money.", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html"><span class="logo-icon">&#129520;</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free &bull; Private &bull; Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active">
+    <h1>Debt Payoff Calculator</h1>
+    <p>Find out exactly when a balance will be paid off, how much interest you will pay in total, and how much time and money an extra monthly payment would save you. Works for credit cards, personal loans, auto loans and student loans.</p>
+
+    <div class="grid-2">
+      <div>
+        <label>Current balance ($)<br><input type="number" id="dp-bal" value="8000" step="any"></label>
+        <label>Annual interest rate / APR (%)<br><input type="number" id="dp-apr" value="22.9" step="any"></label>
+        <label>Monthly payment ($)<br><input type="number" id="dp-pay" value="300" step="any"></label>
+        <label>Extra monthly payment ($, optional)<br><input type="number" id="dp-extra" value="0" step="any"></label>
+        <button id="dp-go">Calculate Payoff</button>
+      </div>
+      <div>
+        <h3>How it works</h3>
+        <ul>
+          <li>Interest accrues monthly on the remaining balance.</li>
+          <li>A payment must exceed the monthly interest or the balance never falls.</li>
+          <li>Extra payments go entirely to principal.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="result-box" id="out">Results will appear here.</div>
+  </section>
+  <article class="tool-article">
+    <h2>Why calculating a payoff date changes behaviour</h2>
+    <p>Revolving debt such as a credit card balance is psychologically slippery: the minimum payment always feels affordable, so the balance can sit untouched for years. A debt payoff calculator makes the cost concrete. Once you see that an $8,000 balance at 22.9% APR with $300 monthly payments takes nearly four years to clear and costs thousands in interest, the motivation to pay more becomes obvious. More importantly, the tool lets you experiment: adding $100 per month typically saves far more than $100 times the number of months, because every extra dollar reduces the balance that interest accrues on for all remaining months.</p>
+    <h2>The mathematics behind the result</h2>
+    <p>Each month the calculator computes interest as <em>balance &times; APR / 12</em>, adds it to the balance, then subtracts your payment. If the payment is smaller than the monthly interest, the balance grows and the loan can never be repaid &mdash; the tool detects this case and warns you instead of looping forever. Otherwise it simulates month by month until the balance reaches zero, counting months and accumulating interest paid. That gives three outputs: the <strong>number of months to be debt-free</strong>, the <strong>total interest paid</strong>, and the <strong>total amount paid</strong> including principal. Running the same simulation with and without the extra payment produces the savings figure.</p>
+    <h2>Worked example</h2>
+    <p>Take an $8,000 credit card balance at 22.9% APR. Paying $300 per month, the debt is cleared in about 39 months and roughly $3,600 of interest is paid on top of the original $8,000 &mdash; a total outlay near $11,600. Raise the payment to $400 per month and payoff drops to about 27 months with interest near $2,400, saving more than $1,200 and a full year. That disproportionate saving is exactly what the calculator is designed to make visible.</p>
+    <h2>Practical strategy notes</h2>
+    <p>If you have several debts, two strategies are common. <em>Avalanche</em> targets the highest interest rate first and minimises total interest paid; this calculator helps you evaluate each debt individually. <em>Snowball</em> targets the smallest balance first, which usually costs slightly more but delivers earlier psychological wins. Whichever you choose, always keep paying at least the minimum on every other debt so you avoid late fees and penalty rates. Also check whether your lender charges a prepayment penalty before aggressively overpaying a fixed-rate loan, and remember that a balance transfer to a 0% APR card can cut interest dramatically if &mdash; and only if &mdash; you clear the balance before the promotional period ends.</p>
+    <p>All simulation runs locally in JavaScript in your browser; your balances are never uploaded.</p>
+  </article>
+  <section class="related">
+    <h3>Related tools</h3>
+    <ul>
+      <li><a href="loan-calculator.html">Loan Calculator</a></li>
+      <li><a href="credit-card-validator.html">Credit Card Validator</a></li>
+      <li><a href="compound-interest-calculator.html">Compound Interest Calculator</a></li>
+      <li><a href="mortgage-calculator.html">Mortgage Calculator</a></li>
+      <li><a href="roi-calculator.html">ROI Calculator</a></li>
+    </ul>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>&copy; 2026 Online Toolbox &mdash; <a href="index.html">All tools</a> &middot; <a href="all-tools.html">Browse</a></p></div></footer>
+<script>
+
+function n(id){ var v = parseFloat(document.getElementById(id).value); return isFinite(v) ? v : 0; }
+function m(x){ return '$' + x.toLocaleString('en-US',{minimumFractionDigits:2, maximumFractionDigits:2}); }
+function simulate(balance, apr, pay){
+  var r = apr/100/12, months = 0, interest = 0;
+  if (pay <= balance * r) return null;
+  while (balance > 0 && months < 1200){
+    var i = balance * r;
+    interest += i;
+    balance = balance + i - pay;
+    months++;
+  }
+  if (months >= 1200) return null;
+  return { months: months, interest: interest, total: months*pay };
+}
+function run(){
+  var bal = n('dp-bal'), apr = n('dp-apr'), pay = n('dp-pay'), extra = n('dp-extra');
+  var el = document.getElementById('out');
+  var base = simulate(bal, apr, pay);
+  if (!base){ el.innerHTML = '<p>Your monthly payment does not cover the monthly interest, so the balance would never be paid off. Increase the payment.</p>'; return; }
+  var html = '<h3>Payoff result</h3><ul>';
+  html += '<li>Monthly payment: ' + m(pay) + '</li>';
+  html += '<li>Months to be debt-free: <strong>' + base.months + '</strong> (' + (base.months/12).toFixed(1) + ' years)</li>';
+  html += '<li>Total interest paid: <strong>' + m(base.interest) + '</strong></li>';
+  html += '<li>Total amount paid: ' + m(base.total) + '</li>';
+  html += '</ul>';
+  if (extra > 0){
+    var fast = simulate(bal, apr, pay + extra);
+    if (fast){
+      html += '<h3>With ' + m(extra) + ' extra per month</h3><ul>';
+      html += '<li>Months to be debt-free: <strong>' + fast.months + '</strong> (' + (fast.months/12).toFixed(1) + ' years)</li>';
+      html += '<li>Total interest paid: ' + m(fast.interest) + '</li>';
+      html += '<li>Months saved: <strong>' + (base.months - fast.months) + '</strong></li>';
+      html += '<li>Interest saved: <strong>' + m(base.interest - fast.interest) + '</strong></li>';
+      html += '</ul>';
+    }
+  } else {
+    var tryExtra = simulate(bal, apr, pay + 100);
+    if (tryExtra && tryExtra.months < base.months){
+      html += '<p>Tip: adding $100 per month would clear the debt ' + (base.months - tryExtra.months) + ' months sooner and save ' + m(base.interest - tryExtra.interest) + ' in interest.</p>';
+    }
+  }
+  el.innerHTML = html;
+}
+document.getElementById('dp-go').addEventListener('click', run);
+run();
+
+</script>
+</body>
+</html>

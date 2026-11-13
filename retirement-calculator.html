@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retirement Calculator - How Much Will I Have at Retirement?</title>
+<meta name="description" content="Free retirement calculator: project your nest egg with monthly contributions, expected return and inflation. See balance at retirement and monthly income it supports.">
+<meta name="keywords" content="retirement calculator, retirement savings calculator, 401k calculator, how much do I need to retire, nest egg calculator, compound growth retirement">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/retirement-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Retirement Savings Calculator">
+<meta property="og:description" content="Free retirement calculator: project your nest egg with monthly contributions, expected return and inflation. See balance at retirement and monthly income it supports.">
+<meta property="og:url" content="https://maniu2475-glitch.github.io/tools-en/retirement-calculator.html">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Retirement Savings Calculator", "url": "https://maniu2475-glitch.github.io/tools-en/retirement-calculator.html", "description": "Free retirement calculator: project your nest egg with monthly contributions, expected return and inflation. See balance at retirement and monthly income it supports.", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html"><span class="logo-icon">&#129520;</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free &bull; Private &bull; Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active">
+    <h1>Retirement Savings Calculator</h1>
+    <p>Find out roughly how large your retirement nest egg will grow to, then see how much monthly income it could realistically support. The projection compounds your current balance and monthly contributions at your expected annual return until your target retirement age, and optionally shows the result in today's purchasing power by subtracting inflation.</p>
+
+    <div class="grid-2">
+      <div>
+        <label>Current age<br><input type="number" id="rc-age" value="30" step="1" min="15" max="90"></label>
+        <label>Retirement age<br><input type="number" id="rc-retire" value="65" step="1" min="16" max="100"></label>
+        <label>Current savings balance ($)<br><input type="number" id="rc-bal" value="25000" step="any"></label>
+        <label>Monthly contribution ($)<br><input type="number" id="rc-monthly" value="500" step="any"></label>
+        <label>Expected annual return (%)<br><input type="number" id="rc-rate" value="7" step="any"></label>
+        <label>Expected inflation (%)<br><input type="number" id="rc-infl" value="2.5" step="any"></label>
+        <label>Withdrawal rate in retirement (%, 4 = rule of 4%)<br><input type="number" id="rc-wd" value="4" step="any"></label>
+        <button id="rc-go">Project My Retirement</button>
+      </div>
+      <div>
+        <h3>Assumptions</h3>
+        <ul>
+          <li>Contributions are added monthly and compound monthly.</li>
+          <li>Returns are nominal; inflation is applied separately.</li>
+          <li>The 4% withdrawal rule is a rough heuristic, not a guarantee.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="result-box" id="out">Results will appear here.</div>
+  </section>
+  <article class="tool-article">
+    <h2>Why a retirement projection is useful</h2>
+    <p>Most people know they should save for retirement but have no idea whether the amount they are saving is anywhere near enough. A retirement calculator turns vague anxiety into a concrete number: this is what your savings are on track to become, and this is the monthly income that amount could plausibly support. Once you can see the gap between the projected nest egg and the amount you actually need, it becomes much easier to decide whether to raise your contribution, retire later, or accept a lower retirement income.</p>
+    <h2>How the projection is calculated</h2>
+    <p>The calculator takes your current balance and compounds it forward to your retirement age at the expected annual return, applying the growth monthly for accuracy. Each monthly contribution is then added on top and itself compounds from the month it is made until retirement. The result is the <strong>projected nominal balance</strong> at retirement. Because a dollar thirty years from now buys far less than a dollar today, the tool also divides that figure by cumulative inflation to show the <strong>real balance in today's dollars</strong>, which is the number you should actually reason with.</p>
+    <p>Finally it multiplies the nominal balance by your chosen withdrawal rate &mdash; commonly 4%, derived from historical safe-withdrawal studies &mdash; to estimate a sustainable annual income, then divides by twelve for a monthly figure. It also reports the total amount you personally contributed versus the amount of growth produced by compounding, which is often the most motivating part of the output: for a typical thirty-year horizon, growth comfortably exceeds contributions.</p>
+    <h2>Worked example</h2>
+    <p>Consider someone aged 30 with $25,000 saved, contributing $500 per month, earning 7% nominal per year with 2.5% inflation, retiring at 65. Contributions total $210,000 over 35 years, but the compounded balance reaches roughly $1.1 million in nominal terms, of which the majority is investment growth rather than money saved. Adjusted for 2.5% inflation over 35 years, that is roughly $460,000 in today's purchasing power. At a 4% withdrawal rate the nominal balance supports about $44,000 per year, or around $3,700 per month, before tax. Seeing those four numbers side by side is far more useful than any single figure.</p>
+    <h2>Important limitations</h2>
+    <p>This is a deterministic projection, not a Monte Carlo simulation. Real markets do not deliver a smooth 7% every year; a bad decade early in retirement can materially reduce sustainable income, which is why sequence-of-returns risk matters. The tool also ignores tax treatment of different account types, employer matching, Social Security or state pension income, and any change in spending patterns in retirement. Earlier retirement ages require a lower withdrawal rate because the money must last longer. Treat the output as a directional planning aid: if the projected balance is far below your goal, the answer is to save more, retire later, or accept less &mdash; and it is better to learn that at 30 than at 63.</p>
+    <p>All calculations happen locally in your browser. Nothing you type is sent anywhere.</p>
+  </article>
+  <section class="related">
+    <h3>Related tools</h3>
+    <ul>
+      <li><a href="compound-interest-calculator.html">Compound Interest Calculator</a></li>
+      <li><a href="savings-calculator.html">Savings Calculator</a></li>
+      <li><a href="roi-calculator.html">ROI Calculator</a></li>
+      <li><a href="inflation-calculator.html">Inflation Calculator</a></li>
+      <li><a href="bmr-calculator.html">BMR Calculator</a></li>
+    </ul>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>&copy; 2026 Online Toolbox &mdash; <a href="index.html">All tools</a> &middot; <a href="all-tools.html">Browse</a></p></div></footer>
+<script>
+
+function n(id){ var v = parseFloat(document.getElementById(id).value); return isFinite(v) ? v : 0; }
+function m(x){ return '$' + Math.round(x).toLocaleString('en-US'); }
+function run(){
+  var age=n('rc-age'), retire=n('rc-retire'), bal=n('rc-bal'), mo=n('rc-monthly');
+  var rate=n('rc-rate')/100/12, infl=n('rc-infl')/100, wd=n('rc-wd')/100;
+  var years = retire - age;
+  var el = document.getElementById('out');
+  if (years <= 0){ el.innerHTML = 'Retirement age must be greater than current age.'; return; }
+  var months = Math.round(years * 12);
+  var fv = bal * Math.pow(1+rate, months);
+  var contribFv = 0;
+  if (rate > 0) contribFv = mo * ((Math.pow(1+rate, months) - 1) / rate);
+  else contribFv = mo * months;
+  var total = fv + contribFv;
+  var contributed = bal + mo * months;
+  var real = total / Math.pow(1+infl, years);
+  var annualIncome = total * wd;
+  var html = '<h3>Projection at age ' + retire + '</h3><ul>';
+  html += '<li>Years until retirement: ' + years + '</li>';
+  html += '<li>Total you contributed: ' + m(contributed) + '</li>';
+  html += '<li>Growth from compounding: ' + m(total - contributed) + '</li>';
+  html += '<li><strong>Projected balance: ' + m(total) + '</strong></li>';
+  html += '<li>In today&rsquo;s dollars (after ' + (infl*100).toFixed(1) + '% inflation): ' + m(real) + '</li>';
+  html += '<li>Sustainable income at ' + (wd*100).toFixed(1) + '% withdrawal: ' + m(annualIncome) + '/year (' + m(annualIncome/12) + '/month)</li>';
+  html += '<li>Monthly income in today&rsquo;s dollars: ' + m(annualIncome/12/Math.pow(1+infl, years)) + '</li>';
+  html += '</ul>';
+  el.innerHTML = html;
+}
+document.getElementById('rc-go').addEventListener('click', run);
+run();
+
+</script>
+</body>
+</html>
