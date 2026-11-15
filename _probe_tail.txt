@@ -1,0 +1,57 @@
+idator</a> &middot; <a href="ratio-calculator.html">Ratio Calculator</a> &middot; <a href="totp-generator.html">TOTP Code Generator (2FA)</a> &middot; <a href="mac-address-lookup.html">MAC Address Lookup &amp; Formatter</a> &middot; <a href="color-contrast-checker.html">Color Contrast Checker (WCAG)</a> &middot; <a href="time-zone-converter.html">Time Zone Converter</a> &middot; <a href="online-calculator.html">Online Calculator</a> &middot; <a href="remove-line-breaks.html">Remove Line Breaks</a> &middot; <a href="credit-card-validator.html">Credit Card Validator</a> &middot; <a href="ratio-calculator.html">Ratio Calculator</a> &middot; <a href="url-encode-decode.html">URL Encoder / Decoder</a> &middot; <a href="html-entities.html">HTML Escape / Unescape</a> &middot; <a href="sha1-hash-generator.html">SHA-1 Hash Generator</a> &middot; <a href="yaml-validator.html">YAML Validator</a></p>
+</main>
+
+  <!-- ===== 侧边栏广告位 ===== -->
+  <aside class="sidebar">
+    <div class="ad-sidebar" id="ad-side">
+      <div class="ad-placeholder-text">Ad slot (300x250)<br>AdSense code goes here</div>
+    </div>
+    <div class="side-card">
+      <h3>Privacy</h3>
+      <p>All tools run locally in your browser. No data is uploaded to any server.</p>
+    </div>
+    <div class="side-card">
+      <h3>All Tools</h3>
+      <ul class="side-list">
+        <li><a href="#tool-json">JSON Formatter</a></li>
+        <li><a href="#tool-base64">Base64</a></li>
+        <li><a href="#tool-url">URL Encode</a></li>
+        <li><a href="#tool-qrcode">QR Code</a></li>
+        <li><a href="#tool-password">Password Gen</a></li>
+        <li><a href="#tool-timestamp">Timestamp</a></li>
+        <li><a href="#tool-color">Colors</a></li>
+        <li><a href="#tool-markdown">Markdown</a></li>
+        <li><a href="#tool-counter">Word Count</a></li>
+        <li><a href="#tool-hash">Hash</a></li>
+        <li><a href="#tool-ip">IP Lookup</a></li>
+        <li><a href="#tool-radix">Radix</a></li>
+        <li><a href="#tool-unit">Units</a></li>
+        <li><a href="#tool-case">Case</a></li>
+        <li><a href="#tool-textsort">文本Dedup/排序</a></li>
+        <li><a href="#tool-csv">CSV→JSON</a></li>
+        <li><a href="#tool-uuid">UUID</a></li>
+        <li><a href="#tool-jwt">JWT</a></li>
+      </ul>
+    </div>
+    <!-- ===== 底部矩形广告位（第二广告位） ===== -->
+    <div class="ad-sidebar ad-rect" id="ad-side-2">
+      <div class="ad-placeholder-text">Ad slot (300x600)</div>
+    </div>
+  </aside>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© 2025 ToolBox · Runs 100% client-side · No data uploaded</p>
+    <p class="footer-links"><a href="#tool-json">JSON</a> · <a href="#tool-base64">Base64</a> · <a href="#tool-qrcode">二维码</a> · <a href="#tool-password">密码</a></p>
+  </div>
+</footer>
+
+<!-- ===== 底部广告位 ===== -->
+<div class="ad-banner" id="ad-bottom">
+  <div class="ad-placeholder-text">Ad slot (responsive banner) — AdSense code goes here</div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

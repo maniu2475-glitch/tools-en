@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Resizer Online - Resize Images Free in Your Browser</title>
+<meta name="description" content="Free online image resizer: resize JPG, PNG, WebP and GIF images to any width or height, keep aspect ratio and download instantly. 100% browser-side, no upload.">
+<meta name="keywords" content="image resizer,resize image online,resize jpg,resize png,image dimensions,scale image,browser image resize">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/image-resizer.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Image Resizer Online - Resize Images Free in Your Browser">
+<meta property="og:description" content="Free online image resizer: resize JPG, PNG, WebP and GIF images to any width or height, keep aspect ratio and download instantly. 100% browser-side, no upload.">
+<meta property="og:url" content="https://maniu2475-glitch.github.io/tools-en/image-resizer.html">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdqAsxVwJGACZjAUIAd8a7S0L/1/1r/HPn1vAmAAGIAJRWYAfwFVAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Image Resizer - Resize Images Online for Free","url":"https://maniu2475-glitch.github.io/tools-en/image-resizer.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="menu">&#9776;</button>
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#129520;</span><span class="logo-text">Online Toolbox</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#tool-json">JSON</a><a href="index.html#tool-base64">Base64</a>
+      <a href="index.html#tool-url">URL</a><a href="index.html#tool-qrcode">QR Code</a>
+      <a href="index.html#tool-hash">Hash</a><a href="all-tools.html">All Tools</a>
+    </nav>
+  </div>
+</header>
+<main class="container" style="max-width:960px;margin:0 auto;padding:24px 16px">
+<h1>Image Resizer - Resize Images Online for Free</h1>
+<p>Resize any image to an exact pixel size without uploading it to a server. This resizer runs entirely inside your browser using the HTML5 canvas API, so your pictures never leave your computer.</p>
+<div class="tool-card" style="background:#fff;border:1px solid #e6e9f0;border-radius:12px;padding:20px;margin:20px 0">
+<h2 style="margin-top:0">Resize an image</h2>
+<input type="file" id="imgFile" accept="image/*" style="margin:8px 0">
+<div style="display:flex;gap:16px;flex-wrap:wrap;margin:12px 0;align-items:flex-end">
+  <label>Width (px)<br><input type="number" id="rw" min="1" style="width:110px"></label>
+  <label>Height (px)<br><input type="number" id="rh" min="1" style="width:110px"></label>
+  <label><input type="checkbox" id="keepRatio" checked> Keep aspect ratio</label>
+  <label>Format<br><select id="fmt"><option value="image/png">PNG</option><option value="image/jpeg">JPEG</option><option value="image/webp">WebP</option></select></label>
+</div>
+<div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-end">
+  <label>Quality <span id="qval">0.92</span><br><input type="range" id="quality" min="0.1" max="1" step="0.01" value="0.92" style="width:160px"></label>
+  <button id="btnResize" style="padding:8px 18px;background:#4f6ef7;color:#fff;border:none;border-radius:8px;cursor:pointer">Resize</button>
+  <button id="btnDl" style="padding:8px 18px;background:#20b26b;color:#fff;border:none;border-radius:8px;cursor:pointer" disabled>Download</button>
+</div>
+<p id="info" style="color:#666;margin-top:12px">Choose an image to begin.</p>
+<canvas id="cv" style="max-width:100%;border:1px solid #e6e9f0;border-radius:8px;margin-top:12px;display:none"></canvas>
+</div>
+<h2>About this tool</h2>
+<p>Resizing images is one of the most common everyday tasks: shrinking a photo before emailing it, fitting a picture into a website header, meeting an upload limit on a job portal, or preparing an avatar for a social network. Most people reach for desktop software or upload private photos to an unknown website, which is slow and often a privacy risk.</p>
+<p>This tool solves that by doing all of the work locally. When you select a file it is read with the browser's built-in <code>FileReader</code> API and drawn onto a canvas element at the size you specify. The canvas is exported back to PNG, JPEG or WebP using <code>toDataURL</code>. Nothing is transmitted over the network, so there is no upload wait, no server-imposed file-size limit, and no chance of your image being logged or reused by a third party.</p>
+<p>Key features: exact width and height inputs, an optional aspect-ratio lock so pictures never look stretched, a quality slider that matters for JPEG and WebP output, and a format selector so you can convert as you resize (a large PNG screenshot can come out as a compact WebP). The canvas preview updates in place and the download button saves the result with a descriptive file name that includes the new dimensions.</p>
+<p>Typical uses include reducing 4000-pixel camera photos down to 1200 pixels for the web, generating thumbnails, preparing images for Markdown documents, and fitting pictures into a strict pixel budget. Because scaling happens in the browser with high-quality smoothing enabled, results look clean for both upscaling and downscaling. If you need to shrink file size rather than pixel dimensions, try the <a href="image-compressor.html">image compressor</a>; for format conversion without resizing, see <a href="png-to-jpg.html">PNG to JPG</a>.</p>
+<h3>Frequently asked questions</h3>
+<div style="line-height:1.9"><details><summary><strong>Are my images uploaded anywhere?</strong></summary><p>No. All decoding, resizing and encoding happens in your browser. You can disconnect from the internet after the page loads and the tool still works.</p></details>
+<details><summary><strong>What is the maximum image size?</strong></summary><p>It depends on your browser's memory, but images up to roughly 50 megapixels usually work. Very large panoramas may be slow on older phones.</p></details>
+<details><summary><strong>Does resizing reduce file size?</strong></summary><p>Usually yes, especially with JPEG or WebP output. Lowering the quality slider also lowers file size; WebP at about 0.8 quality gives the smallest files.</p></details>
+<details><summary><strong>Can I resize to exact dimensions such as 1920x1080?</strong></summary><p>Yes. Type the width and height you need, uncheck "keep aspect ratio" if the target ratio differs, then press Resize.</p></details></div>
+<h3>Related tools</h3><ul class="related-list" style="columns:2;line-height:1.9"><li><a href="image-compressor.html">Image Compressor</a></li><li><a href="png-to-jpg.html">PNG to JPG</a></li><li><a href="json-formatter.html">JSON Formatter</a></li><li><a href="base64.html">Base64 Encoder</a></li><li><a href="html-entities.html">HTML Entities</a></li><li><a href="url-encode-decode.html">URL Encoder</a></li><li><a href="word-counter.html">Word Counter</a></li><li><a href="text-diff.html">Text Diff</a></li></ul>
+</main>
+<footer class="site-footer"><div class="container">
+<p>&copy; 2026 Online Toolbox &middot; <a href="index.html">Home</a> &middot; <a href="all-tools.html">All Tools</a> &middot; <a href="sitemap.xml">Sitemap</a></p>
+<p>All tools run 100% in your browser. No uploads, no signup, no tracking of your content.</p>
+</div></footer>
+<script>
+document.addEventListener('DOMContentLoaded',function(){var m=document.getElementById('menuToggle');if(m){m.addEventListener('click',function(){var n=document.getElementById('mainNav');if(n)n.classList.toggle('open');});}});
+(function(){
+var $=function(i){return document.getElementById(i)};
+var img=null,outUrl=null,origW=0,origH=0;
+var file=$('imgFile'),rw=$('rw'),rh=$('rh'),keep=$('keepRatio'),cv=$('cv'),info=$('info'),dl=$('btnDl');
+$('quality').addEventListener('input',function(){$('qval').textContent=this.value});
+file.addEventListener('change',function(){
+  var f=file.files[0];if(!f)return;
+  var r=new FileReader();
+  r.onload=function(e){var im=new Image();im.onload=function(){
+    img=im;origW=im.naturalWidth;origH=im.naturalHeight;
+    rw.value=origW;rh.value=origH;
+    info.textContent='Original: '+origW+'x'+origH+' px, '+(f.size/1024).toFixed(1)+' KB ('+f.type+')';
+  };im.src=e.target.result;};
+  r.readAsDataURL(f);
+});
+rw.addEventListener('input',function(){if(keep.checked&&img){rh.value=Math.round(rw.value*origH/origW);}});
+rh.addEventListener('input',function(){if(keep.checked&&img){rw.value=Math.round(rh.value*origW/origH);}});
+function doResize(){
+  if(!img){alert('Please choose an image first.');return;}
+  var w=Math.max(1,parseInt(rw.value,10)||origW),h=Math.max(1,parseInt(rh.value,10)||origH);
+  cv.width=w;cv.height=h;cv.style.display='block';
+  var ctx=cv.getContext('2d');ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
+  ctx.clearRect(0,0,w,h);
+  var fmt=$('fmt').value;
+  if(fmt==='image/jpeg'){ctx.fillStyle='#fff';ctx.fillRect(0,0,w,h);}
+  ctx.drawImage(img,0,0,w,h);
+  outUrl=cv.toDataURL(fmt,parseFloat($('quality').value));
+  dl.disabled=false;
+  var bytes=Math.round((outUrl.length-outUrl.indexOf(',')-1)*3/4);
+  info.textContent='Resized to '+w+'x'+h+' px, about '+(bytes/1024).toFixed(1)+' KB';
+}
+$('btnResize').addEventListener('click',doResize);
+dl.addEventListener('click',function(){
+  if(!outUrl)return;var a=document.createElement('a');
+  var ext=$('fmt').value.split('/')[1].replace('jpeg','jpg');
+  a.href=outUrl;a.download='resized-'+cv.width+'x'+cv.height+'.'+ext;
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+});
+})();
+</script>
+</body>
+</html>

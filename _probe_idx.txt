@@ -1,0 +1,31 @@
+/a>
+      <a href="#tool-password" data-tool="password">密码</a>
+      <a href="#tool-timestamp" data-tool="timestamp">时间戳</a>
+      <a href="#tool-color" data-tool="color">颜色</a>
+      <a href="#tool-markdown" data-tool="markdown">Markdown</a>
+      <a href="#tool-counter" data-tool="counter">字数</a>
+      <a href="#tool-hash" data-tool="hash">哈希</a>
+      <a href="#tool-ip" data-tool="ip">IP查询</a>
+      <a href="#tool-radix" data-tool="radix">Radix</a>
+      <a href="#tool-unit" data-tool="unit">Units</a>
+      <a href="#tool-case" data-tool="case">大小写</a>
+      <a href="#tool-textsort" data-tool="textsort">文本处理</a>
+      <a href="#tool-csv" data-tool="csv">CSV转JSON</a>
+      <a href="#tool-uuid" data-tool="uuid">UUID</a>
+      <a href="#tool-jwt" data-tool="jwt">JWT解码</a>
+    </nav>
+  </div>
+</header>
+
+<div class="layout container">
+  <main class="content" id="content">
+
+    <!-- 首页简介 -->
+    <section class="tool-panel active" id="tool-home">
+      <h1>Free Online Toolbox</h1>
+      <p class="intro">23 handy online tools that run <strong>entirely in your browser</strong> — fast, private, and free. No data ever leaves your device.</p>
+      <div class="home-grid">
+        <a class="home-card" href="#tool-json"><div class="hc-icon">🧩</div><div class="hc-title">JSON Formatter / Validator</div><div class="hc-desc">格式化、压缩、校验错误行号</div></a>
+        <a class="home-card" href="#tool-base64"><div class="hc-icon">🔠</div><div class="hc-title">Base64 Encode / Decode</div><div class="hc-desc">支持中文与任意文本</div></a>
+        <a class="home-card" href="#tool-url"><div class="hc-icon">🔗</div><div class="hc-title">URL Encode / Decode</div><div class="hc-desc">encodeURIComponent / decodeURI</div></a>
+        <a class="home-card" href="#tool-qrcode"><div class="hc-icon">📱</div><div class="hc-t

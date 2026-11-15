@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JSON Escape / Unescape Online - Escape JSON Strings Free</title>
+<meta name="description" content="Free online JSON escape and unescape tool: convert text to escaped JSON string literals and decode escaped sequences back to plain text. Handles quotes, backslashes, unicode and newlines.">
+<meta name="keywords" content="json escape,json unescape,escape json string,json stringify,escape quotes,decode json string,json string literal">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/json-escape.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JSON Escape / Unescape Online - Escape JSON Strings Free">
+<meta property="og:description" content="Free online JSON escape and unescape tool: convert text to escaped JSON string literals and decode escaped sequences back to plain text. Handles quotes, backslashes, unicode and newlines.">
+<meta property="og:url" content="https://maniu2475-glitch.github.io/tools-en/json-escape.html">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdqAsxVwJGACZjAUIAd8a7S0L/1/1r/HPn1vAmAAGIAJRWYAfwFVAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"JSON Escape / Unescape - Convert Text to JSON Strings","url":"https://maniu2475-glitch.github.io/tools-en/json-escape.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="menu">&#9776;</button>
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#129520;</span><span class="logo-text">Online Toolbox</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#tool-json">JSON</a><a href="index.html#tool-base64">Base64</a>
+      <a href="index.html#tool-url">URL</a><a href="index.html#tool-qrcode">QR Code</a>
+      <a href="index.html#tool-hash">Hash</a><a href="all-tools.html">All Tools</a>
+    </nav>
+  </div>
+</header>
+<main class="container" style="max-width:960px;margin:0 auto;padding:24px 16px">
+<h1>JSON Escape / Unescape - Convert Text to JSON Strings</h1>
+<p>Turn any text into a valid JSON string literal, or decode an escaped JSON string back into readable text. Handy when you need to embed JSON inside code, config files or another JSON document.</p>
+<div class="tool-card" style="background:#fff;border:1px solid #e6e9f0;border-radius:12px;padding:20px;margin:20px 0">
+<h2 style="margin-top:0">Input</h2>
+<textarea id="in" rows="8" style="width:100%;box-sizing:border-box;font-family:ui-monospace,Consolas,monospace;padding:10px;border:1px solid #ccd;border-radius:8px" placeholder='Type or paste text here. Example: He said "hello" &amp; left.'></textarea>
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin:12px 0">
+  <button id="esc" style="padding:8px 18px;background:#4f6ef7;color:#fff;border:none;border-radius:8px;cursor:pointer">Escape &rarr; JSON</button>
+  <button id="unesc" style="padding:8px 18px;background:#20b26b;color:#fff;border:none;border-radius:8px;cursor:pointer">&larr; Unescape</button>
+  <button id="cp" style="padding:8px 18px;background:#eef1ff;color:#334;border:1px solid #ccd;border-radius:8px;cursor:pointer">Copy output</button>
+  <button id="clr" style="padding:8px 18px;background:#f6f7fb;color:#334;border:1px solid #ccd;border-radius:8px;cursor:pointer">Clear</button>
+</div>
+<label><input type="checkbox" id="wrap" checked> Wrap output in double quotes (full JSON string literal)</label>
+<h2>Output</h2>
+<textarea id="out" rows="8" readonly style="width:100%;box-sizing:border-box;font-family:ui-monospace,Consolas,monospace;padding:10px;border:1px solid #ccd;border-radius:8px;background:#fafbff"></textarea>
+<p id="stat" style="color:#666"></p>
+</div>
+<h2>About this tool</h2>
+<p>JSON string literals have strict escaping rules. A double quote inside the text must be written as <code>\"</code>, a backslash as <code>\\</code>, and control characters must be encoded - a newline becomes <code>\n</code>, a tab <code>\t</code>, and any non-ASCII character may be written as a <code>\uXXXX</code> escape. Whenever you need to place a piece of text inside a JSON document, a JavaScript string, a log format or a database column typed as JSON, you have to apply those rules correctly or the parser will reject the whole document.</p>
+<p>This tool handles both directions. The Escape button takes whatever you paste and produces a valid JSON string literal, using the browser's native <code>JSON.stringify</code> so the output is guaranteed to be spec-compliant. The Unescape button takes an escaped string - with or without the surrounding quotes - and turns it back into readable text, decoding unicode escapes, newlines, tabs and escaped quotes.</p>
+<p>Common real-world uses: preparing a snippet of HTML or SQL for embedding in a JSON config file, escaping a Windows file path (<code>C:\Users\name</code>) so it can live inside JSON, cleaning up API responses that arrive with escaped bodies, or reading a stack trace that has been double-encoded. Because the escaping is performed with the platform's own serialiser, characters such as emoji and accented letters produce identical results to what JavaScript, Python, Go and most other languages expect.</p>
+<p>Note that escaping is not the same as minifying: to re-indent or validate a whole JSON document use the <a href="json-formatter.html">JSON formatter</a>; to turn JSON into query-friendly CSV use <a href="json-to-csv.html">JSON to CSV</a>.</p>
+<h3>Frequently asked questions</h3>
+<div style="line-height:1.9"><details><summary><strong>What is the difference between escaping and encoding?</strong></summary><p>Escaping rewrites characters so they are legal inside a JSON string (quotes, backslashes, control characters). Encoding (such as Base64 or URL encoding) transforms the whole byte stream for a different transport.</p></details>
+<details><summary><strong>Should I keep the surrounding double quotes?</strong></summary><p>Keep them if you are pasting the result into a JSON document as a string value. Remove them if you need just the inner content.</p></details>
+<details><summary><strong>Does it handle unicode and emoji?</strong></summary><p>Yes. Escaping uses JSON.stringify, which outputs UTF-8 characters directly or \uXXXX sequences depending on the character.</p></details>
+<details><summary><strong>Is my data sent to a server?</strong></summary><p>No. The conversion runs entirely in JavaScript on this page.</p></details></div>
+<h3>Related tools</h3><ul class="related-list" style="columns:2;line-height:1.9"><li><a href="json-formatter.html">JSON Formatter</a></li><li><a href="json-to-csv.html">JSON to CSV</a></li><li><a href="base64.html">Base64 Encoder</a></li><li><a href="image-compressor.html">Image Compressor</a></li><li><a href="png-to-jpg.html">PNG to JPG</a></li><li><a href="html-entities.html">HTML Entities</a></li><li><a href="url-encode-decode.html">URL Encoder</a></li><li><a href="word-counter.html">Word Counter</a></li><li><a href="text-diff.html">Text Diff</a></li></ul>
+</main>
+<footer class="site-footer"><div class="container">
+<p>&copy; 2026 Online Toolbox &middot; <a href="index.html">Home</a> &middot; <a href="all-tools.html">All Tools</a> &middot; <a href="sitemap.xml">Sitemap</a></p>
+<p>All tools run 100% in your browser. No uploads, no signup, no tracking of your content.</p>
+</div></footer>
+<script>
+document.addEventListener('DOMContentLoaded',function(){var m=document.getElementById('menuToggle');if(m){m.addEventListener('click',function(){var n=document.getElementById('mainNav');if(n)n.classList.toggle('open');});}});
+(function(){
+var $=function(i){return document.getElementById(i)};
+function esc(s,wrap){
+  var o=JSON.stringify(s);
+  if(!wrap&&o.length>=2)o=o.slice(1,-1);
+  return o;
+}
+function unesc(s){
+  var t=s.trim();
+  if(t.length>=2&&t[0]==='"'&&t[t.length-1]==='"'){try{return JSON.parse(t);}catch(e){}}
+  t=t.replace(/^"+|"+$/g,'');
+  try{return JSON.parse('"'+t.replace(/"/g,'\\"').replace(/\\"/g,'\\"')+'"');}
+  catch(e){
+    return t.replace(/\\u([0-9a-fA-F]{4})/g,function(m,h){return String.fromCharCode(parseInt(h,16));})
+            .replace(/\\n/g,'\n').replace(/\\t/g,'\t').replace(/\\r/g,'\r')
+            .replace(/\\b/g,'\b').replace(/\\f/g,'\f')
+            .replace(/\\"/g,'"').replace(/\\\\/g,'\\');
+  }
+}
+function upd(){
+  var v=$('out').value;$('stat').textContent='Output length: '+v.length+' characters';
+}
+$('esc').addEventListener('click',function(){$('out').value=esc($('in').value,$('wrap').checked);upd();});
+$('unesc').addEventListener('click',function(){var src=$('in').value;$('out').value=unesc(src);upd();});
+$('cp').addEventListener('click',function(){var o=$('out');o.select();
+  var ok=false;try{ok=document.execCommand('copy');}catch(e){}
+  if(navigator.clipboard&&!ok){navigator.clipboard.writeText(o.value);}
+  $('stat').textContent='Copied to clipboard.';});
+$('clr').addEventListener('click',function(){$('in').value='';$('out').value='';$('stat').textContent='';});
+})();
+</script>
+</body>
+</html>
