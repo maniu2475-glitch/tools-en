@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRC32 Checksum Calculator - Verify File &amp; Text Integrity</title>
+<meta name="description" content="Compute the CRC-32 checksum of any text or file in your browser. Instant hex and decimal output, file support, and an explanation of how CRC-32 detects corruption.">
+<meta name="keywords" content="crc32, crc32 checksum, crc32 calculator, checksum online, file integrity check, crc32 hex, cyclic redundancy check">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/crc32-checksum.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CRC32 Checksum Calculator">
+<meta property="og:description" content="Compute the CRC-32 checksum of any text or file in your browser. Instant hex and decimal output, file support, and an explanation of how CRC-32 detects corruption.">
+<meta property="og:url" content="https://maniu2475-glitch.github.io/tools-en/crc32-checksum.html">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "CRC32 Checksum Calculator", "url": "https://maniu2475-glitch.github.io/tools-en/crc32-checksum.html", "description": "Compute the CRC-32 checksum of any text or file in your browser. Instant hex and decimal output, file support, and an explanation of how CRC-32 detects corruption.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="menu">&#9776;</button>
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#129520;</span><span class="logo-text">Online Toolbox</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#tool-json">JSON</a>
+      <a href="index.html#tool-base64">Base64</a>
+      <a href="index.html#tool-url">URL</a>
+      <a href="index.html#tool-qrcode">QR Code</a>
+      <a href="index.html#tool-password">Password</a>
+      <a href="index.html#tool-timestamp">Timestamp</a>
+      <a href="index.html#tool-color">Color</a>
+      <a href="all-tools.html">All Tools</a>
+    </nav>
+  </div>
+</header>
+<main class="container" id="home">
+  <h1>CRC32 Checksum Calculator</h1>
+  <p class="lead">Compute the CRC-32 (IEEE 802.3) checksum of text or a file, in hex and decimal, without uploading anything. The page also shows a SHA-256 digest for stronger integrity checks.</p>
+  <section class="tool-card">
+    <div class="field">
+      <label for="crcIn">Text input</label>
+      <textarea id="crcIn" rows="6" spellcheck="false" placeholder="Type or paste text here..."></textarea>
+    </div>
+    <div class="field">
+      <label for="crcFile">Or choose a file (read locally, never uploaded)</label>
+      <input type="file" id="crcFile">
+    </div>
+    <div class="btn-row">
+      <button class="btn primary" id="crcRun">Compute CRC-32</button>
+      <button class="btn" id="crcCopy">Copy</button>
+      <button class="btn" id="crcClear">Clear</button>
+    </div>
+    <table class="result-table">
+      <tbody>
+        <tr><th>CRC-32 (hex)</th><td id="crcHex">&mdash;</td></tr>
+        <tr><th>CRC-32 (decimal)</th><td id="crcDec">&mdash;</td></tr>
+        <tr><th>SHA-256</th><td id="crcSha">&mdash;</td></tr>
+        <tr><th>Size</th><td id="crcSize">&mdash;</td></tr>
+      </tbody>
+    </table>
+    <p class="hint" id="crcHint"></p>
+  </section>
+  <section class="explain">
+    <h2>What a CRC actually checks</h2>
+    <p>CRC stands for Cyclic Redundancy Check. The algorithm treats the input bits as one long polynomial and divides them by a fixed generator polynomial, keeping only the remainder as the checksum. CRC-32 as used here applies the reflected IEEE 802.3 polynomial <code>0xEDB88320</code>, starts from <code>0xFFFFFFFF</code> and XORs the final result, which is the variant behind ZIP, PNG, Ethernet frames and gzip. Because the maths is polynomial division over GF(2), any single-bit error is guaranteed to be caught, as is any burst error up to 32 bits long. For a random corruption the chance of an undetected error is roughly one in four billion.</p>
+    <h2>CRC-32 versus cryptographic hashes</h2>
+    <p>A CRC is built to catch accidents, not attacks. It is linear, so an attacker can craft arbitrary changes that keep the same checksum &mdash; it is trivially easy to fabricate a collision. MD5 and SHA-256 are designed to resist that: they are non-linear, and SHA-256 has no known practical collisions. The practical rule is CRC-32 for speed on files and network frames, and a cryptographic hash when integrity must be defended against a malicious party. That is why this page shows all three at once: CRC-32 tells you quickly whether a download is intact, while SHA-256 lets you compare against a published release file.</p>
+    <h2>Where you will meet CRC-32</h2>
+    <p>Every entry in a ZIP central directory stores a CRC-32 so archivers can spot truncation. PNG chunks each carry a CRC-32 over their type and data, which is why a corrupted PNG often fails to decode rather than showing garbage pixels. Ethernet frames, Bluetooth packets and many ROM formats use it as well. Web tools often show it in uppercase hex without the <code>0x</code> prefix, so the value here is displayed in both styles &mdash; compare only the eight digits. For a faster modern alternative, the SHA-256 generator gives a cryptographic digest; for quick text integrity checks the MD5 generator is also available.</p>
+  </section>
+  <section class="related">
+    <h2>Related tools</h2>
+    <ul>
+      <li><a href="sha256-hash-generator.html">Sha256 Hash Generator</a></li>
+      <li><a href="sha1-hash-generator.html">Sha1 Hash Generator</a></li>
+      <li><a href="base64.html">Base64</a></li>
+      <li><a href="hex-to-text.html">Hex To Text</a></li>
+    </ul>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; 2026 Online Toolbox &middot; <a href="index.html">Home</a> &middot; <a href="all-tools.html">All Tools</a> &middot; <a href="sitemap.xml">Sitemap</a></p>
+    <p class="muted">All tools run locally in your browser. No data is uploaded.</p>
+  </div>
+</footer>
+
+<script>
+var TABLE=(function(){
+  var t=new Uint32Array(256);
+  for(var n=0;n<256;n++){var c=n;for(var k=0;k<8;k++){c=(c&1)?(0xEDB88320^(c>>>1)):(c>>>1);}t[n]=c>>>0;}
+  return t;
+})();
+function crc32(bytes){
+  var c=0xFFFFFFFF;
+  for(var i=0;i<bytes.length;i++){c=(c>>>8)^TABLE[(c^bytes[i])&0xFF];}
+  return (c^0xFFFFFFFF)>>>0;
+}
+function hex8(n){var s=(n>>>0).toString(16);while(s.length<8)s='0'+s;return s;}
+function toHex(bytes){var s='';for(var i=0;i<bytes.length;i++){var h=bytes[i].toString(16);if(h.length<2)h='0'+h;s+=h;}return s;}
+var last='';
+function render(name,bytes){
+  var c=crc32(bytes);
+  document.getElementById('crcHex').textContent='0x'+hex8(c)+'  ('+hex8(c).toUpperCase()+')';
+  document.getElementById('crcDec').textContent=c;
+  document.getElementById('crcSize').textContent=bytes.length.toLocaleString()+' bytes';
+  last=hex8(c);
+  var sh=document.getElementById('crcSha');
+  sh.textContent='computing...';
+  if(window.crypto&&crypto.subtle){
+    crypto.subtle.digest('SHA-256',bytes).then(function(b){
+      sh.textContent=toHex(new Uint8Array(b));
+    });
+  } else { sh.textContent='crypto.subtle unavailable (use https)'; }
+  document.getElementById('crcHint').textContent='CRC-32 (IEEE 802.3) of '+name+'.';
+}
+document.getElementById('crcRun').onclick=function(){
+  render('text input',new TextEncoder().encode(document.getElementById('crcIn').value));
+};
+document.getElementById('crcFile').onchange=function(){
+  var f=this.files[0];if(!f)return;
+  var r=new FileReader();
+  r.onload=function(){render(f.name,new Uint8Array(r.result));};
+  r.readAsArrayBuffer(f);
+};
+document.getElementById('crcCopy').onclick=function(){if(last&&navigator.clipboard)navigator.clipboard.writeText(last);};
+document.getElementById('crcClear').onclick=function(){
+  document.getElementById('crcIn').value='';document.getElementById('crcFile').value='';
+  ['crcHex','crcDec','crcMd5','crcSha','crcSize'].forEach(function(id){document.getElementById(id).innerHTML='&mdash;';});
+  last='';document.getElementById('crcHint').textContent='Cleared.';
+};
+document.getElementById('crcIn').addEventListener('input',function(){
+  if(this.value)render('text input',new TextEncoder().encode(this.value));
+});
+</script>
+</body>
+</html>

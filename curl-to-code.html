@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>cURL to JavaScript fetch Converter - Online &amp; Free</title>
+<meta name="description" content="Convert cURL commands into JavaScript fetch or async/await code instantly. Paste a curl line from DevTools and get runnable JS in your browser. No data leaves your machine.">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/curl-to-code.html">
+<meta property="og:title" content="cURL to JavaScript fetch Converter - Online &amp; Free">
+<meta property="og:description" content="Convert cURL commands into JavaScript fetch or async/await code instantly. Paste a curl line from DevTools and get runnable JS in your browser. No data leaves your machine.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://maniu2475-glitch.github.io/tools-en/curl-to-code.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="menu">&#9776;</button>
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#129520;</span><span class="logo-text">Online Toolbox</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#tool-json">JSON</a>
+      <a href="index.html#tool-base64">Base64</a>
+      <a href="index.html#tool-url">URL</a>
+      <a href="index.html#tool-qrcode">QR Code</a>
+      <a href="index.html#tool-password">Password</a>
+      <a href="index.html#tool-timestamp">Timestamp</a>
+      <a href="index.html#tool-color">Color</a>
+      <a href="all-tools.html">All Tools</a>
+    </nav>
+  </div>
+</header>
+<main class="container" id="home">
+  <h1>cURL to JavaScript Converter</h1>
+  <p class="lead">Paste a cURL command copied from your browser DevTools or API docs and get ready-to-run JavaScript fetch code.</p>
+  <section class="tool-card">
+    <textarea id="curlIn" rows="7" spellcheck="false" placeholder="curl 'https://api.example.com/v1/items' -H 'Authorization: Bearer TOKEN' -H 'Content-Type: application/json' --data-raw '{"q":"hello"}'"></textarea>
+    <div class="btn-row">
+      <label class="lbl">Output style
+        <select id="curlStyle">
+          <option value="await">async / await</option>
+          <option value="then">.then() chain</option>
+          <option value="node">Node.js fetch</option>
+        </select>
+      </label>
+      <button class="btn" id="curlGo">Convert</button>
+      <button class="btn btn-ghost" id="curlCopy">Copy code</button>
+    </div>
+    <pre id="curlOut" class="output" style="min-height:120px">Your JavaScript will appear here.</pre>
+    <div id="curlErr" class="err"></div>
+  </section>
+  <section class="explain">
+    <h2>Why convert cURL to fetch?</h2>
+    <p>cURL is the universal language for describing an HTTP request, and almost every API documentation page ships a copy-paste <code>curl</code> example. That is convenient for the terminal, but the moment you want to reproduce the same call in a browser front-end or a Node script you have to translate flags into a JavaScript object by hand: <code>-H</code> becomes a <code>headers</code> map, <code>-X POST</code> becomes <code>method</code>, and <code>--data-raw</code> becomes <code>body</code> with the right content type. Doing that manually for a long request with cookies, auth headers and JSON payloads is slow and easy to get wrong &mdash; a single quoting slip produces a runtime error that can take minutes to trace.</p>
+    <p>This converter reads the command the same way a shell would: it tokenises respecting single quotes, double quotes and backslash escapes, then maps the well-known flags. <code>-H</code> or <code>--header</code> collects headers, <code>-X</code> or <code>--request</code> sets the method, <code>-d</code>, <code>--data</code>, <code>--data-raw</code>, <code>--data-binary</code> and <code>--json</code> build the body, <code>-u</code> becomes a Basic auth header, and <code>-b</code> or <code>--cookie</code> becomes a <code>Cookie</code> header. If the data looks like JSON, the output is embedded as a JSON string literal so the generated code is immediately valid.</p>
+    <h2>Reading the generated code</h2>
+    <p>Three styles are offered. The <strong>async / await</strong> form is the one most people want in modern code: it produces an immediately-invoked async function with a <code>try/catch</code> so you can run it straight from the console. The <strong>.then() chain</strong> style suits older codebases or scripts that keep everything flat. The <strong>Node.js</strong> style adds an explicit <code>response.ok</code> check and prints the status, which is handy when debugging a backend integration.</p>
+    <p>Two habits worth keeping: first, treat every generated snippet as a starting point and move secrets into environment variables rather than leaving a bearer token in a committed file. Second, remember that browsers enforce CORS, so a request that works in your terminal may still be blocked in a page &mdash; that is a server policy issue, not a bug in the code. If you are reversing the other direction, compare payloads with the <a href="json-formatter.html">JSON formatter</a>, and decode tokens with the <a href="jwt-decoder.html">JWT decoder</a>.</p>
+  </section>
+  <section class="related">
+    <h2>Related tools</h2>
+    <ul>
+      <li><a href="json-formatter.html">JSON Formatter</a></li>
+      <li><a href="url-encode-decode.html">URL Encoder &amp; Decoder</a></li>
+      <li><a href="jwt-decoder.html">JWT Decoder</a></li>
+      <li><a href="regex-tester.html">Regex Tester</a></li>
+    </ul>
+  </section>
+<script>
+(function(){
+  function tokenize(s){
+    var out=[], cur='', q=null, i=0;
+    while(i<s.length){
+      var c=s[i];
+      if(q){
+        if(c==='\\' && q==='"' && i+1<s.length){ cur+=s[i+1]; i+=2; continue; }
+        if(c===q){ q=null; i++; continue; }
+        cur+=c; i++; continue;
+      }
+      if(c==='"'||c==="'"){ q=c; i++; continue; }
+      if(/\s/.test(c)){ if(cur){out.push(cur);cur='';} i++; continue; }
+      if(c==='\\' && i+1<s.length){ cur+=s[i+1]; i+=2; continue; }
+      cur+=c; i++;
+    }
+    if(cur) out.push(cur);
+    return out;
+  }
+  function parse(cmd){
+    var t=tokenize(cmd.trim());
+    if(t[0]==='curl') t.shift();
+    var r={url:'', method:'', headers:{}, body:null};
+    var noVal={'-L':1,'--location':1,'-s':1,'--silent':1,'-k':1,'--insecure':1,'-v':1,'--verbose':1,'-i':1,'-g':1,'--compressed':1};
+    for(var i=0;i<t.length;i++){
+      var a=t[i], v=t[i+1];
+      if(a==='-H'||a==='--header'){ var p=v||''; var k=p.indexOf(':'); if(k>0) r.headers[p.slice(0,k).trim()]=p.slice(k+1).trim(); i++; }
+      else if(a==='-X'||a==='--request'){ r.method=(v||'').toUpperCase(); i++; }
+      else if(a==='-d'||a==='--data'||a==='--data-raw'||a==='--data-binary'||a==='--data-ascii'){ r.body=v||''; if(!r.method) r.method='POST'; i++; }
+      else if(a==='--json'){ r.body=v||''; if(!r.headers['Content-Type']) r.headers['Content-Type']='application/json'; if(!r.method) r.method='POST'; i++; }
+      else if(a==='-u'||a==='--user'){ try{ r.headers['Authorization']='Basic '+btoa(v||''); }catch(e){} i++; }
+      else if(a==='-b'||a==='--cookie'){ r.headers['Cookie']=v||''; i++; }
+      else if(a==='-A'||a==='--user-agent'){ r.headers['User-Agent']=v||''; i++; }
+      else if(a==='-e'||a==='--referer'){ r.headers['Referer']=v||''; i++; }
+      else if(noVal[a]){ continue; }
+      else if(a.charAt(0)!=='-' && !r.url){ r.url=a; }
+    }
+    return r;
+  }
+  function jsq(s){ return JSON.stringify(String(s)); }
+  function build(r, style){
+    if(!r.url) throw new Error('No URL found in the command.');
+    var hs=Object.keys(r.headers);
+    var hdr = hs.length ? '{\n' + hs.map(function(k){ return "      " + JSON.stringify(k) + ': ' + jsq(r.headers[k]); }).join(',\n') + '\n    }' : null;
+    var opts = [];
+    if(r.method && r.method!=='GET') opts.push('method: ' + jsq(r.method));
+    if(hdr) opts.push('headers: ' + hdr);
+    if(r.body!==null) opts.push('body: ' + jsq(r.body));
+    var optStr = opts.length ? '{\n    ' + opts.join(',\n    ') + '\n  }' : '{}';
+    var url = jsq(r.url);
+    if(style==='then'){
+      return 'fetch(' + url + ', ' + optStr + ')\n  .then(function (res) {\n    if (!res.ok) throw new Error("HTTP " + res.status);\n    return res.json();\n  })\n  .then(function (data) {\n    console.log(data);\n  })\n  .catch(function (err) {\n    console.error(err);\n  });';
+    }
+    var body = style==='node'
+      ? 'const res = await fetch(' + url + ', ' + optStr + ');\n    console.log(res.status);\n    const data = await res.json();\n    console.log(data);'
+      : 'const res = await fetch(' + url + ', ' + optStr + ');\n    if (!res.ok) throw new Error("HTTP " + res.status);\n    const data = await res.json();\n    console.log(data);';
+    return '(async () => {\n  try {\n    ' + body + '\n  } catch (err) {\n    console.error(err);\n  }\n})();';
+  }
+  var out=document.getElementById('curlOut'), err=document.getElementById('curlErr');
+  function go(){
+    err.textContent='';
+    try{
+      var r=parse(document.getElementById('curlIn').value);
+      out.textContent=build(r, document.getElementById('curlStyle').value);
+    }catch(e){ out.textContent=''; err.textContent=e.message; }
+  }
+  document.getElementById('curlGo').onclick=go;
+  document.getElementById('curlCopy').onclick=function(){ if(navigator.clipboard) navigator.clipboard.writeText(out.textContent); };
+})();
+</script>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; 2026 Online Toolbox &middot; All tools run locally in your browser.</p>
+    <p><a href="index.html">Home</a> &middot; <a href="all-tools.html">All Tools</a> &middot; <a href="privacy.html">Privacy</a></p>
+  </div>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>

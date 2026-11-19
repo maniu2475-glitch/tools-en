@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASCII Table - Character Codes, Hex, Binary &amp; Decimal Chart</title>
+<meta name="description" content="Searchable ASCII and extended Latin-1 character table with decimal, hex, binary, octal and HTML entity values. Copy any code instantly. Free, offline, in-browser.">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/ascii-table.html">
+<meta property="og:title" content="ASCII Table - Character Codes, Hex, Binary &amp; Decimal Chart">
+<meta property="og:description" content="Searchable ASCII and extended Latin-1 character table with decimal, hex, binary, octal and HTML entity values. Copy any code instantly. Free, offline, in-browser.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://maniu2475-glitch.github.io/tools-en/ascii-table.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="menu">&#9776;</button>
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#129520;</span><span class="logo-text">Online Toolbox</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#tool-json">JSON</a>
+      <a href="index.html#tool-base64">Base64</a>
+      <a href="index.html#tool-url">URL</a>
+      <a href="index.html#tool-qrcode">QR Code</a>
+      <a href="index.html#tool-password">Password</a>
+      <a href="index.html#tool-timestamp">Timestamp</a>
+      <a href="index.html#tool-color">Color</a>
+      <a href="all-tools.html">All Tools</a>
+    </nav>
+  </div>
+</header>
+<main class="container" id="home">
+  <h1>ASCII Table &amp; Character Code Lookup</h1>
+  <p class="lead">Search any ASCII or Latin-1 character and read its decimal, hexadecimal, octal, binary and HTML entity values side by side.</p>
+  <section class="tool-card">
+    <input type="text" id="asciiSearch" placeholder="Type a character, a name, or a code (e.g. 65, A, space)" />
+    <div class="btn-row">
+      <label class="lbl"><input type="checkbox" id="asciiExt" checked> Include extended (128-255)</label>
+      <label class="lbl"><input type="checkbox" id="asciiCtrl"> Show control characters</label>
+    </div>
+    <div style="max-height:420px;overflow:auto">
+      <table class="result-table" id="asciiTable">
+        <thead><tr><th>Dec</th><th>Hex</th><th>Oct</th><th>Binary</th><th>Char</th><th>HTML</th><th>Name</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="hint" id="asciiCount"></p>
+  </section>
+  <section class="explain">
+    <h2>The ASCII table in one paragraph</h2>
+    <p>ASCII &mdash; the American Standard Code for Information Interchange &mdash; was published in 1963 as a seven-bit character encoding and it remains the substrate under nearly every text format used today. Codes 0 to 31 plus 127 are non-printing control characters inherited from teletype machines: <code>0x0A</code> is line feed, <code>0x0D</code> is carriage return, <code>0x09</code> is tab, and the notorious <code>0x07</code> rings an actual bell on old terminals. Codes 32 to 126 are the printable set that starts with space, runs through digits and punctuation, and ends with the tilde at 126. The ordering is not arbitrary: uppercase letters occupy 65 to 90 and lowercase occupy 97 to 122, a gap of exactly 32, so flipping bit 5 of a letter toggles its case &mdash; a trick still used in fast text algorithms.</p>
+    <h2>Why hexadecimal and binary matter</h2>
+    <p>Developers meet ASCII in three different costumes. Protocols and file formats usually speak hex, so a space shows up as <code>0x20</code> and a newline as <code>0x0A</code>; that is what you will see in a packet capture or a hex editor. Decimal codes appear in HTML numeric entities such as <code>&amp;#65;</code> and in programming-language escapes. Binary is where bit-level codecs like Base64 and compression live &mdash; Base64 exists precisely because it maps every six bits onto an ASCII-safe subset of 64 printable characters. Being able to move between the three representations without guessing is the fastest way to debug mojibake, mismatched line endings and stray non-breaking spaces.</p>
+    <h2>Extended characters and the road to Unicode</h2>
+    <p>ASCII stops at 127. Codes 128 to 255 belong to the extended ranges: ISO-8859-1 (Latin-1) assigns Western European accented letters, while the CP437 and Windows-1252 variants reuse the same slots for box-drawing symbols and smart quotes. This ambiguity is exactly why "smart quotes" from a word processor break JSON: they are byte 0x92 in Windows-1252, not an ASCII apostrophe. Modern text is Unicode, and UTF-8 deliberately keeps the first 128 code points identical to ASCII, which is why a plain English file is byte-for-byte valid UTF-8. When you need to move between these representations, pair this table with the <a href="hex-to-ascii.html">hex to ASCII converter</a>, the <a href="base64.html">Base64 encoder</a> and the <a href="binary-to-text.html">binary to text tool</a>.</p>
+    <h2>Handy landmarks to memorise</h2>
+    <ul>
+      <li><code>48&ndash;57</code> digits 0&ndash;9 &mdash; subtract 48 to get the integer value</li>
+      <li><code>65&ndash;90</code> uppercase, <code>97&ndash;122</code> lowercase &mdash; difference 32</li>
+      <li><code>32</code> space, <code>9</code> tab, <code>10</code> LF, <code>13</code> CR</li>
+      <li><code>64</code> at sign, <code>91</code> left bracket, <code>96</code> backtick, <code>123</code> curly brace</li>
+    </ul>
+  </section>
+  <section class="related">
+    <h2>Related tools</h2>
+    <ul>
+      <li><a href="base64.html">Base64 Encoder &amp; Decoder</a></li>
+      <li><a href="hex-to-ascii.html">Hex To Ascii</a></li>
+      <li><a href="binary-to-text.html">Binary To Text</a></li>
+      <li><a href="html-entities.html">Html Entities</a></li>
+    </ul>
+  </section>
+<script>
+(function(){
+  var names={};
+  var known={32:'Space',33:'Exclamation mark',34:'Quotation mark',35:'Number sign',36:'Dollar sign',37:'Percent sign',38:'Ampersand',39:'Apostrophe',40:'Left parenthesis',41:'Right parenthesis',42:'Asterisk',43:'Plus sign',44:'Comma',45:'Hyphen-minus',46:'Full stop',47:'Slash',58:'Colon',59:'Semicolon',60:'Less-than sign',61:'Equals sign',62:'Greater-than sign',63:'Question mark',64:'At sign',91:'Left square bracket',92:'Backslash',93:'Right square bracket',94:'Caret',95:'Underscore',96:'Grave accent',123:'Left curly bracket',124:'Vertical bar',125:'Right curly bracket',126:'Tilde',127:'Delete'};
+  for(var k in known) names[parseInt(k,10)]=known[k];
+  for(var d=48;d<=57;d++) names[d]='Digit '+(d-48);
+  for(var u=65;u<=90;u++) names[u]='Uppercase ' + String.fromCharCode(u);
+  for(var l=97;l<=122;l++) names[l]='Lowercase ' + String.fromCharCode(l);
+  var cf={0:'NUL',7:'BEL',8:'BS',9:'HT (tab)',10:'LF (newline)',11:'VT',12:'FF',13:'CR (carriage return)',27:'ESC',127:'DEL'};
+  function pad(n,w){ var s=n.toString(2); while(s.length<w) s='0'+s; return s; }
+  function esc(c){ if(c==='<') return '&lt;'; if(c==='>') return '&gt;'; if(c==='&') return '&amp;'; return c; }
+  function render(){
+    var q=(document.getElementById('asciiSearch').value||'').toLowerCase().trim();
+    var ext=document.getElementById('asciiExt').checked;
+    var showCtrl=document.getElementById('asciiCtrl').checked;
+    var max=ext?256:128, rows=[], n=0;
+    for(var i=0;i<max;i++){
+      var isCtrl = i<32 || i===127;
+      if(isCtrl && !showCtrl) continue;
+      var ch=String.fromCharCode(i);
+      var nm=names[i]||cf[i]||('Extended char '+i);
+      var dec=String(i), hex='U+'+('000'+i.toString(16).toUpperCase()).slice(-4);
+      var bin=pad(i,8), oct=i.toString(8);
+      if(q){
+        var hay=(dec+' '+i.toString(16)+' '+bin+' '+oct+' '+nm+' '+ch).toLowerCase();
+        if(hay.indexOf(q)===-1) continue;
+      }
+      rows.push('<tr><td>'+dec+'</td><td>'+hex+'</td><td>'+oct+'</td><td><code>'+bin+'</code></td><td><code>'+(isCtrl?'&middot;':esc(ch))+'</code></td><td><code>&amp;#'+i+';</code></td><td>'+nm+'</td></tr>');
+      n++;
+      if(n>600) break;
+    }
+    document.querySelector('#asciiTable tbody').innerHTML=rows.join('')||'<tr><td colspan="7">No match.</td></tr>';
+    document.getElementById('asciiCount').textContent=rows.length+' characters shown.';
+  }
+  document.getElementById('asciiSearch').addEventListener('input',render);
+  document.getElementById('asciiExt').addEventListener('change',render);
+  document.getElementById('asciiCtrl').addEventListener('change',render);
+  render();
+})();
+</script>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; 2026 Online Toolbox &middot; All tools run locally in your browser.</p>
+    <p><a href="index.html">Home</a> &middot; <a href="all-tools.html">All Tools</a> &middot; <a href="privacy.html">Privacy</a></p>
+  </div>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>

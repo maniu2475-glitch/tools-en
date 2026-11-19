@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Agent Parser - Decode Browser &amp; OS from UA String (Free)</title>
+<meta name="description" content="Free online user agent parser. Paste any User-Agent string to instantly see browser, version, operating system, device type and engine. Runs locally in your browser.">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/user-agent-parser.html">
+<meta property="og:title" content="User Agent Parser - Decode Browser &amp; OS from UA String (Free)">
+<meta property="og:description" content="Free online user agent parser. Paste any User-Agent string to instantly see browser, version, operating system, device type and engine. Runs locally in your browser.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://maniu2475-glitch.github.io/tools-en/user-agent-parser.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="menu">&#9776;</button>
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#129520;</span><span class="logo-text">Online Toolbox</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#tool-json">JSON</a>
+      <a href="index.html#tool-base64">Base64</a>
+      <a href="index.html#tool-url">URL</a>
+      <a href="index.html#tool-qrcode">QR Code</a>
+      <a href="index.html#tool-password">Password</a>
+      <a href="index.html#tool-timestamp">Timestamp</a>
+      <a href="index.html#tool-color">Color</a>
+      <a href="all-tools.html">All Tools</a>
+    </nav>
+  </div>
+</header>
+<main class="container" id="home">
+  <h1>User Agent Parser</h1>
+  <p class="lead">Paste a User-Agent string to decode the browser, version, operating system, rendering engine and device type behind it.</p>
+  <section class="tool-card">
+    <textarea id="uaInput" rows="4" spellcheck="false" placeholder="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"></textarea>
+    <div class="btn-row">
+      <button class="btn" id="uaParse">Parse</button>
+      <button class="btn btn-ghost" id="uaMine">Use my current UA</button>
+      <button class="btn btn-ghost" id="uaCopy">Copy JSON</button>
+    </div>
+    <table class="result-table" id="uaOut"><tbody><tr><td>Enter a User-Agent string and click Parse.</td></tr></tbody></table>
+    <pre id="uaJson" class="output" hidden></pre>
+  </section>
+  <section class="explain">
+    <h2>What is a User-Agent string?</h2>
+    <p>Every time a browser, app or bot requests a web page it sends a <strong>User-Agent</strong> (UA) header. That short line of text tells the server which browser is calling, which version it runs, which operating system and device it is on, and which rendering engine produced the page. The UA evolved in the mid-1990s alongside the first Netscape releases, when sites needed a cheap way to serve different markup to different browsers. Almost thirty years later the same header is still there, carrying a small amount of historical luggage: most strings begin with <code>Mozilla/5.0</code> even in Chrome, Edge or Safari, purely for backward compatibility with 1990s sniffing code.</p>
+    <p>This parser breaks the string into its meaningful parts. It looks for the browser token and version (Chrome, Firefox, Safari, Edge, Opera, Samsung Internet, and the Chromium-based family), then detects the operating system from markers such as <code>Windows NT 10.0</code>, <code>Mac OS X 14_5</code>, <code>Android 14</code> or <code>iPhone OS 17_2</code>. It also recognises the two mainstream engines &mdash; Blink/WebKit, reported by the <code>AppleWebKit/537.36</code> token, and Gecko, reported by <code>Gecko/20100101</code> &mdash; and finally guesses whether the device is a desktop, tablet, phone, or an automated crawler.</p>
+    <h2>Why you would decode a UA string</h2>
+    <ul>
+      <li><strong>Debugging reports.</strong> A user says "the layout breaks on my machine" &mdash; ask for the UA from <code>navigator.userAgent</code> and you immediately know their exact browser and OS build.</li>
+      <li><strong>Reading access logs.</strong> Server logs store the raw string; this tool turns those cryptic tokens into a readable summary you can paste into a bug tracker.</li>
+      <li><strong>Bot filtering.</strong> Crawlers, scrapers and SEO tools identify themselves in the UA. Spotting <code>Googlebot</code>, <code>bingbot</code> or <code>curl</code> tells you whether a hit is real traffic.</li>
+      <li><strong>QA test matrices.</strong> Collect the UAs of the devices you actually care about, then use them to configure emulation in DevTools or Playwright.</li>
+    </ul>
+    <h2>Accuracy caveats you should know</h2>
+    <p>A UA string is self-declared and freely spoofable, so treat the output as a strong hint rather than ground truth. Browsers have also deliberately frozen parts of the header: Chrome reduced the platform detail it exposes (User-Agent Reduction) and recommends feature detection with <code>navigator.userAgentData</code> instead. iOS Safari inside a third-party app often reports a WebView UA that omits the host app name. And some strings are genuinely ambiguous &mdash; Edge on macOS and Chrome on macOS differ only by a couple of tokens, so a heuristic parser occasionally guesses wrong. If you need certainty, prefer capability detection in the code you write and use the UA only for analytics and support triage.</p>
+    <h2>Privacy</h2>
+    <p>Everything here runs in JavaScript on your own machine. The string you paste is never uploaded to a server, which matters when the UA comes from a customer ticket or an internal log file. Close the tab and the data is gone. If you also need to decode tokens, try the <a href="jwt-decoder.html">JWT decoder</a>; for encoding strings into a URL safe form see the <a href="url-encode-decode.html">URL encoder</a>.</p>
+  </section>
+  <section class="related">
+    <h2>Related tools</h2>
+    <ul>
+      <li><a href="jwt-decoder.html">JWT Decoder</a></li>
+      <li><a href="url-encode-decode.html">URL Encoder &amp; Decoder</a></li>
+      <li><a href="json-formatter.html">JSON Formatter</a></li>
+      <li><a href="regex-tester.html">Regex Tester</a></li>
+    </ul>
+  </section>
+<script>
+(function(){
+  function detect(ua){
+    var r = {raw: ua, browser:'Unknown', version:'', os:'Unknown', engine:'Unknown', device:'Desktop'};
+    if(!ua) return r;
+    var m;
+    if(/Googlebot/i.test(ua)) {r.browser='Googlebot'; r.device='Bot';}
+    else if(/bingbot/i.test(ua)) {r.browser='Bingbot'; r.device='Bot';}
+    else if(/curl\//i.test(ua)) {r.browser='curl'; r.device='Bot';}
+    else if((m=ua.match(/Edg\/([\d.]+)/))) {r.browser='Edge'; r.version=m[1];}
+    else if((m=ua.match(/OPR\/([\d.]+)/))) {r.browser='Opera'; r.version=m[1];}
+    else if((m=ua.match(/SamsungBrowser\/([\d.]+)/))) {r.browser='Samsung Internet'; r.version=m[1];}
+    else if((m=ua.match(/Firefox\/([\d.]+)/))) {r.browser='Firefox'; r.version=m[1];}
+    else if((m=ua.match(/Chrome\/([\d.]+)/))) {r.browser='Chrome'; r.version=m[1];}
+    else if((m=ua.match(/Version\/([\d.]+).*Safari/))) {r.browser='Safari'; r.version=m[1];}
+    if(/Windows NT 10/i.test(ua)) r.os='Windows 10/11';
+    else if(/Windows NT 6\.3/i.test(ua)) r.os='Windows 8.1';
+    else if(/Windows NT 6\.1/i.test(ua)) r.os='Windows 7';
+    else if(/Windows/i.test(ua)) r.os='Windows';
+    else if((m=ua.match(/Android ([\d.]+)/i))) r.os='Android ' + m[1];
+    else if((m=ua.match(/(?:iPhone|iPad|iPod).*?OS ([\d_]+)/i))) r.os='iOS ' + m[1].replace(/_/g,'.');
+    else if((m=ua.match(/Mac OS X ([\d_]+)/i))) r.os='macOS ' + m[1].replace(/_/g,'.');
+    else if(/CrOS/i.test(ua)) r.os='ChromeOS';
+    else if(/Ubuntu/i.test(ua)) r.os='Ubuntu';
+    else if(/Linux/i.test(ua)) r.os='Linux';
+    else if(/FreeBSD/i.test(ua)) r.os='FreeBSD';
+    if(/Gecko\/20/.test(ua) && /Firefox/.test(ua)) r.engine='Gecko';
+    else if(/AppleWebKit\//.test(ua)) r.engine='Blink/WebKit';
+    if(/iPad|Tablet/i.test(ua)) r.device='Tablet';
+    else if(/Mobi|iPhone|Android.*Mobile/i.test(ua)) r.device='Phone';
+    return r;
+  }
+  var input=document.getElementById('uaInput');
+  var out=document.getElementById('uaOut');
+  var json=document.getElementById('uaJson');
+  var last=null;
+  function run(u){
+    last=detect(u);
+    var rows=[['Browser',last.browser],['Version',last.version||'-'],['Operating system',last.os],['Rendering engine',last.engine],['Device type',last.device]];
+    out.innerHTML='<tbody>'+rows.map(function(x){return '<tr><th>'+x[0]+'</th><td>'+String(x[1]).replace(/</g,'&lt;')+'</td></tr>';}).join('')+'</tbody>';
+    json.hidden=false; json.textContent=JSON.stringify(last,null,2);
+  }
+  document.getElementById('uaParse').onclick=function(){run(input.value.trim());};
+  document.getElementById('uaMine').onclick=function(){input.value=navigator.userAgent;run(input.value);};
+  document.getElementById('uaCopy').onclick=function(){if(!last)return;if(navigator.clipboard)navigator.clipboard.writeText(JSON.stringify(last,null,2));};
+  input.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();run(input.value.trim());}});
+})();
+</script>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; 2026 Online Toolbox &middot; All tools run locally in your browser.</p>
+    <p><a href="index.html">Home</a> &middot; <a href="all-tools.html">All Tools</a> &middot; <a href="privacy.html">Privacy</a></p>
+  </div>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>

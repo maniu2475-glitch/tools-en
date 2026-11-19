@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Markdown to HTML Converter - Free Online Converter</title>
+<meta name="description" content="Convert Markdown to clean HTML instantly in your browser. Supports headings, lists, tables, code blocks, links, images, blockquotes and GFM task lists. No upload, no signup.">
+<meta name="keywords" content="markdown to html, md to html converter, markdown converter, github flavored markdown, markdown generator, free markdown tool">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/markdown-to-html.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Markdown to HTML Converter">
+<meta property="og:description" content="Convert Markdown to clean HTML instantly in your browser. Supports headings, lists, tables, code blocks, links, images, blockquotes and GFM task lists. No upload, no signup.">
+<meta property="og:url" content="https://maniu2475-glitch.github.io/tools-en/markdown-to-html.html">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Markdown to HTML Converter", "url": "https://maniu2475-glitch.github.io/tools-en/markdown-to-html.html", "description": "Convert Markdown to clean HTML instantly in your browser. Supports headings, lists, tables, code blocks, links, images, blockquotes and GFM task lists. No upload, no signup.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="menu">&#9776;</button>
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#129520;</span><span class="logo-text">Online Toolbox</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#tool-json">JSON</a>
+      <a href="index.html#tool-base64">Base64</a>
+      <a href="index.html#tool-url">URL</a>
+      <a href="index.html#tool-qrcode">QR Code</a>
+      <a href="index.html#tool-password">Password</a>
+      <a href="index.html#tool-timestamp">Timestamp</a>
+      <a href="index.html#tool-color">Color</a>
+      <a href="all-tools.html">All Tools</a>
+    </nav>
+  </div>
+</header>
+<main class="container" id="home">
+  <h1>Markdown to HTML Converter</h1>
+  <p class="lead">Paste Markdown on the left and get HTML on the right, live as you type. Everything is converted locally in JavaScript, so drafts and internal notes never leave your machine.</p>
+  <section class="tool-card">
+    <div class="field">
+      <label for="mdIn">Markdown input</label>
+      <textarea id="mdIn" rows="12" spellcheck="false"># Hello Markdown
+
+Paste **Markdown** here and watch the *HTML* appear on the right.
+
+- Supports lists
+- Inline `code`
+- [Links](https://example.com)
+
+> Blockquotes work too.
+
+```js
+const hello = "world";
+```
+
+| Column A | Column B |
+| --- | --- |
+| 1 | 2 |
+</textarea>
+    </div>
+    <div class="btn-row">
+      <button class="btn primary" id="mdRun">Convert</button>
+      <button class="btn" id="mdLive">Live: ON</button>
+      <button class="btn" id="mdCopy">Copy HTML</button>
+      <button class="btn" id="mdClear">Clear</button>
+    </div>
+    <div class="field">
+      <label for="mdOut">HTML output</label>
+      <textarea id="mdOut" rows="12" spellcheck="false"></textarea>
+    </div>
+    <p class="hint" id="mdHint"></p>
+  </section>
+  <section class="explain">
+    <h2>What Markdown actually is</h2>
+    <p>Markdown is a lightweight plain-text syntax written by John Gruber in 2004 so that documents stay readable before and after rendering. Where HTML needs explicit tags, Markdown infers structure from punctuation: a leading <code>#</code> makes a heading, a blank line separates paragraphs, <code>**bold**</code> sets strong emphasis and a leading <code>-</code> starts a list. Because the source is still plain text, it survives email, chat, code review and version control without turning into tag soup, which is why README files, issue trackers and note apps all converged on it.</p>
+    <h2>CommonMark, GFM and the flavors</h2>
+    <p>The original specification was informal, so implementations disagreed on edge cases. CommonMark (2014) closed that gap with a rigorous spec and a test suite, and GitHub Flavored Markdown (GFM) added the features most people now expect: fenced code blocks with language hints, tables, task lists with checkboxes, strikethrough with double tildes and autolinks. This converter implements the GFM subset you meet daily &mdash; headings, emphasis, lists, task lists, tables, fenced code, blockquotes, rules, images and links. Inline code is protected before other rules run, so a literal asterisk inside backticks stays an asterisk.</p>
+    <h2>Safety and escaping</h2>
+    <p>HTML is escaped before any tag is generated, which means raw markup you paste stays text instead of executing. That is the right default for a preview tool: it stops draft content from running scripts in your browser. When you embed the generated HTML in a CMS, review it as you would any pasted HTML, and sanitise it server-side if the source is untrusted. If you need the reverse direction, the Markdown editor lets you write and preview in one pane, and the HTML entities tool helps when you must display literal angle brackets.</p>
+  </section>
+  <section class="related">
+    <h2>Related tools</h2>
+    <ul>
+      <li><a href="markdown-editor.html">Markdown Editor</a></li>
+      <li><a href="html-entities.html">Html Entities</a></li>
+      <li><a href="html-minifier.html">Html Minifier</a></li>
+      <li><a href="text-diff.html">Text Diff</a></li>
+    </ul>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; 2026 Online Toolbox &middot; <a href="index.html">Home</a> &middot; <a href="all-tools.html">All Tools</a> &middot; <a href="sitemap.xml">Sitemap</a></p>
+    <p class="muted">All tools run locally in your browser. No data is uploaded.</p>
+  </div>
+</footer>
+
+<script>
+var input=document.getElementById('mdIn');
+var out=document.getElementById('mdOut');
+var hint=document.getElementById('mdHint');
+var live=true;
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function inline(s){
+  s=esc(s);
+  s=s.replace(/`([^`]+)`/g,'<code>$1</code>');
+  s=s.replace(/!\[([^\]]*)\]\(([^)\s]+)[^\)]*\)/g,'<img alt="$1" src="$2">');
+  s=s.replace(/\[([^\]]+)\]\(([^)\s]+)[^\)]*\)/g,'<a href="$2">$1</a>');
+  s=s.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
+  s=s.replace(/__([^_]+)__/g,'<strong>$1</strong>');
+  s=s.replace(/(^|[^*])\*([^*\n]+)\*/g,'$1<em>$2</em>');
+  s=s.replace(/~~([^~]+)~~/g,'<del>$1</del>');
+  return s;
+}
+function convert(md){
+  var lines=md.replace(/\r\n/g,'\n').split('\n');
+  var html=[],i=0,inList=null,para=[];
+  function flushPara(){if(para.length){html.push('<p>'+inline(para.join(' '))+'</p>');para=[];}}
+  function closeList(){if(inList){html.push('</'+inList+'>');inList=null;}}
+  while(i<lines.length){
+    var line=lines[i];
+    var fence=line.match(/^```(\w*)\s*$/);
+    if(fence){
+      flushPara();closeList();
+      var lang=fence[1],buf=[];i++;
+      while(i<lines.length && !/^```\s*$/.test(lines[i])){buf.push(lines[i]);i++;}
+      i++;
+      html.push('<pre><code'+(lang?' class="language-'+lang+'"':'')+'>'+esc(buf.join('\n'))+'</code></pre>');
+      continue;
+    }
+    if(/^\s*$/.test(line)){flushPara();closeList();i++;continue;}
+    var h=line.match(/^(#{1,6})\s+(.*)$/);
+    if(h){flushPara();closeList();html.push('<h'+h[1].length+'>'+inline(h[2])+'</h'+h[1].length+'>');i++;continue;}
+    if(/^\s*(---|\*\*\*|___)\s*$/.test(line)){flushPara();closeList();html.push('<hr>');i++;continue;}
+    if(/^\s*&gt;|^\s*>/.test(line)){
+      flushPara();closeList();
+      var qb=[];while(i<lines.length && /^\s*>/.test(lines[i])){qb.push(lines[i].replace(/^\s*>\s?/,''));i++;}
+      html.push('<blockquote>'+inline(qb.join(' '))+'</blockquote>');continue;
+    }
+    if(/^\s*\|.*\|\s*$/.test(line) && i+1<lines.length && /^\s*\|[\s:|-]+\|\s*$/.test(lines[i+1])){
+      flushPara();closeList();
+      var cells=function(r){return r.trim().replace(/^\|/,'').replace(/\|$/,'').split('|').map(function(c){return c.trim();});};
+      var head=cells(line);i+=2;
+      var body=[];
+      while(i<lines.length && /^\s*\|.*\|\s*$/.test(lines[i])){body.push(cells(lines[i]));i++;}
+      var t='<table><thead><tr>'+head.map(function(c){return '<th>'+inline(c)+'</th>';}).join('')+'</tr></thead><tbody>';
+      body.forEach(function(r){t+='<tr>'+r.map(function(c){return '<td>'+inline(c)+'</td>';}).join('')+'</tr>';});
+      html.push(t+'</tbody></table>');continue;
+    }
+    var task=line.match(/^\s*[-*+]\s+\[([ xX])\]\s+(.*)$/);
+    if(task){
+      flushPara();
+      if(inList!=='ul'){closeList();html.push('<ul>');inList='ul';}
+      html.push('<li><input type="checkbox" disabled'+(task[1].toLowerCase()==='x'?' checked':'')+'> '+inline(task[2])+'</li>');
+      i++;continue;
+    }
+    var ul=line.match(/^\s*[-*+]\s+(.*)$/);
+    if(ul){flushPara();if(inList!=='ul'){closeList();html.push('<ul>');inList='ul';}html.push('<li>'+inline(ul[1])+'</li>');i++;continue;}
+    var ol=line.match(/^\s*\d+[.)]\s+(.*)$/);
+    if(ol){flushPara();if(inList!=='ol'){closeList();html.push('<ol>');inList='ol';}html.push('<li>'+inline(ol[1])+'</li>');i++;continue;}
+    para.push(line.trim());i++;
+  }
+  flushPara();closeList();
+  return html.join('\n');
+}
+function run(){
+  var t0=Date.now();
+  out.value=convert(input.value);
+  hint.textContent='Converted in '+(Date.now()-t0)+' ms \u00b7 '+input.value.length+' characters in, '+out.value.length+' out.';
+}
+document.getElementById('mdRun').onclick=run;
+document.getElementById('mdLive').onclick=function(){live=!live;this.textContent='Live: '+(live?'ON':'OFF');};
+input.addEventListener('input',function(){if(live)run();});
+document.getElementById('mdCopy').onclick=function(){if(navigator.clipboard)navigator.clipboard.writeText(out.value);hint.textContent='HTML copied to clipboard.';};
+document.getElementById('mdClear').onclick=function(){input.value='';out.value='';hint.textContent='Cleared.';};
+run();
+</script>
+</body>
+</html>

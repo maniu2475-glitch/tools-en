@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timezone Converter - Convert Time Between Time Zones Free</title>
+<meta name="description" content="Free online timezone converter. Convert any date and time across 40+ time zones and see all offsets at once, with automatic DST handling. Runs in your browser.">
+<meta name="keywords" content="timezone converter, time zone conversion, utc converter, est to pst, gmt to ist, world clock, dst converter">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/timezone-converter.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Timezone Converter">
+<meta property="og:description" content="Free online timezone converter. Convert any date and time across 40+ time zones and see all offsets at once, with automatic DST handling. Runs in your browser.">
+<meta property="og:url" content="https://maniu2475-glitch.github.io/tools-en/timezone-converter.html">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Timezone Converter", "url": "https://maniu2475-glitch.github.io/tools-en/timezone-converter.html", "description": "Free online timezone converter. Convert any date and time across 40+ time zones and see all offsets at once, with automatic DST handling. Runs in your browser.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="menu">&#9776;</button>
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#129520;</span><span class="logo-text">Online Toolbox</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#tool-json">JSON</a>
+      <a href="index.html#tool-base64">Base64</a>
+      <a href="index.html#tool-url">URL</a>
+      <a href="index.html#tool-qrcode">QR Code</a>
+      <a href="index.html#tool-password">Password</a>
+      <a href="index.html#tool-timestamp">Timestamp</a>
+      <a href="index.html#tool-color">Color</a>
+      <a href="all-tools.html">All Tools</a>
+    </nav>
+  </div>
+</header>
+<main class="container" id="home">
+  <h1>Timezone Converter</h1>
+  <p class="lead">Convert a date and time from one time zone to many others at once. Daylight saving is handled by the browser's own tz database, so nothing is uploaded.</p>
+  <section class="tool-card">
+    <div class="field">
+      <label for="tzDate">Date &amp; time</label>
+      <input type="datetime-local" id="tzDate">
+    </div>
+    <div class="field">
+      <label for="tzFrom">From time zone</label>
+      <select id="tzFrom"></select>
+    </div>
+    <div class="field">
+      <label>Convert to</label>
+      <div id="tzTargets" class="chk-grid"></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn primary" id="tzNow">Use current time</button>
+      <button class="btn" id="tzRun">Convert</button>
+      <button class="btn" id="tzCopy">Copy result</button>
+    </div>
+    <table class="result-table" id="tzTable">
+      <thead><tr><th>Time zone</th><th>Local time</th><th>Offset</th><th>Day diff</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <p class="hint" id="tzHint"></p>
+  </section>
+  <section class="explain">
+    <h2>Why time zone conversion is harder than it looks</h2>
+    <p>A time zone is not a fixed offset from UTC. It is a set of rules &mdash; a base offset plus a list of historical and future transitions. Most of North America and Europe shift one hour twice a year for daylight saving time, the Southern Hemisphere shifts on opposite dates, and a handful of places shift by 30 or 45 minutes instead of a full hour, such as India at UTC+05:30 and Nepal at UTC+05:45. Australia even has zones that observe a half-hour daylight offset. Any converter that simply adds or subtracts whole hours will therefore produce wrong answers for a large part of the world.</p>
+    <h2>How this converter gets it right</h2>
+    <p>This page does not hard-code offsets. It asks the browser for the wall-clock time in each zone using <code>Intl.DateTimeFormat</code> with an explicit <code>timeZone</code>, then derives the real offset from that result. The browser ships with the IANA time zone database (also called tzdata or the Olson database), which is updated whenever governments change their rules &mdash; Brazil abolishing daylight saving, Mexico ending it in most states, Egypt reintroducing it. Because the conversion runs locally, the tool works offline after the page loads and no meeting time is ever sent to a server.</p>
+    <h2>Practical tips for scheduling across zones</h2>
+    <p>Always convert the <em>instant</em>, not the clock reading. When a colleague says "let's meet at 9am my time", the safe record is the UTC instant plus the zone identifier, never a bare "9am". Store ISO-8601 strings with an explicit offset such as <code>2026-11-19T09:00:00-05:00</code> and keep the IANA name alongside, because offsets change with policy. Watch for the day-boundary problem shown in the table's "day diff" column: a 9am call in New York is already tomorrow in Tokyo. If you also need to turn timestamps into human dates, pair this tool with the Unix timestamp converter or the date difference calculator.</p>
+  </section>
+  <section class="related">
+    <h2>Related tools</h2>
+    <ul>
+      <li><a href="unix-timestamp-converter.html">Unix Timestamp Converter</a></li>
+      <li><a href="date-difference-calculator.html">Date Difference Calculator</a></li>
+      <li><a href="week-number-calculator.html">Week Number Calculator</a></li>
+      <li><a href="countdown-timer.html">Countdown Timer</a></li>
+    </ul>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; 2026 Online Toolbox &middot; <a href="index.html">Home</a> &middot; <a href="all-tools.html">All Tools</a> &middot; <a href="sitemap.xml">Sitemap</a></p>
+    <p class="muted">All tools run locally in your browser. No data is uploaded.</p>
+  </div>
+</footer>
+
+<script>
+var ZONES=["UTC","America/Los_Angeles","America/Denver","America/Chicago","America/New_York",
+"America/Sao_Paulo","Europe/London","Europe/Paris","Europe/Berlin","Europe/Madrid",
+"Europe/Moscow","Africa/Cairo","Africa/Lagos","Asia/Dubai","Asia/Karachi",
+"Asia/Kolkata","Asia/Dhaka","Asia/Bangkok","Asia/Shanghai","Asia/Hong_Kong",
+"Asia/Singapore","Asia/Tokyo","Asia/Seoul","Australia/Sydney","Pacific/Auckland"];
+var fromSel=document.getElementById('tzFrom');
+var box=document.getElementById('tzTargets');
+var DEFAULT_T=["UTC","America/New_York","Europe/London","Europe/Berlin","Asia/Shanghai","Asia/Tokyo","Australia/Sydney"];
+ZONES.forEach(function(z){
+  var o=document.createElement('option');o.value=z;o.textContent=z;fromSel.appendChild(o);
+  var id='tzc_'+z.replace(/[^a-z0-9]/gi,'_');
+  var lbl=document.createElement('label');lbl.className='lbl';
+  var cb=document.createElement('input');cb.type='checkbox';cb.value=z;cb.id=id;
+  if(DEFAULT_T.indexOf(z)>=0)cb.checked=true;
+  lbl.appendChild(cb);lbl.appendChild(document.createTextNode(' '+z));
+  box.appendChild(lbl);
+});
+fromSel.value='America/New_York';
+function pad(n){return n<10?'0'+n:''+n;}
+function partsIn(date,tz){
+  var fmt=new Intl.DateTimeFormat('en-US',{timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit',
+    hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+  var p={};fmt.formatToParts(date).forEach(function(x){p[x.type]=x.value;});
+  return p;
+}
+function offsetMinutes(date,tz){
+  var p=partsIn(date,tz);
+  var asUTC=Date.UTC(+p.year,+p.month-1,+p.day,+p.hour%24,+p.minute,+p.second);
+  return Math.round((asUTC-date.getTime())/60000);
+}
+function offStr(m){
+  var s=m<0?'-':'+';m=Math.abs(m);
+  return 'UTC'+s+pad(Math.floor(m/60))+':'+pad(m%60);
+}
+var last='';
+function run(){
+  var v=document.getElementById('tzDate').value;
+  if(!v){document.getElementById('tzHint').textContent='Pick a date and time first.';return;}
+  var local=new Date(v);
+  var from=fromSel.value;
+  // interpret the typed wall-clock time as being in `from`
+  var off=offsetMinutes(local,from)*60000;
+  var utc=new Date(local.getTime()-off);
+  var targets=[].slice.call(box.querySelectorAll('input:checked')).map(function(c){return c.value;});
+  if(targets.indexOf(from)<0)targets.unshift(from);
+  var tb=document.querySelector('#tzTable tbody');tb.innerHTML='';
+  var baseDay=partsIn(utc,from).day;
+  var lines=[];
+  targets.forEach(function(tz){
+    var p=partsIn(utc,tz);
+    var dd=(+p.day)-(+baseDay);
+    var row=document.createElement('tr');
+    row.innerHTML='<td>'+tz+'</td><td>'+p.year+'-'+p.month+'-'+p.day+' '+pad(p.hour%24)+':'+p.minute+':'+p.second+'</td><td>'+offStr(offsetMinutes(utc,tz))+'</td><td>'+(dd>0?'+'+dd:(dd<0?dd:'—'))+'</td>';
+    tb.appendChild(row);
+    lines.push(tz+'  '+p.year+'-'+p.month+'-'+p.day+' '+pad(p.hour%24)+':'+p.minute+'  '+offStr(offsetMinutes(utc,tz)));
+  });
+  last=lines.join('\n');
+  document.getElementById('tzHint').textContent='Converted '+targets.length+' time zone(s). DST is applied automatically.';
+}
+function nowLocalInput(){
+  var d=new Date();
+  var s=d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())+'T'+pad(d.getHours())+':'+pad(d.getMinutes());
+  document.getElementById('tzDate').value=s;
+}
+document.getElementById('tzRun').onclick=run;
+document.getElementById('tzNow').onclick=function(){nowLocalInput();run();};
+document.getElementById('tzCopy').onclick=function(){if(last&&navigator.clipboard)navigator.clipboard.writeText(last);};
+nowLocalInput();
+run();
+</script>
+</body>
+</html>

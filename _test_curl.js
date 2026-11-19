@@ -1,0 +1,22 @@
+const fs = require('fs');
+const h = fs.readFileSync('curl-to-code.html', 'utf8');
+let code = h.match(/<script>([\s\S]*?)<\/script>/)[1];
+code = code.replace("(function(){", "(function(){\n  var __T=function(){return {parse:parse, build:build};};");
+const idx = code.lastIndexOf("})();");
+code = code.slice(0, idx) + "  globalThis.__hook = __T;\n" + code.slice(idx);
+const fakeEl = { addEventListener: () => {}, onclick: null, value: '', textContent: '' };
+const doc = { getElementById: () => Object.assign({}, fakeEl), querySelector: () => fakeEl };
+new Function('document', 'console', 'navigator', 'btoa', code)(doc, console, {}, (s) => Buffer.from(s).toString('base64'));
+const api = globalThis.__hook();
+
+const cmd = "curl 'https://api.example.com/v1/items?a=1&b=2' -H 'Authorization: Bearer abc' -H 'Content-Type: application/json' --data-raw '{\"q\":\"hello world\"}'";
+const r = api.parse(cmd);
+console.log('PARSED:', JSON.stringify(r, null, 1));
+console.log('---- await ----');
+console.log(api.build(r, 'await'));
+console.log('---- then ----');
+console.log(api.build(r, 'then'));
+console.log('---- simple DELETE ----');
+console.log(api.build(api.parse("curl -X DELETE https://api.example.com/v1/items/42"), 'await'));
+console.log('---- basic auth ----');
+console.log(api.build(api.parse("curl -u user:pass https://example.com/api"), 'node'));
