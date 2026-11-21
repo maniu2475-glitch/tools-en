@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Line Counter - Count Lines, Words & Characters Free</title>
+<meta name="description" content="Count lines, non-empty lines, blank lines, words, characters and bytes in any text or file. Handles CRLF, LF and CR. Runs entirely in your browser.">
+<meta name="keywords" content="line counter,count lines,line count tool,count lines in text,how many lines,character counter,line and word counter">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/line-counter.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Line Counter">
+<meta property="og:description" content="Count lines, non-empty lines, blank lines, words, characters and bytes in any text or file. Handles CRLF, LF and CR. Runs entirely in your browser.">
+<meta property="og:url" content="https://maniu2475-glitch.github.io/tools-en/line-counter.html">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Line Counter", "url": "https://maniu2475-glitch.github.io/tools-en/line-counter.html", "description": "Count lines, non-empty lines, blank lines, words, characters and bytes in any text or file. Handles CRLF, LF and CR. Runs entirely in your browser.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="menu">&#9776;</button>
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#129520;</span><span class="logo-text">Online Toolbox</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#tool-json">JSON</a>
+      <a href="index.html#tool-base64">Base64</a>
+      <a href="index.html#tool-url">URL</a>
+      <a href="index.html#tool-qrcode">QR Code</a>
+      <a href="index.html#tool-password">Password</a>
+      <a href="index.html#tool-timestamp">Timestamp</a>
+      <a href="index.html#tool-color">Color</a>
+      <a href="all-tools.html">All Tools</a>
+    </nav>
+  </div>
+</header>
+<main class="container" id="home">
+  <h1>Line Counter</h1>
+  <p class="lead">Paste text or open a file to count lines, non-empty lines, blank lines, words, characters and UTF-8 bytes as you type. Handles Unix, Windows and classic Mac line endings.</p>
+
+  <section class="tool-card">
+    <textarea id="lcIn" class="ta" rows="12" spellcheck="false" placeholder="Paste or type text here — counts update as you type." aria-label="Text input"></textarea>
+    <div class="row">
+      <button class="btn" id="lcSample">Load sample</button>
+      <button class="btn" id="lcFile">Open file…</button>
+      <input type="file" id="lcFileInput" style="display:none" accept=".txt,.md,.csv,.json,.js,.py,.log,.xml,.html,.css">
+      <button class="btn" id="lcClear">Clear</button>
+      <label class="hint"><input type="checkbox" id="lcTrim"> Ignore blank lines</label>
+    </div>
+    <table class="out-table">
+      <tbody>
+        <tr><th>Lines</th><td id="lcLines">0</td></tr>
+        <tr><th>Non-empty lines</th><td id="lcNonEmpty">0</td></tr>
+        <tr><th>Blank lines</th><td id="lcBlank">0</td></tr>
+        <tr><th>Words</th><td id="lcWords">0</td></tr>
+        <tr><th>Characters (with spaces)</th><td id="lcChars">0</td></tr>
+        <tr><th>Characters (no spaces)</th><td id="lcCharsNS">0</td></tr>
+        <tr><th>Longest line</th><td id="lcLongest">0</td></tr>
+        <tr><th>Average line length</th><td id="lcAvg">0</td></tr>
+        <tr><th>Byte size (UTF-8)</th><td id="lcBytes">0 B</td></tr>
+      </tbody>
+    </table>
+  </section>
+<script>
+(function(){
+  var t=document.getElementById('lcIn'),trim=document.getElementById('lcTrim');
+  function fmtBytes(n){if(n<1024)return n+' B';if(n<1048576)return (n/1024).toFixed(2)+' KB';return (n/1048576).toFixed(2)+' MB';}
+  function update(){
+    var v=t.value;
+    var all=v.length?v.split(/\r\n|\r|\n/):[];
+    var nonEmpty=0,blank=0,chars=0,longest=0,words=0;
+    for(var i=0;i<all.length;i++){
+      var L=all[i];
+      if(L.trim()==='')blank++; else nonEmpty++;
+      if(L.length>longest)longest=L.length;
+    }
+    words=(v.match(/\S+/g)||[]).length;
+    charsSimplified=v.replace(/\s/g,'').length;
+    var lines=trim.checked?nonEmpty:(v.length?all.length:0);
+    var bytes;
+    try{bytes=new TextEncoder().encode(v).length;}catch(e){bytes=v.length;}
+    document.getElementById('lcLines').textContent=lines;
+    document.getElementById('lcNonEmpty').textContent=nonEmpty;
+    document.getElementById('lcBlank').textContent=blank;
+    document.getElementById('lcWords').textContent=words;
+    document.getElementById('lcChars').textContent=v.length;
+    document.getElementById('lcCharsNS').textContent=charsSimplified;
+    document.getElementById('lcLongest').textContent=longest;
+    document.getElementById('lcAvg').textContent=nonEmpty?Math.round((v.replace(/\s/g,'').length/Math.max(lines,1))):0;
+    document.getElementById('lcBytes').textContent=fmtBytes(bytes);
+  }
+  t.addEventListener('input',update);
+  trim.addEventListener('change',update);
+  document.getElementById('lcClear').addEventListener('click',function(){t.value='';update();});
+  document.getElementById('lcSample').addEventListener('click',function(){
+    t.value='function greet(name) {\n  return "Hello, " + name;\n}\n\n// call it\nconsole.log(greet("world"));\n\n\nexport default greet;\n';
+    update();
+  });
+  document.getElementById('lcFile').addEventListener('click',function(){document.getElementById('lcFileInput').click();});
+  document.getElementById('lcFileInput').addEventListener('change',function(e){
+    var f=e.target.files[0];if(!f)return;var r=new FileReader();
+    r.onload=function(){t.value=r.result;update();};r.readAsText(f);
+  });
+  update();
+})();
+</script>
+
+  <section class="explain">
+    <h2>Counting lines sounds trivial until you try it</h2>
+    <p>Every operating system disagrees about what ends a line. Unix uses a single line feed (<code>\n</code>, 0x0A), classic Mac OS used a single carriage return (<code>\r</code>, 0x0D), and Windows uses both in sequence (<code>\r\n</code>). A file written on Windows and read by a naive Unix counter will still have the carriage returns embedded in it, and a file whose final line has no terminator is famously miscounted by command-line tools like <code>wc -l</code>, which counts newline characters rather than lines and therefore reports one fewer than humans expect. This counter splits on any of the three conventions, so pasted text from any source gives the number you would get by scrolling to the bottom of a text editor.</p>
+    <h2>Blank lines are the hidden variable</h2>
+    <p>Source code files are typically 15 to 25 percent blank lines, and that proportion matters for enforcements like "no function may exceed 100 lines" or for pricing a translation job. The ignore-blank-lines checkbox flips the main figure between raw line count and meaningful line count, while the second row always reports both so you can compare. A line containing only spaces or a tab is treated as blank, because visually it is.</p>
+    <h2>Characters, words and bytes</h2>
+    <p>The character count with spaces is what word-processor limit dialogs mean, and the count without spaces is what Twitter-style length checks effectively use. Byte size is different again: it is the UTF-8 encoded length, so an emoji or an accented letter occupies more than one byte even though it is a single character. Longest line and average line length are useful signals when you are deciding how to wrap a Markdown table, a commit message or a CSV column that a tool refuses to read. If you only need a word count, the word counter is a lighter page; for a full breakdown including reading time, use the reading time calculator.</p>
+  </section>
+  <section class="related">
+    <h2>Related tools</h2>
+    <ul>
+      <li><a href="word-counter.html">Word Counter</a></li>
+      <li><a href="byte-counter.html">Byte Counter</a></li>
+      <li><a href="reading-time-calculator.html">Reading Time Calculator</a></li>
+      <li><a href="remove-duplicate-lines.html">Remove Duplicate Lines</a></li>
+      <li><a href="text-sort.html">Text Sort</a></li>
+    </ul>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; 2026 Online Toolbox &middot; <a href="index.html">Home</a> &middot; <a href="all-tools.html">All Tools</a> &middot; <a href="sitemap.xml">Sitemap</a></p>
+    <p class="muted">All tools run locally in your browser. No data is uploaded.</p>
+  </div>
+</footer>
+</body>
+</html>

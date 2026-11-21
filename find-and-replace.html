@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find and Replace Text Online - Bulk Search & Replace Tool</title>
+<meta name="description" content="Free online find and replace tool: search and replace text in bulk with regex, case-insensitive and whole-word options. Runs entirely in your browser.">
+<meta name="keywords" content="find and replace,search and replace,text replace,replace text online,bulk replace,regex replace,find and replace tool">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/find-and-replace.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Find and Replace Text">
+<meta property="og:description" content="Free online find and replace tool: search and replace text in bulk with regex, case-insensitive and whole-word options. Runs entirely in your browser.">
+<meta property="og:url" content="https://maniu2475-glitch.github.io/tools-en/find-and-replace.html">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Find and Replace Text">
+<meta name="twitter:description" content="Free online find and replace tool: search and replace text in bulk with regex, case-insensitive and whole-word options. Runs entirely in your browser.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdqAsxVwJGACZjAUIAd8a7S0L/1/1r/HPn1vAmAAGIAJRWYAfwFVAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Find and Replace Text", "url": "https://maniu2475-glitch.github.io/tools-en/find-and-replace.html", "description": "Free online find and replace tool: search and replace text in bulk with regex, case-insensitive and whole-word options. Runs entirely in your browser.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Find &amp; Replace Text</h1>
+<h3>Find and replace</h3>
+<p style="font-size:0.9rem;color:#666">Paste your text, enter what to find and what to replace it with. All processing happens locally in your browser.</p>
+<textarea id="fr-in" rows="10" style="width:100%;font-family:ui-monospace,Consolas,monospace" placeholder="Paste your text here…"></textarea>
+<div class="btn-group" style="margin-top:8px">
+<label>Find: <input id="fr-find" type="text" style="width:180px" placeholder="text to find"></label>
+<label>Replace: <input id="fr-repl" type="text" style="width:180px" placeholder="replacement"></label>
+</div>
+<div class="btn-group" style="margin-top:8px">
+<label><input id="fr-regex" type="checkbox"> Regex</label>
+<label><input id="fr-case" type="checkbox"> Case sensitive</label>
+<label><input id="fr-word" type="checkbox"> Whole word</label>
+<button class="btn" onclick="frRun()">Replace all</button>
+<button class="btn" onclick="frCount()">Count matches</button>
+<button class="btn" onclick="frCopy()">Copy result</button>
+<button class="btn" onclick="frClear()">Clear</button>
+</div>
+<div class="result-box" id="fr-status" style="margin-top:8px">Ready.</div>
+<textarea id="fr-out" rows="10" style="width:100%;font-family:ui-monospace,Consolas,monospace;margin-top:8px" placeholder="Result appears here…"></textarea>
+<script>
+function frBuild(){
+  var find=document.getElementById('fr-find').value;
+  var isRe=document.getElementById('fr-regex').checked;
+  var cs=document.getElementById('fr-case').checked;
+  var ww=document.getElementById('fr-word').checked;
+  if(find===''){return null;}
+  var src=isRe?find:find.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  if(ww&&!isRe){src='\\b'+src+'\\b';}
+  var flags='g'+(cs?'':'i');
+  try{return new RegExp(src,flags);}catch(e){document.getElementById('fr-status').textContent='Invalid regex: '+e.message;return null;}
+}
+function frRun(){
+  var txt=document.getElementById('fr-in').value;
+  var re=frBuild(); if(!re)return;
+  var repl=document.getElementById('fr-repl').value;
+  var isReMode=document.getElementById('fr-regex').checked;
+  var literals=[];
+  if(!isReMode){
+    // escape $ so it is inserted literally, and stash $1..$99 style groups
+    var stashed=repl.replace(/\$(\d{1,2})/g,function(m,n){literals.push(n);return '\u0000'+(literals.length-1)+'\u0000';});
+    repl=stashed.split('\u0000').map(function(part,i){
+      if(i%2===0){return part.split('$').join('$$');}
+      return '$'+literals[parseInt(part,10)];
+    }).join('');
+  }
+  var before=(txt.match(re)||[]).length;
+  var out; try{out=txt.replace(re,repl);}catch(e){document.getElementById('fr-status').textContent='Replace error: '+e.message;return;}
+  document.getElementById('fr-out').value=out;
+  var after=(out.match(re)||[]).length;
+  document.getElementById('fr-status').textContent='Replaced '+before+' match'+(before===1?'':'es')+'. Remaining matches: '+after+'.';
+}
+function frCount(){
+  var txt=document.getElementById('fr-in').value;
+  var re=frBuild(); if(!re)return;
+  var m=txt.match(re)||[];
+  document.getElementById('fr-status').textContent='Found '+m.length+' match'+(m.length===1?'':'es')+'.';
+}
+function frCopy(){
+  var el=document.getElementById('fr-out');
+  el.select(); document.execCommand('copy');
+  document.getElementById('fr-status').textContent='Result copied to clipboard.';
+}
+function frClear(){
+  document.getElementById('fr-in').value='';
+  document.getElementById('fr-out').value='';
+  document.getElementById('fr-status').textContent='Ready.';
+}
+</script>
+<p class="tool-desc">Find and replace is one of those tiny operations you need almost every day: renaming a variable across a code snippet, switching a product name in a long email template, cleaning up inconsistent capitalisation in a spreadsheet export, or removing stray whitespace from scraped data. Doing it by hand in a text editor is error prone because you lose track of how many replacements you have already made. This page performs true bulk replacement and, more importantly, reports exactly how many matches were found and how many remain afterwards.
+      <p class="tool-desc">Three options cover almost every real world use case. <strong>Regex</strong> switches the "find" field into a JavaScript regular expression, so patterns like <code>\d{3}-\d{3}</code>, <code>\s+</code> or <code>(?&lt;name&gt;\w+)</code> work as expected, and capture groups can be referenced in the replacement with <code>$1</code>, <code>$2</code> and so on. <strong>Case sensitive</strong> decides whether "Apple" and "apple" are the same needle. <strong>Whole word</strong> wraps the pattern in word boundaries so replacing "cat" never damages "category" or "concatenate".</p>
+      <p class="tool-desc">Everything is executed by JavaScript in your own tab - the text is never transmitted to a server, no request is logged, and the page even works after you go offline. That makes it safe for pasting customer data, internal documents, source code or configuration files. Use the Copy button to put the result straight onto your clipboard, or count matches first to sanity check a destructive replacement before you run it.</p></p>
+      <h3>Related tools</h3>
+      <div class="related-tools">
+<a class="btn btn-outline" href="text-diff.html">Text diff / compare</a>
+<a class="btn btn-outline" href="regex-tester.html">Regex tester</a>
+<a class="btn btn-outline" href="remove-duplicate-lines.html">Remove duplicate lines</a>
+<a class="btn btn-outline" href="remove-line-breaks.html">Remove line breaks</a>
+<a class="btn btn-outline" href="case-converter.html">Case converter</a>
+<a class="btn btn-outline" href="text-sort.html">Sort text lines</a>
+<a class="btn btn-outline" href="word-counter.html">Word counter</a>
+<a class="btn btn-outline" href="word-frequency-counter.html">Word frequency</a>
+<a class="btn btn-outline" href="slug-generator.html">Slug generator</a>
+<a class="btn btn-outline" href="html-entities.html">HTML entities</a>
+<a class="btn btn-outline" href="json-escape.html">JSON escape</a>
+<a class="btn btn-outline" href="line-counter.html">Line counter</a>
+      </div>
+      <h3>Frequently asked questions</h3>
+      <div style="line-height:1.9">
+<details><summary><strong>Does the find and replace tool upload my text?</strong></summary><p>No. The replacement runs in JavaScript inside your browser tab. Nothing is sent to any server, so the page keeps working offline and is safe for confidential text.</p></details>
+<details><summary><strong>Which regular expression flavour is supported?</strong></summary><p>The tool uses the browser native JavaScript RegExp engine, which supports character classes, quantifiers, lookahead, lookbehind (in modern browsers), named groups and the $1..$n backreferences in the replacement string.</p></details>
+<details><summary><strong>Why did the whole-world option not match part of a word?</strong></summary><p>Whole word mode adds \b word boundaries around your search term. A word boundary only exists between a word character (letters, digits, underscore) and a non-word character, so "cat" will not match inside "category".</p></details>
+<details><summary><strong>Can I replace with an empty string to delete matches?</strong></summary><p>Yes. Leave the replace field empty and press Replace all - every match is removed. Use the Count matches button first if you want to verify how many occurrences exist.</p></details>
+<details><summary><strong>Is there a limit on the amount of text?</strong></summary><p>The practical limit is your browser tab memory. Texts of a few megabytes replace instantly; extremely large texts (tens of megabytes) may take a second or two.</p></details>
+      </div>
+  </section>
+  <div class="ad-banner" id="ad-bottom"><div class="ad-placeholder-text">Ad slot (728x90 / responsive)</div></div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <p><a href="index.html">All tools</a> • <a href="all-tools.html">Sitemap of tools</a> • <a href="index.html#privacy">Privacy</a></p>
+    <p class="muted">© 2026 Online Toolbox. All processing happens in your browser.</p>
+  </div>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>

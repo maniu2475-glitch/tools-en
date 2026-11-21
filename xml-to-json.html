@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XML to JSON Converter - Free Online, Browser-Side</title>
+<meta name="description" content="Convert XML to JSON instantly in your browser. Handles attributes, repeated elements, nested nodes and mixed text. No upload, no sign-up, free.">
+<meta name="keywords" content="xml to json,xml to json converter,convert xml to json,xml json online,xml2json,xml to json parser">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/xml-to-json.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="XML to JSON Converter">
+<meta property="og:description" content="Convert XML to JSON instantly in your browser. Handles attributes, repeated elements, nested nodes and mixed text. No upload, no sign-up, free.">
+<meta property="og:url" content="https://maniu2475-glitch.github.io/tools-en/xml-to-json.html">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "XML to JSON Converter", "url": "https://maniu2475-glitch.github.io/tools-en/xml-to-json.html", "description": "Convert XML to JSON instantly in your browser. Handles attributes, repeated elements, nested nodes and mixed text. No upload, no sign-up, free.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="menu">&#9776;</button>
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#129520;</span><span class="logo-text">Online Toolbox</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#tool-json">JSON</a>
+      <a href="index.html#tool-base64">Base64</a>
+      <a href="index.html#tool-url">URL</a>
+      <a href="index.html#tool-qrcode">QR Code</a>
+      <a href="index.html#tool-password">Password</a>
+      <a href="index.html#tool-timestamp">Timestamp</a>
+      <a href="index.html#tool-color">Color</a>
+      <a href="all-tools.html">All Tools</a>
+    </nav>
+  </div>
+</header>
+<main class="container" id="home">
+  <h1>XML to JSON Converter</h1>
+  <p class="lead">Paste XML and get clean, indented JSON immediately. Attributes become <code>@name</code> keys, repeated elements become arrays, and stray text is preserved under <code>#text</code>. Everything runs locally.</p>
+
+  <section class="tool-card">
+    <textarea id="xmlIn" class="ta" rows="12" spellcheck="false" placeholder='&lt;catalog&gt;&lt;book id="1"&gt;&lt;title&gt;Dune&lt;/title&gt;&lt;year&gt;1965&lt;/year&gt;&lt;/book&gt;&lt;/catalog&gt;' aria-label="XML input"></textarea>
+    <div class="row">
+      <button class="btn primary" id="xmlRun">Convert to JSON</button>
+      <button class="btn" id="xmlSample">Load sample</button>
+      <button class="btn" id="xmlCopy">Copy JSON</button>
+      <button class="btn" id="xmlClear">Clear</button>
+    </div>
+    <p class="hint" id="xmlStatus"></p>
+    <textarea id="xmlOut" class="ta" rows="12" spellcheck="false" readonly aria-label="JSON output"></textarea>
+  </section>
+<script>
+(function(){
+  var inp=document.getElementById('xmlIn'),out=document.getElementById('xmlOut'),st=document.getElementById('xmlStatus');
+  function esc(s){return String(s);}
+  function parseXml(text){
+    var doc=new DOMParser().parseFromString(text,'application/xml');
+    var err=doc.querySelector('parsererror');
+    if(err) throw new Error(err.textContent.replace(/\s+/g,' ').slice(0,300));
+    function conv(node){
+      var obj={};
+      if(node.attributes&&node.attributes.length){for(var i=0;i<node.attributes.length;i++){var a=node.attributes[i];obj['@'+a.name]=a.value;}}
+      var kids=node.childNodes,textParts=[],childNames=[];
+      for(var j=0;j<kids.length;j++){
+        var k=kids[j];
+        if(k.nodeType===3){var t=k.nodeValue.trim();if(t)textParts.push(t);}
+        else if(k.nodeType===4){textParts.push(k.nodeValue);}
+        else if(k.nodeType===1){
+          childNames.push(k.nodeName);
+          var v=conv(k);
+          if(Object.prototype.hasOwnProperty.call(obj,k.nodeName)){
+            if(!Array.isArray(obj[k.nodeName])) obj[k.nodeName]=[obj[k.nodeName]];
+            obj[k.nodeName].push(v);
+          } else obj[k.nodeName]=v;
+        }
+      }
+      if(childNames.length===0){
+        var joined=textParts.join(' ');
+        if(Object.keys(obj).length===0) return joined;
+        if(joined) obj['#text']=joined;
+        return obj;
+      }
+      if(textParts.length){var jt=textParts.join(' ');if(jt)obj['#text']=jt;}
+      return obj;
+    }
+    var root=doc.documentElement;
+    if(!root) throw new Error('No root element found.');
+    var res={};res[root.nodeName]=conv(root);return res;
+  }
+  function run(){
+    st.textContent='';st.className='hint';
+    try{
+      var v=parseXml(inp.value);
+      out.value=JSON.stringify(v,null,2);
+      st.textContent='Converted successfully.';
+      st.className='hint ok';
+    }catch(e){out.value='';st.textContent='Error: '+e.message;st.className='hint err';}
+  }
+  document.getElementById('xmlRun').addEventListener('click',run);
+  document.getElementById('xmlClear').addEventListener('click',function(){inp.value='';out.value='';st.textContent='';});
+  document.getElementById('xmlSample').addEventListener('click',function(){
+    inp.value='<?xml version="1.0"?><catalog><book id="1"><title>Dune</title><year>1965</year><tags><tag>scifi</tag><tag>classic</tag></tags></book><book id="2"><title>Neuromancer</title><year>1984</year></book></catalog>';
+    run();
+  });
+  document.getElementById('xmlCopy').addEventListener('click',function(){
+    if(!out.value){st.textContent='Nothing to copy yet.';return;}
+    out.select();document.execCommand('copy');
+    if(navigator.clipboard) navigator.clipboard.writeText(out.value);
+    st.textContent='JSON copied to clipboard.';
+  });
+})();
+</script>
+
+  <section class="explain">
+    <h2>What happens when XML meets JSON</h2>
+    <p>XML and JSON both describe trees, but they disagree about how to do it. XML has attributes, mixed content, comments, processing instructions and namespaces; JSON has only objects, arrays, strings, numbers, booleans and null. A converter therefore has to make a set of judgement calls, and this tool makes them visibly rather than silently. Element names become object keys, nesting becomes nesting, and repeated sibling names automatically collapse into an array so that <code>&lt;tag&gt;a&lt;/tag&gt;&lt;tag&gt;b&lt;/tag&gt;</code> becomes <code>["a","b"]</code> instead of one key overwriting the other.</p>
+    <h2>Attributes and text nodes</h2>
+    <p>XML attributes are prefixed with an <code>@</code> sign &mdash; <code>&lt;book id="1"&gt;</code> becomes <code>{"@id": "1"}</code> &mdash; which is the same convention used by popular libraries such as xml2js and fast-xml-parser, so the output drops straight into existing code. Character data that sits alongside child elements is placed under <code>#text</code> rather than being thrown away, and whitespace-only text between elements is discarded because it is almost always formatting noise from pretty-printed documents.</p>
+    <h2>Why convert at all</h2>
+    <p>JSON is the default format of web APIs and of every modern language's standard library, while XML still dominates SOAP services, RSS and Atom feeds, sitemaps, Office documents, Android layouts and countless government and banking interfaces. Converting to JSON lets you query the tree with ordinary property access, sort it, filter it, store it in MongoDB or Redis, and debug it with <code>console.log</code>. If the result needs to be flattened for a spreadsheet, the JSON to CSV converter handles that next step.</p>
+    <h2>Reading errors instead of guessing</h2>
+    <p>Malformed XML is reported with the position information the browser's own parser produces, so an unclosed tag surfaces as an explicit error message rather than a half-built object. Remember that XML is strict: every element must be closed, tags are case-sensitive, attribute values must be quoted, and a bare <code>&amp;</code> must be written as <code>&amp;amp;</code>. If your input fails, check those four things first. To go the other direction, the XML formatter will pretty-print a minified document, and the YAML validator does the same job for the YAML family.</p>
+  </section>
+  <section class="related">
+    <h2>Related tools</h2>
+    <ul>
+      <li><a href="json-to-yaml.html">JSON to YAML</a></li>
+      <li><a href="xml-formatter.html">XML Formatter</a></li>
+      <li><a href="json-formatter.html">JSON Formatter</a></li>
+      <li><a href="yaml-to-json.html">YAML to JSON</a></li>
+      <li><a href="json-to-csv.html">JSON to CSV</a></li>
+    </ul>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; 2026 Online Toolbox &middot; <a href="index.html">Home</a> &middot; <a href="all-tools.html">All Tools</a> &middot; <a href="sitemap.xml">Sitemap</a></p>
+    <p class="muted">All tools run locally in your browser. No data is uploaded.</p>
+  </div>
+</footer>
+</body>
+</html>

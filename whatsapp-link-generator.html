@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WhatsApp Link Generator - Create wa.me Click-to-Chat Links Free</title>
+<meta name="description" content="Free WhatsApp link generator. Build a wa.me click-to-chat link with a prefilled message, plus a QR code and ready-to-paste HTML button. Runs in your browser.">
+<meta name="keywords" content="whatsapp link generator,wa.me link,whatsapp click to chat,whatsapp qr code,whatsapp link with message,create whatsapp link">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/whatsapp-link-generator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="WhatsApp Link Generator">
+<meta property="og:description" content="Free WhatsApp link generator. Build a wa.me click-to-chat link with a prefilled message, plus a QR code and ready-to-paste HTML button. Runs in your browser.">
+<meta property="og:url" content="https://maniu2475-glitch.github.io/tools-en/whatsapp-link-generator.html">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WhatsApp Link Generator">
+<meta name="twitter:description" content="Free WhatsApp link generator. Build a wa.me click-to-chat link with a prefilled message, plus a QR code and ready-to-paste HTML button. Runs in your browser.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdqAsxVwJGACZjAUIAd8a7S0L/1/1r/HPn1vAmAAGIAJRWYAfwFVAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "WhatsApp Link Generator", "url": "https://maniu2475-glitch.github.io/tools-en/whatsapp-link-generator.html", "description": "Free WhatsApp link generator. Build a wa.me click-to-chat link with a prefilled message, plus a QR code and ready-to-paste HTML button. Runs in your browser.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script></head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>WhatsApp Link Generator</h1>
+<h3>Build a click-to-chat link</h3>
+<p style="font-size:0.9rem;color:#666">Enter your number in international format without "+", spaces or dashes (example: 14155552671 for a US number).</p>
+<div class="btn-group">
+<label>Country code + number: <input id="wa-phone" type="text" style="width:200px" placeholder="14155552671"></label>
+</div>
+<div class="btn-group" style="margin-top:8px">
+<label>Prefilled message (optional):<br><textarea id="wa-msg" rows="3" style="width:100%;max-width:520px" placeholder="Hi! I would like to ask about…"></textarea></label>
+</div>
+<div class="btn-group" style="margin-top:8px">
+<button class="btn" onclick="waBuild()">Generate link</button>
+<button class="btn" onclick="waQr()">Show QR code</button>
+<button class="btn" onclick="waCopy()">Copy link</button>
+<button class="btn" onclick="waClear()">Clear</button>
+</div>
+<div class="result-box" id="wa-out" style="word-break:break-all;font-family:ui-monospace,Consolas,monospace">—</div>
+<div id="wa-qr" style="margin-top:10px;text-align:center"></div>
+<div id="wa-code" style="margin-top:10px"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+<script>
+function waValidate(phone){
+  var digits=(phone||'').replace(/[^0-9]/g,'');
+  if(digits.length<8||digits.length>15){return null;}
+  if(digits.charAt(0)==='0'){return null;}
+  return digits;
+}
+function waUrl(){
+  var p=waValidate(document.getElementById('wa-phone').value);
+  if(!p){return null;}
+  var msg=document.getElementById('wa-msg').value;
+  var u='https://wa.me/'+p;
+  if(msg&&msg.trim()!==''){u+='?text='+encodeURIComponent(msg);}
+  return u;
+}
+function waBuild(){
+  var u=waUrl();
+  var out=document.getElementById('wa-out');
+  if(!u){
+    out.textContent='Invalid number. Use 8-15 digits in international format, starting with the country code and without a leading zero.';
+    document.getElementById('wa-code').innerHTML='';
+    return;
+  }
+  out.textContent=u;
+  var p=waValidate(document.getElementById('wa-phone').value);
+  var msg=document.getElementById('wa-msg').value;
+  var btn='<p class="tool-desc" style="font-size:0.85rem">HTML button snippet:</p>'+
+    '<pre style="white-space:pre-wrap;word-break:break-all;font-size:0.8rem;background:#f6f7fb;padding:10px;border-radius:6px">&lt;a href="'+
+    u.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;')+
+    '" target="_blank" rel="noopener"&gt;Chat on WhatsApp&lt;/a&gt;</pre>';
+  if(p&&msg&&msg.length>250){
+    btn+='<p style="font-size:0.8rem;color:#b45309">Note: very long prefilled messages are truncated or ignored by some WhatsApp clients.</p>';
+  }
+  document.getElementById('wa-code').innerHTML=btn;
+}
+function waQr(){
+  var u=waUrl();
+  if(!u){document.getElementById('wa-qr').textContent='Generate a valid link first.';return;}
+  var box=document.getElementById('wa-qr');
+  box.innerHTML='';
+  if(!window.QRCode){box.textContent='QR library not loaded yet - check your connection and press Show QR code again.';return;}
+  new QRCode(box,{text:u,width:220,height:220,correctLevel:QRCode.CorrectLevel.M});
+}
+function waCopy(){
+  var u=waUrl();
+  if(!u){document.getElementById('wa-out').textContent='Generate a valid link first.';return;}
+  var ta=document.createElement('textarea');ta.value=u;document.body.appendChild(ta);
+  ta.select();document.execCommand('copy');document.body.removeChild(ta);
+  document.getElementById('wa-out').textContent=u+'  (copied)';
+}
+function waClear(){
+  document.getElementById('wa-phone').value='';
+  document.getElementById('wa-msg').value='';
+  document.getElementById('wa-out').textContent='—';
+  document.getElementById('wa-qr').innerHTML='';
+  document.getElementById('wa-code').innerHTML='';
+}
+</script>
+<p class="tool-desc">A WhatsApp click-to-chat link lets anyone start a conversation with you without first saving your number: the visitor taps the link, WhatsApp opens (app or web) and the chat is ready, optionally with a message already typed. The official format is <code>https://wa.me/&lt;phone&gt;</code>, where the phone number is written in full international format with no plus sign, no spaces and no leading zero - for example <code>wa.me/14155552671</code> for a US number and <code>wa.me/8613800138000</code> for a Chinese mobile.
+      <p class="tool-desc">Adding <code>?text=</code> with a URL-encoded message prefills the chat box, which is exactly what you want on a product page ("Hi, I would like to order the blue model"), in a restaurant menu, on a business card landing page, or in an email signature. The generator validates the number length (8 to 15 digits), builds the encoded URL for you and shows both the raw link and an HTML button snippet you can paste straight into a website.</p>
+      <p class="tool-desc">The companion QR code is handy for print: put it on a poster, a menu, a package insert or a shop window and passers-by scan it with their camera to open the conversation. Because the whole flow - validation, URL encoding and QR rendering - happens in your browser, the phone number and message are never uploaded. One caveat worth knowing: wa.me does not guarantee delivery to a user who has blocked unknown contacts, and very long prefilled messages may be truncated by some clients.</p></p>
+      <h3>Related tools</h3>
+      <div class="related-tools">
+<a class="btn btn-outline" href="qr-code-generator.html">QR code generator</a>
+<a class="btn btn-outline" href="url-encode-decode.html">URL encode/decode</a>
+<a class="btn btn-outline" href="url-parser.html">URL parser</a>
+<a class="btn btn-outline" href="slug-generator.html">Slug generator</a>
+<a class="btn btn-outline" href="html-entities.html">HTML entities</a>
+<a class="btn btn-outline" href="text-to-speech.html">Text to speech</a>
+<a class="btn btn-outline" href="random-string-generator.html">Random string</a>
+<a class="btn btn-outline" href="barcode-generator.html">Barcode generator</a>
+<a class="btn btn-outline" href="json-escape.html">JSON escape</a>
+<a class="btn btn-outline" href="curl-to-code.html">cURL to code</a>
+<a class="btn btn-outline" href="qr-scanner.html">QR code scanner</a>
+<a class="btn btn-outline" href="word-counter.html">Word counter</a>
+      </div>
+      <h3>Frequently asked questions</h3>
+      <div style="line-height:1.9">
+<details><summary><strong>What number format does wa.me require?</strong></summary><p>Country code followed by the subscriber number, digits only: no plus sign, no spaces, dashes, brackets or leading zero. UK 07700 900123 becomes 447700900123.</p></details>
+<details><summary><strong>Why does my link open WhatsApp Web instead of the app?</strong></summary><p>wa.me detects the platform. On desktop browsers it opens web.whatsapp.com; on phones with the app installed it opens the app directly. Both work with the same link.</p></details>
+<details><summary><strong>Can I use a prefilled message with emoji or Chinese text?</strong></summary><p>Yes. The message is URL-encoded with encodeURIComponent, so emoji, Chinese characters, line breaks and symbols are preserved.</p></details>
+<details><summary><strong>Is the generated link permanent?</strong></summary><p>The link is just a URL - it never expires. It stops working only if the phone number stops using WhatsApp or the account is deleted.</p></details>
+<details><summary><strong>Does wa.me work for WhatsApp Business accounts?</strong></summary><p>Yes, Business accounts can be reached with the same click-to-chat link; customers simply see the business profile banner when the chat opens.</p></details>
+      </div>
+  </section>
+  <div class="ad-banner" id="ad-bottom"><div class="ad-placeholder-text">Ad slot (728x90 / responsive)</div></div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <p><a href="index.html">All tools</a> • <a href="all-tools.html">Sitemap of tools</a> • <a href="index.html#privacy">Privacy</a></p>
+    <p class="muted">© 2026 Online Toolbox. All processing happens in your browser.</p>
+  </div>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>

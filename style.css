@@ -197,3 +197,19 @@ details summary{cursor:pointer}
 .opt-group{margin:10px 0;display:flex;gap:16px;flex-wrap:wrap;align-items:center}
 input[type=color]{cursor:pointer;border:none;background:none}
 @media(max-width:768px){div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}}
+
+/* --- shared helpers for generated tool pages --- */
+.ta { width:100%; box-sizing:border-box; font-family:ui-monospace,Menlo,Consolas,monospace; font-size:14px; line-height:1.5; margin-bottom:10px; }
+.row { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:12px; }
+.hint { color:#6a737d; font-size:14px; margin:8px 0; }
+.hint.ok { color:#1a7f37; }
+.hint.err { color:#c0392b; }
+.out-table { width:100%; border-collapse:collapse; margin:10px 0; }
+.out-table th { text-align:left; font-weight:600; padding:8px 10px; background:#f5f7fb; border-bottom:1px solid #e3e7ef; width:55%; color:#333a45; }
+.out-table td { padding:8px 10px; border-bottom:1px solid #e3e7ef; font-family:ui-monospace,Menlo,Consolas,monospace; }
+.lead { color:#4a5160; font-size:17px; margin-bottom:18px; }
+.explain h2 { margin-top:26px; font-size:20px; }
+.explain p { line-height:1.7; color:#333a45; }
+.related ul { display:flex; flex-wrap:wrap; gap:10px; list-style:none; padding:0; }
+.related li a { display:inline-block; padding:8px 14px; background:#eef1fb; color:#3d55c4; border-radius:999px; text-decoration:none; font-size:14px; }
+.related li a:hover { background:#dfe5fa; }

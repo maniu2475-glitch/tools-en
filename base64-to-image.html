@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Base64 to Image Decoder - Preview & Download Free</title>
+<meta name="description" content="Decode Base64 or data URI strings into a viewable, downloadable image. Also encode any image file to a data URI. 100% browser-side, nothing uploaded.">
+<meta name="keywords" content="base64 to image,base64 image decoder,data uri to image,base64 to png,decode base64 image,image to base64,data uri generator">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/base64-to-image.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Base64 to Image">
+<meta property="og:description" content="Decode Base64 or data URI strings into a viewable, downloadable image. Also encode any image file to a data URI. 100% browser-side, nothing uploaded.">
+<meta property="og:url" content="https://maniu2475-glitch.github.io/tools-en/base64-to-image.html">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Base64 to Image", "url": "https://maniu2475-glitch.github.io/tools-en/base64-to-image.html", "description": "Decode Base64 or data URI strings into a viewable, downloadable image. Also encode any image file to a data URI. 100% browser-side, nothing uploaded.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="menu">&#9776;</button>
+    <a class="logo" href="index.html#home"><span class="logo-icon">&#129520;</span><span class="logo-text">Online Toolbox</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#tool-json">JSON</a>
+      <a href="index.html#tool-base64">Base64</a>
+      <a href="index.html#tool-url">URL</a>
+      <a href="index.html#tool-qrcode">QR Code</a>
+      <a href="index.html#tool-password">Password</a>
+      <a href="index.html#tool-timestamp">Timestamp</a>
+      <a href="index.html#tool-color">Color</a>
+      <a href="all-tools.html">All Tools</a>
+    </nav>
+  </div>
+</header>
+<main class="container" id="home">
+  <h1>Base64 to Image</h1>
+  <p class="lead">Paste a Base64 string or <code>data:image/...</code> URI to preview and download the picture, or pick an image file to turn it into an embeddable data URI. The bytes never leave your browser.</p>
+
+  <section class="tool-card">
+    <h2>Base64 &rarr; image</h2>
+    <textarea id="biIn" class="ta" rows="8" spellcheck="false" placeholder="Paste a data URI (data:image/png;base64,...) or raw Base64 string" aria-label="Base64 input"></textarea>
+    <div class="row">
+      <button class="btn primary" id="biDecode">Decode</button>
+      <button class="btn" id="biPick">Choose image file…</button>
+      <input type="file" id="biFile" style="display:none" accept="image/*">
+      <button class="btn" id="biClear">Clear</button>
+    </div>
+    <p class="hint" id="biStatus"></p>
+    <div id="biPreviewWrap" style="display:none">
+      <img id="biPreview" alt="Decoded preview" style="max-width:100%;border-radius:8px;border:1px solid #dfe3ea">
+      <p class="hint" id="biMeta"></p>
+      <a id="biDownload" class="btn" download="decoded-image.png">Download image</a>
+    </div>
+  </section>
+  <section class="tool-card">
+    <h2>Image &rarr; Base64</h2>
+    <p class="hint">Pick any image with the button above; the data URI appears here, ready to paste into CSS or HTML.</p>
+    <textarea id="biOut" class="ta" rows="6" spellcheck="false" readonly aria-label="Base64 output"></textarea>
+    <div class="row"><button class="btn" id="biCopy">Copy data URI</button><span class="hint" id="biSize"></span></div>
+  </section>
+<script>
+(function(){
+  var inp=document.getElementById('biIn'),st=document.getElementById('biStatus');
+  var img=document.getElementById('biPreview'),wrap=document.getElementById('biPreviewWrap');
+  var meta=document.getElementById('biMeta'),dl=document.getElementById('biDownload');
+  var out=document.getElementById('biOut'),sizeEl=document.getElementById('biSize');
+  function setStatus(msg,cls){st.textContent=msg;st.className='hint'+(cls?' '+cls:'');}
+  function mimeFromB64(b){
+    if(b.indexOf('/9j/')===0)return 'image/jpeg';
+    if(b.indexOf('iVBOR')===0)return 'image/png';
+    if(b.indexOf('R0lGOD')===0)return 'image/gif';
+    if(b.indexOf('UklGR')===0)return 'image/webp';
+    if(b.indexOf('PHN2Zy')===0||b.indexOf('PD94bWw')===0)return 'image/svg+xml';
+    if(b.indexOf('Qk')===0)return 'image/bmp';
+    return 'image/png';
+  }
+  function decode(){
+    var raw=inp.value.trim();
+    if(!raw){setStatus('Paste something first.','err');wrap.style.display='none';return;}
+    var mime='image/png',b64=raw;
+    var m=raw.match(/^data:([^;,]+)?(;base64)?,([\s\S]*)$/);
+    if(m){if(m[1])mime=m[1];b64=m[3];}
+    b64=b64.replace(/\s+/g,'');
+    if(!/^[A-Za-z0-9+/=_-]+$/.test(b64)){setStatus('That does not look like Base64 (illegal characters).','err');wrap.style.display='none';return;}
+    if(m.indexOf(';base64')<0) mime=mimeFromB64(b64);
+    var uri='data:'+mime+';base64,'+b64;
+    img.onload=function(){
+      wrap.style.display='block';
+      var kb=Math.round(b64.length*3/4);
+      meta.textContent=mime+' · '+img.naturalWidth+' × '+img.naturalHeight+' px · ~'+kb+' bytes';
+      dl.href=uri;
+      dl.setAttribute('download','decoded.'+(mime.split('/')[1]||'png').replace('svg+xml','svg').replace('jpeg','jpg'));
+      setStatus('Decoded successfully.','ok');
+    };
+    img.onerror=function(){wrap.style.display='none';setStatus('Decoded bytes are not a valid image.','err');};
+    img.src=uri;
+  }
+  document.getElementById('biDecode').addEventListener('click',decode);
+  document.getElementById('biClear').addEventListener('click',function(){inp.value='';out.value='';wrap.style.display='none';setStatus('');});
+  document.getElementById('biPick').addEventListener('click',function(){document.getElementById('biFile').click();});
+  document.getElementById('biFile').addEventListener('change',function(e){
+    var f=e.target.files[0];if(!f)return;
+    var r=new FileReader();
+    r.onload=function(){
+      out.value=r.result;
+      sizeEl.textContent='data URI length: '+r.result.length.toLocaleString()+' chars';
+      inp.value=r.result;decode();
+    };
+    r.readAsDataURL(f);
+  });
+  document.getElementById('biCopy').addEventListener('click',function(){
+    if(!out.value){setStatus('Nothing to copy yet.','err');return;}
+    out.select();document.execCommand('copy');
+    if(navigator.clipboard)navigator.clipboard.writeText(out.value);
+    setStatus('Data URI copied.','ok');
+  });
+  inp.addEventListener('paste',function(){setTimeout(decode,0);});
+})();
+</script>
+
+  <section class="explain">
+    <h2>What a Base64 image actually is</h2>
+    <p>A data URI embeds a whole file inside a string: <code>data:image/png;base64,iVBORw0KGgo...</code>. The part before the comma is a media type declaration, the word <code>base64</code> says how the bytes were encoded, and everything after the comma is the file itself translated into the 64-character alphabet <code>A-Z a-z 0-9 + /</code> with <code>=</code> used as padding. Base64 exists because text channels &mdash; HTML attributes, CSS <code>url()</code>, JSON strings, email bodies &mdash; cannot safely carry arbitrary binary. Each group of three bytes becomes four characters, so the encoded string is about 33 percent larger than the original file.</p>
+    <h2>When embedding beats a separate request</h2>
+    <p>Inlining removes one HTTP request per image, which matters for tiny assets such as icons, spacer pixels, SVG logos and CSS gradients, and it guarantees the image renders even if the host path changes. The cost is that inlined images cannot be cached separately, they block the parsing of the stylesheet or HTML that contains them, and they are repeated in full every time the containing file is served. As a rule of thumb, inline anything under a few kilobytes and keep photographs and screenshots as separate files &mdash; and never inline an image that appears more than once on a page.</p>
+    <h2>Reading the preview honestly</h2>
+    <p>This page decodes entirely in the browser: the string never leaves your machine, which is why it is safe for screenshots of invoices, IDs or internal dashboards. The decoder sniffs the media type from the first bytes when the data URI does not declare one, because Base64 itself carries no format information &mdash; a JPEG and a PNG encode to indistinguishable-looking strings. If the preview area refuses to appear, the bytes are not an image: a truncated string, a missing <code>+</code>, or a newline inserted by an email client will all produce invalid data rather than a broken-looking picture.</p>
+    <h2>Going the other way</h2>
+    <p>The upper panel decodes, and the lower panel encodes a file you pick. Use it to build a CSS icon or a mail-signature logo, then check the resulting length before pasting into a style attribute. For raw text rather than files the Base64 encoder is simpler, the image compressor will shrink a photograph before you decide to inline it, and the image resizer is the right first step when a screenshot is too large to embed at all.</p>
+  </section>
+  <section class="related">
+    <h2>Related tools</h2>
+    <ul>
+      <li><a href="image-to-base64.html">Image to Base64</a></li>
+      <li><a href="base64.html">Base64 Encoder / Decoder</a></li>
+      <li><a href="image-compressor.html">Image Compressor</a></li>
+      <li><a href="image-resizer.html">Image Resizer</a></li>
+      <li><a href="png-to-jpg.html">PNG to JPG</a></li>
+    </ul>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; 2026 Online Toolbox &middot; <a href="index.html">Home</a> &middot; <a href="all-tools.html">All Tools</a> &middot; <a href="sitemap.xml">Sitemap</a></p>
+    <p class="muted">All tools run locally in your browser. No data is uploaded.</p>
+  </div>
+</footer>
+</body>
+</html>
