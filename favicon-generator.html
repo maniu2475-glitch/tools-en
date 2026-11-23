@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Favicon Generator - Create Favicon Icons from Text or Image (Free)</title>
+<meta name="description" content="Free favicon generator: make a website favicon from text, emoji or an uploaded image. Download 16x16, 32x32, 48x48, 180x180, 192x192 and 512x512 PNG icons instantly. No signup, no upload, 100% browser-side.">
+<meta name="keywords" content="favicon generator,free favicon maker,create favicon,apple touch icon,favicon png,favicon from text,favicon from image,website icon generator">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/favicon-generator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Favicon Generator">
+<meta property="og:description" content="Free favicon generator: make a website favicon from text, emoji or an uploaded image. Download 16x16, 32x32, 48x48, 180x180, 192x192 and 512x512 PNG icons instantly. No signup, no upload, 100% browser-side.">
+<meta property="og:url" content="https://maniu2475-glitch.github.io/tools-en/favicon-generator.html">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Favicon Generator", "url": "https://maniu2475-glitch.github.io/tools-en/favicon-generator.html", "description": "Free favicon generator: make a website favicon from text, emoji or an uploaded image. Download 16x16, 32x32, 48x48, 180x180, 192x192 and 512x512 PNG icons instantly. No signup, no upload, 100% browser-side.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Favicon Generator</h1>
+      <p class="tool-desc">Create a favicon from a letter, emoji or image and download all standard PNG sizes — 16x16, 32x32, 180x180, 512x512 — fully in your browser.</p>
+
+<div class="grid-2">
+<div>
+  <label>Choose a source</label>
+  <div class="btn-group" style="margin:8px 0">
+    <button class="btn btn-primary" onclick="fvTab('text')">From text</button>
+    <button class="btn btn-outline" onclick="fvTab('image')">From image</button>
+  </div>
+  <div id="fv-text-panel">
+    <label>Letter / emoji</label>
+    <input id="fv-char" value="A" maxlength="3" style="width:100px" oninput="fvDraw()">
+    <label style="display:block;margin-top:10px">Background color</label>
+    <input id="fv-bg" type="color" value="#4f6ef7" oninput="fvDraw()">
+    <label style="display:block;margin-top:10px">Text color</label>
+    <input id="fv-fg" type="color" value="#ffffff" oninput="fvDraw()">
+    <label style="display:block;margin-top:10px">Rounded corners: <span id="fv-r-rad">28</span>%</label>
+    <input id="fv-radius" type="range" min="0" max="50" value="28" style="width:100%" oninput="document.getElementById('fv-r-rad').textContent=this.value;fvDraw()">
+  </div>
+  <div id="fv-image-panel" style="display:none">
+    <label>Upload a square image</label>
+    <input type="file" accept="image/*" onchange="fvImg(this)">
+  </div>
+  <hr>
+  <label>Preview &amp; download</label>
+  <div id="fv-out" style="display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap"></div>
+</div>
+<div>
+  <canvas id="fv-canvas" width="512" height="512" style="width:180px;height:180px;border:1px solid #ddd;border-radius:10px;background:#fff"></canvas>
+  <p class="tool-desc" style="margin-top:10px">All sizes are generated locally in your browser — your image is never uploaded.</p>
+</div>
+</div>
+
+      <hr>
+      <h2>About this tool</h2>
+<p style="line-height:1.9">A favicon is the small square icon a browser shows in the tab, in bookmarks and on mobile home screens. Getting it right matters: a crisp 16x16 or 32x32 icon makes a site look professional, while a stretched or blurry icon makes it look unfinished. This generator produces every size modern browsers and platforms ask for — 16x16, 32x32, 48x48, 180x180 (Apple Touch Icon), 192x192 and 512x512 (Android / PWA manifest) — either from a single letter with a custom background color and corner radius, or from an image you upload. Because everything is drawn in a canvas element on your own device, the source image never leaves the browser; there is no server upload step and no retention of your artwork. Right-click any preview to save the PNG, or use the download buttons. Typical workflow: type your brand initial, pick your brand color, download the 32x32 and 180x180 files, then reference them in your HTML head with rel="icon" and rel="apple-touch-icon". For multi-size .ico files, most modern browsers accept the PNG 32x32 alone, so the generated PNG is enough for 2026-era sites. If you also need to convert images between formats, try our PNG to JPG or WebP tools alongside this page.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="image-resizer.html">Image Resizer</a><a class="btn btn-outline" href="image-compressor.html">Image Compressor</a><a class="btn btn-outline" href="png-to-jpg.html">PNG to JPG</a><a class="btn btn-outline" href="image-to-base64.html">Image to Base64</a><a class="btn btn-outline" href="color-picker.html">Color Picker</a><a class="btn btn-outline" href="qr-code-generator.html">QR Code Generator</a><a class="btn btn-outline" href="barcode-generator.html">Barcode Generator</a><a class="btn btn-outline" href="base64-to-image.html">Base64 to Image</a></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2026 Online Toolbox · Free browser-side tools, no data uploaded.</p></div></footer>
+<script>
+
+var fvMode='text', fvImage=null;
+function fvTab(m){fvMode=m;document.getElementById('fv-text-panel').style.display=(m==='text')?'block':'none';document.getElementById('fv-image-panel').style.display=(m==='image')?'block':'none';fvDraw();}
+function fvImg(inp){var f=inp.files&&inp.files[0];if(!f){fvImage=null;return;}var img=new Image();img.onload=function(){fvImage=img;fvDraw();};img.src=URL.createObjectURL(f);}
+function fvDraw(){
+  var c=document.getElementById('fv-canvas'),x=c.getContext('2d'),S=512;
+  x.clearRect(0,0,S,S);
+  if(fvMode==='image'&&fvImage){
+    var r=parseInt(document.getElementById('fv-radius').value,10)/100*S;
+    x.save();x.beginPath();x.moveTo(r,0);x.arcTo(S,0,S,S,r);x.arcTo(S,S,0,S,r);x.arcTo(0,S,0,0,r);x.arcTo(0,0,S,0,r);x.closePath();x.clip();
+    var sc=Math.min(S/fvImage.width,S/fvImage.height);
+    var w=fvImage.width*sc,h=fvImage.height*sc;
+    x.drawImage(fvImage,(S-w)/2,(S-h)/2,w,h);x.restore();
+  } else {
+    var bg=document.getElementById('fv-bg').value;
+    var rad=parseInt(document.getElementById('fv-radius').value,10)/100*S;
+    x.fillStyle=bg;x.beginPath();
+    x.moveTo(rad,0);x.arcTo(S,0,S,S,rad);x.arcTo(S,S,0,S,rad);x.arcTo(0,S,0,0,rad);x.arcTo(0,0,S,0,rad);x.closePath();x.fill();
+    var t=document.getElementById('fv-char').value||'A';
+    x.fillStyle=document.getElementById('fv-fg').value;
+    x.font='bold '+(S*0.58)+'px -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif';
+    x.textAlign='center';x.textBaseline='middle';
+    x.fillText(t,S/2,S/2+S*0.02);
+  }
+  fvOut();
+}
+function fvOut(){
+  var out=document.getElementById('fv-out');out.innerHTML='';
+  [16,32,48,180,192,512].forEach(function(s){
+    var c2=document.createElement('canvas');c2.width=s;c2.height=s;
+    c2.getContext('2d').drawImage(document.getElementById('fv-canvas'),0,0,s,s);
+    var url=c2.toDataURL('image/png');
+    var wrap=document.createElement('div');wrap.style.textAlign='center';
+    var im=document.createElement('img');im.src=url;im.width=Math.min(s,64);im.height=Math.min(s,64);
+    im.style.cssText='display:block;margin:0 auto 4px;border:1px solid #ddd;border-radius:4px;image-rendering:pixelated';
+    var a=document.createElement('a');a.href=url;a.download='favicon-'+s+'x'+s+'.png';a.textContent=s+'px';a.style.fontSize='12px';
+    wrap.appendChild(im);wrap.appendChild(a);out.appendChild(wrap);
+  });
+}
+fvDraw();
+
+</script>
+</body>
+</html>

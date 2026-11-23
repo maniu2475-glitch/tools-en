@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Watermark to Image Online - Free Text Watermark Tool (No Upload)</title>
+<meta name="description" content="Free online image watermark tool: add copyright text or your brand name to photos with adjustable size, opacity, color and position, including tiled watermarks. No upload, no signup, works offline in the browser.">
+<meta name="keywords" content="add watermark to image,watermark photo online,text watermark,image watermark free,batch watermark,copyright watermark,watermark png,protect photos">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/image-watermark.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Image Watermark Tool">
+<meta property="og:description" content="Free online image watermark tool: add copyright text or your brand name to photos with adjustable size, opacity, color and position, including tiled watermarks. No upload, no signup, works offline in the browser.">
+<meta property="og:url" content="https://maniu2475-glitch.github.io/tools-en/image-watermark.html">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Image Watermark Tool", "url": "https://maniu2475-glitch.github.io/tools-en/image-watermark.html", "description": "Free online image watermark tool: add copyright text or your brand name to photos with adjustable size, opacity, color and position, including tiled watermarks. No upload, no signup, works offline in the browser.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<div class="ad-banner" id="ad-top"><div class="ad-placeholder-text">Ad slot (728x90 / responsive) — AdSense code goes here</div></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span> <span>Online Toolbox</span></a>
+    <span class="tagline">Free • Private • Browser-side</span>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-main">
+      <h1>Add Watermark to Image</h1>
+      <p class="tool-desc">Put a text watermark on any photo — set font size, opacity, color and position, then download a PNG. Runs entirely in your browser.</p>
+
+<div class="grid-2">
+<div>
+  <label>1. Upload an image</label>
+  <input type="file" accept="image/*" onchange="wmLoad(this)">
+  <label style="display:block;margin-top:14px">2. Watermark text</label>
+  <input id="wm-text" value="© Your Name" style="width:100%" oninput="wmDraw()">
+  <label style="display:block;margin-top:10px">Font size: <span id="wm-sz-l">48</span>px</label>
+  <input id="wm-size" type="range" min="10" max="200" value="48" style="width:100%" oninput="document.getElementById('wm-sz-l').textContent=this.value;wmDraw()">
+  <label style="display:block;margin-top:10px">Opacity: <span id="wm-op-l">50</span>%</label>
+  <input id="wm-opacity" type="range" min="5" max="100" value="50" style="width:100%" oninput="document.getElementById('wm-op-l').textContent=this.value;wmDraw()">
+  <label style="display:block;margin-top:10px">Color</label>
+  <input id="wm-color" type="color" value="#ffffff" oninput="wmDraw()">
+  <label style="display:block;margin-top:10px">Position</label>
+  <select id="wm-pos" onchange="wmDraw()">
+    <option value="br">Bottom right</option><option value="bl">Bottom left</option>
+    <option value="tr">Top right</option><option value="tl">Top left</option>
+    <option value="c">Center</option><option value="tile">Tiled (repeat)</option>
+  </select>
+  <label style="display:block;margin-top:10px"><input type="checkbox" id="wm-shadow" checked onchange="wmDraw()"> Add shadow for readability</label>
+  <button class="btn btn-primary" style="margin-top:14px" onclick="wmSave()">Download watermarked image</button>
+</div>
+<div>
+  <canvas id="wm-canvas" style="max-width:100%;border:1px solid #ddd;border-radius:10px"></canvas>
+  <p class="tool-desc" id="wm-hint" style="margin-top:10px">Upload an image to start. Nothing is uploaded anywhere.</p>
+</div>
+</div>
+
+      <hr>
+      <h2>About this tool</h2>
+<p style="line-height:1.9">A watermark is the simplest way to mark an image as yours before it gets shared, re-posted or scraped. Photographers use a copyright line, designers use a brand name, and marketplace sellers use it to protect product photos from being reused by competitors. This tool draws a text watermark straight onto a canvas in your browser: choose the text, font size, opacity, color and position, then export a PNG. Position presets cover the four corners plus a centered placement, and the tiled option repeats the watermark across the whole image, which is much harder to crop out than a single corner mark. A drop shadow is applied by default because white text over a bright sky or a white background becomes invisible without it. Because the image is decoded by the browser and never transmitted, this is safe for client photos, ID documents and unreleased product shots — nothing leaves your computer and no copy is stored. Practical tips: keep opacity around 30-50% so the watermark deters reuse without ruining the picture, keep the font size proportional to image width (about 4-6% looks natural), and place the mark where cropping it out would cut the subject. Export at the original resolution using the download button; the PNG keeps full quality. If you need to shrink the file afterwards, run it through our image compressor.</p>
+      <h3>Related tools</h3>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="image-compressor.html">Image Compressor</a><a class="btn btn-outline" href="image-resizer.html">Image Resizer</a><a class="btn btn-outline" href="favicon-generator.html">Favicon Generator</a><a class="btn btn-outline" href="png-to-jpg.html">PNG to JPG</a><a class="btn btn-outline" href="image-to-base64.html">Image to Base64</a><a class="btn btn-outline" href="exif-viewer.html">EXIF Viewer</a><a class="btn btn-outline" href="color-picker.html">Color Picker</a><a class="btn btn-outline" href="qr-code-generator.html">QR Code Generator</a></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2026 Online Toolbox · Free browser-side tools, no data uploaded.</p></div></footer>
+<script>
+
+var wmImg=null;
+function wmLoad(inp){
+  var f=inp.files&&inp.files[0];if(!f)return;
+  var img=new Image();
+  img.onload=function(){wmImg=img;var c=document.getElementById('wm-canvas');c.width=img.width;c.height=img.height;wmDraw();document.getElementById('wm-hint').textContent='Loaded '+img.width+'x'+img.height+'px. Adjust the watermark and download.';};
+  img.src=URL.createObjectURL(f);
+}
+function wmDraw(){
+  var c=document.getElementById('wm-canvas'),x=c.getContext('2d');
+  if(!wmImg){return;}
+  c.width=wmImg.width;c.height=wmImg.height;
+  x.drawImage(wmImg,0,0);
+  var txt=document.getElementById('wm-text').value||'';
+  var sz=parseInt(document.getElementById('wm-size').value,10);
+  var op=parseInt(document.getElementById('wm-opacity').value,10)/100;
+  var col=document.getElementById('wm-color').value;
+  var pos=document.getElementById('wm-pos').value;
+  var shadow=document.getElementById('wm-shadow').checked;
+  x.font='bold '+sz+'px -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif';
+  x.globalAlpha=op;x.fillStyle=col;
+  var m=sz*0.8;
+  if(pos==='tile'){
+    x.save();
+    var stepX=x.measureText(txt).width+sz*4, stepY=sz*4;
+    x.translate(-c.width/2,-c.height/2);x.rotate(-30*Math.PI/180);x.translate(-c.width/2,-c.height/2);
+    for(var yy=-sz;yy<c.height*2;yy+=stepY){
+      for(var xx=-sz;xx<c.width*2;xx+=stepX){
+        if(shadow){x.shadowColor='rgba(0,0,0,0.55)';x.shadowBlur=sz*0.2;x.shadowOffsetX=1;x.shadowOffsetY=1;}
+        x.fillText(txt,xx,yy);
+      }
+    }
+    x.restore();x.globalAlpha=1;return;
+  }
+  var w=x.measureText(txt).width, h=sz;
+  var px,py;
+  if(pos==='br'){px=c.width-w-m;py=c.height-m;}
+  else if(pos==='bl'){px=m;py=c.height-m;}
+  else if(pos==='tr'){px=c.width-w-m;py=m+sz;}
+  else if(pos==='tl'){px=m;py=m+sz;}
+  else {px=(c.width-w)/2;py=(c.height+sz)/2;}
+  if(shadow){x.shadowColor='rgba(0,0,0,0.55)';x.shadowBlur=sz*0.2;x.shadowOffsetX=1;x.shadowOffsetY=1;}
+  x.fillText(txt,px,py);
+  x.shadowBlur=0;x.globalAlpha=1;
+}
+function wmSave(){
+  if(!wmImg){alert('Please upload an image first.');return;}
+  var c=document.getElementById('wm-canvas');
+  var a=document.createElement('a');a.download='watermarked.png';a.href=c.toDataURL('image/png');a.click();
+}
+
+</script>
+</body>
+</html>
