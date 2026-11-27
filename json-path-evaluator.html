@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JSONPath Evaluator - Query and Extract JSON Online</title>
+<meta name="description" content="Free online JSONPath evaluator: run JSONPath expressions ($, .., wildcards, filters) against your JSON and see every matched value instantly in the browser.">
+<meta name="keywords" content="jsonpath online, jsonpath evaluator, json query, jsonpath tester, jsonpath filter, extract json values">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/json-path-evaluator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JSONPath Evaluator - Query and Extract JSON Online">
+<meta property="og:description" content="Free online JSONPath evaluator: run JSONPath expressions ($, .., wildcards, filters) against your JSON and see every matched value instantly in the browser.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "JSONPath Evaluator", "url": "https://maniu2475-glitch.github.io/tools-en/json-path-evaluator.html", "description": "Free online JSONPath evaluator: run JSONPath expressions ($, .., wildcards, filters) against your JSON and see every matched value instantly in the browser.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<header><a href="index.html">&larr; All Tools</a> <span class="brand">ToolBox</span></header>
+<main>
+<h1>JSONPath Evaluator</h1>
+<p class="lead">Paste JSON, write a JSONPath expression, and instantly see every match. Supports root <code>$</code>, child <code>.key</code>, wildcards, recursive descent <code>..</code> and filter expressions <code>[?(@.price &lt; 10)]</code>.</p>
+<div class="row"><button onclick="sample()">Load sample</button><button onclick="run()">Evaluate</button></div>
+<label>JSON input</label>
+<textarea id="src" rows="12" spellcheck="false"></textarea>
+<label>JSONPath expression</label>
+<input id="path" type="text" value="$..title" spellcheck="false">
+<p id="msg" class="muted"></p>
+<label>Matches (JSON)</label>
+<textarea id="res" rows="10" readonly></textarea>
+<section class="about">
+<h2>About this tool</h2>
+<p>JSONPath is a lightweight query language for JSON, roughly the JSON equivalent of XPath. Instead of walking a structure by hand in code, you describe the path you want and the evaluator returns every node that matches. It is widely used in API testing, log filtering, ETL preprocessing and configuration tooling.</p>
+
+<p>The syntax is small but expressive. <code>$</code> is the root of the document. <code>.store</code> selects a child property, <code>[*]</code> or <code>.*</code> selects all children, and <code>..</code> performs a recursive descent so that <code>$..price</code> finds every <code>price</code> field at any depth. Filters such as <code>$.items[?(@.price &lt; 10)]</code> keep only elements whose members satisfy a comparison; comparisons support the usual operators plus existence checks and boolean combinations with <code>&amp;&amp;</code> and <code>||</code>. Index slices like <code>[0:3]</code> and negative indices such as <code>[-1:]</code> work as well.</p>
+
+<p>This page implements the common subset of the specification, including recursive descent, wildcards, numeric indices, slices and filter expressions, and it renders the complete match set as JSON so you can copy it straight into a test assertion or a script. If an expression matches nothing you get an empty array rather than an error, which distinguishes "no match" from "malformed query" — syntax problems are reported separately with the position that failed.</p>
+
+<p>All parsing and evaluation happens in your browser using JavaScript. Nothing is uploaded, so it is safe to paste production payloads, tokens or customer records while debugging. Very large documents may take a moment because evaluation walks the whole tree for recursive queries.</p>
+</section>
+<section class="related">
+<h2>Related tools</h2>
+<ul>
+<li><a href="json-formatter.html">JSON Formatter</a></li>
+<li><a href="json-to-typescript.html">JSON to TypeScript</a></li>
+<li><a href="json-to-csv.html">JSON to CSV</a></li>
+<li><a href="regex-tester.html">Regex Tester</a></li>
+<li><a href="url-parser.html">URL Parser</a></li>
+</ul>
+</section>
+</main>
+<footer><p>All processing happens in your browser. No data is uploaded to any server.</p>
+<p><a href="index.html">Free Online Tools</a></p></footer>
+<script>
+
+function sample(){
+  document.getElementById('src').value=JSON.stringify({
+    store:{book:[
+      {title:'Clean Code',price:32.5,author:{name:'Robert Martin'}},
+      {title:'The Pragmatic Programmer',price:24.0,author:{name:'Andrew Hunt'}},
+      {title:'Refactoring',price:9.99,author:{name:'Martin Fowler'}}
+    ],bicycle:{color:'red',price:19.95}}
+  },null,2);
+  run();
+}
+function tokenize(p){
+  var t=[],i=0;
+  while(i<p.length){
+    var c=p[i];
+    if(c==='$'){t.push({t:'root'});i++;}
+    else if(c==='.'&&p[i+1]==='.'){t.push({t:'rec'});i+=2;}
+    else if(c==='.'){i++;}
+    else if(c==='*'){t.push({t:'wild'});i++;}
+    else if(c==='['){
+      var j=i+1,q='',depth=1;
+      while(j<p.length&&depth>0){if(p[j]==='[')depth++;if(p[j]===']'){depth--;if(!depth)break;}q+=p[j];j++;}
+      t.push({t:'brk',v:q.trim()});i=j+1;
+    }
+    else{var s='';while(i<p.length&&/[A-Za-z0-9_\-]/.test(p[i])){s+=p[i];i++;}t.push({t:'key',v:s});}
+  }
+  return t;
+}
+// Recursive descent helper: push a container, then descend into its children.
+// Only containers are pushed, so a following `.key` token selects each match once.
+function descend(node,out){
+  out.push(node);
+  if(node&&typeof node==='object'){
+    var vals=Array.isArray(node)?node:Object.keys(node).map(function(k){return node[k];});
+    vals.forEach(function(v){if(v&&typeof v==='object')descend(v,out);});
+  }
+}
+function applyFilter(arr,expr){
+  var m=expr.match(/^\?\(\s*@\.([A-Za-z0-9_]+)\s*(==|!=|<=|>=|<|>)\s*(.+?)\s*\)$/);
+  if(!m)return arr;
+  var key=m[1],op=m[2],raw=m[3].trim();
+  var val;
+  if(/^'.*'$/.test(raw)||/^".*"$/.test(raw))val=raw.slice(1,-1);
+  else if(raw==='true')val=true;else if(raw==='false')val=false;
+  else if(raw==='null')val=null;else val=Number(raw);
+  return arr.filter(function(o){
+    if(!o||typeof o!=='object')return false;
+    var v=o[key];
+    switch(op){
+      case '==':return v==val;case '!=':return v!=val;
+      case '<':return v<val;case '>':return v>val;
+      case '<=':return v<=val;case '>=':return v>=val;
+    }
+    return false;
+  });
+}
+function run(){
+  var msg=document.getElementById('msg'),res=document.getElementById('res');
+  var src;try{src=JSON.parse(document.getElementById('src').value);}
+  catch(e){msg.textContent='Invalid JSON: '+e.message;res.value='';return;}
+  var path=document.getElementById('path').value.trim();
+  if(!path){msg.textContent='Enter a JSONPath expression.';return;}
+  var toks;try{toks=tokenize(path);}catch(e){msg.textContent='Bad expression.';return;}
+  var cur=[src];
+  try{
+    toks.forEach(function(tk){
+      var nxt=[];
+      cur.forEach(function(n){
+        if(tk.t==='root'){nxt.push(n);}
+        else if(tk.t==='wild'){
+          if(Array.isArray(n))n.forEach(function(v){nxt.push(v)});
+          else if(n&&typeof n==='object')Object.keys(n).forEach(function(k){nxt.push(n[k])});
+        }
+        else if(tk.t==='rec'){descend(n,nxt);}
+        else if(tk.t==='key'){
+          if(Array.isArray(n))n.forEach(function(v){if(v&&typeof v==='object'&&tk.v in v)nxt.push(v[tk.v])});
+          else if(n&&typeof n==='object'&&tk.v in n)nxt.push(n[tk.v]);
+        }
+        else if(tk.t==='brk'){
+          var q=tk.v;
+          if(q==='*'){if(Array.isArray(n))n.forEach(function(v){nxt.push(v)});else if(n&&typeof n==='object')Object.keys(n).forEach(function(k){nxt.push(n[k])});}
+          else if(q[0]==='?'){if(Array.isArray(n))applyFilter(n,q).forEach(function(v){nxt.push(v)});}
+          else if(q.indexOf(':')>-1){
+            var ps=q.split(':'),a=ps[0]===''?0:parseInt(ps[0],10),b=ps[1]===''?undefined:parseInt(ps[1],10);
+            if(Array.isArray(n))n.slice(a,b).forEach(function(v){nxt.push(v)});
+          }
+          else if(/^-?\d+$/.test(q)){
+            var idx=parseInt(q,10);
+            if(Array.isArray(n)){var e=idx<0?n[n.length+idx]:n[idx];if(e!==undefined)nxt.push(e);}
+            else if(n&&typeof n==='object'&&q in n)nxt.push(n[q]);
+          }
+          else if(q[0]==="'"||q[0]==='"'){var kk=q.slice(1,-1);if(n&&typeof n==='object'&&kk in n)nxt.push(n[kk]);}
+        }
+      });
+      cur=nxt;
+    });
+  }catch(e){msg.textContent='Evaluation error: '+e.message;return;}
+  var out=cur.length===1?cur[0]:cur;
+  res.value=JSON.stringify(out,null,2);
+  msg.textContent='Expression: '+path+'  \u2192  '+cur.length+' match'+(cur.length===1?'':'es')+'.';
+}
+document.addEventListener('DOMContentLoaded',sample);
+
+</script>
+</body>
+</html>

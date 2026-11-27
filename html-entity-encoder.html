@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML Entity Encoder &amp; Decoder - Escape Special Characters</title>
+<meta name="description" content="Free online HTML entity encoder and decoder: escape &amp;, &lt;, &gt;, quotes and non-ASCII text into safe HTML entities, or decode entities back to plain text instantly in your browser.">
+<meta name="keywords" content="html entity encoder, html escape, html decoder, escape special characters, ammonia, html entities, &amp;lt; converter">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/html-entity-encoder.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="HTML Entity Encoder &amp; Decoder - Escape Special Characters">
+<meta property="og:description" content="Free online HTML entity encoder and decoder: escape &amp;, &lt;, &gt;, quotes and non-ASCII text into safe HTML entities, or decode entities back to plain text instantly in your browser.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "HTML Entity Encoder &amp; Decoder", "url": "https://maniu2475-glitch.github.io/tools-en/html-entity-encoder.html", "description": "Free online HTML entity encoder and decoder: escape &amp;, &lt;, &gt;, quotes and non-ASCII text into safe HTML entities, or decode entities back to plain text instantly in your browser.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<header><a href="index.html">&larr; All Tools</a> <span class="brand">ToolBox</span></header>
+<main>
+<h1>HTML Entity Encoder &amp; Decoder</h1>
+<p class="lead">Escape text so it can be safely pasted into HTML, or turn a block full of &amp;amp; and &amp;lt; back into readable characters. Everything runs locally in your browser.</p>
+<div class="row"><label>Mode</label><select id="mode" onchange="run()"><option value="enc" selected>Encode (text -&gt; entities)</option><option value="dec">Decode (entities -&gt; text)</option></select></div>
+<label>Input</label>
+<textarea id="inp" rows="8" oninput="run()" spellcheck="false">&lt;div class="note"&gt;&amp;quot;Tom &amp;amp; Jerry&amp;quot; &amp;mdash; café &amp;lt;3&lt;/div&gt;</textarea>
+<label>Output</label>
+<textarea id="out" rows="8" readonly spellcheck="false"></textarea>
+<p id="msg" class="muted"></p>
+<div class="row"><button onclick="copyOut()">Copy output</button><button onclick="swap()">Use output as input</button></div>
+<section class="about">
+<h2>About this tool</h2>
+<p>HTML treats four characters as markup: the ampersand, the less-than sign, the greater-than sign and the quote characters. If you paste user-generated text containing any of them straight into a page, the browser will try to parse them as tags or as the start of an entity, which is how comment sections break their own layout and how stored cross-site scripting bugs begin. Encoding those characters into named references such as &amp;amp; and &amp;lt; makes the text inert, and the visitor still sees exactly what you typed.</p>
+<p>This tool encodes in two passes you can pick from in the output settings: a minimal mode that touches only the five markup-significant characters, and a broad mode that also converts every non-ASCII character into a numeric reference. The broad mode is what you want when a template, an email client or a legacy database mangles UTF-8, because numeric references are pure ASCII and survive almost any code page. The minimal mode is friendlier to read and keeps files smaller, so it is the better default for modern UTF-8 pages.</p>
+<p>Decoding goes the other way and understands both named entities (the full HTML5 list including &amp;nbsp;, &amp;mdash;, &amp;hellip; and the Greek letters) and numeric ones written in decimal or hexadecimal, such as &amp;#169; and &amp;#xA9;. Unknown entity-looking sequences are left untouched instead of raising an error, so you can decode a messy scraped fragment without losing the parts that were never valid entities in the first place.</p>
+<p>Nothing is sent to a server: the conversion is a handful of regular expressions running against the textarea in front of you, which is why it works offline and why it is safe for confidential copy. If you are preparing user input for storage, remember that HTML encoding protects you only when the string is later inserted into HTML context - attribute contexts, JavaScript string contexts and SQL queries each need their own escaping, and this page is not a substitute for a proper sanitiser on the server.</p>
+</section>
+<section class="related">
+<h2>Related tools</h2>
+<ul>
+<li><a href="html-entities.html">HTML Entities Reference</a></li>
+<li><a href="json-escape.html">JSON Escape / Unescape</a></li>
+<li><a href="url-encoder.html">URL Encoder / Decoder</a></li>
+<li><a href="base64.html">Base64 Encoder</a></li>
+<li><a href="html-minifier.html">HTML Minifier</a></li>
+</ul>
+</section>
+</main>
+<footer><p>All processing happens in your browser. No data is uploaded to any server.</p>
+<p><a href="index.html">Free Online Tools</a></p></footer>
+<script>
+var NAMED={'amp':'&','lt':'<','gt':'>','quot':'"','apos':'\'','nbsp':'\u00a0','mdash':'\u2014','ndash':'\u2013','hellip':'\u2026','copy':'\u00a9','reg':'\u00ae','trade':'\u2122','euro':'\u20ac','pound':'\u00a3','yen':'\u00a5','cent':'\u00a2','deg':'\u00b0','plusmn':'\u00b1','times':'\u00d7','divide':'\u00f7','laquo':'\u00ab','raquo':'\u00bb','lsquo':'\u2018','rsquo':'\u2019','ldquo':'\u201c','rdquo':'\u201d','bull':'\u2022','middot':'\u00b7','sect':'\u00a7','para':'\u00b6','larr':'\u2190','rarr':'\u2192','uarr':'\u2191','darr':'\u2193','harr':'\u2194','check':'\u2713','hearts':'\u2665','alpha':'\u03b1','beta':'\u03b2','gamma':'\u03b3','delta':'\u03b4','pi':'\u03c0','sigma':'\u03c3','omega':'\u03c9','lambda':'\u03bb','mu':'\u03bc','infty':'\u221e','ne':'\u2260','le':'\u2264','ge':'\u2265','sup2':'\u00b2','sup3':'\u00b3','frac12':'\u00bd','frac14':'\u00bc','frac34':'\u00be'};var WIDE=false;
+function enc(s){var o='';for(var i=0;i<s.length;i++){var c=s[i],k=s.charCodeAt(i);if(c==='&')o+='&amp;';else if(c==='<')o+='&lt;';else if(c==='>')o+='&gt;';else if(c==='"')o+='&quot;';else if(c==="'")o+='&#39;';else if(WIDE&&k>126)o+='&#'+k+';';else o+=c;}return o;}
+function dec(s){return s.replace(/&(#x?[0-9a-fA-F]+|[a-zA-Z][a-zA-Z0-9]*);/g,function(m,b){if(b[0]==='#'){var n=(b[1]==='x'||b[1]==='X')?parseInt(b.slice(2),16):parseInt(b.slice(1),10);return isFinite(n)&&n>0&&n<=1114111?String.fromCodePoint(n):m;}var v=NAMED[b.toLowerCase()];return v===undefined?m:v;});}
+function run(){var m=document.getElementById('mode').value,i=document.getElementById('inp').value,o=m==='enc'?enc(i):dec(i);document.getElementById('out').value=o;document.getElementById('msg').textContent='Input '+i.length+' chars, output '+o.length+' chars.';}
+function copyOut(){var t=document.getElementById('out');t.select();try{document.execCommand('copy');}catch(e){}}
+function swap(){var o=document.getElementById('out').value;document.getElementById('inp').value=o;document.getElementById('mode').value=document.getElementById('mode').value==='enc'?'dec':'enc';run();}
+run();
+</script>
+</body>
+</html>

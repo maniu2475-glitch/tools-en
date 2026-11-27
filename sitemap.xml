@@ -610,4 +610,28 @@
   <url><loc>https://maniu2475-glitch.github.io/tools-en/favicon-generator.html</loc><lastmod>2026-11-23</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://maniu2475-glitch.github.io/tools-en/image-watermark.html</loc><lastmod>2026-11-23</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://maniu2475-glitch.github.io/tools-en/http-status-codes.html</loc><lastmod>2026-11-23</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://maniu2475-glitch.github.io/tools-en/json-path-evaluator.html</loc><lastmod>2026-11-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://maniu2475-glitch.github.io/tools-en/onclick-generator.html</loc><lastmod>2026-11-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://maniu2475-glitch.github.io/tools-en/phone-number-formatter.html</loc><lastmod>2026-11-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://maniu2475-glitch.github.io/tools-en/unicode-text-converter.html</loc><lastmod>2026-11-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://maniu2475-glitch.github.io/tools-en/html-entity-encoder.html</loc><lastmod>2026-11-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://maniu2475-glitch.github.io/tools-en/gitignore-generator.html</loc><lastmod>2026-11-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url>
+    <loc>https://maniu2475-glitch.github.io/tools-en/image-to-pdf.html</loc>
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://maniu2475-glitch.github.io/tools-en/svg-to-png.html</loc>
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://maniu2475-glitch.github.io/tools-en/anagram-solver.html</loc>
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

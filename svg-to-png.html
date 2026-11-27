@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SVG to PNG Converter Online - Rasterize SVG Free</title>
+<meta name="description" content="Convert SVG vector images to transparent PNG at any resolution right in your browser. Set custom width/height, download instantly. No upload, fully private.">
+<meta name="keywords" content="svg to png,svg to png converter,rasterize svg,svg converter,convert svg online,svg to png transparent">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/svg-to-png.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<!-- Open Graph / SEO -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="SVG to PNG Converter">
+<meta property="og:description" content="Convert SVG vector images to transparent PNG at any resolution right in your browser. Set custom width/height, download instantly. No upload, fully private.">
+<meta property="og:url" content="https://maniu2475-glitch.github.io/tools-en/svg-to-png.html">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdqAsxVwJGACZjAUIAd8a7S0L/1/1r/HPn1vAmAAGIAJRWYAfwFVAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "SVG to PNG Converter", "url": "https://maniu2475-glitch.github.io/tools-en/svg-to-png.html", "description": "Convert SVG vector images to transparent PNG at any resolution right in your browser. Set custom width/height, download instantly. No upload, fully private.", "applicationCategory": "UtilityApplication", "operatingSystem": "All", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script>
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a class="logo" href="index.html">🧰 Free Online Tools</a>
+<nav><a href="index.html">Home</a> <a href="all-tools.html">All Tools</a></nav></div></header>
+<main class="wrap">
+<h1>SVG to PNG Converter</h1>
+<p class="lead">Rasterize SVG vector graphics into crisp PNG images at the exact size you need. Runs entirely in your browser — nothing is uploaded.</p>
+<section class="tool-card">
+<input type="file" id="svg" accept=".svg,image/svg+xml" class="file-input">
+<div class="row"><label>Width <input type="number" id="w" value="1024" min="1"></label>
+<label>Height <input type="number" id="h" value="1024" min="1"></label>
+<label>Background <input type="text" id="bg" value="transparent"></label></div>
+<button id="go">Convert to PNG</button> <span id="msg"></span>
+<div id="prev" style="margin-top:12px"></div>
+</section>
+<section class="explain">
+<h2>About this SVG to PNG Converter</h2>
+<p>SVG is a vector format, which means it scales infinitely without losing quality but is not always supported by the programs or platforms you need it for. Photos, social media banners, app icons, slides and many CMS systems expect a raster format such as PNG. This <strong>SVG to PNG converter</strong> bridges that gap by rendering your vector artwork into a transparent PNG at whatever resolution you specify. Unlike many converters, the rendering happens locally in your browser using the Canvas API, so proprietary logos or unreleased designs you upload remain on your own machine.</p><p>Choose an SVG file, set the output width and height in pixels, and optionally type a background colour (leave the field as <em>transparent</em> to preserve alpha). Clicking <em>Convert to PNG</em> draws the vector onto an HTML canvas at the chosen size and exports a PNG. Because the image is drawn at the requested pixel dimensions rather than being upscaled afterwards, the result stays sharp — a great way to produce a high-resolution icon or favicon from a small vector. A preview of the generated PNG appears so you can check the result, and the file downloads automatically.</p><p>For best results, request a size that matches the aspect ratio of your SVG; otherwise the image is stretched to fill the canvas. If your SVG references external fonts, images or stylesheets by URL, the browser may block them for security reasons and the render can fail — inline those assets or convert fonts to paths first. Simple geometric logos, icons and illustrations convert perfectly. You can generate several sizes in a row, for example a 512×512 app icon plus a 32×32 favicon, simply by changing the numbers and converting again. All output is a standard PNG that opens anywhere.</p>
+</section>
+<section class="related">
+<h2>Related tools</h2>
+<ul><li><a href="favicon-generator.html">Favicon Generator</a></li>
+<li><a href="png-to-jpg.html">Png To Jpg</a></li>
+<li><a href="image-to-pdf.html">Image to PDF Converter</a> — Turn one or more JPG or PNG images into a single PDF document. Everything runs l</li>
+<li><a href="image-resizer.html">Image Resizer</a></li>
+<li><a href="image-to-base64.html">Image To Base64</a></li></ul>
+</section>
+<script>
+const msg=document.getElementById('msg');let text='';
+document.getElementById('svg').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{text=r.result;msg.textContent='Loaded '+f.name;};r.readAsText(f);});
+document.getElementById('go').onclick=()=>{if(!text){msg.textContent='Choose an SVG file first.';return;}
+const w=parseInt(document.getElementById('w').value)||1024;const h=parseInt(document.getElementById('h').value)||1024;
+const bg=document.getElementById('bg').value.trim();
+const blob=new Blob([text],{type:'image/svg+xml'});const url=URL.createObjectURL(blob);const im=new Image();
+im.onload=()=>{const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');
+if(bg&&bg!=='transparent'){x.fillStyle=bg;x.fillRect(0,0,w,h);}
+x.drawImage(im,0,0,w,h);c.toBlob(b=>{const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download='image.png';a.click();const prev=document.getElementById('prev');prev.innerHTML='';const img=new Image();img.src=u;img.style.maxWidth='100%';img.style.border='1px solid #ddd';prev.appendChild(img);msg.textContent='PNG ready ('+w+'×'+h+').';},'image/png');};
+im.onerror=()=>{msg.textContent='Could not render this SVG — it may contain external references.';};im.src=url;};
+</script>
+</main>
+<footer class="site-footer"><div class="wrap"><p>&copy; 2026 Free Online Tools · All processing runs locally in your browser, no data is uploaded.</p>
+<p><a href="index.html">Home</a> · <a href="all-tools.html">All Tools</a> · <a href="https://maniu2475-glitch.github.io/tools-en/svg-to-png.html">SVG to PNG Converter</a></p></div></footer>
+</body>
+</html>

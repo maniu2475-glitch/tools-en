@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Onclick Generator - Build JavaScript Event Handler Code</title>
+<meta name="description" content="Free onclick generator: build ready-to-paste JavaScript event handler code for buttons and links - alerts, new tabs, clipboard copy, scroll-to and element targeting.">
+<meta name="keywords" content="onclick generator, javascript onclick code, button onclick, onclick alert, onclick new tab, copy to clipboard onclick, event handler generator">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/onclick-generator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Onclick Generator - Build JavaScript Event Handler Code">
+<meta property="og:description" content="Free onclick generator: build ready-to-paste JavaScript event handler code for buttons and links - alerts, new tabs, clipboard copy, scroll-to and element targeting.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Onclick Generator", "url": "https://maniu2475-glitch.github.io/tools-en/onclick-generator.html", "description": "Free onclick generator: build ready-to-paste JavaScript event handler code for buttons and links - alerts, new tabs, clipboard copy, scroll-to and element targeting.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<header><a href="index.html">&larr; All Tools</a> <span class="brand">ToolBox</span></header>
+<main>
+<h1>Onclick Generator</h1>
+<p class="lead">Pick an action, fill in the options and get correct, escaped JavaScript onclick code you can paste straight into a button, link or image tag.</p>
+<div class="row"><label>Element</label><select id="el" onchange="run()"><option value="button" selected>button</option><option value="a">a (link)</option><option value="img">img</option><option value="div">div</option><option value="span">span</option></select></div>
+<div class="row"><label>Action</label><select id="act" onchange="run()"><option value="alert" selected>Show alert</option><option value="confirm">Confirm and report choice</option><option value="href">Open URL</option><option value="newtab">Open URL in new tab</option><option value="copy">Copy fixed text to clipboard</option><option value="scroll">Scroll to element id</option><option value="toggle">Toggle element visibility</option><option value="style">Set element style</option><option value="log">console.log message</option><option value="custom">Custom code</option></select></div>
+<label>Value / selector / message</label>
+<input id="val" type="text" value="Hello from my button" oninput="run()">
+<label>Element id (for scroll / toggle / style)</label>
+<input id="tid" type="text" value="my-box" oninput="run()">
+<label>Label text for the generated tag</label>
+<input id="lab" type="text" value="Click me" oninput="run()">
+<label>Generated code</label>
+<textarea id="out" rows="8" readonly spellcheck="false"></textarea>
+<p id="msg" class="muted"></p>
+<div class="row"><button onclick="copyOut()">Copy code</button></div>
+<section class="about">
+<h2>About this tool</h2>
+<p>Inline event handlers are the fastest way to attach behaviour to a piece of HTML when you are working in a CMS, an email template builder, a legacy page you cannot add scripts to, or a quick demo. The syntax looks trivial, which is exactly why it goes wrong: a message containing an apostrophe breaks a single-quoted attribute, a double quote inside the handler ends the attribute early, and a selector with a hash makes the whole thing decode as a fragment. This generator quotes and escapes everything for you so the resulting attribute is valid in both HTML and JavaScript.</p>
+<p>The available actions cover the requests that come up most often: a plain alert, a confirm dialog that reports what the visitor chose, navigation in the same tab or in a new one, copying a fixed string to the clipboard, smooth scrolling to a named element, toggling an element's visibility, changing an inline style, and logging to the console for debugging. Each one maps to a short, dependency-free snippet that works in every modern browser without a framework.</p>
+<p>Two HTML details are handled automatically. First, the tool always adds return false; to navigation actions, because otherwise the browser follows the default behaviour of the anchor and you end up with a blank page instead of a new tab. Second, single quotes are used inside the handler and double quotes outside it, with entities applied to any conflicting character; the escape-order matters, and getting it wrong is the single most common cause of a handler that silently does nothing.</p>
+<p>Keep in mind that inline handlers run in the global scope, cannot be removed or reused as easily as listeners added with addEventListener, and may be blocked outright by a strict Content-Security-Policy that disallows 'unsafe-inline'. For production code where you control the script, prefer attaching listeners in JavaScript. Use this page for the cases where inline is the only option - and when you do, remember that generated code is only a starting point: review it before shipping, especially the clipboard action, which needs the page to be served over HTTPS to work.</p>
+</section>
+<section class="related">
+<h2>Related tools</h2>
+<ul>
+<li><a href="html-entities.html">HTML Entities Reference</a></li>
+<li><a href="js-minifier.html">JavaScript Minifier</a></li>
+<li><a href="regex-tester.html">Regex Tester</a></li>
+<li><a href="html-minifier.html">HTML Minifier</a></li>
+<li><a href="url-encoder.html">URL Encoder / Decoder</a></li>
+</ul>
+</section>
+</main>
+<footer><p>All processing happens in your browser. No data is uploaded to any server.</p>
+<p><a href="index.html">Free Online Tools</a></p></footer>
+<script>
+function q(s){return "'"+String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'")+"'";}
+function aq(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function run(){var el=document.getElementById('el').value,act=document.getElementById('act').value,v=document.getElementById('val').value,tid=document.getElementById('tid').value.trim(),lab=document.getElementById('lab').value||'Click me',code='',attr='';
+ switch(act){
+  case 'alert':code='alert('+q(v)+');';break;
+  case 'confirm':code='if(confirm('+q(v)+')){alert(\'OK pressed\');}else{alert(\'Cancel pressed\');}';break;
+  case 'href':code='location.href='+q(v)+';return false;';attr=' href="'+aq(v)+'"';break;
+  case 'newtab':code='window.open('+q(v)+',\'_blank\',\'noopener\');return false;';attr=' href="'+aq(v)+'" target="_blank" rel="noopener"';break;
+  case 'copy':code='navigator.clipboard.writeText('+q(v)+').then(function(){alert(\'Copied!\');},function(){alert(\'Copy failed\');});return false;';break;
+  case 'scroll':code='document.getElementById('+q(tid)+').scrollIntoView({behavior:\'smooth\'});return false;';break;
+  case 'toggle':code='var e=document.getElementById('+q(tid)+');e.style.display=(e.style.display===\'none\')?\'block\':\'none\';return false;';break;
+  case 'style':code='document.getElementById('+q(tid)+').style.cssText='+q(v)+';return false;';break;
+  case 'log':code='console.log('+q(v)+');';break;
+  default:code=v;}
+ var tag='<'+el+attr+' onclick="'+aq(code)+'"'+(el==='img'?' alt="'+aq(lab)+'" src="image.png"':'')+(el==='div'||el==='span'?'':' style="padding:8px 14px"')+'>'+(el==='img'?'':'\n  '+aq(lab)+'\n</'+el+'>');
+ document.getElementById('out').value=tag;
+ document.getElementById('msg').textContent='Result: '+code;}
+function copyOut(){var t=document.getElementById('out');t.select();try{document.execCommand('copy');}catch(e){}}
+run();
+</script>
+</body>
+</html>

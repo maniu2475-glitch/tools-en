@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phone Number Formatter - Normalize to E.164 &amp; Pretty Print</title>
+<meta name="description" content="Free online phone number formatter: clean any number, strip dashes and brackets, and convert it to E.164, international or US national format with a live preview.">
+<meta name="keywords" content="phone number formatter, e164 converter, phone number validation, normalize phone number, international phone format">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/phone-number-formatter.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Phone Number Formatter - Normalize to E.164 &amp; Pretty Print">
+<meta property="og:description" content="Free online phone number formatter: clean any number, strip dashes and brackets, and convert it to E.164, international or US national format with a live preview.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Phone Number Formatter", "url": "https://maniu2475-glitch.github.io/tools-en/phone-number-formatter.html", "description": "Free online phone number formatter: clean any number, strip dashes and brackets, and convert it to E.164, international or US national format with a live preview.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<header><a href="index.html">&larr; All Tools</a> <span class="brand">ToolBox</span></header>
+<main>
+<h1>Phone Number Formatter</h1>
+<p class="lead">Paste a phone number in any style and get it cleaned up into E.164, international and national formats, plus a quick sanity check on its length.</p>
+<div class="row">
+<label>Country code</label>
+<select id="cc">
+<option value="1" selected>+1 United States / Canada</option>
+<option value="44">+44 United Kingdom</option>
+<option value="61">+61 Australia</option>
+<option value="86">+86 China</option>
+<option value="81">+81 Japan</option>
+<option value="49">+49 Germany</option>
+<option value="33">+33 France</option>
+<option value="91">+91 India</option>
+<option value="55">+55 Brazil</option>
+<option value="49">+49 Germany</option>
+</select>
+</div>
+<label>Phone number</label>
+<input id="inp" type="text" value="(415) 555-2671" oninput="fmt()" spellcheck="false">
+<p id="msg" class="muted"></p>
+<label>E.164 (for APIs, SMS, databases)</label>
+<input id="e164" type="text" readonly>
+<label>International (human readable)</label>
+<input id="intl" type="text" readonly>
+<label>National</label>
+<input id="nat" type="text" readonly>
+<label>RFC 3966 URI</label>
+<input id="uri" type="text" readonly>
+<section class="about">
+<h2>About this tool</h2>
+<p>Phone numbers are stored in dozens of shapes: <code>(415) 555-2671</code>, <code>415.555.2671</code>, <code>+1 415 555 2671</code>, <code>0044 20 7946 0958</code>. APIs that accept SMS or two-factor verification essentially always want E.164 — a plus sign, the country calling code, and the subscriber number with no spaces, dashes or brackets, capped at fifteen digits. Normalising input before sending it prevents the very common class of bug where a perfectly valid number is rejected because of a stray space or a trunk prefix.</p>
+
+<p>This formatter strips every non-digit character, converts a leading <code>00</code> international prefix into <code>+</code>, removes a single leading trunk zero before applying the selected country code, and then renders the result in four common shapes: E.164, a separated international form, the national form with a locally appropriate grouping, and an RFC 3966 <code>tel:</code> URI that can go straight into a link or a call-tracking system.</p>
+
+<p>The length check is a heuristic, not a full numbering-plan validator. Subscriber numbers are typically 6 to 12 digits after the country code, so the tool warns when the total length looks too short or too long. National grouping is also approximate: it follows each country's most common convention rather than the full per-region rules that a library such as libphonenumber applies, and it does not know about area-code reassignment or toll-free ranges.</p>
+
+<p>If you need strict validation, do it server-side with a numbering-plan database and treat this page as a quick cleanup and visual check. Nothing you type leaves your browser — the formatting logic is plain JavaScript running locally, which makes it safe to paste real customer numbers while preparing data for import.</p>
+</section>
+<section class="related">
+<h2>Related tools</h2>
+<ul>
+<li><a href="credit-card-validator.html">Credit Card Validator</a></li>
+<li><a href="uuid-generator.html">UUID Generator</a></li>
+<li><a href="url-parser.html">URL Parser</a></li>
+<li><a href="whatsapp-link-generator.html">WhatsApp Link Generator</a></li>
+</ul>
+</section>
+</main>
+<footer><p>All processing happens in your browser. No data is uploaded to any server.</p>
+<p><a href="index.html">Free Online Tools</a></p></footer>
+<script>
+
+var GRP={ '1':[3,3,4], '44':[4,3,4], '61':[3,3,3], '86':[3,4,4], '81':[2,4,4],
+          '49':[4,4,4], '33':[1,2,2,2,2], '91':[5,5], '55':[2,5,4] };
+function digits(s){return s.replace(/[^0-9+]/g,'');}
+function fmt(){
+  var raw=document.getElementById('inp').value;
+  var cc=document.getElementById('cc').value;
+  var d=raw.replace(/[^0-9]/g,'');
+  if(raw.trim().indexOf('+')===0){}
+  if(d.indexOf('00')===0)d=d.slice(2);
+  if(d.indexOf(cc)!==0 && d[0]==='0')d=d.replace(/^0+/,'');
+  if(d.length<3){document.getElementById('msg').textContent='Enter a number to format.';
+    ['e164','intl','nat','uri'].forEach(function(i){document.getElementById(i).value='';});return;}
+  var national=d;
+  if(d.indexOf(cc)===0 && d.length>cc.length+5)national=d.slice(cc.length);
+  var e164='+'+cc+' '+national;
+  var plain='+'+cc+national;
+  var g=GRP[cc]||[];
+  var parts=[],k=0;
+  for(var i=0;i<g.length&&k<national.length;i++){parts.push(national.substr(k,g[i]));k+=g[i];}
+  if(k<national.length)parts.push(national.slice(k));
+  var intl='+'+cc+' '+parts.join(' ');
+  var nat='('+national.substr(0,3)+') '+national.substr(3,3)+'-'+national.substr(6,4);
+  if(cc!=='1')nat=parts.join(' ');
+  document.getElementById('e164').value=plain;
+  document.getElementById('intl').value=intl;
+  document.getElementById('nat').value=nat;
+  document.getElementById('uri').value='tel:'+plain;
+  var total=cc.length+national.length;
+  var warn=[];
+  if(total<7)warn.push('too short to be a valid international number');
+  if(total>15)warn.push('longer than the 15-digit E.164 maximum');
+  document.getElementById('msg').textContent=warn.length?
+    ('Check this number: '+warn.join('; ')+'. Total '+total+' digits.'):
+    ('Looks plausible: '+total+' digits total (country code '+cc.length+', subscriber '+national.length+').');
+}
+document.addEventListener('DOMContentLoaded',fmt);
+
+</script>
+</body>
+</html>

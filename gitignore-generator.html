@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gitignore Generator - Create .gitignore Files Online</title>
+<meta name="description" content="Free .gitignore generator: pick your language, framework and editor to instantly build a clean, correct .gitignore file. Copy or download in one click.">
+<meta name="keywords" content="gitignore generator, .gitignore file, node gitignore, python gitignore, java gitignore, git ignore rules">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/gitignore-generator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Gitignore Generator - Create .gitignore Files Online">
+<meta property="og:description" content="Free .gitignore generator: pick your language, framework and editor to instantly build a clean, correct .gitignore file. Copy or download in one click.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Gitignore Generator", "url": "https://maniu2475-glitch.github.io/tools-en/gitignore-generator.html", "description": "Free .gitignore generator: pick your language, framework and editor to instantly build a clean, correct .gitignore file. Copy or download in one click.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<header><a href="index.html">&larr; All Tools</a> <span class="brand">ToolBox</span></header>
+<main>
+<h1>Gitignore Generator</h1>
+<p class="lead">Build a ready-to-use <code>.gitignore</code> file in seconds. Select your stack below and the rules are merged and de-duplicated for you.</p>
+<div class="card">
+<label><input type="checkbox" class="stk" value="node" checked> Node / JavaScript / TypeScript</label>
+<label><input type="checkbox" class="stk" value="python" checked> Python</label>
+<label><input type="checkbox" class="stk" value="java"> Java / Gradle / Maven</label>
+<label><input type="checkbox" class="stk" value="go"> Go</label>
+<label><input type="checkbox" class="stk" value="rust"> Rust</label>
+<label><input type="checkbox" class="stk" value="php"> PHP / Composer</label>
+<label><input type="checkbox" class="stk" value="ruby"> Ruby / Rails</label>
+<label><input type="checkbox" class="stk" value="dotnet"> .NET / C#</label>
+<label><input type="checkbox" class="stk" value="os" checked> macOS / Windows / Linux</label>
+<label><input type="checkbox" class="stk" value="editor" checked> Editors &amp; IDEs</label>
+<label><input type="checkbox" class="stk" value="misc" checked> Logs, env files, caches</label>
+</div>
+<div class="row">
+<button onclick="gen()">Generate .gitignore</button>
+<button onclick="copyOut()">Copy</button>
+<button onclick="dl()">Download</button>
+</div>
+<textarea id="out" rows="20" spellcheck="false" placeholder="Your .gitignore will appear here..."></textarea>
+<p id="stat" class="muted"></p>
+<section class="about">
+<h2>About this tool</h2>
+<p>A <code>.gitignore</code> file tells Git which files and folders never to track or commit. Getting it right the first time prevents the classic mistake of committing <code>node_modules/</code>, virtual environments, build output or a <code>.env</code> file that contains real credentials — mistakes that are painful to undo once they are in your commit history.</p>
+
+<p>This generator merges several curated rule sets. Each rule is a glob pattern: a bare name like <code>dist</code> matches any file or directory with that name at any depth, a trailing slash (<code>build/</code>) restricts the match to directories, and a leading slash (<code>/vendor</code>) anchors the pattern to the repository root. The generator de-duplicates overlapping patterns so the output stays readable instead of turning into a wall of repeated lines.</p>
+
+<p>Because ignores are layered, rules added later in the file do not override earlier ones unless you use a negation with an exclamation mark, for example <code>!important.log</code> to re-include a single file that a broader rule excluded. If a file is already tracked, adding it to <code>.gitignore</code> has no effect — you must first run <code>git rm --cached &lt;file&gt;</code>, then commit.</p>
+
+<p>Everything runs locally in your browser: nothing you type or select is transmitted anywhere. Copy the result into a new <code>.gitignore</code> at the root of your repository (feature branches can also have their own), and commit it together with your first source files so collaborators pick up the same rules automatically.</p>
+</section>
+<section class="related">
+<h2>Related tools</h2>
+<ul>
+<li><a href="git-command-generator.html">Git Command Generator</a></li>
+<li><a href="json-formatter.html">JSON Formatter</a></li>
+<li><a href="slug-generator.html">Slug Generator</a></li>
+<li><a href="cron-generator.html">Cron Expression Generator</a></li>
+</ul>
+</section>
+</main>
+<footer><p>All processing happens in your browser. No data is uploaded to any server.</p>
+<p><a href="index.html">Free Online Tools</a></p></footer>
+<script>
+
+var LIB = {
+node:`# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.npm/
+.yarn/cache/
+.pnp.*
+coverage/
+.nyc_output/
+dist/
+build/
+.next/
+.nuxt/
+out/
+.cache/
+.parcel-cache/
+*.tsbuildinfo`,
+python:`# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.venv/
+venv/
+env/
+ENV/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/`,
+java:`# Java
+*.class
+*.log
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+hs_err_pid*
+replay_pid*
+target/
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar`,
+go:`# Go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+vendor/
+go.sum.bak`,
+rust:`# Rust
+/target/
+**/*.rs.bk
+*.pdb
+Cargo.lock.bak`,
+php:`# PHP
+/vendor/
+*.log
+.phpunit.result.cache
+.env.local
+composer.phar`,
+ruby:`# Ruby
+*.gem
+*.rbc
+.bundle/
+vendor/bundle/
+log/
+tmp/
+.byebug_history
+coverage/`,
+dotnet:`# .NET
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/`,
+os:`# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini`,
+editor:`# Editors
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/`,
+misc:`# Misc
+*.log
+.env
+.env.*
+!.env.example
+*.local
+.cache/
+tmp/
+temp/
+*.bak
+*.orig`
+};
+
+function gen(){
+  var picked=[].slice.call(document.querySelectorAll('.stk:checked')).map(function(e){return e.value});
+  var lines=[];
+  picked.forEach(function(k){
+    if(!LIB[k]) return;
+    lines.push(LIB[k]);
+  });
+  var out=lines.join('\n\n');
+  document.getElementById('out').value=out;
+  document.getElementById('stat').textContent=
+    picked.length+' rule sets merged, '+out.split('\n').filter(function(l){return l && l[0]!=='#'}).length+' patterns.';
+}
+function copyOut(){
+  var t=document.getElementById('out');
+  t.select(); document.execCommand('copy');
+  document.getElementById('stat').textContent='Copied to clipboard.';
+}
+function dl(){
+  var b=new Blob([document.getElementById('out').value],{type:'text/plain'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(b); a.download='.gitignore-gitignore';
+  a.click(); URL.revokeObjectURL(a.href);
+}
+document.addEventListener('DOMContentLoaded',gen);
+
+</script>
+</body>
+</html>

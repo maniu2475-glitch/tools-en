@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unicode Text Converter - Escape \u, HTML and UTF-8 Bytes</title>
+<meta name="description" content="Convert text to JavaScript \u escapes, HTML numeric entities, percent-encoded UTF-8 or raw hex bytes, and decode any of them back to plain Unicode text - free and offline.">
+<meta name="keywords" content="unicode converter, unicode escape, \u escape, utf-8 bytes, percent encode unicode, unicode to text, decode unicode">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/unicode-text-converter.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Unicode Text Converter - Escape \u, HTML and UTF-8 Bytes">
+<meta property="og:description" content="Convert text to JavaScript \u escapes, HTML numeric entities, percent-encoded UTF-8 or raw hex bytes, and decode any of them back to plain Unicode text - free and offline.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Unicode Text Converter", "url": "https://maniu2475-glitch.github.io/tools-en/unicode-text-converter.html", "description": "Convert text to JavaScript \u escapes, HTML numeric entities, percent-encoded UTF-8 or raw hex bytes, and decode any of them back to plain Unicode text - free and offline.", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+</head>
+<body>
+<header><a href="index.html">&larr; All Tools</a> <span class="brand">ToolBox</span></header>
+<main>
+<h1>Unicode Text Converter</h1>
+<p class="lead">See exactly how your text is represented as JavaScript \u escapes, HTML entities, percent-encoded UTF-8 or raw bytes - and convert back with one click.</p>
+<div class="row"><label>Output format</label><select id="fmt" onchange="run()"><option value="js" selected>JavaScript \uXXXX</option><option value="html">HTML &amp;#NNNN;</option><option value="pct">Percent-encoded UTF-8</option><option value="hex">UTF-8 hex bytes</option><option value="uplus">Unicode U+XXXX names</option></select></div>
+<label>Input</label>
+<textarea id="inp" rows="6" oninput="run()" spellcheck="false">Café — 你好 世界 🚀</textarea>
+<label>Output</label>
+<textarea id="out" rows="6" readonly spellcheck="false"></textarea>
+<p id="msg" class="muted"></p>
+<div class="row"><button onclick="decMode()">Decode this output back</button></div>
+<label>Decode any format (auto-detected)</label>
+<textarea id="din" rows="4" oninput="decr()" spellcheck="false"></textarea>
+<p id="dmsg" class="muted"></p>
+<section class="about">
+<h2>About this tool</h2>
+<p>Text on screen and text stored in a file are two different things. A single visible character such as an em dash, an accented e or a Chinese ideograph may occupy one byte, two bytes, three bytes or a surrogate pair depending on the encoding, and each programming environment offers a different escape syntax for writing it in ASCII-only source code. This page shows you all of those representations side by side so you can copy the one your code, configuration file or URL actually needs.</p>
+<p>The JavaScript mode produces \uXXXX escapes for the Basic Multilingual Plane and a surrogate pair for anything above it, which is what you need inside a JSON string or a JavaScript literal that has to survive a non-UTF-8 transport. The HTML mode emits decimal numeric character references that render identically in any browser. Percent encoding applies UTF-8 first and then escapes every byte, matching what a URL query string does in practice. The hex mode prints the raw UTF-8 bytes, which is useful when you are staring at a corrupted log file and need to know which bytes are actually there. The U+ mode lists code points with their hexadecimal values, the notation used in Unicode documentation and character tables.</p>
+<p>Decoding is automatic: paste in \u sequences, &#NNNN; entities, %E4%BD%A0 style percent escapes, a hex byte dump or U+ notation and the tool figures out which one you gave it. Mixed input is handled too, because scraped text often arrives with some characters already escaped and others not.</p>
+<p>Typical uses are fixing mojibake in a database export, writing a translation file that must stay ASCII, checking whether two visually identical strings really contain the same code points, and debugging why an emoji split into two halves after passing through a system with a 3-byte UTF-8 limit. Everything happens in your browser, so you can paste customer data or private messages without them leaving the machine - just remember that visual similarity is not identity: Cyrillic and Latin letter A look the same on screen and are different code points, and this tool will show you that instantly.</p>
+</section>
+<section class="related">
+<h2>Related tools</h2>
+<ul>
+<li><a href="unicode-lookup.html">Unicode Character Lookup</a></li>
+<li><a href="html-entities.html">HTML Entities Reference</a></li>
+<li><a href="url-encoder.html">URL Encoder / Decoder</a></li>
+<li><a href="ascii-table.html">ASCII Table</a></li>
+<li><a href="json-escape.html">JSON Escape / Unescape</a></li>
+</ul>
+</section>
+</main>
+<footer><p>All processing happens in your browser. No data is uploaded to any server.</p>
+<p><a href="index.html">Free Online Tools</a></p></footer>
+<script>
+function js(s){var o='';for(var i=0;i<s.length;i++){var k=s.charCodeAt(i);if(k>126||k<32||s[i]==='\\'){o+='\\u'+('0000'+k.toString(16)).slice(-4);}else o+=s[i];}return o;}
+function html(s){var o='';for(var c of s){var k=c.codePointAt(0);o+=(k>126?'&#'+k+';':c);}return o;}
+function pct(s){return encodeURIComponent(s);}
+function hex(s){var b=new TextEncoder().encode(s),a=[];for(var i=0;i<b.length;i++)a.push(('0'+b[i].toString(16)).slice(-2));return a.join(' ');}
+function uplus(s){var a=[];for(var c of s){var k=c.codePointAt(0).toString(16).toUpperCase();a.push('U+'+('0000'+k).slice(-4));}return a.join(' ');}
+function run(){var f=document.getElementById('fmt').value,i=document.getElementById('inp').value,o='';if(f==='js')o=js(i);else if(f==='html')o=html(i);else if(f==='pct')o=pct(i);else if(f==='hex')o=hex(i);else o=uplus(i);document.getElementById('out').value=o;document.getElementById('msg').textContent='Input '+[...i].length+' code points, output '+o.length+' chars.';}
+function decMode(){document.getElementById('din').value=document.getElementById('out').value;decr();}
+function decr(){var s=document.getElementById('din').value,t=s,how=[];
+ if(/\\u[0-9a-fA-F]{4}/.test(t)){t=t.replace(/\\u([0-9a-fA-F]{4})/g,function(m,h){return String.fromCharCode(parseInt(h,16));});how.push('\\u escapes');}
+ if(/&#x?[0-9a-fA-F]+;/.test(t)){t=t.replace(/&#(x?)([0-9a-fA-F]+);/g,function(m,x,h){var n=x?parseInt(h,16):parseInt(h,10);return n>0&&n<=1114111?String.fromCodePoint(n):m;});how.push('HTML entities');}
+ if(/%[0-9A-Fa-f]{2}/.test(t)){try{t=decodeURIComponent(t);how.push('percent-encoding');}catch(e){}}
+ if(/^(\s*[0-9a-fA-F]{2}\s*)+$/.test(t.trim())){try{var by=t.trim().split(/\s+/).map(function(h){return parseInt(h,16);});t=new TextDecoder().decode(new Uint8Array(by));how.push('UTF-8 bytes');}catch(e){}}
+ if(/U\+[0-9A-Fa-f]{4,6}/.test(t)){t=t.replace(/U\+([0-9A-Fa-f]{4,6})/g,function(m,h){return String.fromCodePoint(parseInt(h,16));});how.push('U+ names');}
+ document.getElementById('dmsg').textContent=t.trim()?'Decoded ('+(how.join(', ')||'nothing escaped found')+'): '+t:'Enter escaped text above.';}
+run();
+</script>
+</body>
+</html>

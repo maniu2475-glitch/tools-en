@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image to PDF Converter - JPG &amp; PNG to PDF Online Free</title>
+<meta name="description" content="Convert JPG and PNG images to a single PDF file directly in your browser. Add, remove, reorder images, choose page size and orientation. No upload, no signup, 100% private.">
+<meta name="keywords" content="image to pdf,jpg to pdf,png to pdf,pictures to pdf,combine images into pdf,free image to pdf converter">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/tools-en/image-to-pdf.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<!-- Open Graph / SEO -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Image to PDF Converter">
+<meta property="og:description" content="Convert JPG and PNG images to a single PDF file directly in your browser. Add, remove, reorder images, choose page size and orientation. No upload, no signup, 100% private.">
+<meta property="og:url" content="https://maniu2475-glitch.github.io/tools-en/image-to-pdf.html">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdqAsxVwJGACZjAUIAd8a7S0L/1/1r/HPn1vAmAAGIAJRWYAfwFVAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Image to PDF Converter", "url": "https://maniu2475-glitch.github.io/tools-en/image-to-pdf.html", "description": "Convert JPG and PNG images to a single PDF file directly in your browser. Add, remove, reorder images, choose page size and orientation. No upload, no signup, 100% private.", "applicationCategory": "UtilityApplication", "operatingSystem": "All", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script>
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a class="logo" href="index.html">🧰 Free Online Tools</a>
+<nav><a href="index.html">Home</a> <a href="all-tools.html">All Tools</a></nav></div></header>
+<main class="wrap">
+<h1>Image to PDF Converter</h1>
+<p class="lead">Turn one or more JPG or PNG images into a single PDF document. Everything runs locally in your browser using the pdf-lib library, so your photos never leave your device.</p>
+<section class="tool-card">
+<div class="tool-note">Files are processed on your device only.</div>
+<input type="file" id="imgs" accept="image/png,image/jpeg" multiple class="file-input">
+<div class="row"><label>Page size <select id="psize"><option value="fit">Fit image</option><option value="a4" selected>A4</option><option value="letter">Letter</option></select></label>
+<label>Orientation <select id="orient"><option value="auto" selected>Auto</option><option value="portrait">Portrait</option><option value="landscape">Landscape</option></select></label></div>
+<div id="thumbs" class="thumbs"></div>
+<button id="go">Generate PDF</button> <span id="msg"></span>
+<iframe id="pdfview" style="width:100%;height:420px;border:1px solid #ddd;margin-top:12px;display:none"></iframe>
+</section>
+<section class="explain">
+<h2>About this Image to PDF Converter</h2>
+<p>This free <strong>image to PDF converter</strong> lets you combine photos, screenshots, scans and other pictures into a single portable PDF document without installing any software. It is a common need: attaching receipts to an expense report, emailing a set of photos as one file, or assembling a portfolio of scans for a client. Most online converters ask you to upload your private images to a remote server, which is a privacy risk. This tool works differently — the conversion is performed by JavaScript running inside your own browser tab, so the pictures are never transmitted anywhere.</p><p>To use it, click the file picker and select one or more JPG or PNG images. Each selected image appears as a thumbnail; you can remove any image you picked by mistake before conversion begins. Choose a page size — Fit image keeps each picture at its native dimensions, while A4 and Letter place every picture on a standard sheet with automatic centring and scaling. The orientation option lets you force portrait or landscape pages, or let the tool decide automatically based on each image's aspect ratio. When you press <em>Generate PDF</em>, the tool loads the pdf-lib library, embeds every image, lays them out one per page and triggers a browser download of the finished file. A preview appears on the page so you can verify the result before saving.</p><p>The converter handles the most common web image formats, JPEG and PNG. Photos encoded as JPG produce smaller PDFs, while PNG screenshots preserve crisp text and graphics. Very large batches are processed sequentially to keep the browser responsive. Because everything is local, there are no file-size limits imposed by a server, no accounts, and no email required. The resulting PDF is standard and opens in Adobe Acrobat, Preview, Chrome and every modern viewer. Bookmark this page for quick access the next time you need to bundle scans or photos into a single document.</p>
+</section>
+<section class="related">
+<h2>Related tools</h2>
+<ul><li><a href="png-to-jpg.html">Png To Jpg</a></li>
+<li><a href="image-resizer.html">Image Resizer</a></li>
+<li><a href="image-compressor.html">Image Compressor</a></li>
+<li><a href="favicon-generator.html">Favicon Generator</a></li>
+<li><a href="image-to-base64.html">Image To Base64</a></li></ul>
+</section>
+<script>
+let files=[];const thumbs=document.getElementById('thumbs');const msg=document.getElementById('msg');
+let PDFLibReady=false;
+function loadLib(){return new Promise((res,rej)=>{if(window.PDFLib)return res();const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js';s.onload=()=>res();s.onerror=rej;document.head.appendChild(s);});}
+document.getElementById('imgs').addEventListener('change',e=>{files=Array.from(e.target.files).filter(f=>/image\/(png|jpeg)/.test(f.type));renderThumbs();});
+function renderThumbs(){thumbs.innerHTML='';files.forEach((f,i)=>{const url=URL.createObjectURL(f);const div=document.createElement('div');div.className='thumb';div.innerHTML='<img src="'+url+'"><div class="tname">'+f.name+'<button data-i="'+i+'" class="rm">&times;</button></div>';thumbs.appendChild(div);});thumbs.querySelectorAll('.rm').forEach(b=>b.onclick=()=>{files.splice(+b.dataset.i,1);renderThumbs();});}
+async function toBytes(file){const buf=await file.arrayBuffer();return new Uint8Array(buf);}
+document.getElementById('go').onclick=async()=>{if(!files.length){msg.textContent='Pick at least one image.';return;}
+msg.textContent='Loading library…';try{await loadLib();}catch(e){msg.textContent='Failed to load PDF library (check network).';return;}
+msg.textContent='Building PDF…';
+const {PDFDocument}=window.PDFLib;const pdf=await PDFDocument.create();
+const size=document.getElementById('psize').value;const orient=document.getElementById('orient').value;
+for(const f of files){const bytes=await toBytes(f);let img=f.type==='image/png'?await pdf.embedPng(bytes):await pdf.embedJpg(bytes);
+let pw,ph;if(size==='a4'){pw=595.28;ph=841.89;}else if(size==='letter'){pw=612;ph=792;}else{pw=img.width;ph=img.height;}
+let isLand=orient==='landscape'||(orient==='auto'&&img.width>img.height);
+if(size!=='fit'&&isLand){const t=pw;pw=ph;ph=t;}
+const page=pdf.addPage([pw,ph]);const scale=Math.min(pw/img.width,ph/img.height);const dw=img.width*scale,dh=img.height*scale;
+page.drawImage(img,{x:(pw-dw)/2,y:(ph-dh)/2,width:dw,height:dh});}
+const out=await pdf.save();const blob=new Blob([out],{type:'application/pdf'});const url=URL.createObjectURL(blob);
+const a=document.createElement('a');a.href=url;a.download='images.pdf';a.click();
+const v=document.getElementById('pdfview');v.src=url;v.style.display='block';msg.textContent='Done — '+files.length+' page(s).';};
+</script>
+</main>
+<footer class="site-footer"><div class="wrap"><p>&copy; 2026 Free Online Tools · All processing runs locally in your browser, no data is uploaded.</p>
+<p><a href="index.html">Home</a> · <a href="all-tools.html">All Tools</a> · <a href="https://maniu2475-glitch.github.io/tools-en/image-to-pdf.html">Image to PDF Converter</a></p></div></footer>
+</body>
+</html>
